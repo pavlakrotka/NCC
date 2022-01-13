@@ -1,5 +1,5 @@
 
-# # Copy in R folder the functions of the r package 
+# # Upload functions manually from local folder
 # setwd("C:/Users/mbofi/Nextcloud/GitKraken/NCC")
 # devtools::document()
 # devtools::load_all()
@@ -10,7 +10,9 @@
 # devtools::build_manual(pkg = "C:/Users/mbofi/Nextcloud/GitKraken/NCC", path = "C:/Users/mbofi/Nextcloud/GitKraken/NCC")
 
 
-devtools::install_github("pavlakrotka/NCC",auth_token = "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", force=TRUE)
+# installation from GH
+devtools::install_github("pavlakrotka/NCC",auth_token = "", force=TRUE)
+# note personal auth_token is needed
 
 library(NCC)
 
