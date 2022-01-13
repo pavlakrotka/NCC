@@ -1,4 +1,4 @@
-#' Data simulation
+#' Data simulation for a platform trial with non-concurrent controls with an arbitrary number of treatments and periods
 #'
 #' @description
 #'
@@ -17,7 +17,6 @@
 #' @param endpoint a
 #'
 #' @export
-#' @import stats, rlang
 #' @return
 #' @author
 #' @references
@@ -120,7 +119,7 @@ data_sim <- function(SS_matrix, block_sizes, alloc_ratios, mu0=0, delta, p0, OR,
 
     Data <- data.frame(response = X,
                        treatment = t,
-                       stage = rep(1:n_periods, SS_period),
+                       period = rep(1:n_periods, SS_period),
                        j = c(1:SS_total),
                        means = mu0+means)
 
@@ -131,35 +130,3 @@ data_sim <- function(SS_matrix, block_sizes, alloc_ratios, mu0=0, delta, p0, OR,
 
   return(Data)
 }
-
-#######################################################################################################################
-
-#######################################################################################################################
-
-# A0 <- c(10, 10, 10)
-# A1 <- c(20, 10, NA)
-# A2 <- c(NA, 10, 20)
-#
-# SS_matrix <- matrix(c(A0, A1, A2), nrow = 3, byrow = T)
-# SS_matrix
-#
-# alloc_ratios <- matrix(c(1,1,1,
-#                          2,1,0,
-#                          0,1,2), ncol = 3, byrow = T)
-# alloc_ratios
-#
-# test <- data_sim_block(SS_matrix = SS_matrix, block_sizes = c(6,6,6), alloc_ratios = alloc_ratios,
-#                        mu0 = 0, delta = c(0.25,0.25), p0, OR, lambda = c(0,0,0), sigma = 1, N_peak, trend = "linear", trend_param, endpoint = "continuous")
-
-
-
-
-
-
-
-
-
-
-
-
-

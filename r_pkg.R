@@ -1,14 +1,14 @@
 
 
 # Create r package folder
-usethis::create_package("C:/Users/pavla/Desktop/NCC")
+usethis::create_package("C:/Users/pavla/Nextcloud/GitKraken/NCC")
 
 # Copy in R folder the functions of the r package 
-setwd("X:/EU-PEARL/NCC")
+setwd("C:/Users/pavla/Nextcloud/GitKraken/NCC")
 devtools::document()
 devtools::load_all()
 
 # Build & check the package
-devtools::build(pkg = "X:/EU-PEARL/NCC", path = NULL, binary = FALSE, manual = TRUE)
-devtools::check_built(path = "X:/EU-PEARL/NCC", cran=TRUE, manual = TRUE)
-devtools::build_manual(pkg = "X:/EU-PEARL/NCC", path = NULL)
+devtools::build(pkg = "C:/Users/pavla/Nextcloud/GitKraken/NCC", path = NULL, binary = FALSE, manual = TRUE)
+devtools::check_built(path = "C:/Users/pavla/Nextcloud/GitKraken/NCC", cran=TRUE, manual = TRUE)
+devtools::build_manual(pkg = "C:/Users/pavla/Nextcloud/GitKraken/NCC", path = NULL)
