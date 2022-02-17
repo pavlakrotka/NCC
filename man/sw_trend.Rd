@@ -7,19 +7,16 @@
 sw_trend(cj, lambda)
 }
 \arguments{
-\item{cj}{a}
+\item{cj}{Period indicator}
 
-\item{lambda}{a}
+\item{lambda}{Strength of time trend}
 }
 \value{
-
+Time trend in period cj
 }
 \description{
-
-}
-\references{
-
+Generates stepwise trend for a given period. No time trend is assumed in the first period.
 }
 \author{
-
+Marta Bofill Roig, Pavla Krotka
 }

@@ -1,6 +1,6 @@
 #' Generation of stepwise trend with jump sizes adapted to sample size per period
 #'
-#' @description
+#' @description Generates stepwise trend for a given period. Jump sizes are adapted to the period sample size.
 #'
 #' @param cj Period indicator
 #' @param lambda Strength of time trend

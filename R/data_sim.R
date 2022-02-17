@@ -14,13 +14,17 @@
 #' @param N_peak Point at which the inverted-u time trend switches direction in terms of overall sample size
 #' @param trend Indicates the time trend pattern ("linear", "stepwise" or "inv_u")
 #'
+#' @import rlang
+#' @import stats
+#' 
 #' @export
 #' @return Data frame: simulated trial data
 #' @author Pavla Krotka, Marta Bofill Roig
 
 data_sim_cont <- function(T_, N, SS_arm, alloc_ratios, block_sizes, mu0=0, delta, lambda, sigma, N_peak, trend){
   
-  require(rlang)
+  requireNamespace("rlang")
+  requireNamespace("stats")
   
   if (is.null(T_)==F & is.null(N)==F){
     

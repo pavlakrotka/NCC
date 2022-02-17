@@ -2,26 +2,23 @@
 % Please edit documentation in R/linear_trend.R
 \name{linear_trend}
 \alias{linear_trend}
-\title{Generation of a linear trend}
+\title{Generation of a linear trend that starts in a given period}
 \usage{
 linear_trend(j, lambda, sample_size)
 }
 \arguments{
-\item{j}{a}
+\item{j}{Patient recruitment index}
 
-\item{lambda}{a}
+\item{lambda}{Strength of time trend}
 
-\item{sample_size}{a}
+\item{sample_size}{Vector of dimension 2, indicating sample size in the trial period until the time trend starts and the remaining sample size.}
 }
 \value{
-
+Time trend for patient j
 }
 \description{
-
-}
-\references{
-
+Generates linear trend for patient j
 }
 \author{
-
+Marta Bofill Roig, Pavla Krotka
 }

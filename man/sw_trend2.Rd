@@ -7,23 +7,20 @@
 sw_trend2(cj, lambda, ss_period, ss_total)
 }
 \arguments{
-\item{cj}{a}
+\item{cj}{Period indicator}
 
-\item{lambda}{a}
+\item{lambda}{Strength of time trend}
 
-\item{ss_period}{a}
+\item{ss_period}{Sample size in a given period}
 
-\item{ss_total}{a}
+\item{ss_total}{Total sample size}
 }
 \value{
-
+Time trend in period cj
 }
 \description{
-
-}
-\references{
-
+Generates stepwise trend for a given period. Jump sizes are adapted to the period sample size.
 }
 \author{
-
+Marta Bofill Roig, Pavla Krotka
 }

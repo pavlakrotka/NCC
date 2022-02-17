@@ -1,17 +1,20 @@
 Package: NCC
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Simulation of platform trial with non-concurrent controls
+Version: 1.0
+Authors: Pavla Krotka, Marta Bofill Roig
+Maintainer: Pavla Krotka <pavla.krotka@meduniwien.ac.at>
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Pavla",
+           family = "Krotka",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
+           email = "pavla.krotka@meduniwien.ac.at",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: use_mit_license()
+Description: Simulation of platform trial with non-concurrent controls.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: false 
 Imports: 
-  rlang
+  rlang,
+  stats
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
