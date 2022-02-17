@@ -2,14 +2,13 @@
 #'
 #' @description
 #'
-#' @param cj a
-#' @param lambda a
-#' @param ss_period a
-#' @param ss_total a
+#' @param cj Period indicator
+#' @param lambda Strength of time trend
+#' @param ss_period Sample size in a given period
+#' @param ss_total Total sample size
 #'
 #' @export
-#' @return
-#' @author
-#' @references
+#' @return Time trend in period cj
+#' @author Marta Bofill Roig, Pavla Krotka
 
 sw_trend2 <- function(cj,lambda,ss_period,ss_total){(ss_period/ss_total)*lambda*(cj-1)}
