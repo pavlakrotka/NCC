@@ -4,7 +4,13 @@ output: github_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      error = FALSE,
+                      warning = FALSE,
+                      comment = "",
+                      fig.align = "center",
+                      out.width = "80%")
 
 source("R/data_sim_cont.R")
 source("R/linear_trend.R")
