@@ -2,8 +2,9 @@
 #'
 #' @description Computes the sample size matrix - sample sizes per arm (rows) and per period (columns)
 #'
-#' @param T_ Timing of adding new arms in terms of number of patients allocated to the control arm
-#' @param N Overall sample size for the trial
+#' @param n_total Overall sample size for the trial
+#' @param num_arms Number of treatment arms in the trial
+#' @param t_arm Timing of adding new arms in terms of number of patients allocated to the control arm
 #' 
 #' @keywords internal
 #'
@@ -11,106 +12,76 @@
 #' @return Sample size matrix
 #' @author Pavla Krotka
 
-get_ss_matrix <- function(T_, N){ 
-  n = (N-2*T_)/4
+get_ss_matrix <- function(n_total, num_arms, t_arm) {
+  n_arm <- (n_total-(num_arms-1)*t_arm)/(num_arms+1)
   
-  if(2*T_ >= n){
-  
-  control = round(c(T_, n-T_, 2*T_-n, n-T_, T_))
-  control = control[control!=0]
-  
-  if(!is.na(which(control < 0)[1])){
-    control = control[1:(which(control < 0)[1]-1)]
+  if(n_arm<t_arm | 2*t_arm < n_arm){
+    stop("n_arm>=t_arm & 2*t_arm >= n_arm must hold!")
   }
   
-  arm_1 = rep(NA, length(control))
-  arm_2 = rep(NA, length(control))
-  arm_3 = rep(NA, length(control))
+  num_periods <- (2*num_arms)-1
   
-  i <- 1
-  while (sum(arm_1, na.rm = T)<n) {
-    arm_1[i] <- control[i]
-    i = i+1
-  }
+  control_cumsum <- rep(NA, num_periods)
+  control_cumsum[length(control_cumsum)] <- n_arm+((num_arms-1)*t_arm) # last entry
+  control_cumsum[-length(control_cumsum)][c(TRUE, FALSE)] <- t_arm*seq(1, (num_periods-1)/2) # odd entries
+  control_cumsum[-length(control_cumsum)][c(FALSE, TRUE)] <- n_arm + t_arm*seq(0, ((num_periods-1)/2)-1) # even entries
   
-  if(length(control)>1){
-    i <- 2
-    while (sum(arm_2, na.rm = T)<n) {
-      arm_2[i] <- control[i]
-      i = i+1
-    }
-    
-    i <- length(control)
-    while (sum(arm_3, na.rm = T)<n) {
-      arm_3[i] <- control[i]
-      i = i-1
-    }
-  } else {
-    arm_2[1] <- control[1]
-    arm_3[1] <- control[1]
-  }
+  control <- rep(NA, num_periods)
+  control[1] <- control_cumsum[1]
+  control[-1] <- diff(control_cumsum)
+  control <- round(control)
+  control <- control[control!=0]
   
-  } else if(2*T_<n) {
+  SS_matrix <- matrix(nrow = num_arms+1, ncol = length(control))
+  SS_matrix[1,] <- control
+  
+  for(i in 1:num_arms){
+    arm_start <- which(cumsum(control)>(i-1)*round(t_arm))[1]
+    control_new <- control
+    control_new[if(arm_start==1) NA else c(1:(arm_start-1))] <- 0
+    arm_stop <- which(cumsum(control_new)>=round(n_arm))[1]
     
-    control = round(c(T_, T_, n-2*T_, T_, T_))
-    control = control[control!=0]
-    
-    if(!is.na(which(control < 0)[1])){
-      control = control[1:(which(control < 0)[1]-1)]
-    }
-    
-    arm_1 = rep(NA, length(control))
-    arm_2 = rep(NA, length(control))
-    arm_3 = rep(NA, length(control))
-    
-    i <- 1
-    while (sum(arm_1, na.rm = T)<n) {
-      arm_1[i] <- control[i]
-      i = i+1
-    }
-    
-    if(length(control)>1){
-      i <- 2
-      while (sum(arm_2, na.rm = T)<n) {
-        arm_2[i] <- control[i]
-        i = i+1
-      }
-      
-      i <- length(control)
-      while (sum(arm_3, na.rm = T)<n) {
-        arm_3[i] <- control[i]
-        i = i-1
-      }
-    } else {
-      arm_2[1] <- control[1]
-      arm_3[1] <- control[1]
-    }
-    
+    SS_matrix[i+1, arm_start:arm_stop] <- control[arm_start:arm_stop]
     
   }
-  
-  SS_matrix = matrix(c(control, arm_1, arm_2, arm_3), byrow = T, nrow = 4)
   
   return(SS_matrix)
 }
 
 
 
-# get_ss_matrix(0, 1000)
-# get_ss_matrix(100, 1000)
-# get_ss_matrix(120, 1000)
-# get_ss_matrix(130, 1000)
-# get_ss_matrix(140, 1000)
-# get_ss_matrix(150, 1000)
-# get_ss_matrix(166.66, 1000)
+
+
+# get_ss_matrix(1000, 2, 150)
+# get_ss_matrix(1000, 2, 200)
 # 
-# get_ss_matrix(90, 1000)
-# get_ss_matrix(80, 1000)
-# get_ss_matrix(70, 1000)
-# get_ss_matrix(60, 1000)
-# get_ss_matrix(50, 1000)
-# get_ss_matrix(40, 1000)
-# get_ss_matrix(30, 1000)
-# get_ss_matrix(20, 1000)
-# get_ss_matrix(10, 1000)
+# get_ss_matrix(1000, 3, 100)
+# get_ss_matrix(1000, 3, 120)
+# get_ss_matrix(1000, 3, 130)
+# get_ss_matrix(1000, 3, 140)
+# get_ss_matrix(1000, 3, 150)
+# get_ss_matrix(1000, 3, 166.66)
+# 
+# 
+# get_ss_matrix(1000, 4, 90)
+# get_ss_matrix(1000, 4, 100)
+# get_ss_matrix(1000, 4, 120)
+# get_ss_matrix(1000, 4, 125)
+# 
+# 
+# get_ss_matrix(1000, 5, 100)
+# get_ss_matrix(1000, 5, 90)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
