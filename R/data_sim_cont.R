@@ -46,8 +46,8 @@ data_sim_cont <- function(n_total, num_arms, t_arm, n_arm, alloc_ratios, period_
     
     SS_matrix <- matrix(nrow = num_arms+1, ncol = num_periods)
     
-    for (i in 2:num_arms) { # get sample sizes for each arm
-      SS_matrix[i+1,] <-  alloc_ratios[i+1,]/sum(alloc_ratios[i+1,], na.rm = T)*n_arm
+    for (i in 1:num_arms) { # get sample sizes for each arm
+      SS_matrix[i+1,] <- alloc_ratios[i+1,]/sum(alloc_ratios[i+1,], na.rm = T)*n_arm
     }
     
     SS_matrix[1,] <- na.omit(apply(SS_matrix, 2, unique)) # get sample sizes for control
@@ -156,8 +156,12 @@ data_sim_cont <- function(n_total, num_arms, t_arm, n_arm, alloc_ratios, period_
 }
 
 
-#test <- data_sim_cont(n_total = 1000, num_arms = 3, t_arm = 120, period_blocks = 2, delta=rep(0.25, 3), lambda=rep(0.15, 4), sigma=1, trend="linear")
+# test <- data_sim_cont(n_total = 1000, num_arms = 3, t_arm = 120, period_blocks = 2, delta=rep(0.25, 3), lambda=rep(0.15, 4), sigma=1, trend="linear")
 
+# test <- data_sim_cont(n_total = NULL, num_arms = NULL, t_arm = NULL, 
+#                       n_arm = 200, alloc_ratios = matrix(c(1,1,1,
+#                                                            1,1,NA,
+#                                                            NA,1,1), ncol = 3, byrow = T), period_blocks = 2, delta=rep(0.25, 3), lambda=rep(0.15, 4), sigma=1, trend="linear")
 
 
 
