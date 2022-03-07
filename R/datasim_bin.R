@@ -22,7 +22,7 @@
 #' @return Data frame: simulated trial data
 #' @author Pavla Krotka, Marta Bofill Roig
 
-datasim_bin <- function(n_total, num_arms, t_arm, n_arm, alloc_ratios, period_blocks=2, p0, OR, lambda, trend, N_peak){
+datasim_bin <- function(n_total, num_arms, t_arm, n_arm, alloc_ratios, period_blocks=2, p0, OR, lambda, trend, N_peak, full=FALSE){
   
   requireNamespace("rlang")
   requireNamespace("stats")
@@ -149,16 +149,23 @@ datasim_bin <- function(n_total, num_arms, t_arm, n_arm, alloc_ratios, period_bl
   
   X <- rbinom(n = n_total, size = 1, prob = p)
   
-  Data <- data.frame(response = X,
-                     treatment = t,
-                     period = rep(1:num_periods, N_period),
-                     j = c(1:n_total),
-                     p = p)
-  
-  for (i in 0:(num_arms)) {
-    Data[ ,paste0("lambda", i)] <- lambda[i+1]
+  if (full) {
+    Data <- data.frame(j = c(1:n_total),
+                       response = X,
+                       treatment = t,
+                       period = rep(1:num_periods, N_period),
+                       p = p)
+    
+    for (i in 0:(num_arms)) {
+      Data[ ,paste0("lambda", i)] <- lambda[i+1]
+    }
+    
+  } else {
+    Data <- data.frame(j = c(1:n_total),
+                       response = X,
+                       treatment = t,
+                       period = rep(1:num_periods, N_period))
   }
-  
   
   return(Data)
 }
