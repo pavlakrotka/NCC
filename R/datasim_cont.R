@@ -1,6 +1,6 @@
-#' Data simulation for continuous endpoints for a platform trial with 3 treatment arms entering sequentially
+#' Data simulation for continuous endpoints for a platform trial with an arbitrary number of treatment arms entering sequentially
 #'
-#' @description Simulates data from a platform trial with 3 treatment arms entering sequentially. There is the option to either specify the timing of adding arms and the overall sample size in the trial or specify the sample size per arm (assumed equal) and the allocation ratios per period.
+#' @description Simulates data from a platform trial with continuous endpoints and an arbitrary number of treatment arms entering sequentially. There is the option to either specify the timing of adding arms and the overall sample size in the trial or specify the sample size per arm (assumed equal) and the allocation ratios per period.
 #'
 #' @param n_total Overall sample size for the trial
 #' @param num_arms Number of treatment arms in the trial
@@ -80,7 +80,7 @@ datasim_cont <- function(n_total, num_arms, t_arm, n_arm, alloc_ratios, period_b
   }
   
   
-  for (i in 0:(num_arms)) {
+  for (i in 0:num_arms) {
     assign(paste0("j", i), which(t==i)) # j0, j1, j2 ... position in time (order) of allocated patients in every arm
   }
   
@@ -90,7 +90,7 @@ datasim_cont <- function(n_total, num_arms, t_arm, n_arm, alloc_ratios, period_b
   # Simulation of individual trend
   
   if(trend=="linear"){
-    for (i in 0:(num_arms)) {
+    for (i in 0:num_arms) {
       assign(paste0("ind_trend", i), linear_trend(j=eval(sym(paste0("j", i))),
                                                   lambda = lambda[i+1],
                                                   sample_size = c(0, n_total)))
@@ -98,7 +98,7 @@ datasim_cont <- function(n_total, num_arms, t_arm, n_arm, alloc_ratios, period_b
   }
   
   if(trend=="linear2"){ # trend starts in the second period and is linear
-    for (i in 0:(num_arms)) {
+    for (i in 0:num_arms) {
       assign(paste0("ind_trend", i), linear_trend(j=eval(sym(paste0("j", i))),
                                                   lambda = lambda[i+1],
                                                   sample_size = c(N_period[1], sum(N_period[-1]))))
@@ -106,7 +106,7 @@ datasim_cont <- function(n_total, num_arms, t_arm, n_arm, alloc_ratios, period_b
   }
   
   if(trend=="stepwise"){
-    for (i in 0:(num_arms)) {
+    for (i in 0:num_arms) {
       assign(paste0("ind_trend", i), sw_trend(cj=cj[eval(sym(paste0("j", i)))],
                                               lambda = lambda[i+1]))
     }
@@ -114,7 +114,7 @@ datasim_cont <- function(n_total, num_arms, t_arm, n_arm, alloc_ratios, period_b
   
   if(trend=="inv_u"){
     
-    for (i in 0:(num_arms)) {
+    for (i in 0:num_arms) {
       assign(paste0("j", i, "_1"), which(eval(sym(paste0("j", i))) <= N_peak))
       assign(paste0("j", i, "_2"), which(eval(sym(paste0("j", i))) > N_peak))
       
@@ -135,7 +135,7 @@ datasim_cont <- function(n_total, num_arms, t_arm, n_arm, alloc_ratios, period_b
   means <- c()
   means[j0] <- ind_trend0
   
-  for (i in 1:(num_arms)) {
+  for (i in 1:num_arms) {
     means[eval(sym(paste0("j", i)))] <- eval(sym(paste0("ind_trend", i))) + delta[i]
   }
   
@@ -147,7 +147,7 @@ datasim_cont <- function(n_total, num_arms, t_arm, n_arm, alloc_ratios, period_b
                      j = c(1:n_total),
                      means = mu0+means)
   
-  for (i in 0:(num_arms)) {
+  for (i in 0:num_arms) {
     Data[ ,paste0("lambda", i)] <- lambda[i+1]
   }
   
@@ -156,9 +156,9 @@ datasim_cont <- function(n_total, num_arms, t_arm, n_arm, alloc_ratios, period_b
 }
 
 
-# test <- data_sim_cont(n_total = 1000, num_arms = 3, t_arm = 120, period_blocks = 2, delta=rep(0.25, 3), lambda=rep(0.15, 4), sigma=1, trend="linear")
+# test <- datasim_cont(n_total = 1000, num_arms = 3, t_arm = 120, period_blocks = 2, delta=rep(0.25, 3), lambda=rep(0.15, 4), sigma=1, trend="linear")
 
-# test <- data_sim_cont(n_total = NULL, num_arms = NULL, t_arm = NULL, 
+# test <- datasim_cont(n_total = NULL, num_arms = NULL, t_arm = NULL, 
 #                       n_arm = 200, alloc_ratios = matrix(c(1,1,1,
 #                                                            1,1,NA,
 #                                                            NA,1,1), ncol = 3, byrow = T), period_blocks = 2, delta=rep(0.25, 3), lambda=rep(0.15, 4), sigma=1, trend="linear")
