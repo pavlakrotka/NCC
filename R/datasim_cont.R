@@ -23,7 +23,7 @@
 #' @return Data frame: simulated trial data
 #' @author Pavla Krotka, Marta Bofill Roig
 
-data_sim_cont <- function(n_total, num_arms, t_arm, n_arm, alloc_ratios, period_blocks=2, mu0=0, delta, lambda, sigma, trend, N_peak){
+datasim_cont <- function(n_total, num_arms, t_arm, n_arm, alloc_ratios, period_blocks=2, mu0=0, delta, lambda, sigma, trend, N_peak){
   
   requireNamespace("rlang")
   requireNamespace("stats")
