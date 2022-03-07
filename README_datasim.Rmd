@@ -48,9 +48,9 @@ Specify the sample size per treatment arm (assumed equal) and a matrix with allo
 # Example
 
 head(data_sim_cont(n_total = NULL, num_arms = NULL, t_arm = NULL, 
-                   n_arm = 200, alloc_ratios = , matrix(c(1,1,1,
-                                                          1,1,NA,
-                                                          NA,1,1), ncol = 3, byrow = T),
+                   n_arm = 200, alloc_ratios = matrix(c(1,1,1,
+                                                        1,1,NA,
+                                                        NA,1,1), ncol = 3, byrow = T),
                    period_blocks = 2, delta = rep(0.25, 3), lambda = rep(0.15, 4), 
                    sigma = 1, trend = "linear"))
 ```
