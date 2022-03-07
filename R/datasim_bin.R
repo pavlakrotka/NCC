@@ -13,6 +13,7 @@
 #' @param lambda Vector with strength of time trend in each arm
 #' @param trend Indicates the time trend pattern ("linear", "stepwise" or "inv_u")
 #' @param N_peak Point at which the inverted-u time trend switches direction in terms of overall sample size
+#' @param full Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses) should be included (TRUE). Default=FALSE
 #' 
 #'
 #' @import rlang
@@ -161,8 +162,7 @@ datasim_bin <- function(n_total, num_arms, t_arm, n_arm, alloc_ratios, period_bl
     }
     
   } else {
-    Data <- data.frame(j = c(1:n_total),
-                       response = X,
+    Data <- data.frame(response = X,
                        treatment = t,
                        period = rep(1:num_periods, N_period))
   }
