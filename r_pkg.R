@@ -12,3 +12,10 @@ devtools::load_all()
 devtools::build(pkg = "C:/Users/pavla/Nextcloud/GitKraken/NCC", path = NULL, binary = FALSE, manual = TRUE)
 devtools::check_built(path = "C:/Users/pavla/Nextcloud/GitKraken/NCC", cran=TRUE, manual = TRUE)
 devtools::build_manual(pkg = "C:/Users/pavla/Nextcloud/GitKraken/NCC", path = NULL)
+
+#create vignette
+usethis::use_vignette("my-vignette")
+
+
+# https://www.r-bloggers.com/2017/08/building-a-website-with-pkgdown-a-short-guide/
+# https://r-pkgs.org/vignettes.html

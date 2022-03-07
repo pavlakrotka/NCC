@@ -1,0 +1,72 @@
+---
+title: "`data_sim_cont()`: simulating platform trials with continuous data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(NCC)
+```
+
+
+## Short description
+
+The function `data_sim_cont()` enables data simulation of a platform trial with an arbitrary number of treatment arms entering at different time points.
+
+
+### Assumptions
+
+- sample sizes are equal across all treatment arms
+- block randomization is used, a factor to multiply the number of active arms with in order to get the block size in each period can be specified as input argument (period_blocks, default=2)
+
+## Usage options
+
+### Inputs
+
+The user has two options to specify input arguments:
+
+#### 1)
+
+Specify total sample size in the trial (n_total), number of treatment arms (num_arms) and the timing of adding new arms in terms of number of patients allocated to the control arm (t_arm). The sample size per period is then computed using the `get_ss_matrix()` function. The sample sizes in treatment and control arms are varying, based on the 3 specified parameters and the assumptions of equal sample sizes for all treatment arms and 1:1:...:1 allocation ratio in all periods.
+
+```{r, eval=FALSE}
+# Example
+
+head(data_sim_cont(n_total = 1000, num_arms = 3, t_arm = 120, 
+                   n_arm = NULL, alloc_ratios = NULL, 
+                   period_blocks = 2, delta = rep(0.25, 3), lambda = rep(0.15, 4), 
+                   sigma = 1, trend = "linear"))
+```
+
+
+#### 2)
+
+Specify the sample size per treatment arm (assumed equal) and a matrix with allocation ratios in each period. The matrix with sample sizes per period is then computed based on these input parameters.
+
+```{r, eval=FALSE}
+# Example
+
+head(data_sim_cont(n_total = NULL, num_arms = NULL, t_arm = NULL, 
+                   n_arm = 200, alloc_ratios = , matrix(c(1,1,1,
+                                                          1,1,NA,
+                                                          NA,1,1), ncol = 3, byrow = T),
+                   period_blocks = 2, delta = rep(0.25, 3), lambda = rep(0.15, 4), 
+                   sigma = 1, trend = "linear"))
+```
+
+### Outputs
+
+Define new parameter `full`. If `full=F`, then the output only contains response, treatment, period. Otherwise,then the output is all the dataframe. 
+
+
+
