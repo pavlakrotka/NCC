@@ -22,9 +22,10 @@ We divide the duration of the trial into *S* periods, where the periods are the 
 
 The bellow figure illustrates the considered trial desing with *K* treatment arms and *S* periods.
 
-<img src="./figures/trial_general_1.PNG" width="70%" style="display: block; margin: auto;" />
-
-<img src="./figures/trial_general_1.PNG" alt="Image Title" style="width:50.0%" />
+<img src="./figures/trial_general_1.PNG" alt="Figure 1: Scheme of the considered platform trial." width="70%" />
+<p class="caption">
+Figure 1: Scheme of the considered platform trial.
+</p>
 
 Installation
 ------------
