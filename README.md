@@ -9,11 +9,13 @@ non-concurrent control data.
 
 This package contains the following functions:
 
-  - `datasim_cont()` - simulates data with continuous outcomes
-  - `datasim_bin()` - simulates data with binary outcomes
-  - `get_ss_matrix()` - computes sample sizes per arm and period
-  - `linear_trend()` - generates linear trend for each patient
-  - `sw_trend()` - generates stepwise trend for each patient
+  - `datasim_cont()` simulates data with continuous outcomes
+  - `datasim_bin()` simulates data with binary outcomes
+  - `get_ss_matrix()` computes sample sizes per arm and period
+  - `linear_trend()` is the linear time trend function, used to generate
+    the trend for each patient
+  - `sw_trend()` is the stepwise time trend function, used generate the
+    trend for each patient
 
 ### Design overview
 
