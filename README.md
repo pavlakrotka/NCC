@@ -27,6 +27,8 @@ The bellow figure illustrates the considered trial desing with *K* treatment arm
 Figure 1: Scheme of the cosidered trial desing.
 </p>
 
+<img src="trial_general_1.png" alt="Image Title" style="width:30.0%" />
+
 Installation
 ------------
 

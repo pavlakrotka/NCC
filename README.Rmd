@@ -42,6 +42,8 @@ The bellow figure illustrates the considered trial desing with $K$ treatment arm
 include_graphics("trial_general_1.png")
 ```
 
+
+![Image Title](trial_general_1.png){width=30%}
  
 
 ## Installation
