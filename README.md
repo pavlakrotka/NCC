@@ -22,11 +22,6 @@ We divide the duration of the trial into *S* periods, where the periods are the 
 
 The bellow figure illustrates the considered trial desing with *K* treatment arms and *S* periods.
 
-<img src="trial_general_1.png" alt="Figure 1: Scheme of the cosidered trial desing." width="70%" />
-<p class="caption">
-Figure 1: Scheme of the cosidered trial desing.
-</p>
-
 <img src="trial_general_1.png" alt="Image Title" style="width:30.0%" />
 
 Installation
