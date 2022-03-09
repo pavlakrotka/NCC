@@ -1,0 +1,27 @@
+---
+title: "`get_ss_matrix()`: sample size computation for platform trials with continuous data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(NCC)
+```
+
+# get_ss_matrix()
+
+```{r}
+# Example 
+
+get_ss_matrix(1000, 4, 100)
+```
