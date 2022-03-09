@@ -2,7 +2,7 @@
 title: "`datasim_cont()`: simulating platform trials with continuous response"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{my-vignette}
+  %\VignetteIndexEntry{datasim_cont}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
