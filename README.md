@@ -2,10 +2,8 @@ NCC: R package for comparing treatment arms against control in platform
 trials with non-concurrent controls
 ================
 
-## NCC
-
-`NCC` allows users to simulate platform trials and to compare arms using
-non-concurrent control data.
+`NCC` package allows users to simulate platform trials and to compare
+arms using non-concurrent control data.
 
 This package contains the following functions:
 
@@ -14,8 +12,11 @@ This package contains the following functions:
   - `get_ss_matrix()` computes sample sizes per arm and period
   - `linear_trend()` is the linear time trend function, used to generate
     the trend for each patient
-  - `sw_trend()` is the stepwise time trend function, used generate the
+  - `sw_trend()` is the step-wise time trend function, used generate the
     trend for each patient
+
+For a more detailed description of the functions, see the vignettes in
+the R-package website (XXX).
 
 ### Design overview
 
@@ -26,11 +27,11 @@ starting with one initial treatment arm, where a new arm is added after
 every \(\delta\) patients have been enrolled in the control arm.
 
 We divide the duration of the trial into \(S\) periods, where the
-periods are the time intervals bounded by times at a treatment arm
+periods are the time intervals bounded by times at which a treatment arm
 either enters or leaves the platform.
 
-Figure 1 illustrates the considered trial design with \(K\) treatment
-arms and \(S\) periods.
+Figure 1 illustrates the considered trial design.
+<!-- with $K$ treatment arms and $S$ periods. -->
 
 <div class="figure" style="text-align: center">
 
