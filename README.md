@@ -21,7 +21,7 @@ We divide the duration of the trial into *S* periods, where the periods are the 
 
 The below figure illustrates the considered trial design.
 
-<img src="./figures/trial_general_2.PNG" alt="Scheme of the platform trial over time according to the number of patients recruited to control." width="70%" />
+<img src="./man/figures/trial_general_2.PNG" alt="Scheme of the platform trial over time according to the number of patients recruited to control." width="70%" />
 <p class="caption">
 Scheme of the platform trial over time according to the number of patients recruited to control.
 </p>
@@ -31,7 +31,7 @@ Installation
 
 ``` r
 # install.packages("devtools") 
-devtools::install_github("pavlakrotka/NCC")
+devtools::install_github("pavlakrotka/NCC", build_vignettes = TRUE)
 ```
 
 Documentation

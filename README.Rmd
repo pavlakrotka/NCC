@@ -39,7 +39,7 @@ We divide the duration of the trial into $S$ periods, where the periods are the 
 The below figure illustrates the considered trial design.
 
 ```{r, echo=FALSE, fig.cap="Scheme of the platform trial over time according to the number of patients recruited to control."}
-include_graphics("./figures/trial_general_2.PNG")
+include_graphics("./man/figures/trial_general_2.PNG")
 ```
 
 
@@ -47,7 +47,7 @@ include_graphics("./figures/trial_general_2.PNG")
 
 ```{r, message=FALSE, warning=FALSE, results=FALSE, eval=FALSE}
 # install.packages("devtools") 
-devtools::install_github("pavlakrotka/NCC")
+devtools::install_github("pavlakrotka/NCC", build_vignettes = TRUE)
 ```
 
 ## Documentation
