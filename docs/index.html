@@ -19,8 +19,6 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -33,12 +31,18 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">NCC</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
+<li>
+  <a href="index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -73,9 +77,9 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div class="section level1">
-<div class="page-header"><h1 id="ncc-r-package-for-simulation-and-analysis-of-platform-trials-with-non-concurrent-controls">NCC: R package for simulation and analysis of platform trials with non-concurrent controls<a class="anchor" aria-label="anchor" href="#ncc-r-package-for-simulation-and-analysis-of-platform-trials-with-non-concurrent-controls"></a>
-</h1></div>
+<div id="ncc-r-package-for-simulation-and-analysis-of-platform-trials-with-non-concurrent-controls" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#ncc-r-package-for-simulation-and-analysis-of-platform-trials-with-non-concurrent-controls" class="anchor"></a>NCC: R package for simulation and analysis of platform trials with non-concurrent controls</h1></div>
 <p><code>NCC</code> package allows users to simulate platform trials and to compare arms using non-concurrent control data.</p>
 <p>This package contains the following functions:</p>
 <ul>
@@ -91,81 +95,69 @@
 <code><a href="reference/sw_trend.html">sw_trend()</a></code> is the step-wise time trend function, used generate the trend for each patient</li>
 </ul>
 <p>For a more detailed description of the functions, see the vignettes in the R-package website (XXX).</p>
-<div class="section level3">
-<h3 id="design-overview">Design overview<a class="anchor" aria-label="anchor" href="#design-overview"></a>
-</h3>
+<div id="design-overview" class="section level3">
+<h3 class="hasAnchor">
+<a href="#design-overview" class="anchor"></a>Design overview</h3>
 <p>We consider a platform trial evaluating the efficacy of <em>K</em> treatment arms compared to a shared control. We assume that treatment arms enter the platform trial sequentially. In particular, we consider a trial starting with one initial treatment arm, where a new arm is added after every <em>δ</em> patients have been enrolled in the control arm.</p>
 <p>We divide the duration of the trial into <em>S</em> periods, where the periods are the time intervals bounded by times at which a treatment arm either enters or leaves the platform.</p>
 <p>The below figure illustrates the considered trial design.</p>
-<p><img src="./reference/figures/trial_general_2.PNG" alt="Scheme of the platform trial over time according to the number of patients recruited to control." width="70%"></p>
-<p class="caption"> Scheme of the platform trial over time according to the number of patients recruited to control. </p>
+<img src="./man/figures/trial_general_2.PNG" alt="Scheme of the platform trial over time according to the number of patients recruited to control." width="70%"><p class="caption">
+Scheme of the platform trial over time according to the number of patients recruited to control.
+</p>
 </div>
-<div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h2>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools") </span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"pavlakrotka/NCC"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"pavlakrotka/NCC"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
-</h2>
-<div class="sourceCode"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html" class="external-link">browseVignettes</a></span><span class="op">(</span><span class="st">"NCC"</span><span class="op">)</span></code></pre></div>
+<div id="documentation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#documentation" class="anchor"></a>Documentation</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html">browseVignettes</a></span><span class="op">(</span><span class="st">"NCC"</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h2>
-<p><br><span class="math display">1</span><br> Bofill Roig, Marta, et al. <em>“On model-based time trend adjustments in platform trials with non-concurrent controls.”</em> arXiv preprint <a href="https://arxiv.org/abs/2112.06574" class="external-link">arXiv:2112.06574</a> (2021).</p>
+<div id="references" class="section level2">
+<h2 class="hasAnchor">
+<a href="#references" class="anchor"></a>References</h2>
+<p><br><span class="math display">1</span><br> Bofill Roig, Marta, et al. <em>“On model-based time trend adjustments in platform trials with non-concurrent controls.”</em> arXiv preprint <a href="https://arxiv.org/abs/2112.06574">arXiv:2112.06574</a> (2021).</p>
 <p><br><span class="math display">2</span><br> Lee, Kim May, and James Wason. <em>“Including non-concurrent control patients in the analysis of platform trials: is it worth it?.”</em> BMC medical research methodology 20.1 (2020): 1-12.</p>
 <hr>
 <p><strong>Funding</strong></p>
-<p><a href="https://eu-pearl.eu/" class="external-link">EU-PEARL</a> (EU Patient-cEntric clinicAl tRial pLatforms) project has received funding from the Innovative Medicines Initiative (IMI) 2 Joint Undertaking (JU) under grant agreement No 853966. This Joint Undertaking receives support from the European Union’s Horizon 2020 research and innovation programme and EFPIA andChildren’s Tumor Foundation, Global Alliance for TB Drug Development non-profit organisation, Spring works Therapeutics Inc. This publication reflects the authors’ views. Neither IMI nor the European Union, EFPIA, or any Associated Partners are responsible for any use that may be made of the information contained herein.</p>
+<p><a href="https://eu-pearl.eu/">EU-PEARL</a> (EU Patient-cEntric clinicAl tRial pLatforms) project has received funding from the Innovative Medicines Initiative (IMI) 2 Joint Undertaking (JU) under grant agreement No 853966. This Joint Undertaking receives support from the European Union’s Horizon 2020 research and innovation programme and EFPIA andChildren’s Tumor Foundation, Global Alliance for TB Drug Development non-profit organisation, Spring works Therapeutics Inc. This publication reflects the authors’ views. Neither IMI nor the European Union, EFPIA, or any Associated Partners are responsible for any use that may be made of the information contained herein.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="license">
-<h2 data-toc-skip>License</h2>
+<h2>License</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
+<a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
 </li>
 </ul>
 </div>
-
-
-<div class="citation">
-<h2 data-toc-skip>Citation</h2>
-<ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing NCC</a></li>
-</ul>
-</div>
-
 <div class="developers">
-<h2 data-toc-skip>Developers</h2>
+<h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Pavla Krotka <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/YOUR-ORCID-ID" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Marta Bofill Roig <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4400-7541" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">More about authors...</a></li>
+<li>Pavla Krotka <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/YOUR-ORCID-ID" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Marta Bofill Roig <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4400-7541" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
-
-
 
   </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p></p>
-<p>Developed by Pavla Krotka, Marta Bofill Roig.</p>
+  <p>Developed by Pavla Krotka, Marta Bofill Roig.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -173,8 +165,6 @@
 
   
 
-
-  
 
   </body>
 </html>
