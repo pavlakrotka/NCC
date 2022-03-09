@@ -1,14 +1,16 @@
 Package: NCC
 Title: Simulation of platform trial with non-concurrent controls
 Version: 1.0
-Authors: Pavla Krotka, Marta Bofill Roig
+Authors: Pavla Krotka [aut, cre], Marta Bofill Roig [aut, cre], Martin Posch [ctb]
 Maintainer: Pavla Krotka <pavla.krotka@meduniwien.ac.at>
 Authors@R: 
-    person(given = "Pavla",
+	c(person(given = "Pavla",
            family = "Krotka",
            role = c("aut", "cre"),
            email = "pavla.krotka@meduniwien.ac.at",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           comment = c(ORCID = "YOUR-ORCID-ID")),
+	person("Marta", "Bofill Roig", email = "marta.bofillroig@meduniwien.ac.at", role = c("aut"), comment = c(ORCID = "0000-0002-4400-7541")),
+	person("Martin", "Posch", email = "martin.posch@meduniwien.ac.at", role = c("ctb"), comment = c(ORCID = "0000-0001-8499-8573")))
 Description: Simulation of platform trial with non-concurrent controls.
 License: MIT + file LICENSE
 Encoding: UTF-8
