@@ -38,6 +38,11 @@ We divide the duration of the trial into $S$ periods, where the periods are the 
 
 The bellow figure illustrates the considered trial desing with $K$ treatment arms and $S$ periods.
 
+```{r, echo=FALSE}
+include_graphics("./figures/trial_general_1.png")
+```
+
+
 
 ![Image Title](./figures/trial_general_1.png){width=50%}
  
