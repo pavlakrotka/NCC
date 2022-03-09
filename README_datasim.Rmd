@@ -12,15 +12,15 @@ knitr::opts_chunk$set(echo = TRUE,
                       fig.align = "center",
                       out.width = "80%")
 
-source("R/data_sim_cont.R")
+source("R/datasim_cont.R")
 source("R/linear_trend.R")
 source("R/get_ss_matrix.R")
 ```
 
 
-## data_sim_cont()
+## datasim_cont()
 
-The function `data_sim_cont()` enables data simulation of a platform trial with an arbitrary number of treatment arms entering at different time points.
+The function `datasim_cont()` enables data simulation of a platform trial with continuous endpoint and an arbitrary number of treatment arms entering at different time points.
 
 ### Usage options
 
@@ -33,7 +33,7 @@ Specify total sample size in the trial (n_total), number of treatment arms (num_
 ```{r}
 # Example
 
-head(data_sim_cont(n_total = 1000, num_arms = 3, t_arm = 120, 
+head(datasim_cont(n_total = 1000, num_arms = 3, t_arm = 120, 
                    n_arm = NULL, alloc_ratios = NULL, 
                    period_blocks = 2, delta = rep(0.25, 3), lambda = rep(0.15, 4), 
                    sigma = 1, trend = "linear"))
@@ -47,7 +47,7 @@ Specify the sample size per treatment arm (assumed equal) and a matrix with allo
 ```{r}
 # Example
 
-head(data_sim_cont(n_total = NULL, num_arms = NULL, t_arm = NULL, 
+head(datasim_cont(n_total = NULL, num_arms = NULL, t_arm = NULL, 
                    n_arm = 200, alloc_ratios = matrix(c(1,1,1,
                                                         1,1,NA,
                                                         NA,1,1), ncol = 3, byrow = T),

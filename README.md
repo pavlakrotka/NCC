@@ -1,4 +1,4 @@
-﻿NCC: R package for comparing treatment arms against control in platform trials with non-concurrent controls
+NCC: R package for comparing treatment arms against control in platform trials with non-concurrent controls
 ================
 
 NCC
@@ -22,7 +22,7 @@ We divide the duration of the trial into *S* periods, where the periods are the 
 
 The bellow figure illustrates the considered trial desing with *K* treatment arms and *S* periods.
 
-![Image Title](./figures/trial_general_1.png)
+<img src="./figures/trial_general_1.png" alt="Image Title" style="width:50.0%" />
 
 Installation
 ------------
