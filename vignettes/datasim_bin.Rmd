@@ -1,5 +1,5 @@
 ---
-title: "`datasim_cont()`: simulating platform trials with continuous data"
+title: "`datasim_bin()`: simulating platform trials with continuous data"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{my-vignette}
@@ -19,9 +19,9 @@ library(NCC)
 ```
 
 
-# datasim_cont()
+# datasim_bin()
 
-The function `datasim_cont()` enables data simulation of a platform trial with continuous endpoint and an arbitrary number of treatment arms entering at different time points.
+The function `datasim_bin()` enables data simulation of a platform trial with binary endpoint and an arbitrary number of treatment arms entering at different time points.
 
 ## Assumptions
 
@@ -53,19 +53,11 @@ The function `datasim_cont()` enables data simulation of a platform trial with c
     </tr>
     <tr>
         <td>$\eta_0$</td>
-        <td>mu0</td>
-    </tr>
-    <tr>
-        <td>$\theta$</td>
-        <td>delta</td>
+        <td>p0</td>
     </tr>
     <tr>
         <td>$\lambda$</td>
         <td>lambda</td>
-    </tr>
-    <tr>
-        <td>$\sigma$</td>
-        <td>sigma</td>
     </tr>
     <tr>
         <td>$N_p$</td>
@@ -92,10 +84,9 @@ Specify the sample size per treatment arm (`n_arm`, assumed equal) and a matrix 
 #### Other input parameters
 
 - `period_blocks` - number to multiply the number of active arms with in order to get the block size per period (block size = `period_blocks` $\cdot$ #active arms)
-- `mu0` - response in the control arm. Default=0
-- `delta` - vector with treatment effects for each arm
+- `p0` - response in the control arm
+- `OR`- vector with odds ratios for each arm
 - `lambda` - vector with strength of time trend in each arm
-- `sigma` - residual variance
 - `trend` - indicates the time trend pattern ("linear", "stepwise" or "inv_u")
 - `N_peak` - point at which the inverted-u time trend switches direction in terms of overall sample size
 - `full` - boolean. Indicates whether the full dataset should be returned. Default=`FALSE`
@@ -110,32 +101,30 @@ The function outputs a dataframe with the simulated trial data. If the parameter
 ```{r}
 # Usage option 1
 
-head(datasim_cont(n_total = 1000, num_arms = 3, t_arm = 120, 
-                   n_arm = NULL, alloc_ratios = NULL, 
-                   period_blocks = 2, delta = rep(0.25, 3), lambda = rep(0.15, 4), 
-                   sigma = 1, trend = "linear"))
+head(datasim_bin(n_total = 1000, num_arms = 3, t_arm = 120, 
+                 n_arm = NULL, alloc_ratios = NULL, 
+                 period_blocks = 2, p0 = 0.7, OR = rep(1.4, 3), 
+                 lambda = rep(0.15, 4), trend = "linear"))
 ```
 
 
 ```{r}
 # Usage option 2
 
-head(datasim_cont(n_total = NULL, num_arms = NULL, t_arm = NULL, 
-                   n_arm = 200, alloc_ratios = matrix(c(1,1,1,
-                                                        1,1,NA,
-                                                        NA,1,1), ncol = 3, byrow = T),
-                   period_blocks = 2, delta = rep(0.25, 3), lambda = rep(0.15, 4), 
-                   sigma = 1, trend = "linear"))
+head(datasim_bin(n_total = NULL, num_arms = NULL, t_arm = NULL, 
+                 n_arm = 200, alloc_ratios = matrix(c(1,1,1,
+                                                      1,1,NA,
+                                                      NA,1,1), ncol = 3, byrow = T),
+                 period_blocks = 2, p0 = 0.7, OR = rep(1.4, 3), 
+                 lambda = rep(0.15, 4), trend = "linear"))
 ```
 
 ```{r}
 # Usage option 1 - full dataset
 
-head(datasim_cont(n_total = 1000, num_arms = 3, t_arm = 120, 
-                   n_arm = NULL, alloc_ratios = NULL, 
-                   period_blocks = 2, delta = rep(0.25, 3), lambda = rep(0.15, 4), 
-                   sigma = 1, trend = "linear", full = T))
+head(datasim_bin(n_total = 1000, num_arms = 3, t_arm = 120, 
+                 n_arm = NULL, alloc_ratios = NULL, 
+                 period_blocks = 2, p0 = 0.7, OR = rep(1.4, 3), 
+                 lambda = rep(0.15, 4), trend = "linear", full = T))
 ```
-
-
 

@@ -1,5 +1,5 @@
 ---
-title: "NCC: R package for comparing treatment arms against control in platform trials with non-concurrent controls"
+title: "NCC: R package for simulation and analysis of platform trials with non-concurrent controls"
 output: github_document
 ---
 
@@ -36,10 +36,10 @@ We consider a platform trial evaluating the efficacy of $K$ treatment arms compa
 
 We divide the duration of the trial into $S$ periods, where the periods are the time intervals bounded by times at which a treatment arm either enters or leaves the platform.
 
-Figure 1 illustrates the considered trial design. <!-- with $K$ treatment arms and $S$ periods. -->
+The below figure illustrates the considered trial design.
 
-```{r, echo=FALSE, fig.cap="Figure 1: Scheme of the platform trial over time according to the number of patients recruited to control."}
-include_graphics("./figures/trial_general_1.PNG")
+```{r, echo=FALSE, fig.cap="Scheme of the platform trial over time according to the number of patients recruited to control."}
+include_graphics("./figures/trial_general_2.PNG")
 ```
 
 
