@@ -28,7 +28,7 @@ This package contains the following functions:
 - `linear_trend()` is the linear time trend function, used to generate the trend for each patient
 - `sw_trend()` is the step-wise time trend function, used generate the trend for each patient
 
-For a more detailed description of the functions, see the vignettes in the R-package website (XXX).
+For a more detailed description of the functions, see the vignettes in the R-package website (https://pavlakrotka.github.io/NCC/).
 
 ### Design overview
 
@@ -38,7 +38,7 @@ We divide the duration of the trial into $S$ periods, where the periods are the 
 
 The below figure illustrates the considered trial design.
 
-```{r, echo=FALSE, fig.cap="Scheme of the platform trial over time according to the number of patients recruited to control."}
+```{r, echo=FALSE}
 include_graphics("./man/figures/trial_general_2.PNG")
 ```
 
