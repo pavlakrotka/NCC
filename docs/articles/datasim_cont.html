@@ -58,6 +58,9 @@
   </div>
 </nav><div class="container template-article">
 
+
+
+
 <div class="row">
   <main id="main"><div class="page-header">
       <img src="" class="logo" alt=""><h1>datasim_cont</h1>
@@ -69,64 +72,108 @@
 
     
     
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">NCC</span><span class="op">)</span></code></pre></div>
 <div class="section level2">
 <h2 id="datasim_cont">datasim_cont()<a class="anchor" aria-label="anchor" href="#datasim_cont"></a>
 </h2>
-<p>The function <code><a href="../reference/datasim_cont.html">datasim_cont()</a></code> enables data simulation of a platform trial with continuous endpoint and an arbitrary number of treatment arms entering at different time points.</p>
+<p>The function <code><a href="../reference/datasim_cont.html">datasim_cont()</a></code> enables data simulation of a
+platform trial with continuous endpoint and an arbitrary number of
+treatment arms entering at different time points.</p>
 <div class="section level3">
 <h3 id="assumptions">Assumptions<a class="anchor" aria-label="anchor" href="#assumptions"></a>
 </h3>
 <ul>
 <li>equal sample sizes across all treatment arms</li>
-<li>block randomization is used, a factor to multiply the number of active arms with in order to get the block size in each period can be specified as input argument (<code>period_blocks</code>, default=2)</li>
+<li>block randomization is used, a factor to multiply the number of
+active arms with in order to get the block size in each period can be
+specified as input argument (<code>period_blocks</code>, default=2)</li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="notation">Notation<a class="anchor" aria-label="anchor" href="#notation"></a>
 </h3>
 <table class="table">
-<pre><code>&lt;tr&gt;
-    &lt;td&gt;&lt;b&gt;Paper&lt;/b&gt;&lt;/td&gt;
-    &lt;td&gt;&lt;b&gt;Software&lt;/b&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td&gt;$N$&lt;/td&gt;
-    &lt;td&gt;n_total&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td&gt;$K$&lt;/td&gt;
-    &lt;td&gt;num_arms&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td&gt;$d$&lt;/td&gt;
-    &lt;td&gt;d&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td&gt;$n$&lt;/td&gt;
-    &lt;td&gt;n_arm&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td&gt;$\eta_0$&lt;/td&gt;
-    &lt;td&gt;mu0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td&gt;$\theta$&lt;/td&gt;
-    &lt;td&gt;theta&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td&gt;$\lambda$&lt;/td&gt;
-    &lt;td&gt;lambda&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td&gt;$\sigma$&lt;/td&gt;
-    &lt;td&gt;sigma&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-    &lt;td&gt;$N_p$&lt;/td&gt;
-    &lt;td&gt;N_peak&lt;/td&gt;
-&lt;/tr&gt;</code></pre>
+<tr>
+<td>
+<b>Paper</b>
+</td>
+<td>
+<b>Software</b>
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(N\)</span>
+</td>
+<td>
+n_total
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(K\)</span>
+</td>
+<td>
+num_arms
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(d\)</span>
+</td>
+<td>
+d
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(n\)</span>
+</td>
+<td>
+n_arm
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(\eta_0\)</span>
+</td>
+<td>
+mu0
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(\theta\)</span>
+</td>
+<td>
+theta
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(\lambda\)</span>
+</td>
+<td>
+lambda
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(\sigma\)</span>
+</td>
+<td>
+sigma
+</td>
+</tr>
+<tr>
+<td>
+<span class="math inline">\(N_p\)</span>
+</td>
+<td>
+N_peak
+</td>
+</tr>
 </table>
 </div>
 <div class="section level3">
@@ -140,45 +187,66 @@
 <div class="section level5">
 <h5 id="option-1">Option 1)<a class="anchor" aria-label="anchor" href="#option-1"></a>
 </h5>
-<p>Specify total sample size in the trial (<code>n_total</code>), number of treatment arms (<code>num_arms</code>) and the timing of adding new arms in terms of number of patients allocated to the control arm (<code>d</code>). The sample size per period is then computed using the <code><a href="../reference/get_ss_matrix.html">get_ss_matrix()</a></code> function. The sample sizes in treatment and control arms are varying, based on the 3 specified parameters and the assumptions of equal sample sizes for all treatment arms and 1:1:...:1 allocation ratio in all periods.</p>
+<p>Specify total sample size in the trial (<code>n_total</code>), number
+of treatment arms (<code>num_arms</code>) and the timing of adding new
+arms in terms of number of patients allocated to the control arm
+(<code>d</code>). The sample size per period is then computed using the
+<code><a href="../reference/get_ss_matrix.html">get_ss_matrix()</a></code> function. The sample sizes in treatment and
+control arms are varying, based on the 3 specified parameters and the
+assumptions of equal sample sizes for all treatment arms and 1:1:…:1
+allocation ratio in all periods.</p>
 </div>
 <div class="section level5">
 <h5 id="option-2">Option 2)<a class="anchor" aria-label="anchor" href="#option-2"></a>
 </h5>
-<p>Specify the sample size per treatment arm (<code>n_arm</code>, assumed equal) and a matrix with allocation ratios (<code>alloc_ratios</code>) in each period. The matrix with sample sizes per period is then computed based on these input parameters.</p>
+<p>Specify the sample size per treatment arm (<code>n_arm</code>,
+assumed equal) and a matrix with allocation ratios
+(<code>alloc_ratios</code>) in each period. The matrix with sample sizes
+per period is then computed based on these input parameters.</p>
 </div>
 <div class="section level5">
 <h5 id="other-input-parameters">Other input parameters<a class="anchor" aria-label="anchor" href="#other-input-parameters"></a>
 </h5>
 <ul>
 <li>
-<code>period_blocks</code> - number to multiply the number of active arms with in order to get the block size per period (block size = <code>period_blocks</code> <span class="math inline">\(\cdot\)</span> #active arms)</li>
+<code>period_blocks</code> - number to multiply the number of active
+arms with in order to get the block size per period (block size =
+<code>period_blocks</code> <span class="math inline">\(\cdot\)</span>
+#active arms)</li>
 <li>
 <code>mu0</code> - response in the control arm. Default=0</li>
 <li>
 <code>theta</code> - vector with treatment effects for each arm</li>
 <li>
-<code>lambda</code> - vector with strength of time trend in each arm</li>
+<code>lambda</code> - vector with strength of time trend in each
+arm</li>
 <li>
 <code>sigma</code> - residual variance</li>
 <li>
-<code>trend</code> - indicates the time trend pattern ("linear", "stepwise" or "inv_u")</li>
+<code>trend</code> - indicates the time trend pattern (“linear”,
+“stepwise” or “inv_u”)</li>
 <li>
-<code>N_peak</code> - point at which the inverted-u time trend switches direction in terms of overall sample size</li>
+<code>N_peak</code> - point at which the inverted-u time trend
+switches direction in terms of overall sample size</li>
 <li>
-<code>full</code> - boolean. Indicates whether the full dataset should be returned. Default=<code>FALSE</code>
+<code>full</code> - boolean. Indicates whether the full dataset
+should be returned. Default=<code>FALSE</code>
 </li>
 </ul>
 </div>
 <div class="section level4">
 <h4 id="output">Output<a class="anchor" aria-label="anchor" href="#output"></a>
 </h4>
-<p>The function outputs a dataframe with the simulated trial data. If the parameter <code>full</code> is set to <code>FALSE</code> (default), only variables needed for the analysis are included. If <code>full=TRUE</code>, the dataframe also contains additional information (lambdas, underlying responses).</p>
+<p>The function outputs a dataframe with the simulated trial data. If
+the parameter <code>full</code> is set to <code>FALSE</code> (default),
+only variables needed for the analysis are included. If
+<code>full=TRUE</code>, the dataframe also contains additional
+information (lambdas, underlying responses).</p>
 </div>
 <div class="section level4">
 <h4 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h4>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Usage option 1</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/datasim_cont.html">datasim_cont</a></span><span class="op">(</span>n_total <span class="op">=</span> <span class="fl">1000</span>, num_arms <span class="op">=</span> <span class="fl">3</span>, d <span class="op">=</span> <span class="fl">120</span>, 
@@ -186,14 +254,14 @@
                    period_blocks <span class="op">=</span> <span class="fl">2</span>, theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, 
                    sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: rlang</span>
-<span class="co">#&gt;     response treatment period</span>
-<span class="co">#&gt; 1 -1.1987613         0      1</span>
-<span class="co">#&gt; 2  1.1802917         1      1</span>
-<span class="co">#&gt; 3  0.5265062         0      1</span>
-<span class="co">#&gt; 4  1.3584314         1      1</span>
-<span class="co">#&gt; 5 -0.6815167         1      1</span>
-<span class="co">#&gt; 6  0.9195701         0      1</span></code></pre></div>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<span class="co">#&gt;      response treatment period</span>
+<span class="co">#&gt; 1  0.84550021         1      1</span>
+<span class="co">#&gt; 2 -0.52136462         0      1</span>
+<span class="co">#&gt; 3  0.85764654         1      1</span>
+<span class="co">#&gt; 4 -0.05250059         0      1</span>
+<span class="co">#&gt; 5  0.75575895         1      1</span>
+<span class="co">#&gt; 6  0.26187533         0      1</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Usage option 2</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/datasim_cont.html">datasim_cont</a></span><span class="op">(</span>n_total <span class="op">=</span> <span class="cn">NULL</span>, num_arms <span class="op">=</span> <span class="cn">NULL</span>, d <span class="op">=</span> <span class="cn">NULL</span>, 
@@ -202,14 +270,14 @@
                                                         <span class="cn">NA</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">3</span>, byrow <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,
                    period_blocks <span class="op">=</span> <span class="fl">2</span>, theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, 
                    sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;     response treatment period</span>
-<span class="co">#&gt; 1  0.8264386         0      1</span>
-<span class="co">#&gt; 2 -0.3604101         1      1</span>
-<span class="co">#&gt; 3 -1.0157993         0      1</span>
-<span class="co">#&gt; 4  0.1203175         1      1</span>
-<span class="co">#&gt; 5 -1.6633505         0      1</span>
-<span class="co">#&gt; 6 -1.4135061         1      1</span></code></pre></div>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<span class="co">#&gt;      response treatment period</span>
+<span class="co">#&gt; 1  0.68248753         0      1</span>
+<span class="co">#&gt; 2  0.23163824         0      1</span>
+<span class="co">#&gt; 3  0.40597891         1      1</span>
+<span class="co">#&gt; 4 -0.42594113         1      1</span>
+<span class="co">#&gt; 5 -0.48634766         0      1</span>
+<span class="co">#&gt; 6  0.01751399         0      1</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Usage option 1 - full dataset</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/datasim_cont.html">datasim_cont</a></span><span class="op">(</span>n_total <span class="op">=</span> <span class="fl">1000</span>, num_arms <span class="op">=</span> <span class="fl">3</span>, d <span class="op">=</span> <span class="fl">120</span>, 
@@ -217,12 +285,12 @@
                    period_blocks <span class="op">=</span> <span class="fl">2</span>, theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, 
                    sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span>, full <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;   j   response treatment period        means lambda0 lambda1 lambda2 lambda3</span>
-<span class="co">#&gt; 1 1  0.3434576         0      1 0.0000000000    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 2 2 -0.1874528         0      1 0.0001501502    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 3 3 -0.6537429         1      1 0.2503003003    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 4 4  1.0762372         1      1 0.2504504505    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 5 5 -0.5000652         0      1 0.0006006006    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 6 6  0.7176929         1      1 0.2507507508    0.15    0.15    0.15    0.15</span></code></pre></div>
+<span class="co">#&gt; 1 1 -0.5229791         1      1 0.2500000000    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 2 2  1.3592157         0      1 0.0001501502    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 3 3 -2.1387565         1      1 0.2503003003    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 4 4 -0.9798018         0      1 0.0004504505    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 5 5  0.7725765         1      1 0.2506006006    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 6 6 -0.2305347         1      1 0.2507507508    0.15    0.15    0.15    0.15</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -239,7 +307,8 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
     </footer>

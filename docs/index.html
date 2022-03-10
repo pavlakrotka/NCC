@@ -58,56 +58,79 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="ncc-r-package-for-simulation-and-analysis-of-platform-trials-with-non-concurrent-controls">NCC: R package for simulation and analysis of platform trials with non-concurrent controls<a class="anchor" aria-label="anchor" href="#ncc-r-package-for-simulation-and-analysis-of-platform-trials-with-non-concurrent-controls"></a>
-</h1></div>
-<p><code>NCC</code> package allows users to simulate platform trials and to compare arms using non-concurrent control data.</p>
+  <main id="main" class="col-md-9"><p>NCC: R package for simulation and analysis of platform trials with
+non-concurrent controls ================</p>
+<p><code>NCC</code> package allows users to simulate platform trials and
+to compare arms using non-concurrent control data.</p>
 <p>This package contains the following functions:</p>
 <ul>
 <li>
-<code><a href="reference/datasim_cont.html">datasim_cont()</a></code> simulates data with continuous outcomes</li>
+<code><a href="reference/datasim_cont.html">datasim_cont()</a></code> simulates data with continuous
+outcomes</li>
 <li>
 <code><a href="reference/datasim_bin.html">datasim_bin()</a></code> simulates data with binary outcomes</li>
 <li>
-<code><a href="reference/get_ss_matrix.html">get_ss_matrix()</a></code> computes sample sizes per arm and period</li>
+<code><a href="reference/get_ss_matrix.html">get_ss_matrix()</a></code> computes sample sizes per arm and
+period</li>
 <li>
-<code><a href="reference/linear_trend.html">linear_trend()</a></code> is the linear time trend function, used to generate the trend for each patient</li>
+<code><a href="reference/linear_trend.html">linear_trend()</a></code> is the linear time trend function, used
+to generate the trend for each patient</li>
 <li>
-<code><a href="reference/sw_trend.html">sw_trend()</a></code> is the step-wise time trend function, used generate the trend for each patient</li>
+<code><a href="reference/sw_trend.html">sw_trend()</a></code> is the step-wise time trend function, used
+generate the trend for each patient</li>
 </ul>
-<p>For a more detailed description of the functions, see the vignettes in the R-package website (XXX).</p>
+<p>For a more detailed description of the functions, see the vignettes
+in the R-package website (<a href="https://pavlakrotka.github.io/NCC/" class="external-link uri">https://pavlakrotka.github.io/NCC/</a>).</p>
 <div class="section level3">
 <h3 id="design-overview">Design overview<a class="anchor" aria-label="anchor" href="#design-overview"></a>
 </h3>
-<p>We consider a platform trial evaluating the efficacy of <em>K</em> treatment arms compared to a shared control. We assume that treatment arms enter the platform trial sequentially. In particular, we consider a trial starting with one initial treatment arm, where a new arm is added after every <em>d</em> patients have been enrolled in the control arm.</p>
-<p>We divide the duration of the trial into <em>S</em> periods, where the periods are the time intervals bounded by times at which a treatment arm either enters or leaves the platform.</p>
+<p>We consider a platform trial evaluating the efficacy of <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;K" title="K" alt="K"> treatment arms compared to a shared control. We
+assume that treatment arms enter the platform trial sequentially. In
+particular, we consider a trial starting with one initial treatment arm,
+where a new arm is added after every <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;d" title="d" alt="d"> patients have been enrolled in the control arm.</p>
+<p>We divide the duration of the trial into <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;S" title="S" alt="S"> periods, where the periods are the time intervals
+bounded by times at which a treatment arm either enters or leaves the
+platform.</p>
 <p>The below figure illustrates the considered trial design.</p>
-<p><img src="./reference/figures/trial_general_2.PNG" alt="Scheme of the platform trial over time according to the number of patients recruited to control." width="70%"></p>
-<p class="caption"> Scheme of the platform trial over time according to the number of patients recruited to control. </p>
+<p><img src="./reference/figures/trial_general_2.PNG" width="70%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools") </span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"pavlakrotka/NCC"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
 </h2>
-<div class="sourceCode"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html" class="external-link">browseVignettes</a></span><span class="op">(</span><span class="st">"NCC"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<p><br><span class="math display">1</span><br> Bofill Roig, Marta, et al. <em>“On model-based time trend adjustments in platform trials with non-concurrent controls.”</em> arXiv preprint <a href="https://arxiv.org/abs/2112.06574" class="external-link">arXiv:2112.06574</a> (2021).</p>
-<p><br><span class="math display">2</span><br> Lee, Kim May, and James Wason. <em>“Including non-concurrent control patients in the analysis of platform trials: is it worth it?.”</em> BMC medical research methodology 20.1 (2020): 1-12.</p>
+<p>[1] Bofill Roig, Marta, et al. <em>“On model-based time trend
+adjustments in platform trials with non-concurrent controls.”</em> arXiv
+preprint <a href="https://arxiv.org/abs/2112.06574" class="external-link">arXiv:2112.06574</a>
+(2021).</p>
+<p>[2] Lee, Kim May, and James Wason. <em>“Including non-concurrent
+control patients in the analysis of platform trials: is it worth
+it?.”</em> BMC medical research methodology 20.1 (2020): 1-12.</p>
 <hr>
 <p><strong>Funding</strong></p>
-<p><a href="https://eu-pearl.eu/" class="external-link">EU-PEARL</a> (EU Patient-cEntric clinicAl tRial pLatforms) project has received funding from the Innovative Medicines Initiative (IMI) 2 Joint Undertaking (JU) under grant agreement No 853966. This Joint Undertaking receives support from the European Union’s Horizon 2020 research and innovation programme and EFPIA andChildren’s Tumor Foundation, Global Alliance for TB Drug Development non-profit organisation, Spring works Therapeutics Inc. This publication reflects the authors’ views. Neither IMI nor the European Union, EFPIA, or any Associated Partners are responsible for any use that may be made of the information contained herein.</p>
+<p><a href="https://eu-pearl.eu/" class="external-link">EU-PEARL</a> (EU Patient-cEntric
+clinicAl tRial pLatforms) project has received funding from the
+Innovative Medicines Initiative (IMI) 2 Joint Undertaking (JU) under
+grant agreement No 853966. This Joint Undertaking receives support from
+the European Union’s Horizon 2020 research and innovation programme and
+EFPIA andChildren’s Tumor Foundation, Global Alliance for TB Drug
+Development non-profit organisation, Spring works Therapeutics Inc. This
+publication reflects the authors’ views. Neither IMI nor the European
+Union, EFPIA, or any Associated Partners are responsible for any use
+that may be made of the information contained herein.</p>
 </div>
-</div>
+
   </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
@@ -147,7 +170,8 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
     </footer>
