@@ -1,5 +1,5 @@
 ---
-title: "`datasim_bin()`: simulating platform trials with binary response"
+title: "datasim_bin"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{datasim_bin}

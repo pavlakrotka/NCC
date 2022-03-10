@@ -1,5 +1,5 @@
 ---
-title: "`get_ss_matrix()`: sample size computation for platform trials with continuous data"
+title: "get_ss_matrix"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{get_ss_matrix}

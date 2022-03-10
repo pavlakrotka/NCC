@@ -1,5 +1,5 @@
 ---
-title: "`datasim_cont()`: simulating platform trials with continuous response"
+title: "datasim_cont"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{datasim_cont}
