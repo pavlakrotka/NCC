@@ -44,8 +44,8 @@ The function `datasim_bin()` enables data simulation of a platform trial with bi
         <td>num_arms</td>
     </tr>
     <tr>
-        <td>$\delta$</td>
-        <td>t_arms</td>
+        <td>$d$</td>
+        <td>d</td>
     </tr>
     <tr>
         <td>$n$</td>
@@ -73,7 +73,7 @@ The user has two options to define the sample sizes in the trial:
 
 #### Option 1)
 
-Specify total sample size in the trial (`n_total`), number of treatment arms (`num_arms`) and the timing of adding new arms in terms of number of patients allocated to the control arm (`t_arm`). The sample size per period is then computed using the `get_ss_matrix()` function. The sample sizes in treatment and control arms are varying, based on the 3 specified parameters and the assumptions of equal sample sizes for all treatment arms and 1:1:...:1 allocation ratio in all periods.
+Specify total sample size in the trial (`n_total`), number of treatment arms (`num_arms`) and the timing of adding new arms in terms of number of patients allocated to the control arm (`d`). The sample size per period is then computed using the `get_ss_matrix()` function. The sample sizes in treatment and control arms are varying, based on the 3 specified parameters and the assumptions of equal sample sizes for all treatment arms and 1:1:...:1 allocation ratio in all periods.
 
 
 #### Option 2)
@@ -101,7 +101,7 @@ The function outputs a dataframe with the simulated trial data. If the parameter
 ```{r}
 # Usage option 1
 
-head(datasim_bin(n_total = 1000, num_arms = 3, t_arm = 120, 
+head(datasim_bin(n_total = 1000, num_arms = 3, d = 120, 
                  n_arm = NULL, alloc_ratios = NULL, 
                  period_blocks = 2, p0 = 0.7, OR = rep(1.4, 3), 
                  lambda = rep(0.15, 4), trend = "linear"))
@@ -111,7 +111,7 @@ head(datasim_bin(n_total = 1000, num_arms = 3, t_arm = 120,
 ```{r}
 # Usage option 2
 
-head(datasim_bin(n_total = NULL, num_arms = NULL, t_arm = NULL, 
+head(datasim_bin(n_total = NULL, num_arms = NULL, d = NULL, 
                  n_arm = 200, alloc_ratios = matrix(c(1,1,1,
                                                       1,1,NA,
                                                       NA,1,1), ncol = 3, byrow = T),
@@ -122,7 +122,7 @@ head(datasim_bin(n_total = NULL, num_arms = NULL, t_arm = NULL,
 ```{r}
 # Usage option 1 - full dataset
 
-head(datasim_bin(n_total = 1000, num_arms = 3, t_arm = 120, 
+head(datasim_bin(n_total = 1000, num_arms = 3, d = 120, 
                  n_arm = NULL, alloc_ratios = NULL, 
                  period_blocks = 2, p0 = 0.7, OR = rep(1.4, 3), 
                  lambda = rep(0.15, 4), trend = "linear", full = T))

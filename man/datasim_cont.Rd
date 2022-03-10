@@ -7,12 +7,12 @@
 datasim_cont(
   n_total,
   num_arms,
-  t_arm,
+  d,
   n_arm,
   alloc_ratios,
   period_blocks = 2,
   mu0 = 0,
-  delta,
+  theta,
   lambda,
   sigma,
   trend,
@@ -25,17 +25,17 @@ datasim_cont(
 
 \item{num_arms}{Number of treatment arms in the trial}
 
-\item{t_arm}{Timing of adding new arms in terms of number of patients allocated to the control arm}
+\item{d}{Timing of adding new arms in terms of number of patients allocated to the control arm}
 
 \item{n_arm}{Sample size per arm}
 
-\item{alloc_ratios}{Matrix with allocation ratios in each period}
+\item{alloc_ratios}{Matrix with allocation ratios in each period (rows = arms; columns = periods)}
 
 \item{period_blocks}{Number to multiply the number of active arms with in order to get the block size per period}
 
 \item{mu0}{Response in the control arm. Default=0}
 
-\item{delta}{Vector with treatment effects for each arm}
+\item{theta}{Vector with treatment effects for each arm}
 
 \item{lambda}{Vector with strength of time trend in each arm}
 
@@ -52,6 +52,19 @@ Data frame: simulated trial data
 }
 \description{
 Simulates data from a platform trial with continuous endpoints and an arbitrary number of treatment arms entering sequentially. There is the option to either specify the timing of adding arms and the overall sample size in the trial or specify the sample size per arm (assumed equal) and the allocation ratios per period.
+}
+\examples{
+
+# Usage option 1 - specify n_total, num_arms and d
+datasim_cont(n_total = 1000, num_arms = 3, d = 120,
+n_arm = NULL, alloc_ratios = NULL,
+period_blocks = 2, theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear")
+
+# Usage option 2 - specify n_arm and alloc_ratios
+datasim_cont(n_total = NULL, num_arms = NULL, d = NULL,
+n_arm = 200, alloc_ratios = matrix(c(1,1,1,1,1,NA,NA,1,1), ncol = 3, byrow = TRUE),
+period_blocks = 2, theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear")
+
 }
 \author{
 Pavla Krotka, Marta Bofill Roig

@@ -4,14 +4,14 @@
 \alias{get_ss_matrix}
 \title{Sample size matrix for a platform trial with 3 arms}
 \usage{
-get_ss_matrix(n_total, num_arms, t_arm)
+get_ss_matrix(n_total, num_arms, d)
 }
 \arguments{
 \item{n_total}{Overall sample size for the trial}
 
 \item{num_arms}{Number of treatment arms in the trial}
 
-\item{t_arm}{Timing of adding new arms in terms of number of patients allocated to the control arm}
+\item{d}{Timing of adding new arms in terms of number of patients allocated to the control arm}
 }
 \value{
 Sample size matrix
