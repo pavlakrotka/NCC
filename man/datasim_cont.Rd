@@ -56,14 +56,14 @@ Simulates data from a platform trial with continuous endpoints and an arbitrary 
 \examples{
 
 # Usage option 1 - specify n_total, num_arms and d
-datasim_cont(n_total = 1000, num_arms = 3, d = 120,
+head(datasim_cont(n_total = 1000, num_arms = 3, d = 120,
 n_arm = NULL, alloc_ratios = NULL,
-period_blocks = 2, theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear")
+period_blocks = 2, theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear"))
 
 # Usage option 2 - specify n_arm and alloc_ratios
-datasim_cont(n_total = NULL, num_arms = NULL, d = NULL,
+head(datasim_cont(n_total = NULL, num_arms = NULL, d = NULL,
 n_arm = 200, alloc_ratios = matrix(c(1,1,1,1,1,NA,NA,1,1), ncol = 3, byrow = TRUE),
-period_blocks = 2, theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear")
+period_blocks = 2, theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear"))
 
 }
 \author{
