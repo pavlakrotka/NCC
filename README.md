@@ -1,5 +1,5 @@
 
-# NCC: Simulation and analysis of platform trials <br> with non-concurrent controls <img src="man/figures/NCC_hexsticker.png" align="right" height="200" />
+# NCC: Simulation and analysis of platform trials with non-concurrent controls <img src="man/figures/NCC_hexsticker.png" align="right" height="200" />
 
 `NCC` package allows users to simulate platform trials and to compare
 arms using non-concurrent control data.
