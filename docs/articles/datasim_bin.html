@@ -237,11 +237,11 @@ information (lambdas, underlying responses).</p>
                  lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, trend <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: rlang</span>
 <span class="co">#&gt;   response treatment period</span>
-<span class="co">#&gt; 1        0         0      1</span>
-<span class="co">#&gt; 2        1         0      1</span>
+<span class="co">#&gt; 1        1         0      1</span>
+<span class="co">#&gt; 2        0         1      1</span>
 <span class="co">#&gt; 3        1         1      1</span>
-<span class="co">#&gt; 4        1         1      1</span>
-<span class="co">#&gt; 5        1         1      1</span>
+<span class="co">#&gt; 4        0         0      1</span>
+<span class="co">#&gt; 5        1         0      1</span>
 <span class="co">#&gt; 6        0         1      1</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Usage option 2</span>
@@ -253,12 +253,12 @@ information (lambdas, underlying responses).</p>
                  period_blocks <span class="op">=</span> <span class="fl">2</span>, p0 <span class="op">=</span> <span class="fl">0.7</span>, OR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1.4</span>, <span class="fl">3</span><span class="op">)</span>, 
                  lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, trend <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;   response treatment period</span>
-<span class="co">#&gt; 1        1         0      1</span>
-<span class="co">#&gt; 2        0         1      1</span>
-<span class="co">#&gt; 3        1         1      1</span>
-<span class="co">#&gt; 4        0         0      1</span>
-<span class="co">#&gt; 5        0         0      1</span>
-<span class="co">#&gt; 6        1         1      1</span></code></pre></div>
+<span class="co">#&gt; 1        0         0      1</span>
+<span class="co">#&gt; 2        1         1      1</span>
+<span class="co">#&gt; 3        1         0      1</span>
+<span class="co">#&gt; 4        0         1      1</span>
+<span class="co">#&gt; 5        0         1      1</span>
+<span class="co">#&gt; 6        1         0      1</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Usage option 1 - full dataset</span>
 
@@ -267,12 +267,12 @@ information (lambdas, underlying responses).</p>
                  period_blocks <span class="op">=</span> <span class="fl">2</span>, p0 <span class="op">=</span> <span class="fl">0.7</span>, OR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1.4</span>, <span class="fl">3</span><span class="op">)</span>, 
                  lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, trend <span class="op">=</span> <span class="st">"linear"</span>, full <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;   j response treatment period         p lambda0 lambda1 lambda2 lambda3</span>
-<span class="co">#&gt; 1 1        1         1      1 0.7656250    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 2 2        1         0      1 0.7000315    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 1 1        1         0      1 0.7000000    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 2 2        1         1      1 0.7656519    0.15    0.15    0.15    0.15</span>
 <span class="co">#&gt; 3 3        1         0      1 0.7000631    0.15    0.15    0.15    0.15</span>
 <span class="co">#&gt; 4 4        1         1      1 0.7657058    0.15    0.15    0.15    0.15</span>
 <span class="co">#&gt; 5 5        1         0      1 0.7001261    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 6 6        0         1      1 0.7657597    0.15    0.15    0.15    0.15</span></code></pre></div>
+<span class="co">#&gt; 6 6        1         1      1 0.7657597    0.15    0.15    0.15    0.15</span></code></pre></div>
 </div>
 </div>
 </div>
