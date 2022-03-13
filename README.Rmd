@@ -2,7 +2,7 @@
 output: github_document
 ---
 
-# NCC: R package for simulation and analysis of platform trials with non-concurrent controls <img src="man/figures/NCC_hexsticker.png" align="right" height="139" />
+# NCC: Simulation and analysis of platform trials <br> with non-concurrent controls <img src="man/figures/NCC_hexsticker.png" align="right" height="200" />
 
 ```{r setup, include=FALSE}
 library(knitr)
