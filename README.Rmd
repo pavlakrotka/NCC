@@ -3,6 +3,8 @@ title: "NCC: R package for simulation and analysis of platform trials with non-c
 output: github_document
 ---
 
+<img src="man/figures/NCC_hexsticker.png" align="right" height="139"/>
+
 ```{r setup, include=FALSE}
 library(knitr)
 opts_chunk$set(echo = TRUE,
@@ -18,17 +20,17 @@ source("R/linear_trend.R")
 source("R/get_ss_matrix.R")
 ```
 
-`NCC` package allows users to simulate platform trials and to compare arms using non-concurrent control data. 
+`NCC` package allows users to simulate platform trials and to compare arms using non-concurrent control data.
 
 This package contains the following functions:
 
-- `datasim_cont()` simulates data with continuous outcomes
-- `datasim_bin()` simulates data with binary outcomes
-- `get_ss_matrix()` computes sample sizes per arm and period
-- `linear_trend()` is the linear time trend function, used to generate the trend for each patient
-- `sw_trend()` is the step-wise time trend function, used generate the trend for each patient
+-   `datasim_cont()` simulates data with continuous outcomes
+-   `datasim_bin()` simulates data with binary outcomes
+-   `get_ss_matrix()` computes sample sizes per arm and period
+-   `linear_trend()` is the linear time trend function, used to generate the trend for each patient
+-   `sw_trend()` is the step-wise time trend function, used generate the trend for each patient
 
-For a more detailed description of the functions, see the vignettes in the R-package website (https://pavlakrotka.github.io/NCC/).
+For a more detailed description of the functions, see the vignettes in the R-package website (<https://pavlakrotka.github.io/NCC/>).
 
 ### Design overview
 
@@ -41,7 +43,6 @@ The below figure illustrates the considered trial design.
 ```{r, echo=FALSE}
 include_graphics("./man/figures/trial_general_2.PNG")
 ```
-
 
 ## Installation
 
@@ -62,9 +63,8 @@ browseVignettes("NCC")
 
 [2] Lee, Kim May, and James Wason. *"Including non-concurrent control patients in the analysis of platform trials: is it worth it?."* BMC medical research methodology 20.1 (2020): 1-12.
 
----
+------------------------------------------------------------------------
 
 **Funding**
 
 [EU-PEARL](https://eu-pearl.eu/) (EU Patient-cEntric clinicAl tRial pLatforms) project has received funding from the Innovative Medicines Initiative (IMI) 2 Joint Undertaking (JU) under grant agreement No 853966. This Joint Undertaking receives support from the European Union’s Horizon 2020 research and innovation programme and EFPIA andChildren’s Tumor Foundation, Global Alliance for TB Drug Development non-profit organisation, Spring works Therapeutics Inc. This publication reflects the authors’ views. Neither IMI nor the European Union, EFPIA, or any Associated Partners are responsible for any use that may be made of the information contained herein.
-
