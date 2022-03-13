@@ -3,7 +3,7 @@ title: "NCC: R package for simulation and analysis of platform trials with non-c
 output: github_document
 ---
 
-<img src="man/figures/NCC_hexsticker.png" align="right" height="139"/>
+<img src="man/figures/NCC_hexsticker.png" align="right" height="200"/>
 
 ```{r setup, include=FALSE}
 library(knitr)
