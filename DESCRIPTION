@@ -1,5 +1,5 @@
 Package: NCC
-Title: Simulation of platform trial with non-concurrent controls
+Title: Simulation and analysis of platform trial with non-concurrent controls
 Version: 1.0
 Authors: Pavla Krotka [aut, cre], Marta Bofill Roig [aut], Martin Posch [ctb]
 Maintainer: Pavla Krotka <pavla.krotka@meduniwien.ac.at>
