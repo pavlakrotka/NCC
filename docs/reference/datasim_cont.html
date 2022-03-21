@@ -110,27 +110,26 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
 <span class="r-in"><span class="co"># Usage option 1 - specify n_total, num_arms and d</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">datasim_cont</span><span class="op">(</span>n_total <span class="op">=</span> <span class="fl">1000</span>, num_arms <span class="op">=</span> <span class="fl">3</span>, d <span class="op">=</span> <span class="fl">120</span>,</span>
-<span class="r-in">n_arm <span class="op">=</span> <span class="cn">NULL</span>, alloc_ratios <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span class="r-in">period_blocks <span class="op">=</span> <span class="fl">2</span>, theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     response treatment period</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.2756168         0      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.1927308         0      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -0.2299197         1      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  1.4063490         1      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -1.1381529         0      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  1.0488656         0      1</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Usage option 2 - specify n_arm and alloc_ratios</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">datasim_cont</span><span class="op">(</span>n_total <span class="op">=</span> <span class="cn">NULL</span>, num_arms <span class="op">=</span> <span class="cn">NULL</span>, d <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span class="r-in">n_arm <span class="op">=</span> <span class="fl">200</span>, alloc_ratios <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">3</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span class="r-in">period_blocks <span class="op">=</span> <span class="fl">2</span>, theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      response treatment period</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -0.45665792         0      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -0.68008877         1      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  0.36833254         0      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -1.60108599         1      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  0.09092183         1      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  0.48229623         0      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1.02211968         1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.55534981         1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  0.06938018         0      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  0.12088701         0      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -0.20343044         0      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -0.03341849         1      1</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Usage option 2 - specify n_arm and alloc_ratios</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">datasim_cont</span><span class="op">(</span>n_arm <span class="op">=</span> <span class="fl">200</span>,</span>
+<span class="r-in">alloc_ratios <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">3</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span class="r-in">period_blocks <span class="op">=</span> <span class="fl">2</span>, theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      response treatment period</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -0.87973364         0      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -0.03422645         0      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  0.01324230         1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -1.60545282         1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  0.07487922         1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -0.50186158         0      1</span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

@@ -179,10 +179,9 @@ N_peak
 <div class="section level3">
 <h3 id="usage-options">Usage options<a class="anchor" aria-label="anchor" href="#usage-options"></a>
 </h3>
-</div>
-<div class="section level3">
-<h3 id="input">Input<a class="anchor" aria-label="anchor" href="#input"></a>
-</h3>
+<div class="section level4">
+<h4 id="input">Input<a class="anchor" aria-label="anchor" href="#input"></a>
+</h4>
 <p>The user has two options to define the sample sizes in the trial:</p>
 <div class="section level5">
 <h5 id="option-1">Option 1)<a class="anchor" aria-label="anchor" href="#option-1"></a>
@@ -234,14 +233,15 @@ should be returned. Default=<code>FALSE</code>
 </li>
 </ul>
 </div>
+</div>
 <div class="section level4">
 <h4 id="output">Output<a class="anchor" aria-label="anchor" href="#output"></a>
 </h4>
-<p>The function outputs a dataframe with the simulated trial data. If
-the parameter <code>full</code> is set to <code>FALSE</code> (default),
-only variables needed for the analysis are included. If
-<code>full=TRUE</code>, the dataframe also contains additional
-information (lambdas, underlying responses).</p>
+<p>Per default (using <code>full=FALSE</code>), the function outputs a
+dataframe with simulated trial data needed for the analysis. If the
+parameter <code>full</code> is set to <code>TRUE</code>, the output is a
+list containing an extended version of the dataframe (also including
+lambdas and underlying responses) and all input parameters.</p>
 </div>
 <div class="section level4">
 <h4 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
@@ -250,47 +250,43 @@ information (lambdas, underlying responses).</p>
 <code class="sourceCode R"><span class="co"># Usage option 1</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/datasim_cont.html">datasim_cont</a></span><span class="op">(</span>n_total <span class="op">=</span> <span class="fl">1000</span>, num_arms <span class="op">=</span> <span class="fl">3</span>, d <span class="op">=</span> <span class="fl">120</span>, 
-                   n_arm <span class="op">=</span> <span class="cn">NULL</span>, alloc_ratios <span class="op">=</span> <span class="cn">NULL</span>, 
                    period_blocks <span class="op">=</span> <span class="fl">2</span>, theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, 
                    sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: rlang</span>
 <span class="co">#&gt;     response treatment period</span>
-<span class="co">#&gt; 1 -2.0348305         1      1</span>
-<span class="co">#&gt; 2  0.4398661         0      1</span>
-<span class="co">#&gt; 3  1.6149201         1      1</span>
-<span class="co">#&gt; 4  2.7256543         0      1</span>
-<span class="co">#&gt; 5  0.4088562         0      1</span>
-<span class="co">#&gt; 6  0.7011949         0      1</span></code></pre></div>
+<span class="co">#&gt; 1  1.4881644         0      1</span>
+<span class="co">#&gt; 2 -0.2194617         1      1</span>
+<span class="co">#&gt; 3  3.0704668         1      1</span>
+<span class="co">#&gt; 4 -2.9820562         0      1</span>
+<span class="co">#&gt; 5  0.3414950         1      1</span>
+<span class="co">#&gt; 6  2.1789780         0      1</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Usage option 2</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/datasim_cont.html">datasim_cont</a></span><span class="op">(</span>n_total <span class="op">=</span> <span class="cn">NULL</span>, num_arms <span class="op">=</span> <span class="cn">NULL</span>, d <span class="op">=</span> <span class="cn">NULL</span>, 
-                   n_arm <span class="op">=</span> <span class="fl">200</span>, alloc_ratios <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/datasim_cont.html">datasim_cont</a></span><span class="op">(</span>n_arm <span class="op">=</span> <span class="fl">200</span>, alloc_ratios <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,
                                                         <span class="fl">1</span>,<span class="fl">1</span>,<span class="cn">NA</span>,
                                                         <span class="cn">NA</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">3</span>, byrow <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>,
                    period_blocks <span class="op">=</span> <span class="fl">2</span>, theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, 
                    sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;     response treatment period</span>
-<span class="co">#&gt; 1  1.6606923         0      1</span>
-<span class="co">#&gt; 2  1.4766618         1      1</span>
-<span class="co">#&gt; 3  0.2493255         0      1</span>
-<span class="co">#&gt; 4 -0.8675614         1      1</span>
-<span class="co">#&gt; 5 -0.5717831         1      1</span>
-<span class="co">#&gt; 6  1.1358228         1      1</span></code></pre></div>
+<span class="co">#&gt; 1  0.6412941         0      1</span>
+<span class="co">#&gt; 2  1.6916599         1      1</span>
+<span class="co">#&gt; 3  1.8096069         0      1</span>
+<span class="co">#&gt; 4 -0.9959966         1      1</span>
+<span class="co">#&gt; 5 -0.1629156         0      1</span>
+<span class="co">#&gt; 6 -0.8876755         1      1</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Usage option 1 - full dataset</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/datasim_cont.html">datasim_cont</a></span><span class="op">(</span>n_total <span class="op">=</span> <span class="fl">1000</span>, num_arms <span class="op">=</span> <span class="fl">3</span>, d <span class="op">=</span> <span class="fl">120</span>, 
-                   n_arm <span class="op">=</span> <span class="cn">NULL</span>, alloc_ratios <span class="op">=</span> <span class="cn">NULL</span>, 
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/datasim_cont.html">datasim_cont</a></span><span class="op">(</span>n_total <span class="op">=</span> <span class="fl">1000</span>, num_arms <span class="op">=</span> <span class="fl">3</span>, d <span class="op">=</span> <span class="fl">120</span>,
                    period_blocks <span class="op">=</span> <span class="fl">2</span>, theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, 
-                   sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span>, full <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span>
+                   sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span>, full <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">$</span><span class="va">Data</span><span class="op">)</span>
 <span class="co">#&gt;   j   response treatment period        means lambda0 lambda1 lambda2 lambda3</span>
-<span class="co">#&gt; 1 1  0.3080140         0      1 0.0000000000    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 2 2 -0.8132265         0      1 0.0001501502    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 3 3  0.8742809         1      1 0.2503003003    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 4 4 -0.9252002         1      1 0.2504504505    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 5 5  1.0789372         1      1 0.2506006006    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 6 6 -0.6998368         0      1 0.0007507508    0.15    0.15    0.15    0.15</span></code></pre></div>
+<span class="co">#&gt; 1 1 -0.9888486         0      1 0.0000000000    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 2 2  0.5961561         1      1 0.2501501502    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 3 3 -1.0351128         1      1 0.2503003003    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 4 4 -1.1314801         0      1 0.0004504505    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 5 5 -1.3221336         1      1 0.2506006006    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 6 6 -0.3973927         1      1 0.2507507508    0.15    0.15    0.15    0.15</span></code></pre></div>
 </div>
 </div>
 </div>
