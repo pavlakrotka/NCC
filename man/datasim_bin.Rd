@@ -54,12 +54,10 @@ Simulates data from a platform trial with binary endpoints and an arbitrary numb
 
 # Usage option 1 - specify n_total, num_arms and d
 head(datasim_bin(n_total = 1000, num_arms = 3, d = 120,
-n_arm = NULL, alloc_ratios = NULL,
 period_blocks = 2, p0 = 0.7, OR = rep(1.4, 3), lambda = rep(0.15, 4), trend = "linear"))
 
 # Usage option 2 - specify n_arm and alloc_ratios
-head(datasim_bin(n_total = NULL, num_arms = NULL, d = NULL,
-n_arm = 200, alloc_ratios = matrix(c(1,1,1,1,1,NA,NA,1,1), ncol = 3, byrow = TRUE),
+head(datasim_bin(n_arm = 200, alloc_ratios = matrix(c(1,1,1,1,1,NA,NA,1,1), ncol = 3, byrow = TRUE),
 period_blocks = 2, p0 = 0.7, OR = rep(1.4, 3), lambda = rep(0.15, 4), trend = "linear"))
 
 
