@@ -67,7 +67,7 @@ The function `datasim_bin()` enables data simulation of a platform trial with bi
 
 ## Usage options
 
-## Input
+### Input
 
 The user has two options to define the sample sizes in the trial:
 
@@ -94,7 +94,7 @@ Specify the sample size per treatment arm (`n_arm`, assumed equal) and a matrix 
 
 ### Output
 
-The function outputs a dataframe with the simulated trial data. If the parameter `full` is set to `FALSE` (default), only variables needed for the analysis are included. If `full=TRUE`, the dataframe also contains additional information (lambdas, underlying responses).
+Per default (using `full=FALSE`), the function outputs a dataframe with simulated trial data needed for the analysis. If the parameter `full` is set to `TRUE`, the output is a list containing an extended version of the dataframe (also including lambdas and underlying responses) and all input parameters.
 
 ### Examples
 
@@ -122,6 +122,6 @@ head(datasim_bin(n_arm = 200, alloc_ratios = matrix(c(1,1,1,
 
 head(datasim_bin(n_total = 1000, num_arms = 3, d = 120,
                  period_blocks = 2, p0 = 0.7, OR = rep(1.4, 3), 
-                 lambda = rep(0.15, 4), trend = "linear", full = T))
+                 lambda = rep(0.15, 4), trend = "linear", full = T)$Data)
 ```
 
