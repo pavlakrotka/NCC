@@ -58,7 +58,7 @@
     <dl><dt>data</dt>
 <dd><p>Simulated trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function</p></dd>
 <dt>arm</dt>
-<dd><p>Indicator of the treatment arm under study to perform inference on</p></dd>
+<dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1)</p></dd>
 <dt>alpha</dt>
 <dd><p>Type I error. Default=0.025</p></dd>
 </dl></div>
@@ -75,20 +75,20 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
 <span class="r-in"><span class="va">trial_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="datasim_cont.html">datasim_cont</a></span><span class="op">(</span>n_total <span class="op">=</span> <span class="fl">1000</span>, num_arms <span class="op">=</span> <span class="fl">3</span>, d <span class="op">=</span> <span class="fl">120</span>,</span>
-<span class="r-in">period_blocks <span class="op">=</span> <span class="fl">2</span>, theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span></span>
+<span class="r-in">theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">poolmodel_cont</span><span class="op">(</span>data<span class="op">=</span><span class="va">trial_data</span>, arm<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu">poolmodel_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.0004291951</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3.328797e-07</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2857404</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4293999</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1182184</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2615293</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4532624</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5972706</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
