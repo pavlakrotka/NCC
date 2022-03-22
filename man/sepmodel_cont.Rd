@@ -9,7 +9,7 @@ sepmodel_cont(data, arm, alpha = 0.025)
 \arguments{
 \item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function}
 
-\item{arm}{Indicator of the treatment arm under study to perform inference on}
+\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1)}
 
 \item{alpha}{Type I error. Default=0.025}
 }
@@ -22,9 +22,9 @@ Performs separate analysis (only taking into account concurrent controls) using 
 \examples{
 
 trial_data <- datasim_cont(n_total = 1000, num_arms = 3, d = 120,
-period_blocks = 2, theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear")
+theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear")
 
-sepmodel_cont(data=trial_data, arm=3)
+sepmodel_cont(data = trial_data, arm = 3)
 
 }
 \author{

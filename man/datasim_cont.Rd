@@ -35,9 +35,9 @@ datasim_cont(
 
 \item{mu0}{Response in the control arm. Default=0}
 
-\item{theta}{Vector with treatment effects for each arm}
+\item{theta}{Vector with treatment effects for each treatment arm (of length num_arms)}
 
-\item{lambda}{Vector with strength of time trend in each arm}
+\item{lambda}{Vector with strength of time trend in each arm (of length num_arms+1, as time trend in the control is also allowed)}
 
 \item{sigma}{Residual variance}
 
@@ -45,10 +45,10 @@ datasim_cont(
 
 \item{N_peak}{Point at which the inverted-u time trend switches direction in terms of overall sample size}
 
-\item{full}{Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses) should be included (TRUE). Default=FALSE}
+\item{full}{Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses, input parameters) should be included (TRUE). Default=FALSE}
 }
 \value{
-Data frame: simulated trial data
+Data frame: simulated trial data (Default, if full=FALSE) or List: simulated trial data, input parameters and additional information (if full=TRUE)
 }
 \description{
 Simulates data from a platform trial with continuous endpoints and an arbitrary number of treatment arms entering sequentially. There is the option to either specify the timing of adding arms and the overall sample size in the trial or specify the sample size per arm (assumed equal) and the allocation ratios per period.
@@ -57,12 +57,12 @@ Simulates data from a platform trial with continuous endpoints and an arbitrary 
 
 # Usage option 1 - specify n_total, num_arms and d
 head(datasim_cont(n_total = 1000, num_arms = 3, d = 120,
-period_blocks = 2, theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear"))
+theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear"))
 
 # Usage option 2 - specify n_arm and alloc_ratios
 head(datasim_cont(n_arm = 200,
 alloc_ratios = matrix(c(1,1,1,1,1,NA,NA,1,1), ncol = 3, byrow = TRUE),
-period_blocks = 2, theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear"))
+theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear"))
 
 }
 \author{
