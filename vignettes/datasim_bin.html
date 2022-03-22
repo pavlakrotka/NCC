@@ -449,14 +449,16 @@ arms with in order to get the block size per period (block size =
 <code>period_blocks</code> <span class="math inline">\(\cdot\)</span>
 #active arms)</li>
 <li><code>p0</code> - response in the control arm</li>
-<li><code>OR</code>- vector with odds ratios for each arm</li>
-<li><code>lambda</code> - vector with strength of time trend in each
-arm</li>
+<li><code>OR</code>- vector with odds ratios for each treatment arm (of
+length <code>num_arms</code>)</li>
+<li><code>lambda</code> - vector with strength of time trend in each arm
+(of length <code>num_arms+1</code>, as time trend in the control is also
+allowed)</li>
 <li><code>trend</code> - indicates the time trend pattern (“linear”,
 “stepwise” or “inv_u”)</li>
 <li><code>N_peak</code> - point at which the inverted-u time trend
 switches direction in terms of overall sample size</li>
-<li><code>full</code> - boolean. Indicates whether the full dataset
+<li><code>full</code> - Boolean. Indicates whether the full dataset
 should be returned. Default=<code>FALSE</code></li>
 </ul>
 </div>
@@ -474,39 +476,39 @@ lambdas and underlying responses) and all input parameters.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usage option 1</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">datasim_bin</span>(<span class="at">n_total =</span> <span class="dv">1000</span>, <span class="at">num_arms =</span> <span class="dv">3</span>, <span class="at">d =</span> <span class="dv">120</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">period_blocks =</span> <span class="dv">2</span>, <span class="at">p0 =</span> <span class="fl">0.7</span>, <span class="at">OR =</span> <span class="fu">rep</span>(<span class="fl">1.4</span>, <span class="dv">3</span>), </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">p0 =</span> <span class="fl">0.7</span>, <span class="at">OR =</span> <span class="fu">rep</span>(<span class="fl">1.4</span>, <span class="dv">3</span>), </span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">lambda =</span> <span class="fu">rep</span>(<span class="fl">0.15</span>, <span class="dv">4</span>), <span class="at">trend =</span> <span class="st">&quot;linear&quot;</span>))</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   response treatment period</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1        0         0      1</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        1         0      1</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1        0         1      1</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        0         0      1</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3        1         1      1</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4        1         1      1</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5        0         1      1</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4        1         0      1</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5        1         0      1</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6        1         0      1</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usage option 2</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">datasim_bin</span>(<span class="at">n_arm =</span> <span class="dv">200</span>, <span class="at">alloc_ratios =</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                                                      <span class="dv">1</span>,<span class="dv">1</span>,<span class="cn">NA</span>,</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                                                      <span class="cn">NA</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> T),</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">period_blocks =</span> <span class="dv">2</span>, <span class="at">p0 =</span> <span class="fl">0.7</span>, <span class="at">OR =</span> <span class="fu">rep</span>(<span class="fl">1.4</span>, <span class="dv">3</span>), </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">p0 =</span> <span class="fl">0.7</span>, <span class="at">OR =</span> <span class="fu">rep</span>(<span class="fl">1.4</span>, <span class="dv">3</span>), </span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">lambda =</span> <span class="fu">rep</span>(<span class="fl">0.15</span>, <span class="dv">4</span>), <span class="at">trend =</span> <span class="st">&quot;linear&quot;</span>))</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   response treatment period</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1        1         0      1</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        0         1      1</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3        1         1      1</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4        1         0      1</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5        1         0      1</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1        1         1      1</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2        1         1      1</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3        1         0      1</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4        0         0      1</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5        1         1      1</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6        1         0      1</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Usage option 1 - full dataset</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">datasim_bin</span>(<span class="at">n_total =</span> <span class="dv">1000</span>, <span class="at">num_arms =</span> <span class="dv">3</span>, <span class="at">d =</span> <span class="dv">120</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">period_blocks =</span> <span class="dv">2</span>, <span class="at">p0 =</span> <span class="fl">0.7</span>, <span class="at">OR =</span> <span class="fu">rep</span>(<span class="fl">1.4</span>, <span class="dv">3</span>), </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">p0 =</span> <span class="fl">0.7</span>, <span class="at">OR =</span> <span class="fu">rep</span>(<span class="fl">1.4</span>, <span class="dv">3</span>), </span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">lambda =</span> <span class="fu">rep</span>(<span class="fl">0.15</span>, <span class="dv">4</span>), <span class="at">trend =</span> <span class="st">&quot;linear&quot;</span>, <span class="at">full =</span> T)<span class="sc">$</span>Data)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   j response treatment period         p lambda0 lambda1 lambda2 lambda3</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1        1         0      1 0.7000000    0.15    0.15    0.15    0.15</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2        1         1      1 0.7656519    0.15    0.15    0.15    0.15</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1        0         0      1 0.7000000    0.15    0.15    0.15    0.15</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2        1         0      1 0.7000315    0.15    0.15    0.15    0.15</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3        1         1      1 0.7656789    0.15    0.15    0.15    0.15</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4        0         0      1 0.7000946    0.15    0.15    0.15    0.15</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4        1         1      1 0.7657058    0.15    0.15    0.15    0.15</span></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5        1         0      1 0.7001261    0.15    0.15    0.15    0.15</span></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6        1         0      1 0.7001576    0.15    0.15    0.15    0.15</span></span></code></pre></div>
 </div>

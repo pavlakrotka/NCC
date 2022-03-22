@@ -93,12 +93,12 @@ Specify the sample size per treatment arm (`n_arm`, assumed equal) and a matrix 
 
 - `period_blocks` - number to multiply the number of active arms with in order to get the block size per period (block size = `period_blocks` $\cdot$ #active arms)
 - `mu0` - response in the control arm. Default=0
-- `theta` - vector with treatment effects for each arm
-- `lambda` - vector with strength of time trend in each arm
+- `theta` - vector with treatment effects for each treatment arm (of length `num_arms`)
+- `lambda` - vector with strength of time trend in each arm (of length `num_arms+1`, as time trend in the control is also allowed)
 - `sigma` - residual variance
 - `trend` - indicates the time trend pattern ("linear", "stepwise" or "inv_u")
 - `N_peak` - point at which the inverted-u time trend switches direction in terms of overall sample size
-- `full` - boolean. Indicates whether the full dataset should be returned. Default=`FALSE`
+- `full` - Boolean. Indicates whether the full dataset should be returned. Default=`FALSE`
 
 
 ### Output
@@ -111,8 +111,8 @@ Per default (using `full=FALSE`), the function outputs a dataframe with simulate
 # Usage option 1
 
 head(datasim_cont(n_total = 1000, num_arms = 3, d = 120, 
-                   period_blocks = 2, theta = rep(0.25, 3), lambda = rep(0.15, 4), 
-                   sigma = 1, trend = "linear"))
+                  theta = rep(0.25, 3), lambda = rep(0.15, 4), 
+                  sigma = 1, trend = "linear"))
 ```
 
 
@@ -120,18 +120,18 @@ head(datasim_cont(n_total = 1000, num_arms = 3, d = 120,
 # Usage option 2
 
 head(datasim_cont(n_arm = 200, alloc_ratios = matrix(c(1,1,1,
-                                                        1,1,NA,
-                                                        NA,1,1), ncol = 3, byrow = T),
-                   period_blocks = 2, theta = rep(0.25, 3), lambda = rep(0.15, 4), 
-                   sigma = 1, trend = "linear"))
+                                                       1,1,NA,
+                                                       NA,1,1), ncol = 3, byrow = T),
+                  theta = rep(0.25, 3), lambda = rep(0.15, 4), 
+                  sigma = 1, trend = "linear"))
 ```
 
 ```{r}
 # Usage option 1 - full dataset
 
 head(datasim_cont(n_total = 1000, num_arms = 3, d = 120,
-                   period_blocks = 2, theta = rep(0.25, 3), lambda = rep(0.15, 4), 
-                   sigma = 1, trend = "linear", full = T)$Data)
+                  theta = rep(0.25, 3), lambda = rep(0.15, 4), 
+                  sigma = 1, trend = "linear", full = T)$Data)
 ```
 
 
