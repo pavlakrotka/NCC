@@ -3,7 +3,7 @@
 #' @description Performs pooled analysis (naively pooling concurrent and non-concurrent controls without adjustment) using a linear model
 #'
 #' @param data Simulated trial data, e.g. result from the `datasim_cont()` function
-#' @param arm Indicator of the treatment arm under study to perform inference on
+#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
 #' @param alpha Type I error. Default=0.025
 #'
 #' @importFrom stats lm
@@ -16,9 +16,9 @@
 #' @examples
 #'
 #' trial_data <- datasim_cont(n_total = 1000, num_arms = 3, d = 120,
-#' period_blocks = 2, theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear")
+#' theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear")
 #'
-#' poolmodel_cont(data=trial_data, arm=3)
+#' poolmodel_cont(data = trial_data, arm = 3)
 #'
 #' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment
 #' @author Pavla Krotka

@@ -9,11 +9,11 @@
 #' @param alloc_ratios Matrix with allocation ratios in each period (rows = arms; columns = periods)
 #' @param period_blocks Number to multiply the number of active arms with in order to get the block size per period
 #' @param p0 Response in the control arm
-#' @param OR Vector with odds ratios for each arm
-#' @param lambda Vector with strength of time trend in each arm
+#' @param OR Vector with odds ratios for each treatment arm (of length num_arms)
+#' @param lambda Vector with strength of time trend in each arm (of length num_arms+1, as time trend in the control is also allowed)
 #' @param trend Indicates the time trend pattern ("linear", "stepwise" or "inv_u")
 #' @param N_peak Point at which the inverted-u time trend switches direction in terms of overall sample size
-#' @param full Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses) should be included (TRUE). Default=FALSE
+#' @param full Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses, input parameters) should be included (TRUE). Default=FALSE
 #'
 #' @importFrom stats na.omit
 #' @importFrom stats rbinom
@@ -25,14 +25,14 @@
 #'
 #' # Usage option 1 - specify n_total, num_arms and d
 #' head(datasim_bin(n_total = 1000, num_arms = 3, d = 120,
-#' period_blocks = 2, p0 = 0.7, OR = rep(1.4, 3), lambda = rep(0.15, 4), trend = "linear"))
+#' p0 = 0.7, OR = rep(1.4, 3), lambda = rep(0.15, 4), trend = "linear"))
 #'
 #' # Usage option 2 - specify n_arm and alloc_ratios
 #' head(datasim_bin(n_arm = 200, alloc_ratios = matrix(c(1,1,1,1,1,NA,NA,1,1), ncol = 3, byrow = TRUE),
-#' period_blocks = 2, p0 = 0.7, OR = rep(1.4, 3), lambda = rep(0.15, 4), trend = "linear"))
+#' p0 = 0.7, OR = rep(1.4, 3), lambda = rep(0.15, 4), trend = "linear"))
 #'
 #'
-#' @return Data frame: simulated trial data
+#' @return Data frame: simulated trial data (Default, if full=FALSE) or List: simulated trial data, input parameters and additional information (if full=TRUE)
 #' @author Pavla Krotka, Marta Bofill Roig
 
 datasim_bin <- function(n_total, num_arms, d, n_arm, alloc_ratios, period_blocks=2, p0, OR, lambda, trend, N_peak, full=FALSE){

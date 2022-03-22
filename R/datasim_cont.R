@@ -9,12 +9,12 @@
 #' @param alloc_ratios Matrix with allocation ratios in each period (rows = arms; columns = periods)
 #' @param period_blocks Number to multiply the number of active arms with in order to get the block size per period
 #' @param mu0 Response in the control arm. Default=0
-#' @param theta Vector with treatment effects for each arm
-#' @param lambda Vector with strength of time trend in each arm
+#' @param theta Vector with treatment effects for each treatment arm (of length num_arms)
+#' @param lambda Vector with strength of time trend in each arm (of length num_arms+1, as time trend in the control is also allowed)
 #' @param sigma Residual variance
 #' @param trend Indicates the time trend pattern ("linear", "stepwise" or "inv_u")
 #' @param N_peak Point at which the inverted-u time trend switches direction in terms of overall sample size
-#' @param full Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses) should be included (TRUE). Default=FALSE
+#' @param full Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses, input parameters) should be included (TRUE). Default=FALSE
 #'
 #' @importFrom stats na.omit
 #' @importFrom stats rnorm
@@ -26,14 +26,14 @@
 #'
 #' # Usage option 1 - specify n_total, num_arms and d
 #' head(datasim_cont(n_total = 1000, num_arms = 3, d = 120,
-#' period_blocks = 2, theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear"))
+#' theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear"))
 #'
 #' # Usage option 2 - specify n_arm and alloc_ratios
 #' head(datasim_cont(n_arm = 200,
 #' alloc_ratios = matrix(c(1,1,1,1,1,NA,NA,1,1), ncol = 3, byrow = TRUE),
-#' period_blocks = 2, theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear"))
+#' theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear"))
 #'
-#' @return Data frame: simulated trial data
+#' @return Data frame: simulated trial data (Default, if full=FALSE) or List: simulated trial data, input parameters and additional information (if full=TRUE)
 #' @author Pavla Krotka, Marta Bofill Roig
 
 datasim_cont <- function(n_total, num_arms, d, n_arm, alloc_ratios, period_blocks=2, mu0=0, theta, lambda, sigma, trend, N_peak, full=FALSE){

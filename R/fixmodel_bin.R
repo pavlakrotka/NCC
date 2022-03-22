@@ -3,7 +3,7 @@
 #' @description Performs logistic regression taking into account all trial data until the arm under study leaves the trial and adjusting for periods as factors
 #'
 #' @param data Simulated trial data, e.g. result from the `datasim_bin()` function
-#' @param arm Indicator of the treatment arm under study to perform inference on
+#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
 #' @param alpha Type I error. Default=0.025
 #'
 #' @importFrom stats glm
@@ -16,9 +16,9 @@
 #' @examples
 #'
 #' trial_data <- datasim_bin(n_total = 1000, num_arms = 3, d = 120,
-#' period_blocks = 2, p0 = 0.7, OR = rep(1.4, 3), lambda = rep(0.15, 4), trend = "linear")
+#' p0 = 0.7, OR = rep(1.4, 3), lambda = rep(0.15, 4), trend = "linear")
 #'
-#' fixmodel_bin(data=trial_data, arm=3)
+#' fixmodel_bin(data = trial_data, arm = 3)
 #'
 #' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment
 #' @author Pavla Krotka
