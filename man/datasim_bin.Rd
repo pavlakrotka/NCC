@@ -5,11 +5,9 @@
 \title{Data simulation for binary endpoints for a platform trial with an arbitrary number of treatment arms entering sequentially}
 \usage{
 datasim_bin(
-  n_total,
   num_arms,
-  d,
   n_arm,
-  alloc_ratios,
+  d,
   period_blocks = 2,
   p0,
   OR,
@@ -20,15 +18,11 @@ datasim_bin(
 )
 }
 \arguments{
-\item{n_total}{Overall sample size for the trial}
-
 \item{num_arms}{Number of treatment arms in the trial}
 
-\item{d}{Timing of adding new arms in terms of number of patients allocated to the control arm}
+\item{n_arm}{Sample size per arm (assumed equal)}
 
-\item{n_arm}{Sample size per arm}
-
-\item{alloc_ratios}{Matrix with allocation ratios in each period (rows = arms; columns = periods)}
+\item{d}{Vector with timings of adding new arms in terms of number of patients recruited to the trial so far (of length num_arms)}
 
 \item{period_blocks}{Number to multiply the number of active arms with in order to get the block size per period}
 
@@ -48,17 +42,12 @@ datasim_bin(
 Data frame: simulated trial data (Default, if full=FALSE) or List: simulated trial data, input parameters and additional information (if full=TRUE)
 }
 \description{
-Simulates data from a platform trial with binary endpoints and an arbitrary number of treatment arms entering sequentially. There is the option to either specify the timing of adding arms and the overall sample size in the trial or specify the sample size per arm (assumed equal) and the allocation ratios per period.
+Simulates data from a platform trial with binary endpoints and an arbitrary number of treatment arms entering sequentially. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the the sample size per arm (assumed equal).
 }
 \examples{
 
-# Usage option 1 - specify n_total, num_arms and d
-head(datasim_bin(n_total = 1000, num_arms = 3, d = 120,
-p0 = 0.7, OR = rep(1.4, 3), lambda = rep(0.15, 4), trend = "linear"))
-
-# Usage option 2 - specify n_arm and alloc_ratios
-head(datasim_bin(n_arm = 200, alloc_ratios = matrix(c(1,1,1,1,1,NA,NA,1,1), ncol = 3, byrow = TRUE),
-p0 = 0.7, OR = rep(1.4, 3), lambda = rep(0.15, 4), trend = "linear"))
+head(datasim_bin(num_arms = 3, n_arm = 100, d = c(0, 100, 250),
+p0 = 0.7, OR = rep(1.8, 3), lambda = rep(0.15, 4), trend="stepwise"))
 
 
 }

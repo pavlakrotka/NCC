@@ -18,7 +18,11 @@ LazyData: false
 Imports: 
   rlang,
   stats,
-  MASS
+  MASS,
+  RBesT,
+  rjags,
+  dplyr,
+  magrittr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Suggests: 

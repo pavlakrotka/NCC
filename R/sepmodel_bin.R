@@ -15,8 +15,8 @@
 #'
 #' @examples
 #'
-#' trial_data <- datasim_bin(n_total = 1000, num_arms = 3, d = 120,
-#' p0 = 0.7, OR = rep(1.4, 3), lambda = rep(0.15, 4), trend = "linear")
+#' trial_data <- datasim_bin(num_arms = 3, n_arm = 100, d = c(0, 100, 250),
+#' p0 = 0.7, OR = rep(1.8, 3), lambda = rep(0.15, 4), trend="stepwise")
 #'
 #' sepmodel_bin(data = trial_data, arm = 3)
 #'
@@ -28,7 +28,7 @@ sepmodel_bin <- function(data, arm, alpha=0.025){
   periods <- unique(data[data$treatment==arm,]$period)
   data_new <- data[data$treatment %in% c(0, arm) & data$period %in% periods,]
 
-  # fit linear model
+  # fit logistic model
   mod <- glm(response ~ as.factor(treatment), data_new, family = "binomial")
   res <- summary(mod)
 

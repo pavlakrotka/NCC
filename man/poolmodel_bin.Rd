@@ -21,8 +21,8 @@ Performs pooled analysis (naively pooling concurrent and non-concurrent controls
 }
 \examples{
 
-trial_data <- datasim_bin(n_total = 1000, num_arms = 3, d = 120,
-p0 = 0.7, OR = rep(1.4, 3), lambda = rep(0.15, 4), trend = "linear")
+trial_data <- datasim_bin(num_arms = 3, n_arm = 100, d = c(0, 100, 250),
+p0 = 0.7, OR = rep(1.8, 3), lambda = rep(0.15, 4), trend="stepwise")
 
 poolmodel_bin(data = trial_data, arm = 3)
 

@@ -1,0 +1,169 @@
+#' Time machine for continuous data
+#'
+#' @description Time machine for continuous data
+#'
+#' @param data Simulated trial data, e.g. result from the `datasim_cont()` function
+#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
+#' @param alpha Type I error. Default=0.025
+#' @param prec_delta ...
+#' @param prec_gamma ...
+#' @param tau_a ...
+#' @param tau_b ...
+#' @param sigma_nu ...
+#'
+#' @importFrom stats aggregate
+#' @importFrom stats quantile
+#' @importFrom stats var
+#' @importFrom rjags jags.model
+#' @importFrom rjags coda.samples
+#'
+#' @export
+#'
+#' @examples
+#'
+#' trial_data <- datasim_cont(num_arms = 3, n_arm = 100, d = c(0, 100, 250),
+#' theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear")
+#'
+#' timemachine_cont(data = trial_data, arm = 3)
+#'
+#'
+#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment
+#' @author Dominic Magirr, Peter Jacko
+
+timemachine_cont <- function(data,
+                             arm,
+                             alpha = 0.025,
+                             prec_delta = 0.001,
+                             prec_gamma = 0.001,
+                             tau_a = 0.1,
+                             tau_b = 0.01,
+                             sigma_nu = 1){
+
+  model_string_time_machine_cont <- "
+  model {
+
+
+    for (i in 1:n_trt_periods){
+
+
+       x_bar[i] ~ dnorm(mu[i], n[i] * prec)
+
+       sigma_2[i] ~ dgamma((n[i] - 1) / 2, n[i] * prec / 2)
+
+            ## alpha[1] is current interval, alpha[10] is most distant interval
+            ## time j corresponds to alpha interval Int-(j-1)
+            ## e.g. time 1 corresponds to alpha interval 10-(1-1)=10 if interim #10
+            ## e.g. time 2 corresponds to alpha interval 7-(2-1)=6 if interim #7
+
+       mu[i] = gamma0 + alpha[n_periods- (period[i]-1)] + delta[trt[i]]
+
+    }
+
+
+    ## Priors for time, counting backwards from current time interval (k=1 for current, k=10 for most distant)
+    alpha[1] = 0
+    alpha[2] ~ dnorm(0, tau)
+    for(k in 3:n_periods) {
+        alpha[k] ~ dnorm(2*alpha[k-1] - alpha[k-2], tau)  # 2*(most recent) - (more distant) puts trend in right direction
+    }
+
+    ## Other priors
+    delta[1] <- 0
+    for(i in 2:n_trts){
+      delta[i] ~ dnorm(0, prec_delta)
+    }
+
+    tau ~  dgamma(tau_a, tau_b)
+
+    ### Intercept
+    gamma0 ~ dnorm(0, prec_gamma)
+
+    ### Precision (corresponding to random error term)
+    nu ~ dnorm(0,sigma_nu) T(0,)
+    prec <- 1 / (nu ^ 2)
+
+
+  }
+"
+
+  trt_period_n <- aggregate(data$response,
+                            list(treatment = data$treatment,
+                                 period = data$period),
+                            "length")
+
+  trt_period_means <- aggregate(data$response,
+                                list(treatment = data$treatment,
+                                     period = data$period),
+                                "mean")
+
+  trt_period_vars <- aggregate(data$response,
+                               list(treatment = data$treatment,
+                                    period = data$period),
+                               function(x) var(x) * (length(x) - 1) / length(x))
+
+
+  n_trt_periods <- dim(trt_period_means)[1]
+  n_trts <- max(trt_period_means$treatment) + 1
+  n_periods <- max(trt_period_means$period)
+
+  trt <- trt_period_means$treatment + 1 ## need index to start at 1, not 0.
+  period <- trt_period_means$period
+
+  x_bar <- trt_period_means$x
+  sigma_2 <- trt_period_vars$x
+  n <- trt_period_n$x
+
+  ### Arguments to pass to jags_model
+  data_list = list(x_bar = x_bar,
+                   sigma_2 = sigma_2,
+                   n = n,
+                   trt = trt,
+                   period = period,
+                   n_trts = n_trts,
+                   n_periods = n_periods,
+                   n_trt_periods = n_trt_periods,
+                   prec_delta = prec_delta,
+                   prec_gamma = prec_gamma,
+                   tau_a = tau_a,
+                   tau_b = tau_b,
+                   sigma_nu = sigma_nu)
+
+  inits_list = list(gamma0 = 0,
+                    nu = 1)
+
+
+  ### Fit the model
+  jags_model <- jags.model(textConnection(model_string_time_machine_cont),
+                           data = data_list,
+                           inits = inits_list,
+                           n.adapt = 1000,
+                           n.chains = 3,
+                           quiet = T)
+
+  ### Extract posterior samples
+  mcmc_samples <- coda.samples(jags_model,
+                               c("delta"),
+                               n.iter = 4000)
+
+  ### Arrange all samples together
+  all_samples <- do.call(rbind.data.frame, mcmc_samples)
+
+  ## posterior means
+  post_means <- colMeans(all_samples)
+
+  ## posterior credible intervals
+  post_cis <- apply(all_samples, 2, quantile, probs = c(alpha / 2, 1 - alpha / 2))
+
+  ## posterior "p-values"
+  post_p <- apply(all_samples, 2, function(x) mean(x < 0))
+
+  ## return
+  list(p_val = unname(post_p[arm]),
+       treat_effect = unname(post_means[arm]),
+       lower_ci = post_cis[1,arm],
+       upper_ci = post_cis[2,arm],
+       reject_h0 = unname(post_p[2] < alpha / 2))
+}
+
+
+

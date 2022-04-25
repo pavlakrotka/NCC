@@ -1,12 +1,10 @@
 #' Data simulation for binary endpoints for a platform trial with an arbitrary number of treatment arms entering sequentially
 #'
-#' @description Simulates data from a platform trial with binary endpoints and an arbitrary number of treatment arms entering sequentially. There is the option to either specify the timing of adding arms and the overall sample size in the trial or specify the sample size per arm (assumed equal) and the allocation ratios per period.
+#' @description Simulates data from a platform trial with binary endpoints and an arbitrary number of treatment arms entering sequentially. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the the sample size per arm (assumed equal).
 #'
-#' @param n_total Overall sample size for the trial
 #' @param num_arms Number of treatment arms in the trial
-#' @param d Timing of adding new arms in terms of number of patients allocated to the control arm
-#' @param n_arm Sample size per arm
-#' @param alloc_ratios Matrix with allocation ratios in each period (rows = arms; columns = periods)
+#' @param n_arm Sample size per arm (assumed equal)
+#' @param d Vector with timings of adding new arms in terms of number of patients recruited to the trial so far (of length num_arms)
 #' @param period_blocks Number to multiply the number of active arms with in order to get the block size per period
 #' @param p0 Response in the control arm
 #' @param OR Vector with odds ratios for each treatment arm (of length num_arms)
@@ -23,19 +21,14 @@
 #'
 #' @examples
 #'
-#' # Usage option 1 - specify n_total, num_arms and d
-#' head(datasim_bin(n_total = 1000, num_arms = 3, d = 120,
-#' p0 = 0.7, OR = rep(1.4, 3), lambda = rep(0.15, 4), trend = "linear"))
-#'
-#' # Usage option 2 - specify n_arm and alloc_ratios
-#' head(datasim_bin(n_arm = 200, alloc_ratios = matrix(c(1,1,1,1,1,NA,NA,1,1), ncol = 3, byrow = TRUE),
-#' p0 = 0.7, OR = rep(1.4, 3), lambda = rep(0.15, 4), trend = "linear"))
+#' head(datasim_bin(num_arms = 3, n_arm = 100, d = c(0, 100, 250),
+#' p0 = 0.7, OR = rep(1.8, 3), lambda = rep(0.15, 4), trend="stepwise"))
 #'
 #'
 #' @return Data frame: simulated trial data (Default, if full=FALSE) or List: simulated trial data, input parameters and additional information (if full=TRUE)
 #' @author Pavla Krotka, Marta Bofill Roig
 
-datasim_bin <- function(n_total, num_arms, d, n_arm, alloc_ratios, period_blocks=2, p0, OR, lambda, trend, N_peak, full=FALSE){
+datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, trend, N_peak, full=FALSE){
 
   #requireNamespace("rlang")
   #requireNamespace("stats")
@@ -43,36 +36,42 @@ datasim_bin <- function(n_total, num_arms, d, n_arm, alloc_ratios, period_blocks
   #require("rlang")
   #require("stats")
 
-  if (missing(n_total)==F & missing(num_arms)==F & missing(d)==F){
+  # if (missing(n_total)==F & missing(num_arms)==F & missing(d)==F){
+  #
+  #   SS_matrix <- get_ss_matrix(n_total, num_arms, d)
+  #   alloc_ratios <- ifelse(!is.na(SS_matrix), 1, 0)
+  #
+  #   num_periods <- ncol(alloc_ratios) # total number of periods
+  #   num_arms <- nrow(alloc_ratios)-1 # total number of treatment arms
+  #
+  # } else if (missing(n_arm)==F & missing(alloc_ratios)==F){
+  #
+  #   d <- NULL
+  #
+  #   num_periods <- ncol(alloc_ratios) # total number of periods
+  #   num_arms <- nrow(alloc_ratios)-1 # total number of treatment arms
+  #
+  #   SS_matrix <- matrix(nrow = num_arms+1, ncol = num_periods)
+  #
+  #   for (i in 1:num_arms) { # get sample sizes for each arm
+  #     SS_matrix[i+1,] <- alloc_ratios[i+1,]/sum(alloc_ratios[i+1,], na.rm = T)*n_arm
+  #   }
+  #
+  #   SS_matrix[1,] <- na.omit(apply(SS_matrix, 2, unique)) # get sample sizes for control
+  #
+  #   alloc_ratios[is.na(alloc_ratios)] <- 0
+  #
+  # } else {
+  #   stop("Either n_total, num_arms and d or n_arm and alloc_ratios must be specified!")
+  # }
 
-    SS_matrix <- get_ss_matrix(n_total, num_arms, d)
-    alloc_ratios <- ifelse(!is.na(SS_matrix), 1, 0)
 
-    num_periods <- ncol(alloc_ratios) # total number of periods
-    num_arms <- nrow(alloc_ratios)-1 # total number of treatment arms
-
-  } else if (missing(n_arm)==F & missing(alloc_ratios)==F){
-
-    d <- NULL
-
-    num_periods <- ncol(alloc_ratios) # total number of periods
-    num_arms <- nrow(alloc_ratios)-1 # total number of treatment arms
-
-    SS_matrix <- matrix(nrow = num_arms+1, ncol = num_periods)
-
-    for (i in 1:num_arms) { # get sample sizes for each arm
-      SS_matrix[i+1,] <- alloc_ratios[i+1,]/sum(alloc_ratios[i+1,], na.rm = T)*n_arm
-    }
-
-    SS_matrix[1,] <- na.omit(apply(SS_matrix, 2, unique)) # get sample sizes for control
-
-    alloc_ratios[is.na(alloc_ratios)] <- 0
-
-  } else {
-    stop("Either n_total, num_arms and d or n_arm and alloc_ratios must be specified!")
-  }
+  SS_matrix <- get_ss_matrix(num_arms, n_arm, d)
 
   SS_matrix <- round(SS_matrix)
+
+  alloc_ratios <- ifelse(!is.na(SS_matrix), 1, 0)
+  num_periods <- ncol(alloc_ratios) # total number of periods
 
   N_period <- colSums(SS_matrix, na.rm=T) # sample sizes per period
   N_arm <- rowSums(SS_matrix, na.rm=T) # sample sizes per arm
@@ -238,7 +237,7 @@ datasim_bin <- function(n_total, num_arms, d, n_arm, alloc_ratios, period_blocks
 
     return(list(Data = Data,
                 n_total = n_total,
-                n_arm = N_arm[1], # assumed equal
+                n_arm = N_arm[2], # assumed equal
                 num_arms = num_arms,
                 d = d,
                 SS_matrix = SS_matrix,
@@ -259,8 +258,5 @@ datasim_bin <- function(n_total, num_arms, d, n_arm, alloc_ratios, period_blocks
 }
 
 
-# test <- datasim_bin(n_total = 1000, num_arms = 3, d = 120, period_blocks = 2, p0=0.7, OR=rep(1.8, 3), lambda=rep(0.15, 4), trend="stepwise")
-#
-# test <- datasim_bin(n_arm = 200, alloc_ratios = matrix(c(1,1,1,
-#                                                          1,1,NA,
-#                                                          NA,1,1), ncol = 3, byrow = T), period_blocks = 2, p0=0.7, OR=rep(1.8, 3), lambda=rep(0.15, 4), trend="linear")
+
+# test <- datasim_bin(n_arm = 100, num_arms = 3, d = c(0, 100, 250), p0=0.7, OR=rep(1.8, 3), lambda=rep(0.15, 4), trend="stepwise")

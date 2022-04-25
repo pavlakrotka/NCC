@@ -15,7 +15,7 @@
 #'
 #' @examples
 #'
-#' trial_data <- datasim_cont(n_total = 1000, num_arms = 3, d = 120,
+#' trial_data <- datasim_cont(num_arms = 3, n_arm = 100, d = c(0, 100, 250),
 #' theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear")
 #'
 #' fixmodel_cont(data = trial_data, arm = 3)
@@ -29,7 +29,12 @@ fixmodel_cont <- function(data, arm, alpha=0.025){
   data_new <- data[data$period %in% c(1:max_period),]
 
   # fit linear model
-  mod <- lm(response ~ as.factor(treatment) + as.factor(period), data_new)
+  if(max_period==1){ # if only one period in the data, don't use period as covariate
+    mod <- lm(response ~ as.factor(treatment), data_new)
+  } else {
+
+    mod <- lm(response ~ as.factor(treatment) + as.factor(period), data_new)
+  }
   res <- summary(mod)
 
   # one-sided p-value

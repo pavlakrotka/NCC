@@ -23,5 +23,5 @@ library(NCC)
 ```{r}
 # Example 
 
-get_ss_matrix(1000, 4, 100)
+get_ss_matrix(num_arms = 3, n_arm = 100, d = c(0, 100, 250))
 ```

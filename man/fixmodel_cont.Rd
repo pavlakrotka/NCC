@@ -21,7 +21,7 @@ Performs linear regression taking into account all trial data until the arm unde
 }
 \examples{
 
-trial_data <- datasim_cont(n_total = 1000, num_arms = 3, d = 120,
+trial_data <- datasim_cont(num_arms = 3, n_arm = 100, d = c(0, 100, 250),
 theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear")
 
 fixmodel_cont(data = trial_data, arm = 3)
