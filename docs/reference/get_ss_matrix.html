@@ -50,17 +50,19 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_ss_matrix</span><span class="op">(</span><span class="va">n_total</span>, <span class="va">num_arms</span>, <span class="va">d</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_ss_matrix</span><span class="op">(</span><span class="va">num_arms</span>, <span class="va">n_arm</span>, <span class="va">d</span>, alloc_ratio <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>n_total</dt>
-<dd><p>Overall sample size for the trial</p></dd>
-<dt>num_arms</dt>
+    <dl><dt>num_arms</dt>
 <dd><p>Number of treatment arms in the trial</p></dd>
+<dt>n_arm</dt>
+<dd><p>Sample size per arm</p></dd>
 <dt>d</dt>
-<dd><p>Timing of adding new arms in terms of number of patients allocated to the control arm</p></dd>
+<dd><p>Vector with timings of adding new arms in terms of number of patients recruited to the trial so far (of length num_arms). The first entry must be 0, as the trial is supposed to start with at least one treatment</p></dd>
+<dt>alloc_ratio</dt>
+<dd><p>Vector of length 2. Allocation ratio control vs treatment (for now only 1:1 implemented!)</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -71,6 +73,18 @@
     <p>Pavla Krotka</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
+<span class="r-in"><span class="fu">get_ss_matrix</span><span class="op">(</span>num_arms <span class="op">=</span> <span class="fl">3</span>, n_arm <span class="op">=</span> <span class="fl">100</span>, d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, <span class="fl">250</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      [,1] [,2] [,3] [,4]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   50   50   50   50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]   50   50   NA   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]   NA   50   50   NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]   NA   NA   50   50</span>
+<span class="r-in"></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 

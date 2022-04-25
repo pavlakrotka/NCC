@@ -80,13 +80,12 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Example </span>
 
-<span class="fu"><a href="../reference/get_ss_matrix.html">get_ss_matrix</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">4</span>, <span class="fl">100</span><span class="op">)</span>
-<span class="co">#&gt;      [,1] [,2] [,3] [,4] [,5] [,6] [,7]</span>
-<span class="co">#&gt; [1,]  100   40   60   40   60   40  100</span>
-<span class="co">#&gt; [2,]  100   40   NA   NA   NA   NA   NA</span>
-<span class="co">#&gt; [3,]   NA   40   60   40   NA   NA   NA</span>
-<span class="co">#&gt; [4,]   NA   NA   NA   40   60   40   NA</span>
-<span class="co">#&gt; [5,]   NA   NA   NA   NA   NA   40  100</span></code></pre></div>
+<span class="fu"><a href="../reference/get_ss_matrix.html">get_ss_matrix</a></span><span class="op">(</span>num_arms <span class="op">=</span> <span class="fl">3</span>, n_arm <span class="op">=</span> <span class="fl">100</span>, d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, <span class="fl">250</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt;      [,1] [,2] [,3] [,4]</span>
+<span class="co">#&gt; [1,]   50   50   50   50</span>
+<span class="co">#&gt; [2,]   50   50   NA   NA</span>
+<span class="co">#&gt; [3,]   NA   50   50   NA</span>
+<span class="co">#&gt; [4,]   NA   NA   50   50</span></code></pre></div>
 </div>
   </main>
 </div>

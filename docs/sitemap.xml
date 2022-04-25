@@ -25,6 +25,9 @@
     <loc>/LICENSE-text.html</loc>
   </url>
   <url>
+    <loc>/reference/all_models.html</loc>
+  </url>
+  <url>
     <loc>/reference/datasim_bin.html</loc>
   </url>
   <url>
@@ -49,6 +52,9 @@
     <loc>/reference/linear_trend.html</loc>
   </url>
   <url>
+    <loc>/reference/MAPprior_bin.html</loc>
+  </url>
+  <url>
     <loc>/reference/poolmodel_bin.html</loc>
   </url>
   <url>
@@ -61,9 +67,18 @@
     <loc>/reference/sepmodel_cont.html</loc>
   </url>
   <url>
+    <loc>/reference/sim_study.html</loc>
+  </url>
+  <url>
     <loc>/reference/sw_trend.html</loc>
   </url>
   <url>
     <loc>/reference/sw_trend2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/timemachine_bin.html</loc>
+  </url>
+  <url>
+    <loc>/reference/timemachine_cont.html</loc>
   </url>
 </urlset>

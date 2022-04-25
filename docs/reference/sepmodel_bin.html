@@ -74,24 +74,24 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="va">trial_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="datasim_bin.html">datasim_bin</a></span><span class="op">(</span>n_total <span class="op">=</span> <span class="fl">1000</span>, num_arms <span class="op">=</span> <span class="fl">3</span>, d <span class="op">=</span> <span class="fl">120</span>,</span>
-<span class="r-in">p0 <span class="op">=</span> <span class="fl">0.7</span>, OR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1.4</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, trend <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">trial_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="datasim_bin.html">datasim_bin</a></span><span class="op">(</span>num_arms <span class="op">=</span> <span class="fl">3</span>, n_arm <span class="op">=</span> <span class="fl">100</span>, d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, <span class="fl">250</span><span class="op">)</span>,</span>
+<span class="r-in">p0 <span class="op">=</span> <span class="fl">0.7</span>, OR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1.8</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, trend<span class="op">=</span><span class="st">"stepwise"</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">sepmodel_bin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.0002706296</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.08172531</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8763166</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5743936</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3869519</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.2208992</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.382648</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.409689</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>
