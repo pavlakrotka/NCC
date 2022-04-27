@@ -50,7 +50,7 @@ which a treatment arm either enters or leaves the platform.
 
 The below figure illustrates the considered trial design.
 
-<img src="./man/figures/trial_general_2.PNG" width="70%" style="display: block; margin: auto;" />
+<img src="./man/figures/trial_general_3.PNG" width="70%" style="display: block; margin: auto;" />
 
 ## Installation
 
