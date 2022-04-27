@@ -242,13 +242,13 @@ lambdas and underlying responses) and all input parameters.</p>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/datasim_cont.html">datasim_cont</a></span><span class="op">(</span>num_arms <span class="op">=</span> <span class="fl">3</span>, n_arm <span class="op">=</span> <span class="fl">100</span>, d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, <span class="fl">250</span><span class="op">)</span>, 
                   theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, 
                   sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;      response treatment period</span>
-<span class="co">#&gt; 1 -0.17574731         0      1</span>
-<span class="co">#&gt; 2 -0.01594979         1      1</span>
-<span class="co">#&gt; 3  0.37012184         1      1</span>
-<span class="co">#&gt; 4  0.97349101         0      1</span>
-<span class="co">#&gt; 5  1.28627965         0      1</span>
-<span class="co">#&gt; 6  2.56302602         1      1</span></code></pre></div>
+<span class="co">#&gt;     response treatment period</span>
+<span class="co">#&gt; 1 -0.1911093         0      1</span>
+<span class="co">#&gt; 2  1.1970683         0      1</span>
+<span class="co">#&gt; 3  1.2738331         1      1</span>
+<span class="co">#&gt; 4 -0.9498145         1      1</span>
+<span class="co">#&gt; 5  1.2586799         1      1</span>
+<span class="co">#&gt; 6  1.3784790         0      1</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Full dataset</span>
 
@@ -256,12 +256,12 @@ lambdas and underlying responses) and all input parameters.</p>
                   theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, 
                   sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span>, full <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">$</span><span class="va">Data</span><span class="op">)</span>
 <span class="co">#&gt;   j   response treatment period        means lambda0 lambda1 lambda2 lambda3</span>
-<span class="co">#&gt; 1 1  0.9433949         1      1 0.2500000000    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 2 2 -0.5537502         0      1 0.0003006012    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 3 3  0.6973845         1      1 0.2506012024    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 4 4 -1.1720084         0      1 0.0009018036    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 5 5  0.8974224         1      1 0.2512024048    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 6 6 -1.9129304         0      1 0.0015030060    0.15    0.15    0.15    0.15</span></code></pre></div>
+<span class="co">#&gt; 1 1  0.4354030         0      1 0.0000000000    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 2 2 -1.2808805         1      1 0.2503006012    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 3 3  0.2766805         1      1 0.2506012024    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 4 4 -0.2089909         0      1 0.0009018036    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 5 5  1.3334997         1      1 0.2512024048    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 6 6 -1.2401621         0      1 0.0015030060    0.15    0.15    0.15    0.15</span></code></pre></div>
 </div>
 </div>
 </div>
