@@ -6,13 +6,27 @@ arms using non-concurrent control data.
 
 This package contains the following functions:
 
--   `datasim_cont()` simulates data with continuous outcomes
 -   `datasim_bin()` simulates data with binary outcomes
+-   `datasim_cont()` simulates data with continuous outcomes
 -   `get_ss_matrix()` computes sample sizes per arm and period
 -   `linear_trend()` is the linear time trend function, used to generate
     the trend for each patient
 -   `sw_trend()` is the step-wise time trend function, used generate the
     trend for each patient
+-   `fixmodel_bin()` performs analysis using regression model for binary
+    data
+-   `fixmodel_cont()` performs analysis using regression model for
+    continuous data
+-   `MAPprior_bin()` performs analysis using the MAP prior approach for
+    binary data
+-   `poolmodel_bin()` performs pooled analysis for binary data
+-   `poolmodel_cont()` performs pooled analysis for continuous data
+-   `sepmodel_bin()` performs separate analysis for binary data
+-   `sepmodel_cont()` performs separate analysis for continuous data
+-   `timemachine_bin()` performs analysis using the timemachine approach
+    for binary data
+-   `timemachine_cont()` performs analysis using the timemachine
+    approach for continuous data
 
 For a more detailed description of the functions, see the vignettes in
 the R-package website (<https://pavlakrotka.github.io/NCC/>).
@@ -25,8 +39,9 @@ treatment arms compared to a shared control. We assume that treatment
 arms enter the platform trial sequentially. In particular, we consider a
 trial starting with one initial treatment arm, where a new arm is added
 after every
-![d](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;d "d")
-patients have been enrolled in the control arm.
+![d=(d_1,...,d_K)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;d%3D%28d_1%2C...%2Cd_K%29 "d=(d_1,...,d_K)")
+patients have been recruited to the trial (with
+![d_1=0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;d_1%3D0 "d_1=0")).
 
 We divide the duration of the trial into
 ![S](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S "S")
