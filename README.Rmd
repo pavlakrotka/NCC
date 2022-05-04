@@ -71,6 +71,8 @@ browseVignettes("NCC")
 
 [2] Lee, Kim May, and James Wason. *"Including non-concurrent control patients in the analysis of platform trials: is it worth it?."* BMC medical research methodology 20.1 (2020): 1-12.
 
+[3] Saville, Benjamin R, et al. *"The Bayesian Time Machine: Accounting for Temporal Drift in Multi-arm Platform Trials."* Clinical Trials (In press) (2022). 
+
 ------------------------------------------------------------------------
 
 **Funding**

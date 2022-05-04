@@ -6,26 +6,26 @@ arms using non-concurrent control data.
 
 This package contains the following functions:
 
--   `datasim_bin()` simulates data with binary outcomes
--   `datasim_cont()` simulates data with continuous outcomes
--   `get_ss_matrix()` computes sample sizes per arm and period
--   `linear_trend()` is the linear time trend function, used to generate
+  - `datasim_bin()` simulates data with binary outcomes
+  - `datasim_cont()` simulates data with continuous outcomes
+  - `get_ss_matrix()` computes sample sizes per arm and period
+  - `linear_trend()` is the linear time trend function, used to generate
     the trend for each patient
--   `sw_trend()` is the step-wise time trend function, used generate the
+  - `sw_trend()` is the step-wise time trend function, used generate the
     trend for each patient
--   `fixmodel_bin()` performs analysis using regression model for binary
+  - `fixmodel_bin()` performs analysis using regression model for binary
     data
--   `fixmodel_cont()` performs analysis using regression model for
+  - `fixmodel_cont()` performs analysis using regression model for
     continuous data
--   `MAPprior_bin()` performs analysis using the MAP prior approach for
+  - `MAPprior_bin()` performs analysis using the MAP prior approach for
     binary data
--   `poolmodel_bin()` performs pooled analysis for binary data
--   `poolmodel_cont()` performs pooled analysis for continuous data
--   `sepmodel_bin()` performs separate analysis for binary data
--   `sepmodel_cont()` performs separate analysis for continuous data
--   `timemachine_bin()` performs analysis using the timemachine approach
+  - `poolmodel_bin()` performs pooled analysis for binary data
+  - `poolmodel_cont()` performs pooled analysis for continuous data
+  - `sepmodel_bin()` performs separate analysis for binary data
+  - `sepmodel_cont()` performs separate analysis for continuous data
+  - `timemachine_bin()` performs analysis using the timemachine approach
     for binary data
--   `timemachine_cont()` performs analysis using the timemachine
+  - `timemachine_cont()` performs analysis using the timemachine
     approach for continuous data
 
 For a more detailed description of the functions, see the vignettes in
@@ -33,20 +33,16 @@ the R-package website (<https://pavlakrotka.github.io/NCC/>).
 
 ### Design overview
 
-We consider a platform trial evaluating the efficacy of
-![K](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;K "K")
-treatment arms compared to a shared control. We assume that treatment
-arms enter the platform trial sequentially. In particular, we consider a
-trial starting with one initial treatment arm, where a new arm is added
-after every
-![d=(d_1,...,d_K)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;d%3D%28d_1%2C...%2Cd_K%29 "d=(d_1,...,d_K)")
-patients have been recruited to the trial (with
-![d_1=0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;d_1%3D0 "d_1=0")).
+We consider a platform trial evaluating the efficacy of \(K\) treatment
+arms compared to a shared control. We assume that treatment arms enter
+the platform trial sequentially. In particular, we consider a trial
+starting with one initial treatment arm, where a new arm is added after
+every \(d=(d_1,...,d_K)\) patients have been recruited to the trial
+(with \(d_1=0\)).
 
-We divide the duration of the trial into
-![S](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S "S")
-periods, where the periods are the time intervals bounded by times at
-which a treatment arm either enters or leaves the platform.
+We divide the duration of the trial into \(S\) periods, where the
+periods are the time intervals bounded by times at which a treatment arm
+either enters or leaves the platform.
 
 The below figure illustrates the considered trial design.
 
@@ -75,7 +71,11 @@ in platform trials with non-concurrent controls.”* arXiv preprint
 patients in the analysis of platform trials: is it worth it?.”* BMC
 medical research methodology 20.1 (2020): 1-12.
 
-------------------------------------------------------------------------
+\[3\] Saville, Benjamin R, et al. *“The Bayesian Time Machine:
+Accounting for Temporal Drift in Multi-arm Platform Trials.”* Clinical
+Trials (In press) (2022).
+
+-----
 
 **Funding**
 
