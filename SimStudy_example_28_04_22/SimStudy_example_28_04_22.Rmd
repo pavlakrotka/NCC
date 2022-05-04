@@ -1,0 +1,210 @@
+---
+title: "Non-concurrent Controls: Simulation Study"
+author: 
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: yes
+    toc_depth: 3
+    toc_float: true
+    number_sections: true
+    code_folding: show 
+    theme: flatly
+---
+
+```{r setup, include = FALSE}
+library(knitr)
+opts_chunk$set(collapse = TRUE,
+               comment = "#>",
+               warning = FALSE,
+               message = FALSE,
+               fig.align = "center",
+               out.width = "70%")
+```
+
+```{r, warning=FALSE, message=FALSE, include=FALSE}
+library(tidyverse)
+library(kableExtra)
+library(latex2exp)
+set.seed(717)
+```
+
+
+```{r}
+library(NCC)
+```
+
+
+# Simulation Scenarios - Example
+
+## Scenario II
+
+- Platform trial with 3 treatment arms entering sequentially with equidistant entry times
+
+- Sample sizes: $n=100$ (sample size per treatment arm)
+
+- Allocation ratio 1:1:...:1 in each period
+
+- New arm enters after every $d=(d_1, d_2, d_3)= (0,0,0), (0, 100, 200)$ or $(0,200,400)$ patients are recruited to the trial
+
+- $d_2=d$, $d_3=2d$
+
+- Stepwise time trend, equal strength of the time trend in all arms ($\lambda_k=0.3$ for $k=0,1,2,3$) or different time trend in treatment arm 1 ($\lambda_k=0.3$ for $k=0,2,3$ and $\lambda_1=0.5$)
+
+- Binary endpoint, $p_0=0.3$
+
+- Inference for treatment arms 2 and 3 (power and type I error)
+
+    - Null hypothesis: $OR_k=1$ for $k=2,3$ and $OR_1=1.8$
+
+    - Alternative hypothesis: $OR_k=1.8$ for $k=1,2,3$
+    
+```{r}
+# Sample sizes per period and per arm for these scenarios
+
+get_ss_matrix(num_arms = 3, n_arm = 100, d = c(0,0,0))
+get_ss_matrix(num_arms = 3, n_arm = 100, d = c(0,100,200))
+get_ss_matrix(num_arms = 3, n_arm = 100, d = c(0,200,400))
+```
+
+
+```{r, echo=FALSE}
+include_graphics("scenario_ii.png")
+```
+
+## Scenario III
+
+- Platform trial with 4 treatment arms entering sequentially
+
+- Sample sizes: $n=100$ (sample size per treatment arm)
+
+- Allocation ratio 1:1:...:1 in each period
+
+- New arm enters after every $d=(d_1, d_2, d_3, d_4)= (0,100,150,200)$ or $(0,100,200,200)$ patients are recruited to the trial
+
+- $d_2=d$, $d_4=2d$, $d\le d_3 \le 2d$
+
+- Stepwise time trend, equal strength of the time trend in all arms ($\lambda_k=0.3$ for $k=0,1,2,3,4$) or different time trend in treatment arm 1 ($\lambda_k=0.3$ for $k=0,2,3,4$ and $\lambda_1=0.5$)
+
+- Binary endpoint, $p_0=0.3$
+
+- Inference for treatment arms 2 and 3 (power and type I error)
+
+    - Null hypothesis: $OR_k=1$ for $k=2,3,4$ and $OR_1=1.8$
+
+    - Alternative hypothesis: $OR_k=1.8$ for $k=1,2,3,4$
+    
+```{r}
+# Sample sizes per period and per arm for these scenarios
+
+get_ss_matrix(num_arms = 4, n_arm = 100, d = c(0,100,150,200))
+get_ss_matrix(num_arms = 4, n_arm = 100, d = c(0,100,200,200))
+```
+
+
+```{r, echo=FALSE}
+include_graphics("scenario_iii.png")
+```
+
+
+# Data Generation
+
+- Function `datasim_bin()`
+- **Input:** Trial parameters
+- **Output:** Dataframe with simulated trial data
+
+```{r}
+head(datasim_bin(num_arms = 3, n_arm = 100, d = c(0, 100, 200),
+                 p0 = 0.3, OR=rep(1.6, 3), lambda = rep(0.5, 4), trend="stepwise"))
+```
+
+
+# Results
+
+```{r, include=FALSE}
+results_ii_pow <- read_csv("results/results_ii_pow.csv")
+results_ii_alpha <- read_csv("results/results_ii_alpha.csv")
+results_iii_pow <- read_csv("results/results_iii_pow.csv")
+results_iii_alpha <- read_csv("results/results_iii_alpha.csv")
+```
+
+
+## Scenario II
+
+### Type I error
+
+```{r, echo=FALSE, out.width="100%"}
+ggplot(results_ii_alpha) +
+  geom_line(aes(d2, reject_h0, color=model, linetype=as.factor(study_arm))) +
+  geom_point(aes(d2, reject_h0, color=model)) +
+  labs(x=TeX("$d_1=d$"), y="Type I error", color="Analysis approach:", linetype="Inference for:") +
+  geom_hline(aes(yintercept = 0.1), linetype = "dotted") +
+  facet_grid(~ timetrend) +
+  scale_color_discrete(labels = c("Regression model", "MAP Prior", "Pooled analysis", "Separate analysis", "Timemachine")) +
+  scale_linetype(labels = c("Arm 2", "Arm 3"))
+```
+
+
+### Power
+
+```{r, echo=FALSE, out.width="100%"}
+ggplot(results_ii_pow) +
+  geom_line(aes(d2, reject_h0, color=model, linetype=as.factor(study_arm))) +
+  geom_point(aes(d2, reject_h0, color=model)) +
+  labs(x=TeX("$d_1=d$"), y="Power", color="Analysis approach:", linetype="Inference for:") +
+  facet_grid(~ timetrend) +
+  scale_color_discrete(labels = c("Regression model", "MAP Prior", "Pooled analysis", "Separate analysis", "Timemachine")) +
+  scale_linetype(labels = c("Arm 2", "Arm 3"))
+```
+
+
+## Scenario III
+
+
+### Type I error
+
+```{r, echo=FALSE, out.width="100%"}
+ggplot(results_iii_alpha) +
+  geom_line(aes(d3, reject_h0, color=model, linetype=as.factor(study_arm))) +
+  geom_point(aes(d3, reject_h0, color=model)) +
+  labs(x=TeX("$d_3$"), y="Type I error", color="Analysis approach:", linetype="Inference for:") +
+  geom_hline(aes(yintercept = 0.1), linetype = "dotted") +
+  facet_grid(~ timetrend) +
+  scale_color_discrete(labels = c("Regression model", "MAP Prior", "Pooled analysis", "Separate analysis", "Timemachine")) +
+  scale_linetype(labels = c("Arm 2", "Arm 3", "Arm 4"))
+```
+
+### Power
+
+
+```{r, echo=FALSE, out.width="100%"}
+ggplot(results_iii_pow) +
+  geom_line(aes(d3, reject_h0, color=model, linetype=as.factor(study_arm))) +
+  geom_point(aes(d3, reject_h0, color=model)) +
+  labs(x=TeX("$d_3"), y="Power", color="Analysis approach:", linetype="Inference for:") +
+  facet_grid(~ timetrend) +
+  scale_color_discrete(labels = c("Regression model", "MAP Prior", "Pooled analysis", "Separate analysis", "Timemachine")) +
+  scale_linetype(labels = c("Arm 2", "Arm 3", "Arm 4"))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
