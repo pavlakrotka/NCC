@@ -152,17 +152,17 @@ timemachine_cont <- function(data,
   post_means <- colMeans(all_samples)
 
   ## posterior credible intervals
-  post_cis <- apply(all_samples, 2, quantile, probs = c(alpha / 2, 1 - alpha / 2))
+  post_cis <- apply(all_samples, 2, quantile, probs = c(alpha, 1 - alpha))
 
   ## posterior "p-values"
   post_p <- apply(all_samples, 2, function(x) mean(x < 0))
 
   ## return
-  list(p_val = unname(post_p[arm]),
-       treat_effect = unname(post_means[arm]),
-       lower_ci = post_cis[1,arm],
-       upper_ci = post_cis[2,arm],
-       reject_h0 = unname(post_p[2] < alpha / 2))
+  list(p_val = unname(post_p[arm+1]),
+       treat_effect = unname(post_means[arm+1]),
+       lower_ci = post_cis[1,arm+1],
+       upper_ci = post_cis[2,arm+1],
+       reject_h0 = unname(post_p[arm+1] < alpha))
 }
 
 
