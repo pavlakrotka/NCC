@@ -4,10 +4,23 @@
 \alias{all_models}
 \title{Wrapper function for simulations analyzing given data with all models}
 \usage{
-all_models(data, alpha = 0.025, ...)
+all_models(
+  data,
+  arms,
+  models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior"),
+  endpoint,
+  alpha = 0.025,
+  ...
+)
 }
 \arguments{
 \item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} or \code{datasim_cont()} function}
+
+\item{arms}{Vector with treatment arms to perform inference on. Default - all arms except the first one}
+
+\item{models}{Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior")}
+
+\item{endpoint}{Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints}
 
 \item{alpha}{Type I error. Default=0.025}
 }
@@ -22,7 +35,7 @@ Analyzes given data using the fixed effect model, pooled and separate analyses, 
 trial_data <- datasim_bin(num_arms = 3, n_arm = 100, d = c(0, 100, 250),
 p0 = 0.7, OR = rep(1.8, 3), lambda = rep(0.15, 4), trend="stepwise")
 
-all_models(data = trial_data)
+all_models(data = trial_data, arms = c(2,3), endpoint = "bin")
 
 
 }

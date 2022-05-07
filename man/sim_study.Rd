@@ -4,12 +4,22 @@
 \alias{sim_study}
 \title{Wrapper function performing simulation studies for a given set of scenarios}
 \usage{
-sim_study(nsim, scenarios, endpoint)
+sim_study(
+  nsim,
+  scenarios,
+  arms,
+  models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior"),
+  endpoint
+)
 }
 \arguments{
 \item{nsim}{Number of replications}
 
 \item{scenarios}{Data frame containing all parameters for scenarios that should be simulated}
+
+\item{arms}{Vector with treatment arms to perform inference on. Default - all arms except the first one}
+
+\item{models}{Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior")}
 
 \item{endpoint}{Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints}
 }
