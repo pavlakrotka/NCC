@@ -122,10 +122,26 @@ head(datasim_bin(num_arms = 3, n_arm = 100, d = c(0, 100, 200),
 # Results
 
 ```{r, include=FALSE}
-results_ii_pow <- read_csv("results/results_ii_pow.csv")
-results_ii_alpha <- read_csv("results/results_ii_alpha.csv")
-results_iii_pow <- read_csv("results/results_iii_pow.csv")
-results_iii_alpha <- read_csv("results/results_iii_alpha.csv")
+results_ii_pow <- read_csv("results/results_ii_pow.csv") %>%
+  filter(model!="timemachine")
+results_ii_alpha <- read_csv("results/results_ii_alpha.csv") %>%
+  filter(model!="timemachine")
+results_iii_pow <- read_csv("results/results_iii_pow.csv") %>%
+  filter(model!="timemachine")
+results_iii_alpha <- read_csv("results/results_iii_alpha.csv") %>%
+  filter(model!="timemachine")
+
+# new timemachine results
+
+results_ii_pow_TM <- read_csv("results/results_ii_pow_TM.csv")
+results_ii_alpha_TM <- read_csv("results/results_ii_alpha_TM.csv")
+results_iii_pow_TM <- read_csv("results/results_iii_pow_TM.csv")
+results_iii_alpha_TM <- read_csv("results/results_iii_alpha_TM.csv")
+
+results_ii_pow <- rbind(results_ii_pow, results_ii_pow_TM)
+results_ii_alpha <- rbind(results_ii_alpha, results_ii_alpha_TM)
+results_iii_pow <- rbind(results_iii_pow, results_iii_pow_TM)
+results_iii_alpha <- rbind(results_iii_alpha, results_iii_alpha_TM)
 ```
 
 
