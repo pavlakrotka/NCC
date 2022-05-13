@@ -12,7 +12,8 @@ timemachine_cont(
   prec_gamma = 0.001,
   tau_a = 0.1,
   tau_b = 0.01,
-  sigma_nu = 1
+  sigma_nu = 1,
+  bucket_size = 25
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ timemachine_cont(
 \item{tau_b}{...}
 
 \item{sigma_nu}{...}
+
+\item{bucket_size}{Number of patients per time bucket. Default=25}
 }
 \value{
 List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment

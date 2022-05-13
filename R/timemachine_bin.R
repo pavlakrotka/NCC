@@ -9,6 +9,7 @@
 #' @param prec_gamma ...
 #' @param tau_a ...
 #' @param tau_b ...
+#' @param bucket_size Number of patients per time bucket. Default=25
 #'
 #' @importFrom stats aggregate
 #' @importFrom stats quantile
@@ -34,13 +35,14 @@ timemachine_bin <- function(data,
                             prec_delta = 0.001,
                             prec_gamma = 0.001,
                             tau_a = 0.1,
-                            tau_b = 0.01){
+                            tau_b = 0.01,
+                            bucket_size = 25){
 
   model_string_time_machine_bin <- "
   model {
 
 
-    for (i in 1:n_trt_periods){
+    for (i in 1:n_trt_buckets){
 
 
        x[i] ~ dbin(p[i], n[i])
@@ -50,7 +52,7 @@ timemachine_bin <- function(data,
             ## e.g. time 1 corresponds to alpha interval 10-(1-1)=10 if interim #10
             ## e.g. time 2 corresponds to alpha interval 7-(2-1)=6 if interim #7
 
-       logit(p[i]) = gamma0 + alpha[n_periods- (period[i]-1)] + delta[trt[i]]
+       logit(p[i]) = gamma0 + alpha[n_buckets - (time_bucket[i]-1)] + delta[trt[i]]
 
     }
 
@@ -58,7 +60,7 @@ timemachine_bin <- function(data,
     ## Priors for time, counting backwards from current time interval (k=1 for current, k=10 for most distant)
     alpha[1] = 0
     alpha[2] ~ dnorm(0, tau)
-    for(k in 3:n_periods) {
+    for(k in 3:n_buckets) {
         alpha[k] ~ dnorm(2*alpha[k-1] - alpha[k-2], tau)  # 2*(most recent) - (more distant) puts trend in right direction
     }
 
@@ -76,36 +78,36 @@ timemachine_bin <- function(data,
   }
 "
 
+  data$time_bucket <- rep(c(1:ceiling((nrow(data)/bucket_size))), each=bucket_size)[1:nrow(data)]
 
-
-  trt_period_n <- aggregate(data$response,
+  trt_bucket_n <- aggregate(data$response,
                             list(treatment = data$treatment,
-                                 period = data$period),
+                                 time_bucket = data$time_bucket),
                             "length")
 
-  trt_period_x <- aggregate(data$response,
+  trt_bucket_x <- aggregate(data$response,
                             list(treatment = data$treatment,
-                                 period = data$period),
+                                 time_bucket = data$time_bucket),
                             "sum")
 
-  n_trt_periods <- dim(trt_period_n)[1]
-  n_trts <- max(trt_period_n$treatment) + 1
-  n_periods <- max(trt_period_n$period)
+  n_trt_buckets <- dim(trt_bucket_n)[1]
+  n_trts <- max(trt_bucket_n$treatment) + 1
+  n_buckets <- max(trt_bucket_n$time_bucket)
 
-  trt <- trt_period_n$treatment + 1 ## need index to start at 1, not 0.
-  period <- trt_period_n$period
+  trt <- trt_bucket_n$treatment + 1 ## need index to start at 1, not 0.
+  time_bucket <- trt_bucket_n$time_bucket
 
-  x <- trt_period_x$x
-  n <- trt_period_n$x
+  x <- trt_bucket_x$x
+  n <- trt_bucket_n$x
 
   ### Arguments to pass to jags_model
   data_list = list(x = x,
                    n = n,
                    trt = trt,
-                   period = period,
+                   time_bucket = time_bucket,
                    n_trts = n_trts,
-                   n_periods = n_periods,
-                   n_trt_periods = n_trt_periods,
+                   n_buckets = n_buckets,
+                   n_trt_buckets = n_trt_buckets,
                    prec_delta = prec_delta,
                    prec_gamma = prec_gamma,
                    tau_a = tau_a,
