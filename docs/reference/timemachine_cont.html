@@ -58,7 +58,8 @@
   prec_gamma <span class="op">=</span> <span class="fl">0.001</span>,
   tau_a <span class="op">=</span> <span class="fl">0.1</span>,
   tau_b <span class="op">=</span> <span class="fl">0.01</span>,
-  sigma_nu <span class="op">=</span> <span class="fl">1</span>
+  sigma_nu <span class="op">=</span> <span class="fl">1</span>,
+  bucket_size <span class="op">=</span> <span class="fl">25</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -80,6 +81,8 @@
 <dd><p>...</p></dd>
 <dt>sigma_nu</dt>
 <dd><p>...</p></dd>
+<dt>bucket_size</dt>
+<dd><p>Number of patients per time bucket. Default=25</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -98,16 +101,16 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">timemachine_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4153333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1715</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.03361547</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.127742</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.2461409</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.131498</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3200439</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3906735</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>

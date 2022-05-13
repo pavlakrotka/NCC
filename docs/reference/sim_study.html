@@ -50,7 +50,13 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">sim_study</span><span class="op">(</span><span class="va">nsim</span>, <span class="va">scenarios</span>, <span class="va">endpoint</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">sim_study</span><span class="op">(</span>
+  <span class="va">nsim</span>,
+  <span class="va">scenarios</span>,
+  <span class="va">arms</span>,
+  models <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fixmodel"</span>, <span class="st">"sepmodel"</span>, <span class="st">"poolmodel"</span>, <span class="st">"timemachine"</span>, <span class="st">"MAPprior"</span><span class="op">)</span>,
+  <span class="va">endpoint</span>
+<span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -59,6 +65,10 @@
 <dd><p>Number of replications</p></dd>
 <dt>scenarios</dt>
 <dd><p>Data frame containing all parameters for scenarios that should be simulated</p></dd>
+<dt>arms</dt>
+<dd><p>Vector with treatment arms to perform inference on. Default - all arms except the first one</p></dd>
+<dt>models</dt>
+<dd><p>Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior")</p></dd>
 <dt>endpoint</dt>
 <dd><p>Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints</p></dd>
 </dl></div>
