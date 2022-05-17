@@ -142,6 +142,22 @@ results_ii_pow <- rbind(results_ii_pow, results_ii_pow_TM)
 results_ii_alpha <- rbind(results_ii_alpha, results_ii_alpha_TM)
 results_iii_pow <- rbind(results_iii_pow, results_iii_pow_TM)
 results_iii_alpha <- rbind(results_iii_alpha, results_iii_alpha_TM)
+
+# new timemachine results - buckets
+
+results_ii_pow_TM_buckets <- read_csv("results/results_ii_pow_TM_buckets.csv") %>%
+  mutate(model="timemachine_buckets")
+results_ii_alpha_TM_buckets <- read_csv("results/results_ii_alpha_TM_buckets.csv") %>%
+  mutate(model="timemachine_buckets")
+results_iii_pow_TM_buckets <- read_csv("results/results_iii_pow_TM_buckets.csv") %>%
+  mutate(model="timemachine_buckets")
+results_iii_alpha_TM_buckets <- read_csv("results/results_iii_alpha_TM_buckets.csv") %>%
+  mutate(model="timemachine_buckets")
+
+results_ii_pow <- rbind(results_ii_pow, results_ii_pow_TM_buckets)
+results_ii_alpha <- rbind(results_ii_alpha, results_ii_alpha_TM_buckets)
+results_iii_pow <- rbind(results_iii_pow, results_iii_pow_TM_buckets)
+results_iii_alpha <- rbind(results_iii_alpha, results_iii_alpha_TM_buckets)
 ```
 
 
@@ -156,7 +172,7 @@ ggplot(results_ii_alpha) +
   labs(x=TeX("$d_1=d$"), y="Type I error", color="Analysis approach:", linetype="Inference for:") +
   geom_hline(aes(yintercept = 0.1), linetype = "dotted") +
   facet_grid(~ timetrend) +
-  scale_color_discrete(labels = c("Regression model", "MAP Prior", "Pooled analysis", "Separate analysis", "Timemachine")) +
+  scale_color_discrete(labels = c("Regression model", "MAP Prior", "Pooled analysis", "Separate analysis", "Timemachine", "Timemachine with buckets")) +
   scale_linetype(labels = c("Arm 2", "Arm 3"))
 ```
 
@@ -169,7 +185,7 @@ ggplot(results_ii_pow) +
   geom_point(aes(d2, reject_h0, color=model)) +
   labs(x=TeX("$d_1=d$"), y="Power", color="Analysis approach:", linetype="Inference for:") +
   facet_grid(~ timetrend) +
-  scale_color_discrete(labels = c("Regression model", "MAP Prior", "Pooled analysis", "Separate analysis", "Timemachine")) +
+  scale_color_discrete(labels = c("Regression model", "MAP Prior", "Pooled analysis", "Separate analysis", "Timemachine", "Timemachine with buckets")) +
   scale_linetype(labels = c("Arm 2", "Arm 3"))
 ```
 
@@ -186,7 +202,7 @@ ggplot(results_iii_alpha) +
   labs(x=TeX("$d_3$"), y="Type I error", color="Analysis approach:", linetype="Inference for:") +
   geom_hline(aes(yintercept = 0.1), linetype = "dotted") +
   facet_grid(~ timetrend) +
-  scale_color_discrete(labels = c("Regression model", "MAP Prior", "Pooled analysis", "Separate analysis", "Timemachine")) +
+  scale_color_discrete(labels = c("Regression model", "MAP Prior", "Pooled analysis", "Separate analysis", "Timemachine", "Timemachine with buckets")) +
   scale_linetype(labels = c("Arm 2", "Arm 3", "Arm 4"))
 ```
 
@@ -199,7 +215,7 @@ ggplot(results_iii_pow) +
   geom_point(aes(d3, reject_h0, color=model)) +
   labs(x=TeX("$d_3"), y="Power", color="Analysis approach:", linetype="Inference for:") +
   facet_grid(~ timetrend) +
-  scale_color_discrete(labels = c("Regression model", "MAP Prior", "Pooled analysis", "Separate analysis", "Timemachine")) +
+  scale_color_discrete(labels = c("Regression model", "MAP Prior", "Pooled analysis", "Separate analysis", "Timemachine", "Timemachine with buckets")) +
   scale_linetype(labels = c("Arm 2", "Arm 3", "Arm 4"))
 ```
 

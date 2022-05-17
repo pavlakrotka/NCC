@@ -146,7 +146,7 @@ scenario_ii_pow <- data.frame(num_arms = 3,
          hypothesis = ifelse(OR2==1 & OR3==1, "H0", "H1"))
 
 results_ii_pow_TM <- sim_study(nsim = n_sim, scenarios = scenario_ii_pow, models = "timemachine", endpoint = "bin")
-write_csv(results_ii_pow_TM, "results/results_ii_pow_TM.csv")
+write_csv(results_ii_pow_TM, "results/results_ii_pow_TM_buckets.csv")
 
 
 
@@ -171,7 +171,7 @@ scenario_ii_alpha <- data.frame(num_arms = 3,
          hypothesis = ifelse(OR2==1 & OR3==1, "H0", "H1"))
 
 results_ii_alpha_TM <- sim_study(nsim = n_sim, scenarios = scenario_ii_alpha, models = "timemachine", endpoint = "bin")
-write_csv(results_ii_alpha_TM, "results/results_ii_alpha_TM.csv")
+write_csv(results_ii_alpha_TM, "results/results_ii_alpha_TM_buckets.csv")
 
 
 scenario_iii_pow <- data.frame(num_arms = 4, 
@@ -197,7 +197,7 @@ scenario_iii_pow <- data.frame(num_arms = 4,
          hypothesis = ifelse(OR2==1 & OR3==1 & OR4==1, "H0", "H1"))
 
 results_iii_pow_TM <- sim_study(nsim = n_sim, scenarios = scenario_iii_pow, models = "timemachine", endpoint = "bin")
-write_csv(results_iii_pow_TM, "results/results_iii_pow_TM.csv")
+write_csv(results_iii_pow_TM, "results/results_iii_pow_TM_buckets.csv")
 
 
 
@@ -224,5 +224,5 @@ scenario_iii_alpha <- data.frame(num_arms = 4,
          hypothesis = ifelse(OR2==1 & OR3==1 & OR4==1, "H0", "H1"))
 
 results_iii_alpha_TM <- sim_study(nsim = n_sim, scenarios = scenario_iii_alpha, models = "timemachine", endpoint = "bin")
-write_csv(results_iii_alpha_TM, "results/results_iii_alpha_TM.csv")
+write_csv(results_iii_alpha_TM, "results/results_iii_alpha_TM_buckets.csv")
 
