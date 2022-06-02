@@ -27,6 +27,7 @@ This package contains the following functions:
     for binary data
 -   `timemachine_cont()` performs analysis using the timemachine
     approach for continuous data
+-   `plot_trial()` visualizes the simulated trial
 
 For a more detailed description of the functions, see the vignettes in
 the R-package website (<https://pavlakrotka.github.io/NCC/>).
