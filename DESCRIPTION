@@ -22,7 +22,8 @@ Imports:
   RBesT,
   rjags,
   dplyr,
-  magrittr
+  magrittr,
+  ggplot2
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Suggests: 
