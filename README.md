@@ -13,9 +13,11 @@ This package contains the following functions:
     the trend for each patient
 -   `sw_trend()` is the step-wise time trend function, used generate the
     trend for each patient
--   `fixmodel_bin()` performs analysis using regression model for binary
-    data
--   `fixmodel_cont()` performs analysis using regression model for
+-   `fixmodel_bin()` performs analysis using a regression model for
+    binary data
+-   `fixmodel_cont()` performs analysis using a regression model for
+    continuous data
+-   `mixmodel_cont()` performs analysis using a mixed model for
     continuous data
 -   `MAPprior_bin()` performs analysis using the MAP prior approach for
     binary data
