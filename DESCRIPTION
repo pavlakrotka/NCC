@@ -23,7 +23,8 @@ Imports:
   rjags,
   dplyr,
   magrittr,
-  ggplot2
+  ggplot2,
+  lmerTest
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Suggests: 
