@@ -38,7 +38,7 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
     for(i in 1:dim(scenarios)[1]){
 
       if(missing(arms)){
-        arms <- c(2:scenarios[i]$num_arms)
+        arms <- c(2:scenarios[i,]$num_arms)
       }
 
       arms <- sort(arms)
@@ -83,7 +83,7 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
     for(i in 1:dim(scenarios)[1]){
 
       if(missing(arms)){
-        arms <- c(2:scenarios[i]$num_arms)
+        arms <- c(2:scenarios[i,]$num_arms)
       }
 
       arms <- sort(arms)
