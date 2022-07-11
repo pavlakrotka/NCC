@@ -11,12 +11,12 @@
 #' @keywords internal
 #'
 #' @export
-#' 
-#' @examples 
-#' 
+#'
+#' @examples
+#'
 #' trial_data <- datasim_bin(num_arms = 3, n_arm = 100, d = c(0, 100, 250),
 #' p0 = 0.7, OR = rep(1.8, 3), lambda = rep(0.15, 4), trend="stepwise")
-#' 
+#'
 #' all_models(data = trial_data, arms = c(2,3), endpoint = "bin")
 #'
 #'
@@ -24,19 +24,27 @@
 #' @author Pavla Krotka
 
 
-all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior"), endpoint, alpha=0.025, ...){
-  
+all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior", "mixmodel"), endpoint, alpha=0.025, ...){
+
+  if (endpoint=="cont") {
+    models <- models[models!="MAPprior"]
+  }
+
+  if (endpoint=="bin") {
+    models <- models[models!="mixmodel"]
+  }
+
   arms <- sort(arms)
   models <- sort(models)
-  
+
   res <- list()
-  
+
   for (i in arms) {
     for (j in models) {
       res_i_j <- list(do.call(paste0(j, "_", endpoint), list(data, arm = i, alpha))$reject_h0)
-      
+
       names(res_i_j) <- paste0("reject_h0_", j, "_", i)
-      
+
       res <- append(res, res_i_j)
     }
   }
