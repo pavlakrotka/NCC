@@ -12,6 +12,7 @@
 #' @importFrom doParallel registerDoParallel
 #' @importFrom foreach foreach
 #' @importFrom foreach %dopar%
+#' @importFrom iterators icount
 #'
 #' @keywords internal
 #'
