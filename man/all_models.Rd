@@ -7,7 +7,8 @@
 all_models(
   data,
   arms,
-  models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior"),
+  models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior",
+    "mixmodel"),
   endpoint,
   alpha = 0.025,
   ...
