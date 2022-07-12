@@ -28,7 +28,7 @@
 sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "mixmodel", "MAPprior"), endpoint){
 
   cores <- detectCores()
-  cl <- makeCluster(cores[1]-1) # not to overload your computer
+  cl <- makeCluster(cores[1]-3) # not to overload your computer
   registerDoParallel(cl)
 
   if (endpoint=="cont") {
