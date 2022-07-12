@@ -96,8 +96,7 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
 
                     }
 
-      stopCluster(cl)
-      gc()
+
 
       result_i <- cbind(scenarios[i,],
                         study_arm = rep(arms, each = num_models),
@@ -106,6 +105,10 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
 
       result <- rbind(result, result_i)
     }
+
+     stopCluster(cl)
+      gc()
+
   }
 
 
@@ -162,8 +165,7 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                                  alpha = scenarios$alpha[i])
                     }
 
-      stopCluster(cl)
-      gc()
+
 
       result_i <- cbind(scenarios[i,],
                         study_arm = rep(arms, each = num_models),
@@ -173,6 +175,10 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
       result <- rbind(result, result_i)
 
     }
+
+    stopCluster(cl)
+    gc()
+
   }
   return(result)
 }
