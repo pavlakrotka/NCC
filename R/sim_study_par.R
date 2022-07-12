@@ -9,6 +9,8 @@
 #' @param endpoint Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints
 #'
 #' @importFrom parallel detectCores
+#' @importFrom parallel makeCluster
+#' @importFrom parallel stopCluster
 #' @importFrom doParallel registerDoParallel
 #' @importFrom foreach foreach
 #' @importFrom foreach %dopar%
@@ -25,8 +27,9 @@
 
 sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "mixmodel", "MAPprior"), endpoint){
 
-  cores <- detectCores()-1 # not to overload your computer
-  registerDoParallel(cores)
+  cores <- detectCores()
+  cl <- makeCluster(cores[1]-1) # not to overload your computer
+  registerDoParallel(cl)
 
   if (endpoint=="cont") {
     models <- models[models!="MAPprior"] # not implemented yet
@@ -93,6 +96,9 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
 
                     }
 
+      stopCluster(cl)
+      gc()
+
       result_i <- cbind(scenarios[i,],
                         study_arm = rep(arms, each = num_models),
                         model = models,
@@ -155,6 +161,9 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                                  endpoint = endpoint,
                                  alpha = scenarios$alpha[i])
                     }
+
+      stopCluster(cl)
+      gc()
 
       result_i <- cbind(scenarios[i,],
                         study_arm = rep(arms, each = num_models),
