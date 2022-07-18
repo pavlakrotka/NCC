@@ -101,7 +101,7 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
       result_i <- cbind(scenarios[i,],
                         study_arm = rep(arms, each = num_models),
                         model = models,
-                        reject_h0 = rowMeans(matrix(unlist(unname(db)), ncol = nsim))) # get power/T1E
+                        reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db))), ncol = nsim), na.rm = TRUE)) # get power/T1E
 
       result <- rbind(result, result_i)
     }
@@ -170,7 +170,7 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
       result_i <- cbind(scenarios[i,],
                         study_arm = rep(arms, each = num_models),
                         model = models,
-                        reject_h0 = rowMeans(matrix(unlist(unname(db)), ncol = nsim))) # get power/T1E
+                        reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db))), ncol = nsim), na.rm = TRUE)) # get power/T1E
 
       result <- rbind(result, result_i)
 
