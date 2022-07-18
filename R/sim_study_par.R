@@ -25,10 +25,10 @@
 #' @author Pavla Krotka
 
 
-sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "mixmodel", "MAPprior"), endpoint){
+sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "mixmodel", "MAPprior"), endpoint, perc_cores=0.9){
 
   cores <- detectCores()
-  cl <- makeCluster(cores[1]-3) # not to overload your computer
+  cl <- makeCluster(floor(cores[1]*perc_cores)) # not to overload your computer
   registerDoParallel(cl)
 
   if (endpoint=="cont") {
