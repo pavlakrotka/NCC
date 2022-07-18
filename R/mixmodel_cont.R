@@ -1,4 +1,4 @@
-#' Model-based analysis for continuous data adjusting for periods as a random factor 
+#' Model-based analysis for continuous data adjusting for periods as a random factor
 #'
 #' @description Performs linear mixed model regression taking into account all trial data until the arm under study leaves the trial and adjusting for periods as random factors
 #'
@@ -37,8 +37,8 @@ mixmodel_cont <- function(data, arm, alpha=0.025){
 
   # metrics
   treat_effect <- res$coefficients[paste0("as.factor(treatment)", arm), "Estimate"]
-  lower_ci <- confint(mod)[paste0("as.factor(treatment)", arm), 1]
-  upper_ci <- confint(mod)[paste0("as.factor(treatment)", arm), 2]
+  lower_ci <- confint(mod, parallel="no")[paste0("as.factor(treatment)", arm), 1]
+  upper_ci <- confint(mod, parallel="no")[paste0("as.factor(treatment)", arm), 2]
   reject_h0 <- (p_val < alpha)
 
   return(list(p_val = p_val,
