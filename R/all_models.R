@@ -41,7 +41,7 @@ all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel
 
   for (i in arms) {
     for (j in models) {
-      res_i_j <- list(do.call(paste0(j, "_", endpoint), list(data, arm = i, alpha))$reject_h0)
+      res_i_j <- list(try(do.call(paste0(j, "_", endpoint), list(data, arm = i, alpha))$reject_h0, silent = TRUE))
 
       names(res_i_j) <- paste0("reject_h0_", j, "_", i)
 
