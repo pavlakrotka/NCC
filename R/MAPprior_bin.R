@@ -172,7 +172,7 @@ MAPprior_bin <- function(data,arm,alpha=0.025,opt=1,tau.dist="HalfNormal",tau.pr
               treat_effect = treat_effect,
               lower_ci = lower_ci,
               upper_ci = upper_ci,
-              reject_h0 = reject_h0))
+              reject_h0 = as.logical(reject_h0)))
 }
 
 
