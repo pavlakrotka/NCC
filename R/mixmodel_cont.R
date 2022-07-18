@@ -37,14 +37,14 @@ mixmodel_cont <- function(data, arm, alpha=0.025){
 
   # metrics
   treat_effect <- res$coefficients[paste0("as.factor(treatment)", arm), "Estimate"]
-  lower_ci <- confint(mod, parallel="no")[paste0("as.factor(treatment)", arm), 1]
-  upper_ci <- confint(mod, parallel="no")[paste0("as.factor(treatment)", arm), 2]
+  #lower_ci <- confint(mod, parallel="no")[paste0("as.factor(treatment)", arm), 1]
+  #upper_ci <- confint(mod, parallel="no")[paste0("as.factor(treatment)", arm), 2]
   reject_h0 <- (p_val < alpha)
 
   return(list(p_val = p_val,
               treat_effect = treat_effect,
-              lower_ci = lower_ci,
-              upper_ci = upper_ci,
+              #lower_ci = lower_ci,
+              #upper_ci = upper_ci,
               reject_h0 = reject_h0))
 }
 
