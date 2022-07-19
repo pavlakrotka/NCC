@@ -4,3 +4,29 @@ template:
   bslib:
     pkgdown-nav-height: 100px
 
+navbar:
+  structure:
+    left:
+    - reference
+    - articles
+    right: github
+  components:
+    reference:
+      text: Reference
+      href: reference/index.html
+    articles:
+      text: Articles
+      menu:
+      - text: |
+          datasim_bin
+        href: articles/datasim_bin.html
+      - text: |
+          datasim_cont
+        href: articles/datasim_cont.html
+      - text: |
+          get_ss_matrix
+        href: articles/get_ss_matrix.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/pavlakrotka/NCC
+

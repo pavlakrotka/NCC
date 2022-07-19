@@ -41,9 +41,12 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/datasim_bin.html">datasim_bin</a>
-    <a class="dropdown-item" href="../articles/datasim_cont.html">datasim_cont</a>
-    <a class="dropdown-item" href="../articles/get_ss_matrix.html">get_ss_matrix</a>
+    <a class="dropdown-item" href="../articles/datasim_bin.html">datasim_bin
+</a>
+    <a class="dropdown-item" href="../articles/datasim_cont.html">datasim_cont
+</a>
+    <a class="dropdown-item" href="../articles/get_ss_matrix.html">get_ss_matrix
+</a>
   </div>
 </li>
       </ul>
@@ -51,7 +54,14 @@
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/pavlakrotka/NCC">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
@@ -243,25 +253,25 @@ lambdas and underlying responses) and all input parameters.</p>
                   theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, 
                   sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;     response treatment period</span>
-<span class="co">#&gt; 1 -2.3297112         0      1</span>
-<span class="co">#&gt; 2 -0.7465652         1      1</span>
-<span class="co">#&gt; 3  0.6558934         1      1</span>
-<span class="co">#&gt; 4  0.8293255         0      1</span>
-<span class="co">#&gt; 5 -0.6539111         0      1</span>
-<span class="co">#&gt; 6  0.5282479         1      1</span></code></pre></div>
+<span class="co">#&gt; 1 0.55630671         0      1</span>
+<span class="co">#&gt; 2 0.17567391         1      1</span>
+<span class="co">#&gt; 3 1.27529363         1      1</span>
+<span class="co">#&gt; 4 0.07171652         0      1</span>
+<span class="co">#&gt; 5 0.82826512         0      1</span>
+<span class="co">#&gt; 6 1.06072647         1      1</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Full dataset</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="../reference/datasim_cont.html">datasim_cont</a></span><span class="op">(</span>num_arms <span class="op">=</span> <span class="fl">3</span>, n_arm <span class="op">=</span> <span class="fl">100</span>, d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, <span class="fl">250</span><span class="op">)</span>, 
                   theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, 
                   sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span>, full <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">$</span><span class="va">Data</span><span class="op">)</span>
-<span class="co">#&gt;   j    response treatment period        means lambda0 lambda1 lambda2 lambda3</span>
-<span class="co">#&gt; 1 1  0.56888615         1      1 0.2500000000    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 2 2 -1.85597618         1      1 0.2503006012    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 3 3 -0.20822105         0      1 0.0006012024    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 4 4 -0.48692353         0      1 0.0009018036    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 5 5 -0.06965794         0      1 0.0012024048    0.15    0.15    0.15    0.15</span>
-<span class="co">#&gt; 6 6  0.67066934         1      1 0.2515030060    0.15    0.15    0.15    0.15</span></code></pre></div>
+<span class="co">#&gt;   j   response treatment period        means lambda0 lambda1 lambda2 lambda3</span>
+<span class="co">#&gt; 1 1  0.8180196         0      1 0.0000000000    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 2 2  0.1059849         1      1 0.2503006012    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 3 3 -0.7809652         1      1 0.2506012024    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 4 4 -1.0387510         0      1 0.0009018036    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 5 5  0.1939155         1      1 0.2512024048    0.15    0.15    0.15    0.15</span>
+<span class="co">#&gt; 6 6  0.1046777         0      1 0.0015030060    0.15    0.15    0.15    0.15</span></code></pre></div>
 </div>
 </div>
 </div>
