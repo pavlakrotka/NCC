@@ -51,15 +51,3 @@ fixmodel_bin <- function(data, arm, alpha=0.025){
               upper_ci = upper_ci,
               reject_h0 = reject_h0))
 }
-
-
-# mod_test <- glm(response ~ as.factor(treatment), test %>% filter(treatment %in% c(0,2) & period %in% c(1,2,3,4)), family = "binomial")
-# res_test <- summary(mod_test)
-#
-# fixmodel_bin(test, arm = 2)
-
-
-
-
-
-

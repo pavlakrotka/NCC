@@ -54,8 +54,3 @@ mixmodel_cont <- function(data, arm, alpha=0.025, ci=FALSE){
               reject_h0 = reject_h0))
 }
 
-
-
-
-
-

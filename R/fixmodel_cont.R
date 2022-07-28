@@ -52,15 +52,3 @@ fixmodel_cont <- function(data, arm, alpha=0.025){
               upper_ci = upper_ci,
               reject_h0 = reject_h0))
 }
-
-
-# mod_test <- lm(response ~ as.factor(treatment), test %>% filter(period %in% c(1,2,3,4)))
-# res_test <- summary(mod_test)
-#
-# fixmodel_cont(test, arm=2)
-
-
-
-
-
-
