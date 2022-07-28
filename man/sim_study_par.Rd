@@ -10,7 +10,8 @@ sim_study_par(
   arms,
   models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "mixmodel",
     "MAPprior"),
-  endpoint
+  endpoint,
+  perc_cores = 0.9
 )
 }
 \arguments{
