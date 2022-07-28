@@ -31,12 +31,6 @@
 
 datasim_cont <- function(num_arms, n_arm, d, period_blocks=2, mu0=0, theta, lambda, sigma, trend, N_peak, full=FALSE){
 
-  #requireNamespace("rlang")
-  #requireNamespace("stats")
-
-  #require("rlang")
-  #require("stats")
-
   # if (missing(n_total)==F & missing(num_arms)==F & missing(d)==F){
   #
   #   SS_matrix <- get_ss_matrix(n_total, num_arms, d)
@@ -243,5 +237,3 @@ datasim_cont <- function(num_arms, n_arm, d, period_blocks=2, mu0=0, theta, lamb
   }
 }
 
-
-# test <- datasim_cont(n_arm = 100, num_arms = 3, d = c(0, 100, 250), theta=rep(0.25, 3), lambda=rep(0.15, 4), sigma=1, trend="linear")

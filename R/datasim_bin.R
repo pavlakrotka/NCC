@@ -30,12 +30,6 @@
 
 datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, trend, N_peak, full=FALSE){
 
-  #requireNamespace("rlang")
-  #requireNamespace("stats")
-
-  #require("rlang")
-  #require("stats")
-
   # if (missing(n_total)==F & missing(num_arms)==F & missing(d)==F){
   #
   #   SS_matrix <- get_ss_matrix(n_total, num_arms, d)
@@ -257,6 +251,3 @@ datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, tre
   }
 }
 
-
-
-# test <- datasim_bin(n_arm = 100, num_arms = 3, d = c(0, 100, 250), p0=0.7, OR=rep(1.8, 3), lambda=rep(0.15, 4), trend="stepwise")
