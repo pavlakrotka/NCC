@@ -35,6 +35,8 @@ This package contains the following functions:
     for binary data
 -   `timemachine_cont()` performs analysis using the timemachine
     approach for continuous data
+-   `TT_fixmodel_cont()` performs a treatment-treatment comparison for
+    continuous data adjusting for periods
 -   `plot_trial()` visualizes the simulated trial
 
 For a more detailed description of the functions, see the vignettes in
