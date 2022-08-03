@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_ss_matrix.R
 \name{get_ss_matrix}
 \alias{get_ss_matrix}
-\title{Sample size matrix for a platform trial with 3 arms}
+\title{Sample size matrix for a platform trial with a flexible number of treatment arms}
 \usage{
 get_ss_matrix(num_arms, n_arm, d, alloc_ratio = c(1, 1))
 }

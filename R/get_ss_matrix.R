@@ -1,4 +1,4 @@
-#' Sample size matrix for a platform trial with 3 arms
+#' Sample size matrix for a platform trial with a flexible number of treatment arms
 #'
 #' @description Computes the sample size matrix - sample sizes per arm (rows) and per period (columns)
 #'
