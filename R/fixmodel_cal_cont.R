@@ -24,7 +24,7 @@
 #' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment
 #' @author Pavla Krotka
 
-fixmodel_cal_cont <- function(data, arm, alpha=0.025, unit_size=25){
+fixmodel_cal_cont <- function(data, arm, alpha=0.025, unit_size=250){
 
   data$cal_time <- rep(c(1:ceiling((nrow(data)/unit_size))), each=unit_size)[1:nrow(data)]
 
