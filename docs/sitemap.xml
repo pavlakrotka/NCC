@@ -100,6 +100,18 @@
     <loc>/reference/timemachine_cont.html</loc>
   </url>
   <url>
+    <loc>/reference/TT_all_models.html</loc>
+  </url>
+  <url>
     <loc>/reference/TT_fixmodel_cont.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TT_indirect_cont.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TT_sim_study.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TT_sim_study_par.html</loc>
   </url>
 </urlset>
