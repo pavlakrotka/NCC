@@ -20,7 +20,7 @@
 #'
 #' TT_indirect_cont(data = trial_data, arms = c(1,3))
 #'
-#' @return List containing the p-value (one-sided), estimated difference between the treatments, 95% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated comparison
+#' @return List containing the p-value (one-sided), estimated difference between the treatments and an indicator whether the null hypothesis was rejected or not for the investigated comparison
 #' @author Pavla Krotka
 
 TT_indirect_cont <- function(data, arms, alpha=0.025){
