@@ -1,10 +1,10 @@
-#' Wrapper function for simulations analyzing given data with all models
+#' Wrapper function for simulations analyzing given data with given models (treatment-treatment comparisons)
 #'
-#' @description Analyzes given data using the fixed effect model, pooled and separate analyses, and timemachine and MAP prior approach. Performs inference for all treatment arms in the trial except for the first one
+#' @description Analyzes given data using the fixed effect model and indirect comparison. Compares the indicated treatment arms.
 #'
 #' @param data Simulated trial data, e.g. result from the `datasim_bin()` or `datasim_cont()` function
-#' @param arms Vector with treatment arms to perform inference on. Default - all arms except the first one
-#' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior")
+#' @param arms Indicator of the treatment arms to be compared (vector of length 2)
+#' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "indirect")
 #' @param endpoint Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints
 #' @param alpha Type I error. Default=0.025
 #'

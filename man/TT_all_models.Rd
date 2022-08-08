@@ -2,7 +2,7 @@
 % Please edit documentation in R/TT_all_models.R
 \name{TT_all_models}
 \alias{TT_all_models}
-\title{Wrapper function for simulations analyzing given data with all models}
+\title{Wrapper function for simulations analyzing given data with given models (treatment-treatment comparisons)}
 \usage{
 TT_all_models(
   data,
@@ -16,9 +16,9 @@ TT_all_models(
 \arguments{
 \item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} or \code{datasim_cont()} function}
 
-\item{arms}{Vector with treatment arms to perform inference on. Default - all arms except the first one}
+\item{arms}{Indicator of the treatment arms to be compared (vector of length 2)}
 
-\item{models}{Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior")}
+\item{models}{Vector with models that should be used for the analysis. Default=c("fixmodel", "indirect")}
 
 \item{endpoint}{Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints}
 
@@ -28,7 +28,7 @@ TT_all_models(
 List containing an indicator whether the null hypothesis was rejected or not for the investigated treatment for all models
 }
 \description{
-Analyzes given data using the fixed effect model, pooled and separate analyses, and timemachine and MAP prior approach. Performs inference for all treatment arms in the trial except for the first one
+Analyzes given data using the fixed effect model and indirect comparison. Compares the indicated treatment arms.
 }
 \examples{
 

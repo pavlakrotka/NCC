@@ -36,7 +36,9 @@ This package contains the following functions:
 -   `timemachine_cont()` performs analysis using the timemachine
     approach for continuous data
 -   `TT_fixmodel_cont()` performs a treatment-treatment comparison for
-    continuous data adjusting for periods
+    continuous data using a regression model adjusting for periods
+-   `TT_indirect_cont()` performs a treatment-treatment comparison for
+    continuous data using an indirect comparison
 -   `plot_trial()` visualizes the simulated trial
 
 For a more detailed description of the functions, see the vignettes in

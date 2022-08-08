@@ -2,7 +2,7 @@
 % Please edit documentation in R/TT_sim_study_par.R
 \name{TT_sim_study_par}
 \alias{TT_sim_study_par}
-\title{Wrapper function performing simulation studies for a given set of scenarios (parallelized)}
+\title{Wrapper function performing simulation studies (treatment-treatment comparisons) for a given set of scenarios (parallelized)}
 \usage{
 TT_sim_study_par(
   nsim,
@@ -18,7 +18,7 @@ TT_sim_study_par(
 
 \item{scenarios}{Data frame containing all parameters for scenarios that should be simulated}
 
-\item{arms}{Vector with treatment arms to perform inference on. Default - all arms except the first one}
+\item{arms}{Indicator of the treatment arms to be compared (vector of length 2)}
 
 \item{models}{Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior")}
 
@@ -28,7 +28,7 @@ TT_sim_study_par(
 Data frame with all considered scenarios and corresponding results
 }
 \description{
-Performs a simulation study for a given set of scenarios, analyzing simulated data using the fixed effect model, pooled and separate analyses, and timemachine and MAP prior approach. Performs inference for all treatment arms in the trial except for the first one
+Performs a simulation study for a given set of scenarios, analyzing simulated data using the fixed effect model and indirect comparison. Compares the indicated treatment arms.
 }
 \author{
 Pavla Krotka
