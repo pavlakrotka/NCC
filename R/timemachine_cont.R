@@ -9,7 +9,8 @@
 #' @param prec_gamma ...
 #' @param tau_a ...
 #' @param tau_b ...
-#' @param sigma_nu ...
+#' @param prec_a ...
+#' @param prec_b ...
 #' @param bucket_size Number of patients per time bucket. Default=25
 #'
 #' @importFrom stats aggregate
@@ -38,7 +39,8 @@ timemachine_cont <- function(data,
                              prec_gamma = 0.001,
                              tau_a = 0.1,
                              tau_b = 0.01,
-                             sigma_nu = 1,
+                             prec_a = 0.001,
+                             prec_b = 0.001,
                              bucket_size = 25){
 
   model_string_time_machine_cont <- "
@@ -81,8 +83,7 @@ timemachine_cont <- function(data,
     gamma0 ~ dnorm(0, prec_gamma)
 
     ### Precision (corresponding to random error term)
-    nu ~ dnorm(0,sigma_nu) T(0,)
-    prec <- 1 / (nu ^ 2)
+    prec ~ dgamma(prec_a, prec_b)
 
 
   }
@@ -130,10 +131,10 @@ timemachine_cont <- function(data,
                    prec_gamma = prec_gamma,
                    tau_a = tau_a,
                    tau_b = tau_b,
-                   sigma_nu = sigma_nu)
+                   prec_a = prec_a,
+                   prec_b = prec_b)
 
-  inits_list = list(gamma0 = 0,
-                    nu = 1)
+  inits_list = list(gamma0 = 0)
 
 
   ### Fit the model

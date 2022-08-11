@@ -12,7 +12,8 @@ timemachine_cont(
   prec_gamma = 0.001,
   tau_a = 0.1,
   tau_b = 0.01,
-  sigma_nu = 1,
+  prec_a = 0.001,
+  prec_b = 0.001,
   bucket_size = 25
 )
 }
@@ -31,7 +32,9 @@ timemachine_cont(
 
 \item{tau_b}{...}
 
-\item{sigma_nu}{...}
+\item{prec_a}{...}
+
+\item{prec_b}{...}
 
 \item{bucket_size}{Number of patients per time bucket. Default=25}
 }
