@@ -74,7 +74,7 @@ browseVignettes("NCC")
 
 ## References
 
-[1] Bofill Roig, Marta, et al. *"On model-based time trend adjustments in platform trials with non-concurrent controls."* arXiv preprint [arXiv:2112.06574](https://arxiv.org/abs/2112.06574) (2021).
+[1] Bofill Roig, Marta, et al. *"On model-based time trend adjustments in platform trials with non-concurrent controls."* BMC Medical Research Methodology [[Preprint](https://arxiv.org/abs/2112.06574)] [[Paper](https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-022-01683-w)] (2022).
 
 [2] Lee, Kim May, and James Wason. *"Including non-concurrent control patients in the analysis of platform trials: is it worth it?."* BMC medical research methodology 20.1 (2020): 1-12.
 
