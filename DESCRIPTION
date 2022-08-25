@@ -10,6 +10,8 @@ Authors@R:
            email = "pavla.krotka@meduniwien.ac.at",
            comment = c(ORCID = "0000-0001-5727-4270")),
 	person("Marta", "Bofill Roig", email = "marta.bofillroig@meduniwien.ac.at", role = c("aut"), comment = c(ORCID = "0000-0002-4400-7541")),
+	person("Katharina", "Hees", email = "Katharina.Hees@pei.de", role = c("aut")),
+	person("Dominic", "Magirr", email = "dominic.magirr@novartis.com", role = c("aut")),
 	person("Martin", "Posch", email = "martin.posch@meduniwien.ac.at", role = c("ctb"), comment = c(ORCID = "0000-0001-8499-8573")))
 Description: Simulation of platform trial with non-concurrent controls.
 License: MIT + file LICENSE
