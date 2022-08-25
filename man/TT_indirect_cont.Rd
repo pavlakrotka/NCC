@@ -2,7 +2,7 @@
 % Please edit documentation in R/TT_indirect_cont.R
 \name{TT_indirect_cont}
 \alias{TT_indirect_cont}
-\title{Model-based analysis for treatment-treatment comparison for continuous data adjusting for periods}
+\title{Indirect treatment-treatment comparison for continuous data}
 \usage{
 TT_indirect_cont(data, arms, alpha = 0.025)
 }
@@ -17,7 +17,7 @@ TT_indirect_cont(data, arms, alpha = 0.025)
 List containing the p-value (one-sided), estimated difference between the treatments and an indicator whether the null hypothesis was rejected or not for the investigated comparison
 }
 \description{
-Performs linear regression to compare two treatments taking into account all trial data until the last arm under study leaves the trial and adjusting for periods as factors
+Performs indirect comparison of two treatments
 }
 \examples{
 

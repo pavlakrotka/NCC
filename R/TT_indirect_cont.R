@@ -1,6 +1,6 @@
-#' Model-based analysis for treatment-treatment comparison for continuous data adjusting for periods
+#' Indirect treatment-treatment comparison for continuous data
 #'
-#' @description Performs linear regression to compare two treatments taking into account all trial data until the last arm under study leaves the trial and adjusting for periods as factors
+#' @description Performs indirect comparison of two treatments
 #'
 #' @param data Simulated trial data, e.g. result from the `datasim_cont()` function
 #' @param arms Indicator of the treatment arms to be compared (vector of length 2)
