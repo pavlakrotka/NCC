@@ -32,8 +32,13 @@ mixmodel_cal_cont <- function(data, arm, alpha=0.025, ci=FALSE, unit_size=250, .
   max_unit <- max(data[data$treatment==arm,]$cal_time)
   data_new <- data[data$cal_time %in% c(1:max_unit),]
 
-  # fit linear model
-  mod <- lmer(response ~ as.factor(treatment) + (1 | cal_time), data_new) # using lmerTest
+  # fit linear mixed model
+  if(max_unit==1){ # if only one calendar time unit in the data, don't use unit as covariate
+    mod <- lm(response ~ as.factor(treatment), data_new)
+  } else {
+
+    mod <- lmer(response ~ as.factor(treatment) + (1 | cal_time), data_new) # using lmerTest
+  }
   res <- summary(mod)
 
   # one-sided p-value

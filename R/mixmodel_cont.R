@@ -29,8 +29,13 @@ mixmodel_cont <- function(data, arm, alpha=0.025, ci=FALSE, ...){
   max_period <- max(data[data$treatment==arm,]$period)
   data_new <- data[data$period %in% c(1:max_period),]
 
-  # fit linear model
-  mod <- lmer(response ~ as.factor(treatment) + (1 | period), data_new) # using lmerTest
+  # fit linear mixed model
+  if(max_period==1){ # if only one period in the data, don't use period as covariate
+    mod <- lm(response ~ as.factor(treatment), data_new)
+  } else {
+    mod <- lmer(response ~ as.factor(treatment) + (1 | period), data_new) # using lmerTest
+  }
+
   res <- summary(mod)
 
   # one-sided p-value
