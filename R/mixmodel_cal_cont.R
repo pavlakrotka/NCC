@@ -35,14 +35,19 @@ mixmodel_cal_cont <- function(data, arm, alpha=0.025, ci=FALSE, unit_size=250, .
   # fit linear mixed model
   if(max_unit==1){ # if only one calendar time unit in the data, don't use unit as covariate
     mod <- lm(response ~ as.factor(treatment), data_new)
+    res <- summary(mod)
+
+    # one-sided p-value
+    p_val <- pt(coef(res)[paste0("as.factor(treatment)", arm), "t value"], mod$df, lower.tail = FALSE)
+
   } else {
-
     mod <- lmer(response ~ as.factor(treatment) + (1 | cal_time), data_new) # using lmerTest
-  }
-  res <- summary(mod)
+    res <- summary(mod)
 
-  # one-sided p-value
-  p_val <- pt(coef(res)[paste0("as.factor(treatment)", arm), "t value"], coef(res)[paste0("as.factor(treatment)", arm), "df"], lower.tail = FALSE)
+    # one-sided p-value
+    p_val <- pt(coef(res)[paste0("as.factor(treatment)", arm), "t value"], coef(res)[paste0("as.factor(treatment)", arm), "df"], lower.tail = FALSE)
+  }
+
 
   # treatment effect
   treat_effect <- res$coefficients[paste0("as.factor(treatment)", arm), "Estimate"]

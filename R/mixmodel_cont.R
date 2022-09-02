@@ -32,14 +32,20 @@ mixmodel_cont <- function(data, arm, alpha=0.025, ci=FALSE, ...){
   # fit linear mixed model
   if(max_period==1){ # if only one period in the data, don't use period as covariate
     mod <- lm(response ~ as.factor(treatment), data_new)
+    res <- summary(mod)
+
+    # one-sided p-value
+    p_val <- pt(coef(res)[paste0("as.factor(treatment)", arm), "t value"], mod$df, lower.tail = FALSE)
+
   } else {
     mod <- lmer(response ~ as.factor(treatment) + (1 | period), data_new) # using lmerTest
+    res <- summary(mod)
+
+    # one-sided p-value
+    p_val <- pt(coef(res)[paste0("as.factor(treatment)", arm), "t value"], coef(res)[paste0("as.factor(treatment)", arm), "df"], lower.tail = FALSE)
+
   }
 
-  res <- summary(mod)
-
-  # one-sided p-value
-  p_val <- pt(coef(res)[paste0("as.factor(treatment)", arm), "t value"], coef(res)[paste0("as.factor(treatment)", arm), "df"], lower.tail = FALSE)
 
   # treatment effect
   treat_effect <- res$coefficients[paste0("as.factor(treatment)", arm), "Estimate"]
