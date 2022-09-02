@@ -92,7 +92,24 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                                  arms = arms,
                                  models = models,
                                  endpoint = endpoint,
-                                 alpha = scenarios$alpha[i])
+                                 alpha = scenarios$alpha[i],
+                                 unit_size = scenarios$unit_size[i],
+                                 opt = scenarios$opt[i],
+                                 prior_prec_tau = scenarios$prior_prec_tau[i],
+                                 n.samples = scenarios$n.samples[i],
+                                 n.chains = scenarios$n.chains[i],
+                                 n.iter = scenarios$n.iter[i],
+                                 n.adapt = scenarios$n.adapt[i],
+                                 robustify = scenarios$robustify[i],
+                                 weight = scenarios$weight[i],
+                                 ci = scenarios$ci[i],
+                                 prec_delta = scenarios$prec_delta[i],
+                                 prec_gamma = scenarios$prec_gamma[i],
+                                 tau_a = scenarios$tau_a[i],
+                                 tau_b = scenarios$tau_b[i],
+                                 prec_a = scenarios$prec_a[i],
+                                 prec_b = scenarios$prec_b[i],
+                                 bucket_size = scenarios$bucket_size[i])
 
                     }
 
@@ -162,7 +179,24 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                                  arms = arms,
                                  models = models,
                                  endpoint = endpoint,
-                                 alpha = scenarios$alpha[i])
+                                 alpha = scenarios$alpha[i],
+                                 unit_size = scenarios$unit_size[i],
+                                 opt = scenarios$opt[i],
+                                 prior_prec_tau = scenarios$prior_prec_tau[i],
+                                 n.samples = scenarios$n.samples[i],
+                                 n.chains = scenarios$n.chains[i],
+                                 n.iter = scenarios$n.iter[i],
+                                 n.adapt = scenarios$n.adapt[i],
+                                 robustify = scenarios$robustify[i],
+                                 weight = scenarios$weight[i],
+                                 ci = scenarios$ci[i],
+                                 prec_delta = scenarios$prec_delta[i],
+                                 prec_gamma = scenarios$prec_gamma[i],
+                                 tau_a = scenarios$tau_a[i],
+                                 tau_b = scenarios$tau_b[i],
+                                 prec_a = scenarios$prec_a[i],
+                                 prec_b = scenarios$prec_b[i],
+                                 bucket_size = scenarios$bucket_size[i])
                     }
 
 

@@ -4,7 +4,7 @@
 \alias{sepmodel_cont}
 \title{Separate analysis for continuous data}
 \usage{
-sepmodel_cont(data, arm, alpha = 0.025)
+sepmodel_cont(data, arm, alpha = 0.025, ...)
 }
 \arguments{
 \item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function}

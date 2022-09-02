@@ -15,7 +15,8 @@ MAP_rjags_cont(
   n.iter = 4000,
   n.adapt = 1000,
   robustify = TRUE,
-  weight = 0.1
+  weight = 0.1,
+  ...
 )
 }
 \arguments{
@@ -36,6 +37,8 @@ MAP_rjags_cont(
 \item{n.iter}{needed for coda.smaples, number of iterations to monitor of the jags.model}
 
 \item{n.adapt}{needed for jags.model, defines the number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behaviour to maximize their efficiency}
+
+\item{robustify}{Boolean.}
 
 \item{weight}{weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP prior according to Schmidli 2014}
 }

@@ -4,7 +4,7 @@
 #'
 #' @param data Simulated trial data, e.g. result from the `datasim_bin()` or `datasim_cont()` function
 #' @param arms Vector with treatment arms to perform inference on. Default - all arms except the first one
-#' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior")
+#' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAP_rjags")
 #' @param endpoint Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints
 #' @param alpha Type I error. Default=0.025
 #'
@@ -24,7 +24,11 @@
 #' @author Pavla Krotka
 
 
-all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior", "mixmodel"), endpoint, alpha=0.025, ...){
+all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAP_rjags", "mixmodel"), endpoint, alpha = 0.025,
+                       unit_size = 250,
+                       opt = 1, prior_prec_tau = 1, n.samples = 1000, n.chains = 4, n.iter = 4000, n.adapt = 1000, robustify = TRUE, weight = 0.1,
+                       ci = FALSE,
+                       prec_delta = 0.001, prec_gamma = 0.001, tau_a = 0.1, tau_b = 0.01, prec_a = 0.001, prec_b = 0.001, bucket_size = 25, ...){
 
   if (endpoint=="cont") {
     models <- models[models!="MAPprior"]
@@ -37,11 +41,33 @@ all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel
   arms <- sort(arms)
   models <- sort(models)
 
+  all_args <- mget(ls())
+
   res <- list()
 
   for (i in arms) {
     for (j in models) {
-      res_i_j <- list(try(do.call(paste0(j, "_", endpoint), list(data, arm = i, alpha))$reject_h0, silent = TRUE))
+
+      res_i_j <- list(try(do.call(paste0(j, "_", endpoint), list(data = data,
+                                                                 arm = i,
+                                                                 alpha = alpha,
+                                                                 unit_size = unit_size,
+                                                                 opt = opt,
+                                                                 prior_prec_tau = prior_prec_tau,
+                                                                 n.samples = n.samples,
+                                                                 n.chains = n.chains,
+                                                                 n.iter = n.iter,
+                                                                 n.adapt = n.adapt,
+                                                                 robustify = robustify,
+                                                                 weight = weight,
+                                                                 ci = ci,
+                                                                 prec_delta = prec_delta,
+                                                                 prec_gamma = prec_gamma,
+                                                                 tau_a = tau_a,
+                                                                 tau_b = tau_b,
+                                                                 prec_a = prec_a,
+                                                                 prec_b = prec_b,
+                                                                 bucket_size = bucket_size))$reject_h0, silent = TRUE))
 
       names(res_i_j) <- paste0("reject_h0_", j, "_", i)
 
@@ -50,5 +76,7 @@ all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel
   }
   return(res)
 }
+
+
 
 

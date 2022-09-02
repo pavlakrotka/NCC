@@ -41,7 +41,7 @@ timemachine_cont <- function(data,
                              tau_b = 0.01,
                              prec_a = 0.001,
                              prec_b = 0.001,
-                             bucket_size = 25){
+                             bucket_size = 25, ...){
 
   model_string_time_machine_cont <- "
   model {

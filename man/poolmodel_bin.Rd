@@ -4,7 +4,7 @@
 \alias{poolmodel_bin}
 \title{Pooled analysis for binary data}
 \usage{
-poolmodel_bin(data, arm, alpha = 0.025)
+poolmodel_bin(data, arm, alpha = 0.025, ...)
 }
 \arguments{
 \item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} function}

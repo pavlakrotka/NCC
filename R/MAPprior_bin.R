@@ -52,7 +52,7 @@
 #' @author Katharina Hees
 
 
-MAPprior_bin <- function(data,arm,alpha=0.025,opt=1,tau.dist="HalfNormal",tau.prior=1,beta.prior=2,prec.ef=1000){
+MAPprior_bin <- function(data, arm, alpha=0.025, opt=1, tau.dist="HalfNormal", tau.prior=1, beta.prior=2, prec.ef=1000, ...){
 
   #require("RBesT")
   #require("stats")

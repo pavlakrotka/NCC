@@ -4,7 +4,7 @@
 \alias{sepmodel_bin}
 \title{Separate analysis for binary data}
 \usage{
-sepmodel_bin(data, arm, alpha = 0.025)
+sepmodel_bin(data, arm, alpha = 0.025, ...)
 }
 \arguments{
 \item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} function}

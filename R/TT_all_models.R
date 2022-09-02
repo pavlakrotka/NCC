@@ -31,7 +31,9 @@ TT_all_models <- function(data, arms, models = c("fixmodel", "indirect"), endpoi
   res <- list()
 
   for (i in models){
-    res_i <- list(try(do.call(paste0("TT_", i, "_", endpoint), list(data, arms, alpha))$reject_h0, silent = TRUE))
+    res_i <- list(try(do.call(paste0("TT_", i, "_", endpoint), list(data = data,
+                                                                    arms = arms,
+                                                                    alpha = alpha))$reject_h0, silent = TRUE))
 
     names(res_i) <- paste0("reject_h0_", i)
 

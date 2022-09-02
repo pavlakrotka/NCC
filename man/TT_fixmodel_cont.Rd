@@ -4,7 +4,7 @@
 \alias{TT_fixmodel_cont}
 \title{Model-based analysis for treatment-treatment comparison for continuous data adjusting for periods}
 \usage{
-TT_fixmodel_cont(data, arms, alpha = 0.025)
+TT_fixmodel_cont(data, arms, alpha = 0.025, ...)
 }
 \arguments{
 \item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function}

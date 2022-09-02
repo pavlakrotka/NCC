@@ -23,7 +23,7 @@
 #' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment
 #' @author Pavla Krotka
 
-poolmodel_bin <- function(data, arm, alpha=0.025){
+poolmodel_bin <- function(data, arm, alpha=0.025, ...){
 
   max_period <- max(data[data$treatment==arm,]$period)
   data_new <- data[data$treatment %in% c(0, arm) & data$period %in% c(1:max_period),]

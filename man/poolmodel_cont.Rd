@@ -4,7 +4,7 @@
 \alias{poolmodel_cont}
 \title{Pooled analysis for continuous data}
 \usage{
-poolmodel_cont(data, arm, alpha = 0.025)
+poolmodel_cont(data, arm, alpha = 0.025, ...)
 }
 \arguments{
 \item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function}

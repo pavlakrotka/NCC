@@ -23,7 +23,7 @@
 #' @return List containing the p-value (one-sided), estimated difference between the treatments and an indicator whether the null hypothesis was rejected or not for the investigated comparison
 #' @author Pavla Krotka
 
-TT_indirect_cont <- function(data, arms, alpha=0.025){
+TT_indirect_cont <- function(data, arms, alpha=0.025, ...){
 
   # direct estimate for the first treatment
   periods_1 <- unique(data[data$treatment==arms[1],]$period)

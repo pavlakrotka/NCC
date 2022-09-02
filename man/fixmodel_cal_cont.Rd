@@ -4,7 +4,7 @@
 \alias{fixmodel_cal_cont}
 \title{Model-based analysis for continuous data adjusting for calendar time units}
 \usage{
-fixmodel_cal_cont(data, arm, alpha = 0.025, unit_size = 250)
+fixmodel_cal_cont(data, arm, alpha = 0.025, unit_size = 250, ...)
 }
 \arguments{
 \item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function}

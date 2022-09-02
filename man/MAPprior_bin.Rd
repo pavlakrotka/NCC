@@ -12,7 +12,8 @@ MAPprior_bin(
   tau.dist = "HalfNormal",
   tau.prior = 1,
   beta.prior = 2,
-  prec.ef = 1000
+  prec.ef = 1000,
+  ...
 )
 }
 \arguments{

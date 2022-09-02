@@ -12,7 +12,8 @@ timemachine_bin(
   prec_gamma = 0.001,
   tau_a = 0.1,
   tau_b = 0.01,
-  bucket_size = 25
+  bucket_size = 25,
+  ...
 )
 }
 \arguments{

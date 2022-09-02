@@ -23,7 +23,7 @@
 #' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment
 #' @author Pavla Krotka
 
-sepmodel_bin <- function(data, arm, alpha=0.025){
+sepmodel_bin <- function(data, arm, alpha=0.025, ...){
 
   periods <- unique(data[data$treatment==arm,]$period)
   data_new <- data[data$treatment %in% c(0, arm) & data$period %in% periods,]

@@ -70,7 +70,8 @@
   n.iter <span class="op">=</span> <span class="fl">4000</span>,
   n.adapt <span class="op">=</span> <span class="fl">1000</span>,
   robustify <span class="op">=</span> <span class="cn">TRUE</span>,
-  weight <span class="op">=</span> <span class="fl">0.1</span>
+  weight <span class="op">=</span> <span class="fl">0.1</span>,
+  <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -94,6 +95,8 @@
 <dd><p>needed for coda.smaples, number of iterations to monitor of the jags.model</p></dd>
 <dt>n.adapt</dt>
 <dd><p>needed for jags.model, defines the number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behaviour to maximize their efficiency</p></dd>
+<dt>robustify</dt>
+<dd><p>Boolean.</p></dd>
 <dt>weight</dt>
 <dd><p>weight given to the non-informative component (0 &lt; weight &lt; 1) for the robustification of the MAP prior according to Schmidli 2014</p></dd>
 </dl></div>
@@ -119,16 +122,16 @@ So far: Posterior odds estimated by drawing random samples from the posterior di
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">MAP_rjags_bin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.213</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.037</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.487329</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.961885</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6889519</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9522554</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.963379</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3.645343</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>

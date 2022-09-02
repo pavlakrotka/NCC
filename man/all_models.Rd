@@ -7,10 +7,27 @@
 all_models(
   data,
   arms,
-  models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior",
+  models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAP_rjags",
     "mixmodel"),
   endpoint,
   alpha = 0.025,
+  unit_size = 250,
+  opt = 1,
+  prior_prec_tau = 1,
+  n.samples = 1000,
+  n.chains = 4,
+  n.iter = 4000,
+  n.adapt = 1000,
+  robustify = TRUE,
+  weight = 0.1,
+  ci = FALSE,
+  prec_delta = 0.001,
+  prec_gamma = 0.001,
+  tau_a = 0.1,
+  tau_b = 0.01,
+  prec_a = 0.001,
+  prec_b = 0.001,
+  bucket_size = 25,
   ...
 )
 }
@@ -19,7 +36,7 @@ all_models(
 
 \item{arms}{Vector with treatment arms to perform inference on. Default - all arms except the first one}
 
-\item{models}{Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior")}
+\item{models}{Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAP_rjags")}
 
 \item{endpoint}{Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints}
 

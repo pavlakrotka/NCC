@@ -4,7 +4,7 @@
 \alias{fixmodel_cal_bin}
 \title{Model-based analysis for binary data adjusting for calendar time units}
 \usage{
-fixmodel_cal_bin(data, arm, alpha = 0.025, unit_size = 25)
+fixmodel_cal_bin(data, arm, alpha = 0.025, unit_size = 25, ...)
 }
 \arguments{
 \item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} function}

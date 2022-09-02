@@ -23,7 +23,7 @@
 #' @return List containing the p-value (one-sided), estimated difference between the treatments, 95% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated comparison
 #' @author Pavla Krotka
 
-TT_fixmodel_cont <- function(data, arms, alpha=0.025){
+TT_fixmodel_cont <- function(data, arms, alpha=0.025, ...){
 
   data$treatment <- factor(data$treatment, levels = c(arms[1], setdiff(unique(data$treatment), arms[1])))
 

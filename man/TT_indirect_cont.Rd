@@ -4,7 +4,7 @@
 \alias{TT_indirect_cont}
 \title{Indirect treatment-treatment comparison for continuous data}
 \usage{
-TT_indirect_cont(data, arms, alpha = 0.025)
+TT_indirect_cont(data, arms, alpha = 0.025, ...)
 }
 \arguments{
 \item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function}

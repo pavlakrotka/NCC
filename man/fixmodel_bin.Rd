@@ -4,7 +4,7 @@
 \alias{fixmodel_bin}
 \title{Model-based analysis for binary data adjusting for periods}
 \usage{
-fixmodel_bin(data, arm, alpha = 0.025)
+fixmodel_bin(data, arm, alpha = 0.025, ...)
 }
 \arguments{
 \item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} function}
