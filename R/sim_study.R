@@ -17,7 +17,7 @@
 #' @author Pavla Krotka
 
 
-sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "mixmodel", "MAPprior"), endpoint){
+sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "mixmodel", "MAP_rjags"), endpoint){
 
   if (endpoint=="cont") {
     models <- models[models!="MAPprior"] # not implemented yet
@@ -87,6 +87,8 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
                         reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db))), ncol = nsim), na.rm = TRUE)) # get power/T1E
 
       result <- rbind(result, result_i)
+
+      print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done"))
     }
   }
 
@@ -148,6 +150,8 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
                         reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db))), ncol = nsim), na.rm = TRUE)) # get power/T1E
 
       result <- rbind(result, result_i)
+
+      print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done"))
 
     }
   }

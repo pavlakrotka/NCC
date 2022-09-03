@@ -31,7 +31,8 @@ Imports:
   parallel,
   doParallel,
   foreach,
-  iterators
+  iterators,
+  doSNOW
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Suggests: 

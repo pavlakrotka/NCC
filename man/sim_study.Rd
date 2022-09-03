@@ -9,7 +9,7 @@ sim_study(
   scenarios,
   arms,
   models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "mixmodel",
-    "MAPprior"),
+    "MAP_rjags"),
   endpoint
 )
 }

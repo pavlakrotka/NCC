@@ -25,7 +25,7 @@
 #' @author Pavla Krotka
 
 
-sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "mixmodel", "MAPprior"), endpoint, perc_cores=0.9){
+sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "mixmodel", "MAP_rjags"), endpoint, perc_cores=0.9){
 
   cores <- detectCores()
   cl <- makeCluster(floor(cores[1]*perc_cores)) # not to overload your computer
@@ -121,6 +121,8 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                         reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db))), ncol = nsim), na.rm = TRUE)) # get power/T1E
 
       result <- rbind(result, result_i)
+
+      print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done"))
     }
 
      stopCluster(cl)
@@ -207,6 +209,8 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                         reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db))), ncol = nsim), na.rm = TRUE)) # get power/T1E
 
       result <- rbind(result, result_i)
+
+      print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done"))
 
     }
 
