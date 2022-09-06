@@ -2,7 +2,7 @@
 % Please edit documentation in R/sim_study_par_new.R
 \name{sim_study_par_new}
 \alias{sim_study_par_new}
-\title{Wrapper function performing simulation studies for a given set of scenarios (parallelized)}
+\title{Wrapper function performing simulation studies for a given set of scenarios (parallelized on scenario level)}
 \usage{
 sim_study_par_new(
   nsim,

@@ -1,4 +1,4 @@
-#' Wrapper function performing simulation studies for a given set of scenarios (parallelized)
+#' Wrapper function performing simulation studies for a given set of scenarios (parallelized on scenario level)
 #'
 #' @description Performs a simulation study for a given set of scenarios, analyzing simulated data using the fixed effect model, pooled and separate analyses, and timemachine and MAP prior approach. Performs inference for all treatment arms in the trial except for the first one
 #'
@@ -11,11 +11,9 @@
 #' @importFrom parallel detectCores
 #' @importFrom parallel makeCluster
 #' @importFrom parallel stopCluster
-#' @importFrom doSNOW registerDoSNOW
+#' @importFrom doParallel registerDoParallel
 #' @importFrom foreach foreach
 #' @importFrom foreach %dopar%
-#' @importFrom tcltk tkProgressBar
-#' @importFrom tcltk setTkProgressBar
 #'
 #' @keywords internal
 #'
@@ -29,8 +27,8 @@
 sim_study_par_new <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "mixmodel", "MAP_rjags"), endpoint, perc_cores=0.9){
 
   cores <- detectCores()
-  cl <- makeCluster(floor(cores*perc_cores)) # not to overload your computer
-  registerDoSNOW(cl)
+  cl <- makeCluster(floor(cores[1]*perc_cores)) # not to overload your computer
+  registerDoParallel(cl)
 
   if (endpoint=="cont") {
     models <- models[models!="MAPprior"] # not implemented yet
@@ -50,16 +48,11 @@ sim_study_par_new <- function(nsim, scenarios, arms, models = c("fixmodel", "sep
 
   num_models <- length(models)
 
-  # Progress bar
-  pb <- tkProgressBar(max = dim(scenarios)[1])
-  progress <- function(n) setTkProgressBar(pb, n)
-  opts <- list(progress = progress)
-
 
   if(endpoint=="cont"){
 
     db <- foreach(i = 1:dim(scenarios)[1], .combine = "rbind",
-                  .packages = c("NCC"), .verbose = T, .multicombine = T, .options.snow=opts) %dopar% {
+                  .packages = c("NCC"), .verbose = T, .multicombine = T) %dopar% {
 
                     d_i <- as.numeric(scenarios[i, grepl("^d\\d", names(scenarios))])
                     theta_i <- as.numeric(scenarios[i, grepl("^theta\\d", names(scenarios))])
@@ -114,7 +107,7 @@ sim_study_par_new <- function(nsim, scenarios, arms, models = c("fixmodel", "sep
   if(endpoint=="bin"){
 
     db <- foreach(i = 1:dim(scenarios)[1], .combine = "rbind",
-                  .packages = c("NCC"), .verbose = T, .options.snow=opts) %dopar% {
+                  .packages = c("NCC"), .verbose = T, .multicombine = T) %dopar% {
 
                     d_i <- as.numeric(scenarios[i, grepl("^d\\d", names(scenarios))])
                     OR_i <- as.numeric(scenarios[i, grepl("^OR\\d", names(scenarios))])

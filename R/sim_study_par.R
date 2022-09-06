@@ -1,4 +1,4 @@
-#' Wrapper function performing simulation studies for a given set of scenarios (parallelized)
+#' Wrapper function performing simulation studies for a given set of scenarios (parallelized on replication level)
 #'
 #' @description Performs a simulation study for a given set of scenarios, analyzing simulated data using the fixed effect model, pooled and separate analyses, and timemachine and MAP prior approach. Performs inference for all treatment arms in the trial except for the first one
 #'
