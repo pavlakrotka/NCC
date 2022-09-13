@@ -24,8 +24,9 @@ plot_trial <- function(treatments){
 
   ggplot() +
     geom_line(aes(x=c(1:length(treatments)), y=treatments, color=as.factor(treatments)), size=5, alpha=0.8) +
-    labs(x="Time", y="Treatment") +
+    labs(x="Patients in the trial", y="Treatment") +
     theme_bw() +
-    theme(legend.position="none")
+    theme(legend.position="none") +
+    scale_y_continuous(breaks = unique(treatments), labels = unique(treatments))
 
 }
