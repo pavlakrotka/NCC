@@ -9,7 +9,7 @@
 #' @param p0 Response in the control arm
 #' @param OR Vector with odds ratios for each treatment arm (of length num_arms)
 #' @param lambda Vector with strength of time trend in each arm (of length num_arms+1, as time trend in the control is also allowed)
-#' @param trend Indicates the time trend pattern ("linear", "stepwise" or "inv_u")
+#' @param trend Indicates the time trend pattern ("linear", "stepwise", "stepwise_2" or "inv_u")
 #' @param N_peak Point at which the inverted-u time trend switches direction in terms of overall sample size
 #' @param full Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses, input parameters) should be included (TRUE). Default=FALSE
 #'
@@ -96,6 +96,25 @@ datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, tre
 
   cj <- rep(1:num_periods, N_period) # period indicator
 
+  if(num_periods>1){
+    arm_added <- 1
+
+    for (i in 2:(num_periods)) {
+      prev_per <- max(which(!is.na(SS_matrix[ ,i-1])))
+      if (prev_per<nrow(SS_matrix)) {
+        arm_added[i] <- ifelse(!is.na(SS_matrix[prev_per+1, i]), arm_added[i-1]+sum(!is.na(SS_matrix[(prev_per+1):nrow(SS_matrix), i])), arm_added[i-1])
+      } else {
+        arm_added[i] <- arm_added[i-1]
+      }
+    }
+
+    cj_added <- rep(arm_added, times = N_period) # indicator of jumps only if a new treatment enters (double jumps if 2 treatments enter etc...)
+
+  } else {
+
+    cj_added <- cj
+  }
+
 
   # Simulation of individual trend
 
@@ -129,6 +148,16 @@ datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, tre
                                               lambda = lambda[i+1]))
 
       assign(paste0("all_trend", i), sw_trend(cj=cj,
+                                              lambda = lambda[i+1]))
+    }
+  }
+
+  if(trend=="stepwise_2"){
+    for (i in 0:num_arms) {
+      assign(paste0("ind_trend", i), sw_trend(cj=cj_added[eval(sym(paste0("j", i)))],
+                                              lambda = lambda[i+1]))
+
+      assign(paste0("all_trend", i), sw_trend(cj=cj_added,
                                               lambda = lambda[i+1]))
     }
   }

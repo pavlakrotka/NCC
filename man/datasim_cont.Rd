@@ -35,7 +35,7 @@ datasim_cont(
 
 \item{sigma}{Residual variance}
 
-\item{trend}{Indicates the time trend pattern ("linear", "stepwise" or "inv_u")}
+\item{trend}{Indicates the time trend pattern ("linear", "stepwise", "stepwise_2", or "inv_u")}
 
 \item{N_peak}{Point at which the inverted-u time trend switches direction in terms of overall sample size}
 
