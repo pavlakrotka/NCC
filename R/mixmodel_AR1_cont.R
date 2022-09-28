@@ -34,7 +34,7 @@ mixmodel_AR1_cont <- function(data, arm, alpha=0.025, ci=FALSE, ...){
   # fit linear mixed model
   if(max_period==1){ # if only one period in the data, don't use period as covariate
     mod <- lm(response ~ as.factor(treatment), data_new)
-    res <- summary.HLfit(mod)
+    res <- summary(mod)
 
     # one-sided p-value
     p_val <- pt(coef(res)[paste0("as.factor(treatment)", arm), "t value"], mod$df, lower.tail = FALSE)
@@ -51,11 +51,11 @@ mixmodel_AR1_cont <- function(data, arm, alpha=0.025, ci=FALSE, ...){
 
   } else {
     mod <- fitme(response ~ as.factor(treatment) + AR1(1 | period), data_new)
-    res <- summary(mod, verbose = FALSE)
+    res <- summary.HLfit(mod, verbose = FALSE)
 
     # one-sided p-value
     IC <- get_any_IC(mod, verbose = FALSE)
-    eff_df <- IC["       effective df:"]
+    eff_df <- IC["       effective df:"] # effective degrees of freedom
     p_val <- pt(res$beta_table[paste0("as.factor(treatment)", arm), "t-value"], eff_df, lower.tail = FALSE)
 
     # treatment effect
