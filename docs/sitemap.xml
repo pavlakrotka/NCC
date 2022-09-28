@@ -67,6 +67,9 @@
     <loc>/reference/MAP_rjags_cont.html</loc>
   </url>
   <url>
+    <loc>/reference/mixmodel_AR1_cont.html</loc>
+  </url>
+  <url>
     <loc>/reference/mixmodel_cal_cont.html</loc>
   </url>
   <url>
@@ -80,6 +83,12 @@
   </url>
   <url>
     <loc>/reference/poolmodel_cont.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sepmodel_adj_bin.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sepmodel_adj_cont.html</loc>
   </url>
   <url>
     <loc>/reference/sepmodel_bin.html</loc>
