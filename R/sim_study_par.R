@@ -31,10 +31,6 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
   cl <- makeCluster(floor(cores[1]*perc_cores)) # not to overload your computer
   registerDoParallel(cl)
 
-  if (endpoint=="cont") {
-    models <- models[models!="MAPprior"] # not implemented yet
-  }
-
   if (endpoint=="bin") {
     models <- models[models!="mixmodel"] # not implemented yet
   }
@@ -58,23 +54,6 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
       d_i <- as.numeric(scenarios[i, grepl("^d\\d", names(scenarios))])
       theta_i <- as.numeric(scenarios[i, grepl("^theta\\d", names(scenarios))])
       lambda_i <- as.numeric(scenarios[i, grepl("^lambda\\d", names(scenarios))])
-
-      # db <- replicate(nsim,
-      #                 all_models(data = datasim_cont(n_arm = scenarios$n_arm[i],
-      #                                                num_arms = scenarios$num_arms[i],
-      #                                                d = d_i,
-      #                                                period_blocks = scenarios$period_blocks[i],
-      #                                                mu0 = scenarios$mu0[i],
-      #                                                theta = theta_i,
-      #                                                lambda = lambda_i,
-      #                                                sigma = scenarios$sigma[i],
-      #                                                trend = scenarios$trend[i],
-      #                                                N_peak = scenarios$N_peak[i],
-      #                                                full = FALSE),
-      #                            arms = arms,
-      #                            models = models,
-      #                            endpoint = endpoint,
-      #                            alpha = scenarios$alpha[i]))
 
       db <- foreach(icount(nsim), .combine = cbind,
                     .packages = c("NCC")) %dopar% {
@@ -118,7 +97,9 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
       result_i <- cbind(scenarios[i,],
                         study_arm = rep(arms, each = num_models),
                         model = models,
-                        reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db))), ncol = nsim), na.rm = TRUE)) # get power/T1E
+                        reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db))), ncol = nsim), na.rm = TRUE), # get power/T1E
+                        failed = rowSums(is.na(matrix(as.logical(unlist(unname(db))), ncol = nsim))),
+                        nsim = nsim)
 
       result <- rbind(result, result_i)
 
@@ -148,23 +129,6 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
       d_i <- as.numeric(scenarios[i, grepl("^d\\d", names(scenarios))])
       OR_i <- as.numeric(scenarios[i, grepl("^OR\\d", names(scenarios))])
       lambda_i <- as.numeric(scenarios[i, grepl("^lambda\\d", names(scenarios))])
-
-      # db <- replicate(nsim,
-      #                 all_models(data = datasim_bin(n_arm = scenarios$n_arm[i],
-      #                                               num_arms = scenarios$num_arms[i],
-      #                                               d = d_i,
-      #                                               period_blocks = scenarios$period_blocks[i],
-      #                                               p0 = scenarios$p0[i],
-      #                                               OR = OR_i,
-      #                                               lambda = lambda_i,
-      #                                               trend = scenarios$trend[i],
-      #                                               N_peak = scenarios$N_peak[i],
-      #                                               full = FALSE),
-      #                            arms = arms,
-      #                            models = models,
-      #                            endpoint = endpoint,
-      #                            alpha = scenarios$alpha[i]))
-
 
       db <- foreach(icount(nsim), .combine = cbind,
                     .packages = c("NCC")) %dopar% {
@@ -206,7 +170,9 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
       result_i <- cbind(scenarios[i,],
                         study_arm = rep(arms, each = num_models),
                         model = models,
-                        reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db))), ncol = nsim), na.rm = TRUE)) # get power/T1E
+                        reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db))), ncol = nsim), na.rm = TRUE), # get power/T1E
+                        failed = rowSums(is.na(matrix(as.logical(unlist(unname(db))), ncol = nsim))),
+                        nsim = nsim)
 
       result <- rbind(result, result_i)
 

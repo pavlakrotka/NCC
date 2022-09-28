@@ -19,10 +19,6 @@
 
 sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "mixmodel", "MAP_rjags"), endpoint){
 
-  if (endpoint=="cont") {
-    models <- models[models!="MAPprior"] # not implemented yet
-  }
-
   if (endpoint=="bin") {
     models <- models[models!="mixmodel"] # not implemented yet
   }
@@ -84,7 +80,9 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
       result_i <- cbind(scenarios[i,],
                         study_arm = rep(arms, each = num_models),
                         model = models,
-                        reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db))), ncol = nsim), na.rm = TRUE)) # get power/T1E
+                        reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db))), ncol = nsim), na.rm = TRUE), # get power/T1E
+                        failed = rowSums(is.na(matrix(as.logical(unlist(unname(db))), ncol = nsim))),
+                        nsim = nsim)
 
       result <- rbind(result, result_i)
 
@@ -147,7 +145,9 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
       result_i <- cbind(scenarios[i,],
                         study_arm = rep(arms, each = num_models),
                         model = models,
-                        reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db))), ncol = nsim), na.rm = TRUE)) # get power/T1E
+                        reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db))), ncol = nsim), na.rm = TRUE), # get power/T1E
+                        failed = rowSums(is.na(matrix(as.logical(unlist(unname(db))), ncol = nsim))),
+                        nsim = nsim)
 
       result <- rbind(result, result_i)
 

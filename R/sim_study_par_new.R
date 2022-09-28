@@ -30,10 +30,6 @@ sim_study_par_new <- function(nsim, scenarios, arms, models = c("fixmodel", "sep
   cl <- makeCluster(floor(cores[1]*perc_cores)) # not to overload your computer
   registerDoParallel(cl)
 
-  if (endpoint=="cont") {
-    models <- models[models!="MAPprior"] # not implemented yet
-  }
-
   if (endpoint=="bin") {
     models <- models[models!="mixmodel"] # not implemented yet
   }
@@ -94,7 +90,9 @@ sim_study_par_new <- function(nsim, scenarios, arms, models = c("fixmodel", "sep
                     result_i <- cbind(scenarios[i,],
                                       study_arm = rep(arms, each = num_models),
                                       model = models,
-                                      reject_h0 = rowMeans(matrix(as.logical(unlist(unname(res))), ncol = nsim), na.rm = TRUE)) # get power/T1E
+                                      reject_h0 = rowMeans(matrix(as.logical(unlist(unname(res))), ncol = nsim), na.rm = TRUE), # get power/T1E
+                                      failed = rowSums(is.na(matrix(as.logical(unlist(unname(db))), ncol = nsim))),
+                                      nsim = nsim)
 
                     result_i
                   }
@@ -149,7 +147,9 @@ sim_study_par_new <- function(nsim, scenarios, arms, models = c("fixmodel", "sep
                     result_i <- cbind(scenarios[i,],
                                       study_arm = rep(arms, each = num_models),
                                       model = models,
-                                      reject_h0 = rowMeans(matrix(as.logical(unlist(unname(res))), ncol = nsim), na.rm = TRUE)) # get power/T1E
+                                      reject_h0 = rowMeans(matrix(as.logical(unlist(unname(res))), ncol = nsim), na.rm = TRUE), # get power/T1E
+                                      failed = rowSums(is.na(matrix(as.logical(unlist(unname(db))), ncol = nsim))),
+                                      nsim = nsim)
 
                     result_i
                   }

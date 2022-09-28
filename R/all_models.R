@@ -30,18 +30,12 @@ all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel
                        ci = FALSE,
                        prec_delta = 0.001, prec_gamma = 0.001, tau_a = 0.1, tau_b = 0.01, prec_a = 0.001, prec_b = 0.001, bucket_size = 25, ...){
 
-  if (endpoint=="cont") {
-    models <- models[models!="MAPprior"]
-  }
-
   if (endpoint=="bin") {
     models <- models[models!="mixmodel"]
   }
 
   arms <- sort(arms)
   models <- sort(models)
-
-  all_args <- mget(ls())
 
   res <- list()
 
