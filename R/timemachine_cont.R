@@ -89,7 +89,69 @@ timemachine_cont <- function(data,
   }
 "
 
+  ## repeat this code to take account of awkward
+  ## case where n == 1
+  model_string_time_machine_cont_1 <- "
+  model {
+
+
+    for (i in 1:n_trt_buckets){
+
+
+       x_bar[i] ~ dnorm(mu[i], n[i] * prec)
+
+       sigma_2[i] ~ dgamma((n[i] - 1) / 2, n[i] * prec / 2)
+
+            ## alpha[1] is current interval, alpha[10] is most distant interval
+            ## time j corresponds to alpha interval Int-(j-1)
+            ## e.g. time 1 corresponds to alpha interval 10-(1-1)=10 if interim #10
+            ## e.g. time 2 corresponds to alpha interval 7-(2-1)=6 if interim #7
+
+       mu[i] = gamma0 + alpha[n_buckets - (time_bucket[i]-1)] + delta[trt[i]]
+
+    }
+
+    for (i in 1:n_trt_buckets_1){
+
+
+       x_bar_1[i] ~ dnorm(mu_1[i], prec)
+
+            ## alpha[1] is current interval, alpha[10] is most distant interval
+            ## time j corresponds to alpha interval Int-(j-1)
+            ## e.g. time 1 corresponds to alpha interval 10-(1-1)=10 if interim #10
+            ## e.g. time 2 corresponds to alpha interval 7-(2-1)=6 if interim #7
+
+       mu_1[i] = gamma0 + alpha[n_buckets - (time_bucket_1[i]-1)] + delta[trt_1[i]]
+
+    }
+
+    ## Priors for time, counting backwards from current time interval (k=1 for current, k=10 for most distant)
+    alpha[1] = 0
+    alpha[2] ~ dnorm(0, tau)
+    for(k in 3:n_buckets) {
+        alpha[k] ~ dnorm(2*alpha[k-1] - alpha[k-2], tau)  # 2*(most recent) - (more distant) puts trend in right direction
+    }
+
+    ## Other priors
+    delta[1] <- 0
+    for(i in 2:n_trts){
+      delta[i] ~ dnorm(0, prec_delta)
+    }
+
+    tau ~  dgamma(tau_a, tau_b)
+
+    ### Intercept
+    gamma0 ~ dnorm(0, prec_gamma)
+
+    ### Precision (corresponding to random error term)
+    prec ~ dgamma(prec_a, prec_b)
+
+
+  }
+"
+
   data$time_bucket <- rep(c(1:ceiling((nrow(data)/bucket_size))), each=bucket_size)[1:nrow(data)]
+  #data$time_bucket <- data$period
 
   trt_bucket_n <- aggregate(data$response,
                             list(treatment = data$treatment,
@@ -118,37 +180,89 @@ timemachine_cont <- function(data,
   sigma_2 <- trt_bucket_vars$x
   n <- trt_bucket_n$x
 
-  ### Arguments to pass to jags_model
-  data_list = list(x_bar = x_bar,
-                   sigma_2 = sigma_2,
-                   n = n,
-                   trt = trt,
-                   time_bucket = time_bucket,
-                   n_trts = n_trts,
-                   n_buckets = n_buckets,
-                   n_trt_buckets = n_trt_buckets,
-                   prec_delta = prec_delta,
-                   prec_gamma = prec_gamma,
-                   tau_a = tau_a,
-                   tau_b = tau_b,
-                   prec_a = prec_a,
-                   prec_b = prec_b)
+  ## check when n == 1
+  size_1 <- which(n == 1)
+  if (length(size_1) == 0){ ## don't split up data
 
-  inits_list = list(gamma0 = 0)
+    ### Arguments to pass to jags_model
+    data_list = list(x_bar = x_bar,
+                     sigma_2 = sigma_2,
+                     n = n,
+                     trt = trt,
+                     time_bucket = time_bucket,
+                     n_trts = n_trts,
+                     n_buckets = n_buckets,
+                     n_trt_buckets = n_trt_buckets,
+                     prec_delta = prec_delta,
+                     prec_gamma = prec_gamma,
+                     tau_a = tau_a,
+                     tau_b = tau_b,
+                     prec_a = prec_a,
+                     prec_b = prec_b)
+
+    inits_list = list(gamma0 = 0)
 
 
-  ### Fit the model
-  jags_model <- jags.model(textConnection(model_string_time_machine_cont),
-                           data = data_list,
-                           inits = inits_list,
-                           n.adapt = 1000,
-                           n.chains = 3,
-                           quiet = T)
+    ### Fit the model
+    jags_model <- jags.model(textConnection(model_string_time_machine_cont),
+                             data = data_list,
+                             inits = inits_list,
+                             n.adapt = 1000,
+                             n.chains = 3,
+                             quiet = T)
 
+
+  }
+  else {
+
+    ## seperate the cases where n == 1
+    x_bar_1 <- x_bar[size_1]
+    time_bucket_1 <- time_bucket[size_1]
+    trt_1 <- trt[size_1]
+    n_trt_buckets_1 <- length(x_bar_1)
+
+    ## remove n == 1 cases
+    x_bar <- x_bar[-size_1]
+    time_bucket <- time_bucket[-size_1]
+    trt <- trt[-size_1]
+    n <- n[-size_1]
+    n_trt_buckets <- length(x_bar)
+
+    ### Arguments to pass to jags_model
+    data_list = list(x_bar = x_bar,
+                     x_bar_1 = x_bar_1,
+                     sigma_2 = sigma_2,
+                     n = n,
+                     trt = trt,
+                     trt_1 = trt_1,
+                     time_bucket = time_bucket,
+                     time_bucket_1 = time_bucket_1,
+                     n_trts = n_trts,
+                     n_buckets = n_buckets,
+                     n_trt_buckets = n_trt_buckets,
+                     n_trt_buckets_1 = n_trt_buckets_1,
+                     prec_delta = prec_delta,
+                     prec_gamma = prec_gamma,
+                     tau_a = tau_a,
+                     tau_b = tau_b,
+                     prec_a = prec_a,
+                     prec_b = prec_b)
+
+    inits_list = list(gamma0 = 0)
+
+
+    ### Fit the model
+    jags_model <- jags.model(textConnection(model_string_time_machine_cont_1),
+                             data = data_list,
+                             inits = inits_list,
+                             n.adapt = 1000,
+                             n.chains = 3,
+                             quiet = T)
+  }
   ### Extract posterior samples
   mcmc_samples <- coda.samples(jags_model,
                                c("delta"),
-                               n.iter = 4000)
+                               n.iter = 40000)
 
   ### Arrange all samples together
   all_samples <- do.call(rbind.data.frame, mcmc_samples)
