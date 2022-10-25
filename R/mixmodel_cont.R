@@ -21,7 +21,7 @@
 #'
 #' mixmodel_cont(data = trial_data, arm = 3, ci = TRUE)
 #'
-#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment
+#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
 #' @author Pavla Krotka
 
 mixmodel_cont <- function(data, arm, alpha=0.025, ci=FALSE, ...){
@@ -62,6 +62,7 @@ mixmodel_cont <- function(data, arm, alpha=0.025, ci=FALSE, ...){
               treat_effect = treat_effect,
               lower_ci = ifelse(exists("lower_ci"), lower_ci, "not computed"),
               upper_ci = ifelse(exists("upper_ci"), upper_ci, "not computed"),
-              reject_h0 = reject_h0))
+              reject_h0 = reject_h0,
+              model = mod))
 }
 

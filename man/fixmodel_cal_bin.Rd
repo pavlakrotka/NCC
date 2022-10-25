@@ -16,7 +16,7 @@ fixmodel_cal_bin(data, arm, alpha = 0.025, unit_size = 25, ...)
 \item{unit_size}{Number of patients per calendar time unit Default=25}
 }
 \value{
-List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment
+List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
 }
 \description{
 Performs logistic regression taking into account all trial data until the arm under study leaves the trial and adjusting for calendar time units as factors

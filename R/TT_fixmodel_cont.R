@@ -20,7 +20,7 @@
 #'
 #' TT_fixmodel_cont(data = trial_data, arms = c(1,3))
 #'
-#' @return List containing the p-value (one-sided), estimated difference between the treatments, 95% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated comparison
+#' @return List containing the p-value (one-sided), estimated difference between the treatments, 95% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated comparison and the fitted model
 #' @author Pavla Krotka
 
 TT_fixmodel_cont <- function(data, arms, alpha=0.025, ...){
@@ -52,5 +52,6 @@ TT_fixmodel_cont <- function(data, arms, alpha=0.025, ...){
               est_diff = est_diff,
               lower_ci = lower_ci,
               upper_ci = upper_ci,
-              reject_h0 = reject_h0))
+              reject_h0 = reject_h0,
+              model = mod))
 }

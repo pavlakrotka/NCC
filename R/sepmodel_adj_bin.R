@@ -20,7 +20,7 @@
 #'
 #' sepmodel_adj_bin(data = trial_data, arm = 3)
 #'
-#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment
+#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
 #' @author Pavla Krotka
 
 sepmodel_adj_bin <- function(data, arm, alpha=0.025, ...){
@@ -51,14 +51,9 @@ sepmodel_adj_bin <- function(data, arm, alpha=0.025, ...){
               treat_effect = treat_effect,
               lower_ci = lower_ci,
               upper_ci = upper_ci,
-              reject_h0 = reject_h0))
+              reject_h0 = reject_h0,
+              model = mod))
 }
-
-
-# mod_test <- glm(response ~ as.factor(treatment), test %>% filter(treatment %in% c(0,2) & period %in% c(1,2,3,4)), family = "binomial")
-# res_test <- summary(mod_test)
-#
-# sepmodel_bin(test, arm = 2)
 
 
 

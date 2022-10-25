@@ -73,7 +73,7 @@
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>List containing the p-value (one-sided), estimated difference between the treatments, 95% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated comparison</p>
+    <p>List containing the p-value (one-sided), estimated difference between the treatments, 95% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated comparison and the fitted model</p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -88,19 +88,34 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">TT_fixmodel_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7271339</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2684119</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $est_diff</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.1106566</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1117701</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.470269</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.2435448</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2489559</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4670851</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lm(formula = response ~ as.factor(treatment) + as.factor(period), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     data = data_new)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           (Intercept)  as.factor(treatment)0  as.factor(treatment)2  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.13424               -0.12752                0.06151  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3     as.factor(period)2     as.factor(period)3  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.11177                0.22018                0.00485  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    as.factor(period)4  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.07734  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>

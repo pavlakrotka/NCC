@@ -14,7 +14,7 @@ poolmodel_bin(data, arm, alpha = 0.025, ...)
 \item{alpha}{Type I error. Default=0.025}
 }
 \value{
-List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment
+List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
 }
 \description{
 Performs pooled analysis (naively pooling concurrent and non-concurrent controls without adjustment) using a logistic model

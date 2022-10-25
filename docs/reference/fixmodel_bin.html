@@ -73,7 +73,7 @@
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment</p>
+    <p>List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model</p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -88,19 +88,36 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">fixmodel_bin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.01674001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2891982</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.803202</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1949134</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.08352431</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.4882971</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.575242</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8933183</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:  glm(formula = response ~ as.factor(treatment) + as.factor(period), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     family = "binomial", data = data_new)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           (Intercept)  as.factor(treatment)1  as.factor(treatment)2  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.8833                 0.2286                 0.6538  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3     as.factor(period)2     as.factor(period)3  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.1949                 0.4561                 0.1204  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    as.factor(period)4  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.8379  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Degrees of Freedom: 499 Total (i.e. Null);  493 Residual</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Null Deviance:	    497.6 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 487.3 	AIC: 501.3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>

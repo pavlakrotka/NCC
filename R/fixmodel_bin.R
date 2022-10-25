@@ -20,7 +20,7 @@
 #'
 #' fixmodel_bin(data = trial_data, arm = 3)
 #'
-#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment
+#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
 #' @author Pavla Krotka
 
 fixmodel_bin <- function(data, arm, alpha=0.025, ...){
@@ -49,5 +49,6 @@ fixmodel_bin <- function(data, arm, alpha=0.025, ...){
               treat_effect = treat_effect,
               lower_ci = lower_ci,
               upper_ci = upper_ci,
-              reject_h0 = reject_h0))
+              reject_h0 = reject_h0,
+              model = mod))
 }
