@@ -5,6 +5,7 @@
 #' @param data Simulated trial data, e.g. result from the `datasim_bin()` function
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
 #' @param alpha Type I error. Default=0.025
+#' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE
 #'
 #' @importFrom stats glm
 #' @importFrom stats pnorm
@@ -23,13 +24,19 @@
 #' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
 #' @author Pavla Krotka
 
-fixmodel_bin <- function(data, arm, alpha=0.025, ...){
+fixmodel_bin <- function(data, arm, alpha=0.025, ncc=TRUE, ...){
 
+  min_period <- min(data[data$treatment==arm,]$period)
   max_period <- max(data[data$treatment==arm,]$period)
-  data_new <- data[data$period %in% c(1:max_period),]
+
+  if (ncc) {
+    data_new <- data[data$period %in% c(1:max_period),]
+  } else {
+    data_new <- data[data$period %in% c(min_period:max_period),]
+  }
 
   # fit logistic model
-  if(max_period==1){ # if only one period in the data, don't use period as covariate
+  if(length(unique(data_new$period))==1){ # if only one period in the data, don't use period as covariate
     mod <- glm(response ~ as.factor(treatment), data_new, family = "binomial")
   } else {
     mod <- glm(response ~ as.factor(treatment) + as.factor(period), data_new, family = "binomial")

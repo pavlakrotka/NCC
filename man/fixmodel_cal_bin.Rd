@@ -4,7 +4,7 @@
 \alias{fixmodel_cal_bin}
 \title{Model-based analysis for binary data adjusting for calendar time units}
 \usage{
-fixmodel_cal_bin(data, arm, alpha = 0.025, unit_size = 25, ...)
+fixmodel_cal_bin(data, arm, alpha = 0.025, unit_size = 25, ncc = TRUE, ...)
 }
 \arguments{
 \item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} function}
@@ -14,6 +14,8 @@ fixmodel_cal_bin(data, arm, alpha = 0.025, unit_size = 25, ...)
 \item{alpha}{Type I error. Default=0.025}
 
 \item{unit_size}{Number of patients per calendar time unit Default=25}
+
+\item{ncc}{Boolean. Whether to include NCC data into the analysis. Default=TRUE}
 }
 \value{
 List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model

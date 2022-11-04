@@ -10,6 +10,7 @@ mixmodel_AR1_cal_cont(
   alpha = 0.025,
   ci = FALSE,
   unit_size = 25,
+  ncc = TRUE,
   ...
 )
 }
@@ -21,6 +22,8 @@ mixmodel_AR1_cal_cont(
 \item{alpha}{Type I error. Default=0.025}
 
 \item{ci}{Boolean. Whether confidence intervals should be computed. Default=FALSE}
+
+\item{ncc}{Boolean. Whether to include NCC data into the analysis. Default=TRUE}
 }
 \value{
 List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model

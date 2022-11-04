@@ -6,6 +6,7 @@
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
 #' @param alpha Type I error. Default=0.025
 #' @param ci Boolean. Whether confidence intervals should be computed. Default=FALSE
+#' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE
 #'
 #' @importFrom spaMM fitme
 #' @importFrom spaMM get_any_IC
@@ -26,15 +27,21 @@
 #' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
 #' @author Pavla Krotka
 
-mixmodel_AR1_cal_cont <- function(data, arm, alpha=0.025, ci=FALSE, unit_size=25, ...){
+mixmodel_AR1_cal_cont <- function(data, arm, alpha=0.025, ci=FALSE, unit_size=25, ncc=TRUE, ...){
 
   data$cal_time <- rep(c(1:ceiling((nrow(data)/unit_size))), each=unit_size)[1:nrow(data)]
 
+  min_unit <- min(data[data$treatment==arm,]$cal_time)
   max_unit <- max(data[data$treatment==arm,]$cal_time)
-  data_new <- data[data$cal_time %in% c(1:max_unit),]
+
+  if (ncc) {
+    data_new <- data[data$cal_time %in% c(1:max_unit),]
+  } else {
+    data_new <- data[data$cal_time %in% c(min_unit:max_unit),]
+  }
 
   # fit linear mixed model
-  if(max_unit==1){ # if only one calendar time unit in the data, don't use unit as covariate
+  if(length(unique(data_new$cal_time))==1){ # if only one calendar time unit in the data, don't use unit as covariate
     mod <- lm(response ~ as.factor(treatment), data_new)
     res <- summary(mod)
 

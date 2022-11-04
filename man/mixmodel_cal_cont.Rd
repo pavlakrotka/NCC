@@ -4,7 +4,15 @@
 \alias{mixmodel_cal_cont}
 \title{Model-based analysis for continuous data adjusting for calendar time units as a random factor}
 \usage{
-mixmodel_cal_cont(data, arm, alpha = 0.025, ci = FALSE, unit_size = 25, ...)
+mixmodel_cal_cont(
+  data,
+  arm,
+  alpha = 0.025,
+  ci = FALSE,
+  unit_size = 25,
+  ncc = TRUE,
+  ...
+)
 }
 \arguments{
 \item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function}
@@ -16,6 +24,8 @@ mixmodel_cal_cont(data, arm, alpha = 0.025, ci = FALSE, unit_size = 25, ...)
 \item{ci}{Boolean. Whether confidence intervals should be computed. Default=FALSE}
 
 \item{unit_size}{Number of patients per calendar time unit Default=25}
+
+\item{ncc}{Boolean. Whether to include NCC data into the analysis. Default=TRUE}
 }
 \value{
 List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model

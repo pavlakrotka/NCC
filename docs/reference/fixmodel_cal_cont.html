@@ -59,7 +59,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fixmodel_cal_cont</span><span class="op">(</span><span class="va">data</span>, <span class="va">arm</span>, alpha <span class="op">=</span> <span class="fl">0.025</span>, unit_size <span class="op">=</span> <span class="fl">250</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fixmodel_cal_cont</span><span class="op">(</span><span class="va">data</span>, <span class="va">arm</span>, alpha <span class="op">=</span> <span class="fl">0.025</span>, unit_size <span class="op">=</span> <span class="fl">250</span>, ncc <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -72,6 +72,8 @@
 <dd><p>Type I error. Default=0.025</p></dd>
 <dt>unit_size</dt>
 <dd><p>Number of patients per calendar time unit Default=25</p></dd>
+<dt>ncc</dt>
+<dd><p>Boolean. Whether to include NCC data into the analysis. Default=TRUE</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -90,19 +92,19 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">fixmodel_cal_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1736141</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.00793896</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1327069</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3291799</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.1444165</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.06192717</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4098304</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5964325</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -112,9 +114,9 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           (Intercept)  as.factor(treatment)1  as.factor(treatment)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.08352                0.18681                0.11396  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              -0.02818                0.08178                0.22803  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3   as.factor(cal_time)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.13271                0.08962  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.32918                0.09419  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>

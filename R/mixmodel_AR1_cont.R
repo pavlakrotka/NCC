@@ -6,6 +6,7 @@
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
 #' @param alpha Type I error. Default=0.025
 #' @param ci Boolean. Whether confidence intervals should be computed. Default=FALSE
+#' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE
 #'
 #' @importFrom spaMM fitme
 #' @importFrom spaMM get_any_IC
@@ -26,13 +27,19 @@
 #' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
 #' @author Pavla Krotka
 
-mixmodel_AR1_cont <- function(data, arm, alpha=0.025, ci=FALSE, ...){
+mixmodel_AR1_cont <- function(data, arm, alpha=0.025, ci=FALSE, ncc=TRUE, ...){
 
+  min_period <- min(data[data$treatment==arm,]$period)
   max_period <- max(data[data$treatment==arm,]$period)
-  data_new <- data[data$period %in% c(1:max_period),]
+
+  if (ncc) {
+    data_new <- data[data$period %in% c(1:max_period),]
+  } else {
+    data_new <- data[data$period %in% c(min_period:max_period),]
+  }
 
   # fit linear mixed model
-  if(max_period==1){ # if only one period in the data, don't use period as covariate
+  if(length(unique(data_new$period))==1){ # if only one period in the data, don't use period as covariate
     mod <- lm(response ~ as.factor(treatment), data_new)
     res <- summary(mod)
 

@@ -4,7 +4,7 @@
 \alias{fixmodel_bin}
 \title{Model-based analysis for binary data adjusting for periods}
 \usage{
-fixmodel_bin(data, arm, alpha = 0.025, ...)
+fixmodel_bin(data, arm, alpha = 0.025, ncc = TRUE, ...)
 }
 \arguments{
 \item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} function}
@@ -12,6 +12,8 @@ fixmodel_bin(data, arm, alpha = 0.025, ...)
 \item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1)}
 
 \item{alpha}{Type I error. Default=0.025}
+
+\item{ncc}{Boolean. Whether to include NCC data into the analysis. Default=TRUE}
 }
 \value{
 List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model

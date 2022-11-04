@@ -6,6 +6,8 @@
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
 #' @param alpha Type I error. Default=0.025
 #' @param unit_size Number of patients per calendar time unit Default=25
+#' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE
+#'
 #'
 #' @importFrom stats glm
 #' @importFrom stats pnorm
@@ -24,15 +26,22 @@
 #' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
 #' @author Pavla Krotka
 
-fixmodel_cal_bin <- function(data, arm, alpha=0.025, unit_size=25, ...){
+fixmodel_cal_bin <- function(data, arm, alpha=0.025, unit_size=25, ncc=TRUE, ...){
 
   data$cal_time <- rep(c(1:ceiling((nrow(data)/unit_size))), each=unit_size)[1:nrow(data)]
 
+  min_unit <- min(data[data$treatment==arm,]$cal_time)
   max_unit <- max(data[data$treatment==arm,]$cal_time)
-  data_new <- data[data$cal_time %in% c(1:max_unit),]
+
+  if (ncc) {
+    data_new <- data[data$cal_time %in% c(1:max_unit),]
+  } else {
+    data_new <- data[data$cal_time %in% c(min_unit:max_unit),]
+  }
+
 
   # fit logistic model
-  if(max_unit==1){ # if only one calendar time unit in the data, don't use calendar time unit as covariate
+  if(length(unique(data_new$cal_time))==1){ # if only one calendar time unit in the data, don't use calendar time unit as covariate
     mod <- glm(response ~ as.factor(treatment), data_new, family = "binomial")
   } else {
     mod <- glm(response ~ as.factor(treatment) + as.factor(cal_time), data_new, family = "binomial")
