@@ -8,15 +8,14 @@ MAP_rjags_bin(
   data,
   arm,
   alpha = 0.025,
-  opt = 1,
-  prior_prec_tau = 1,
+  opt = 2,
+  prior_prec_tau = 4,
   n.samples = 1000,
   n.chains = 4,
   n.iter = 4000,
   n.adapt = 1000,
   robustify = TRUE,
-  weight = 0.1,
-  ...
+  weight = 0.1
 )
 }
 \arguments{
@@ -34,13 +33,13 @@ MAP_rjags_bin(
 
 \item{n.chains}{the number of parallel chains for the rjags model}
 
-\item{n.iter}{needed for coda.smaples, number of iterations to monitor of the jags.model}
-
 \item{n.adapt}{needed for jags.model, defines the number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behaviour to maximize their efficiency}
 
-\item{robustify}{Boolean.}
+\item{robustify}{Booelan.}
 
 \item{weight}{weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP prior according to Schmidli 2014}
+
+\item{n.inter}{needed for coda.smaples, number of iterations to monitor of the jags.model}
 }
 \value{
 containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment

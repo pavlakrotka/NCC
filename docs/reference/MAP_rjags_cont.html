@@ -63,15 +63,14 @@
   <span class="va">data</span>,
   <span class="va">arm</span>,
   alpha <span class="op">=</span> <span class="fl">0.025</span>,
-  opt <span class="op">=</span> <span class="fl">1</span>,
-  prior_prec_tau <span class="op">=</span> <span class="fl">1</span>,
+  opt <span class="op">=</span> <span class="fl">2</span>,
+  prior_prec_tau <span class="op">=</span> <span class="fl">4</span>,
   n.samples <span class="op">=</span> <span class="fl">1000</span>,
   n.chains <span class="op">=</span> <span class="fl">4</span>,
   n.iter <span class="op">=</span> <span class="fl">4000</span>,
   n.adapt <span class="op">=</span> <span class="fl">1000</span>,
   robustify <span class="op">=</span> <span class="cn">TRUE</span>,
-  weight <span class="op">=</span> <span class="fl">0.1</span>,
-  <span class="va">...</span>
+  weight <span class="op">=</span> <span class="fl">0.1</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -84,21 +83,21 @@
 <dt>alpha</dt>
 <dd><p>Type I error. Default=0.025</p></dd>
 <dt>opt</dt>
-<dd><p>binary, opt=1: all former periods are use as one source, opt=2: periods form different sources get seperately included into the final analysis</p></dd>
+<dd><p>binary, opt=1: all former periods are used as one source, opt=2: periods form different sources get seperately included into the final analysis</p></dd>
 <dt>prior_prec_tau</dt>
 <dd><p>dispersion parameter of the half normal prior, the prior for the between study heteroginity</p></dd>
 <dt>n.samples</dt>
 <dd><p>defines the number of how many random samples will get drwan for the calcualtion of the posterior mean and the CIs, default is 1000</p></dd>
 <dt>n.chains</dt>
 <dd><p>the number of parallel chains for the rjags model</p></dd>
-<dt>n.iter</dt>
-<dd><p>needed for coda.smaples, number of iterations to monitor of the jags.model</p></dd>
 <dt>n.adapt</dt>
 <dd><p>needed for jags.model, defines the number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behaviour to maximize their efficiency</p></dd>
 <dt>robustify</dt>
 <dd><p>Boolean.</p></dd>
 <dt>weight</dt>
 <dd><p>weight given to the non-informative component (0 &lt; weight &lt; 1) for the robustification of the MAP prior according to Schmidli 2014</p></dd>
+<dt>n.inter</dt>
+<dd><p>needed for coda.smaples, number of iterations to monitor of the jags.model</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -117,21 +116,21 @@ So far: Posterior odds estimated by drawing random samples from the posterior di
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="va">trial_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="datasim_cont.html">datasim_cont</a></span><span class="op">(</span>num_arms <span class="op">=</span> <span class="fl">3</span>, n_arm <span class="op">=</span> <span class="fl">100</span>, d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, <span class="fl">250</span><span class="op">)</span>,</span>
+<span class="r-in"><span class="va">trial_data</span><span class="op">&lt;-</span><span class="fu"><a href="datasim_cont.html">datasim_cont</a></span><span class="op">(</span>num_arms <span class="op">=</span> <span class="fl">3</span>, n_arm <span class="op">=</span> <span class="fl">100</span>, d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, <span class="fl">250</span><span class="op">)</span>,</span>
 <span class="r-in">theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"stepwise"</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">MAP_rjags_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.0002626749</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.001085756</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4782136</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3996125</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2095939</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1347072</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7526845</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6578932</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
