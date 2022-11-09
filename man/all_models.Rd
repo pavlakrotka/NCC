@@ -12,6 +12,7 @@ all_models(
   endpoint,
   alpha = 0.025,
   unit_size = 250,
+  ncc = TRUE,
   opt = 1,
   prior_prec_tau = 1,
   n.samples = 1000,
