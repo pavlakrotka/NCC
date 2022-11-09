@@ -41,8 +41,17 @@
 
 
 
-MAP_rjags_bin <- function(data, arm, alpha = 0.025, opt = 2,prior_prec_tau = 4, n.samples = 1000, n.chains = 4,
-                          n.iter = 4000, n.adapt = 1000, robustify=TRUE, weight = 0.1){
+MAP_rjags_bin <- function(data,
+                          arm,
+                          alpha = 0.025,
+                          opt = 2,
+                          prior_prec_tau = 4,
+                          n.samples = 1000,
+                          n.chains = 4,
+                          n.iter = 4000,
+                          n.adapt = 1000,
+                          robustify = TRUE,
+                          weight = 0.1, ...){
 
   if (opt %in% c(1,2) == FALSE) stop("Wrong parameter input. Parameter opt has to be 1 or 2")
 

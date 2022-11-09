@@ -15,7 +15,8 @@ MAP_rjags_cont(
   n.iter = 4000,
   n.adapt = 1000,
   robustify = TRUE,
-  weight = 0.1
+  weight = 0.1,
+  ...
 )
 }
 \arguments{

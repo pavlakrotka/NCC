@@ -70,7 +70,8 @@
   n.iter <span class="op">=</span> <span class="fl">4000</span>,
   n.adapt <span class="op">=</span> <span class="fl">1000</span>,
   robustify <span class="op">=</span> <span class="cn">TRUE</span>,
-  weight <span class="op">=</span> <span class="fl">0.1</span>
+  weight <span class="op">=</span> <span class="fl">0.1</span>,
+  <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -121,16 +122,16 @@ So far: Posterior odds estimated by drawing random samples from the posterior di
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">MAP_rjags_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.001085756</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.002953882</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3996125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4090429</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1347072</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1022935</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6578932</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6883154</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
