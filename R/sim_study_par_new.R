@@ -86,7 +86,10 @@ sim_study_par_new <- function(nsim, scenarios, arms, models = c("fixmodel", "sep
                                                       tau_b = scenarios$tau_b[i],
                                                       prec_a = scenarios$prec_a[i],
                                                       prec_b = scenarios$prec_b[i],
-                                                      bucket_size = scenarios$bucket_size[i]))
+                                                      bucket_size = scenarios$bucket_size[i],
+                                                      smoothing_basis = scenarios$smoothing_basis[i],
+                                                      basis_dim = scenarios$basis_dim[i],
+                                                      gam_method = scenarios$gam_method[i]))
 
                     result_i <- cbind(scenarios[i,],
                                       study_arm = rep(arms, each = num_models),
@@ -143,7 +146,10 @@ sim_study_par_new <- function(nsim, scenarios, arms, models = c("fixmodel", "sep
                                tau_b = scenarios$tau_b[i],
                                prec_a = scenarios$prec_a[i],
                                prec_b = scenarios$prec_b[i],
-                               bucket_size = scenarios$bucket_size[i])
+                               bucket_size = scenarios$bucket_size[i],
+                               smoothing_basis = scenarios$smoothing_basis[i],
+                               basis_dim = scenarios$basis_dim[i],
+                               gam_method = scenarios$gam_method[i])
 
 
                     result_i <- cbind(scenarios[i,],

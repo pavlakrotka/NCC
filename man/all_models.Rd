@@ -29,6 +29,9 @@ all_models(
   prec_a = 0.001,
   prec_b = 0.001,
   bucket_size = 25,
+  smoothing_basis = "tp",
+  basis_dim = -1,
+  gam_method = "GCV.Cp",
   ...
 )
 }
