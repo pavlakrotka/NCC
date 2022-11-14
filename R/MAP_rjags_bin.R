@@ -13,7 +13,7 @@
 #' @param opt binary, opt=1: all former periods are use as one source, opt=2: periods form different sources get seperately included into the final analysis
 #' @param n.samples defines the number of how many random samples will get drwan for the calcualtion of the posterior mean and the CIs, default is 1000
 #' @param n.chains the number of parallel chains for the rjags model
-#' @param n.inter needed for coda.smaples, number of iterations to monitor of the jags.model
+#' @param n.iter needed for coda.samples, number of iterations to monitor of the jags.model
 #' @param n.adapt needed for jags.model, defines the number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behaviour to maximize their efficiency
 #' @param weight weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP prior according to Schmidli 2014
 #' @param robustify Booelan.

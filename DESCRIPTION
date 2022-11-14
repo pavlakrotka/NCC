@@ -32,7 +32,8 @@ Imports:
   doParallel,
   foreach,
   iterators,
-  spaMM
+  spaMM,
+  mgcv
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Suggests: 

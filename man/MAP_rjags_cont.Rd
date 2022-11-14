@@ -34,13 +34,13 @@ MAP_rjags_cont(
 
 \item{n.chains}{the number of parallel chains for the rjags model}
 
+\item{n.iter}{needed for coda.samples, number of iterations to monitor of the jags.model}
+
 \item{n.adapt}{needed for jags.model, defines the number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behaviour to maximize their efficiency}
 
 \item{robustify}{Boolean.}
 
 \item{weight}{weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP prior according to Schmidli 2014}
-
-\item{n.inter}{needed for coda.smaples, number of iterations to monitor of the jags.model}
 }
 \value{
 containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment

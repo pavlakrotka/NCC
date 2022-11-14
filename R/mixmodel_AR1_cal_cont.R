@@ -6,6 +6,7 @@
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
 #' @param alpha Type I error. Default=0.025
 #' @param ci Boolean. Whether confidence intervals should be computed. Default=FALSE
+#' @param unit_size Number of patients per calendar time unit Default=25
 #' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE
 #'
 #' @importFrom spaMM fitme
