@@ -30,7 +30,8 @@ all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel
                        opt = 1, prior_prec_tau = 1, n.samples = 1000, n.chains = 4, n.iter = 4000, n.adapt = 1000, robustify = TRUE, weight = 0.1,
                        ci = FALSE,
                        prec_delta = 0.001, prec_gamma = 0.001, tau_a = 0.1, tau_b = 0.01, prec_a = 0.001, prec_b = 0.001, bucket_size = 25,
-                       smoothing_basis = "tp", basis_dim = -1, gam_method = "GCV.Cp", ...){
+                       smoothing_basis = "tp", basis_dim = -1, gam_method = "GCV.Cp",
+                       bs_degree = 3, ...){
 
   if (endpoint=="bin") {
     models <- models[models!="mixmodel"]
@@ -67,7 +68,8 @@ all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel
                                                                  bucket_size = bucket_size,
                                                                  smoothing_basis = smoothing_basis,
                                                                  basis_dim = basis_dim,
-                                                                 gam_method = gam_method))$reject_h0, silent = TRUE))
+                                                                 gam_method = gam_method,
+                                                                 bs_degree = bs_degree))$reject_h0, silent = TRUE))
 
       names(res_i_j) <- paste0("reject_h0_", j, "_", i)
 

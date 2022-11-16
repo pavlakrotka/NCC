@@ -89,7 +89,8 @@ sim_study_par_new <- function(nsim, scenarios, arms, models = c("fixmodel", "sep
                                                       bucket_size = scenarios$bucket_size[i],
                                                       smoothing_basis = scenarios$smoothing_basis[i],
                                                       basis_dim = scenarios$basis_dim[i],
-                                                      gam_method = scenarios$gam_method[i]))
+                                                      gam_method = scenarios$gam_method[i],
+                                                      bs_degree = scenarios$bs_degree[i]))
 
                     result_i <- cbind(scenarios[i,],
                                       study_arm = rep(arms, each = num_models),
@@ -149,7 +150,8 @@ sim_study_par_new <- function(nsim, scenarios, arms, models = c("fixmodel", "sep
                                bucket_size = scenarios$bucket_size[i],
                                smoothing_basis = scenarios$smoothing_basis[i],
                                basis_dim = scenarios$basis_dim[i],
-                               gam_method = scenarios$gam_method[i])
+                               gam_method = scenarios$gam_method[i],
+                               bs_degree = scenarios$bs_degree[i])
 
 
                     result_i <- cbind(scenarios[i,],

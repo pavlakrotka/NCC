@@ -92,7 +92,8 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                                  bucket_size = scenarios$bucket_size[i],
                                  smoothing_basis = scenarios$smoothing_basis[i],
                                  basis_dim = scenarios$basis_dim[i],
-                                 gam_method = scenarios$gam_method[i])
+                                 gam_method = scenarios$gam_method[i],
+                                 bs_degree = scenarios$bs_degree[i])
 
                     }
 
@@ -170,7 +171,8 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                                  bucket_size = scenarios$bucket_size[i],
                                  smoothing_basis = scenarios$smoothing_basis[i],
                                  basis_dim = scenarios$basis_dim[i],
-                                 gam_method = scenarios$gam_method[i])
+                                 gam_method = scenarios$gam_method[i],
+                                 bs_degree = scenarios$bs_degree[i])
                     }
 
 
