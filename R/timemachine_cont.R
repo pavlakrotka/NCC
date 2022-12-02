@@ -43,6 +43,9 @@ timemachine_cont <- function(data,
                              prec_b = 0.001,
                              bucket_size = 25, ...){
 
+  max_period <- max(data[data$treatment==arm,]$period)
+  data <- data[data$period %in% c(1:max_period),]
+
   model_string_time_machine_cont <- "
   model {
 

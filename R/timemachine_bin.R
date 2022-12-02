@@ -38,6 +38,9 @@ timemachine_bin <- function(data,
                             tau_b = 0.01,
                             bucket_size = 25, ...){
 
+  max_period <- max(data[data$treatment==arm,]$period)
+  data <- data[data$period %in% c(1:max_period),]
+
   model_string_time_machine_bin <- "
   model {
 
