@@ -9,6 +9,7 @@
 #' @param smoothing_basis String indicating the (penalized) smoothing basis to use. Default="tp"
 #' @param basis_dim The dimension of the basis used to represent the smooth term. The default depends on the number of variables that the smooth is a function of.
 #' @param gam_method The smoothing parameter estimation method. Default="GCV.Cp"
+#' @param ... Further arguments for simulation function
 #'
 #' @importFrom mgcv gam
 #' @importFrom mgcv s

@@ -5,11 +5,13 @@
 #' @param data Simulated trial data, e.g. result from the `datasim_bin()` function
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
 #' @param alpha Type I error. Default=0.025
+#' @param ... Further arguments for simulation function
 #'
 #' @importFrom stats glm
 #' @importFrom stats pnorm
 #' @importFrom stats coef
 #' @importFrom stats confint
+#' @importFrom stats binomial
 #'
 #' @export
 #'
@@ -29,7 +31,7 @@ poolmodel_bin <- function(data, arm, alpha=0.025, ...){
   data_new <- data[data$treatment %in% c(0, arm) & data$period %in% c(1:max_period),]
 
   # fit logistic model
-  mod <- glm(response ~ as.factor(treatment), data_new, family = "binomial")
+  mod <- glm(response ~ as.factor(treatment), data_new, family = binomial)
   res <- summary(mod)
 
   # one-sided p-value

@@ -38,6 +38,8 @@ timemachine_cont(
 \item{prec_b}{...}
 
 \item{bucket_size}{Number of patients per time bucket. Default=25}
+
+\item{...}{Further arguments for simulation function}
 }
 \value{
 List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment

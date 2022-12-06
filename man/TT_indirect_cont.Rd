@@ -12,6 +12,8 @@ TT_indirect_cont(data, arms, alpha = 0.025, ...)
 \item{arms}{Indicator of the treatment arms to be compared (vector of length 2)}
 
 \item{alpha}{Type I error. Default=0.025}
+
+\item{...}{Further arguments for simulation function}
 }
 \value{
 List containing the p-value (one-sided), estimated difference between the treatments and an indicator whether the null hypothesis was rejected or not for the investigated comparison

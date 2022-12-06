@@ -16,6 +16,8 @@ mixmodel_AR1_cont(data, arm, alpha = 0.025, ci = FALSE, ncc = TRUE, ...)
 \item{ci}{Boolean. Whether confidence intervals should be computed. Default=FALSE}
 
 \item{ncc}{Boolean. Whether to include NCC data into the analysis. Default=TRUE}
+
+\item{...}{Further arguments for simulation function}
 }
 \value{
 List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model

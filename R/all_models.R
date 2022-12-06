@@ -7,6 +7,7 @@
 #' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAP_rjags")
 #' @param endpoint Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints
 #' @param alpha Type I error. Default=0.025
+#' @param ... Further arguments for simulation function
 #'
 #' @keywords internal
 #'

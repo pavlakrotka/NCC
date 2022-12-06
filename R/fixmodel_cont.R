@@ -6,6 +6,7 @@
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
 #' @param alpha Type I error. Default=0.025
 #' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE
+#' @param ... Further arguments for simulation function
 #'
 #' @importFrom stats lm
 #' @importFrom stats pt

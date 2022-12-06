@@ -6,11 +6,13 @@
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
 #' @param alpha Type I error. Default=0.025
 #' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE
+#' @param ... Further arguments for simulation function
 #'
 #' @importFrom stats glm
 #' @importFrom stats pnorm
 #' @importFrom stats coef
 #' @importFrom stats confint
+#' @importFrom stats binomial
 #'
 #' @export
 #'
@@ -37,9 +39,9 @@ fixmodel_bin <- function(data, arm, alpha=0.025, ncc=TRUE, ...){
 
   # fit logistic model
   if(length(unique(data_new$period))==1){ # if only one period in the data, don't use period as covariate
-    mod <- glm(response ~ as.factor(treatment), data_new, family = "binomial")
+    mod <- glm(response ~ as.factor(treatment), data_new, family = binomial)
   } else {
-    mod <- glm(response ~ as.factor(treatment) + as.factor(period), data_new, family = "binomial")
+    mod <- glm(response ~ as.factor(treatment) + as.factor(period), data_new, family = binomial)
   }
   res <- summary(mod)
 

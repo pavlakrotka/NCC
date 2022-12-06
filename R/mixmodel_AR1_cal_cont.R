@@ -8,6 +8,7 @@
 #' @param ci Boolean. Whether confidence intervals should be computed. Default=FALSE
 #' @param unit_size Number of patients per calendar time unit Default=25
 #' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE
+#' @param ... Further arguments for simulation function
 #'
 #' @importFrom spaMM fitme
 #' @importFrom spaMM get_any_IC

@@ -87,6 +87,8 @@
 <dd><p>The dimension of the basis used to represent the smooth term. The default depends on the number of variables that the smooth is a function of.</p></dd>
 <dt>gam_method</dt>
 <dd><p>The smoothing parameter estimation method. Default="GCV.Cp"</p></dd>
+<dt>...</dt>
+<dd><p>Further arguments for simulation function</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -105,10 +107,10 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">gam_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1449243</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.07283203</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1397652</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2044919</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "not computed"</span>
@@ -129,9 +131,9 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>     k = basis_dim)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimated degrees of freedom:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  total = 5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1.86  total = 5.86 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GCV score: 0.9842184     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GCV score: 1.11295     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>

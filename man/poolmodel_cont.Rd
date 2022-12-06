@@ -12,6 +12,8 @@ poolmodel_cont(data, arm, alpha = 0.025, ...)
 \item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1)}
 
 \item{alpha}{Type I error. Default=0.025}
+
+\item{...}{Further arguments for simulation function}
 }
 \value{
 List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model

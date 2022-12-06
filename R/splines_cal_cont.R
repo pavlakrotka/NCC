@@ -8,6 +8,7 @@
 #' @param unit_size Number of patients per calendar time unit Default=25
 #' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE
 #' @param bs_degree Degree of the piecewise polynomial. Default=3
+#' @param ... Further arguments for simulation function
 #'
 #' @importFrom stats lm
 #' @importFrom splines bs

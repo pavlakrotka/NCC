@@ -7,12 +7,14 @@
 #' @param alpha Type I error. Default=0.025
 #' @param unit_size Number of patients per calendar time unit Default=25
 #' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE
+#' @param ... Further arguments for simulation function
 #'
 #'
 #' @importFrom stats glm
 #' @importFrom stats pnorm
 #' @importFrom stats coef
 #' @importFrom stats confint
+#' @importFrom stats binomial
 #'
 #' @export
 #'
@@ -42,9 +44,9 @@ fixmodel_cal_bin <- function(data, arm, alpha=0.025, unit_size=25, ncc=TRUE, ...
 
   # fit logistic model
   if(length(unique(data_new$cal_time))==1){ # if only one calendar time unit in the data, don't use calendar time unit as covariate
-    mod <- glm(response ~ as.factor(treatment), data_new, family = "binomial")
+    mod <- glm(response ~ as.factor(treatment), data_new, family = binomial)
   } else {
-    mod <- glm(response ~ as.factor(treatment) + as.factor(cal_time), data_new, family = "binomial")
+    mod <- glm(response ~ as.factor(treatment) + as.factor(cal_time), data_new, family = binomial)
   }
   res <- summary(mod)
 

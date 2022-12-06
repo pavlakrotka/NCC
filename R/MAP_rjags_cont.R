@@ -17,6 +17,7 @@
 #' @param n.adapt needed for jags.model, defines the number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behaviour to maximize their efficiency
 #' @param weight weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP prior according to Schmidli 2014
 #' @param robustify Boolean.
+#' @param ... Further arguments for simulation function
 #'
 #' @importFrom RBesT automixfit
 #' @importFrom RBesT postmix

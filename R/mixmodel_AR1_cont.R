@@ -7,6 +7,7 @@
 #' @param alpha Type I error. Default=0.025
 #' @param ci Boolean. Whether confidence intervals should be computed. Default=FALSE
 #' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE
+#' @param ... Further arguments for simulation function
 #'
 #' @importFrom spaMM fitme
 #' @importFrom spaMM get_any_IC

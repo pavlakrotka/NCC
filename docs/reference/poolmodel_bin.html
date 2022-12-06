@@ -70,6 +70,8 @@
 <dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1)</p></dd>
 <dt>alpha</dt>
 <dd><p>Type I error. Default=0.025</p></dd>
+<dt>...</dt>
+<dd><p>Further arguments for simulation function</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -88,32 +90,32 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">poolmodel_bin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.05224626</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.002770042</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4962068</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.076872</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.08751414</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3583411</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.1164</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.897123</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Call:  glm(formula = response ~ as.factor(treatment), family = "binomial", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:  glm(formula = response ~ as.factor(treatment), family = binomial, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     data = data_new)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           (Intercept)  as.factor(treatment)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                1.0201                 0.4962  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 1.237                  1.077  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Degrees of Freedom: 299 Total (i.e. Null);  298 Residual</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Null Deviance:	    328.3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 325.6 	AIC: 329.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Null Deviance:	    282.8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 273.8 	AIC: 277.8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>

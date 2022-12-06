@@ -70,6 +70,8 @@
 <dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1)</p></dd>
 <dt>alpha</dt>
 <dd><p>Type I error. Default=0.025</p></dd>
+<dt>...</dt>
+<dd><p>Further arguments for simulation function</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -88,19 +90,19 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">sepmodel_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4824868</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.006880464</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.006645733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3519243</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.291418</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.0727177</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3047094</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6311309</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -109,7 +111,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           (Intercept)  as.factor(treatment)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              0.265827               0.006646  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.1085                 0.3519  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>

@@ -41,6 +41,8 @@ MAP_rjags_cont(
 \item{robustify}{Boolean.}
 
 \item{weight}{weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP prior according to Schmidli 2014}
+
+\item{...}{Further arguments for simulation function}
 }
 \value{
 containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment

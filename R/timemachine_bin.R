@@ -10,6 +10,7 @@
 #' @param tau_a ...
 #' @param tau_b ...
 #' @param bucket_size Number of patients per time bucket. Default=25
+#' @param ... Further arguments for simulation function
 #'
 #' @importFrom stats aggregate
 #' @importFrom stats quantile

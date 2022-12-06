@@ -23,6 +23,8 @@ TT_all_models(
 \item{endpoint}{Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints}
 
 \item{alpha}{Type I error. Default=0.025}
+
+\item{...}{Further arguments for simulation function}
 }
 \value{
 List containing an indicator whether the null hypothesis was rejected or not for the investigated treatment for all models

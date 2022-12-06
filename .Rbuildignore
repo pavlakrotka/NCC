@@ -3,3 +3,8 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^README.Rmd
+^examples.R
+^hexsticker.R
+^r_pkg.R
+^website.R

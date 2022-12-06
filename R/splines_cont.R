@@ -7,6 +7,7 @@
 #' @param alpha Type I error. Default=0.025
 #' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE
 #' @param bs_degree Degree of the piecewise polynomial. Default=3
+#' @param ... Further arguments for simulation function
 #'
 #' @importFrom stats lm
 #' @importFrom splines bs

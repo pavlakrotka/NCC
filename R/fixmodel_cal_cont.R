@@ -7,6 +7,7 @@
 #' @param alpha Type I error. Default=0.025
 #' @param unit_size Number of patients per calendar time unit Default=25
 #' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE
+#' @param ... Further arguments for simulation function
 #'
 #' @importFrom stats lm
 #' @importFrom stats pt

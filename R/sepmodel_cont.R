@@ -5,6 +5,7 @@
 #' @param data Simulated trial data, e.g. result from the `datasim_cont()` function
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
 #' @param alpha Type I error. Default=0.025
+#' @param ... Further arguments for simulation function
 #'
 #' @importFrom stats lm
 #' @importFrom stats pt

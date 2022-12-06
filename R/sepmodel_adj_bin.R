@@ -5,11 +5,13 @@
 #' @param data Simulated trial data, e.g. result from the `datasim_bin()` function
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
 #' @param alpha Type I error. Default=0.025
+#' @param ... Further arguments for simulation function
 #'
 #' @importFrom stats glm
 #' @importFrom stats pnorm
 #' @importFrom stats coef
 #' @importFrom stats confint
+#' @importFrom stats binomial
 #'
 #' @export
 #'
@@ -30,10 +32,10 @@ sepmodel_adj_bin <- function(data, arm, alpha=0.025, ...){
 
   # fit logistic model
   if(length(periods)==1){ # if only one period in the data, don't use period as covariate
-    mod <- glm(response ~ as.factor(treatment), data_new, family = "binomial")
+    mod <- glm(response ~ as.factor(treatment), data_new, family = binomial)
   } else {
 
-    mod <- glm(response ~ as.factor(treatment) + as.factor(period), data_new, family = "binomial")
+    mod <- glm(response ~ as.factor(treatment) + as.factor(period), data_new, family = binomial)
 
   }
   res <- summary(mod)

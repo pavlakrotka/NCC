@@ -29,6 +29,8 @@ gam_cont(
 \item{basis_dim}{The dimension of the basis used to represent the smooth term. The default depends on the number of variables that the smooth is a function of.}
 
 \item{gam_method}{The smoothing parameter estimation method. Default="GCV.Cp"}
+
+\item{...}{Further arguments for simulation function}
 }
 \value{
 List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model

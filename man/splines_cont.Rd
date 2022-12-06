@@ -16,6 +16,8 @@ splines_cont(data, arm, alpha = 0.025, ncc = TRUE, bs_degree = 3, ...)
 \item{ncc}{Boolean. Whether to include NCC data into the analysis. Default=TRUE}
 
 \item{bs_degree}{Degree of the piecewise polynomial. Default=3}
+
+\item{...}{Further arguments for simulation function}
 }
 \value{
 List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model

@@ -27,6 +27,8 @@
 
 sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "mixmodel", "MAP_rjags"), endpoint, perc_cores=0.9){
 
+  print(paste0("Starting the simulations. ", dim(scenarios)[1], " scenarios will be simulated. Starting time: ", Sys.time()))
+
   cores <- detectCores()
   cl <- makeCluster(floor(cores[1]*perc_cores)) # not to overload your computer
   registerDoParallel(cl)
@@ -108,7 +110,7 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
 
       result <- rbind(result, result_i)
 
-      print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done"))
+      print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done. Time: ", Sys.time()))
     }
 
      stopCluster(cl)
@@ -186,7 +188,7 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
 
       result <- rbind(result, result_i)
 
-      print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done"))
+      print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done. Time: ", Sys.time()))
 
     }
 
