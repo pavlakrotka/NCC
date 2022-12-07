@@ -105,30 +105,18 @@
 <span class="r-in"><span class="fu">mixmodel_cal_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> boundary (singular) fit: see help('isSingular')</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing profile confidence intervals ...</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>slightly lower deviances (diff=-2.27374e-13) detected</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Last two rows have identical or NA .zeta values: using minstep</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Last two rows have identical or NA .zeta values: using minstep</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>non-monotonic profile for .sig01</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>bad spline fit for .sig01: falling back to linear interpolation</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>collapsing to unique 'x' values</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing profile confidence intervals ...</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>slightly lower deviances (diff=-2.27374e-13) detected</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Last two rows have identical or NA .zeta values: using minstep</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Last two rows have identical or NA .zeta values: using minstep</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>non-monotonic profile for .sig01</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>bad spline fit for .sig01: falling back to linear interpolation</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>collapsing to unique 'x' values</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.03113901</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1525634</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2339388</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1326202</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.01093462</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.1200551</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4788122</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3852955</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
@@ -137,17 +125,17 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> Linear mixed model fit by REML ['lmerModLmerTest']</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Formula: response ~ as.factor(treatment) + (1 | cal_time)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Data: data_new</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> REML criterion at convergence: 1448.532</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> REML criterion at convergence: 1479.645</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Random effects:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Groups   Name        Std.Dev.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  cal_time (Intercept) 0.000   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Residual             1.022   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Residual             1.055   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of obs: 500, groups:  cal_time, 20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Fixed Effects:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           (Intercept)  as.factor(treatment)1  as.factor(treatment)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.1001                 0.1942                 0.3783  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.1548                 0.2258                 0.2589  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.2339  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.1326  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> optimizer (nloptwrap) convergence code: 0 (OK) ; 0 optimizer warnings; 1 lme4 warnings </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>

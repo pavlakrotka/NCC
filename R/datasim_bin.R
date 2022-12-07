@@ -9,8 +9,9 @@
 #' @param p0 Response in the control arm
 #' @param OR Vector with odds ratios for each treatment arm (of length num_arms)
 #' @param lambda Vector with strength of time trend in each arm (of length num_arms+1, as time trend in the control is also allowed)
-#' @param trend Indicates the time trend pattern ("linear", "stepwise", "stepwise_2" or "inv_u")
+#' @param trend Indicates the time trend pattern ("linear", "stepwise", "stepwise_2", "inv_u" or "seasonal")
 #' @param N_peak Point at which the inverted-u time trend switches direction in terms of overall sample size
+#' @param n_wave How many cycles (waves) should a seasonal trend have
 #' @param full Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses, input parameters) should be included (TRUE). Default=FALSE
 #'
 #' @importFrom stats na.omit
@@ -28,37 +29,7 @@
 #' @return Data frame: simulated trial data (Default, if full=FALSE) or List: simulated trial data, input parameters and additional information (if full=TRUE)
 #' @author Pavla Krotka, Marta Bofill Roig
 
-datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, trend, N_peak, full=FALSE){
-
-  # if (missing(n_total)==F & missing(num_arms)==F & missing(d)==F){
-  #
-  #   SS_matrix <- get_ss_matrix(n_total, num_arms, d)
-  #   alloc_ratios <- ifelse(!is.na(SS_matrix), 1, 0)
-  #
-  #   num_periods <- ncol(alloc_ratios) # total number of periods
-  #   num_arms <- nrow(alloc_ratios)-1 # total number of treatment arms
-  #
-  # } else if (missing(n_arm)==F & missing(alloc_ratios)==F){
-  #
-  #   d <- NULL
-  #
-  #   num_periods <- ncol(alloc_ratios) # total number of periods
-  #   num_arms <- nrow(alloc_ratios)-1 # total number of treatment arms
-  #
-  #   SS_matrix <- matrix(nrow = num_arms+1, ncol = num_periods)
-  #
-  #   for (i in 1:num_arms) { # get sample sizes for each arm
-  #     SS_matrix[i+1,] <- alloc_ratios[i+1,]/sum(alloc_ratios[i+1,], na.rm = T)*n_arm
-  #   }
-  #
-  #   SS_matrix[1,] <- na.omit(apply(SS_matrix, 2, unique)) # get sample sizes for control
-  #
-  #   alloc_ratios[is.na(alloc_ratios)] <- 0
-  #
-  # } else {
-  #   stop("Either n_total, num_arms and d or n_arm and alloc_ratios must be specified!")
-  # }
-
+datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, trend, N_peak, n_wave, full=FALSE){
 
   SS_matrix <- get_ss_matrix(num_arms, n_arm, d)
 
@@ -194,6 +165,20 @@ datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, tre
                                                                                               eval(sym(paste0("ind_trend", i, "_1")))[length(eval(sym(paste0("ind_trend", i, "_1"))))]))
 
       assign(paste0("all_trend", i), c(eval(sym(paste0("all_trend", i, "_1"))), eval(sym(paste0("all_trend", i, "_2")))))
+    }
+  }
+
+  if(trend=="seasonal"){
+    for (i in 0:num_arms) {
+      assign(paste0("ind_trend", i), seasonal_trend(j=eval(sym(paste0("j", i))),
+                                                    lambda = lambda[i+1],
+                                                    n_wave = n_wave,
+                                                    n_total = n_total))
+
+      assign(paste0("all_trend", i), seasonal_trend(j=j,
+                                                    lambda = lambda[i+1],
+                                                    n_wave = n_wave,
+                                                    n_total = n_total))
     }
   }
 

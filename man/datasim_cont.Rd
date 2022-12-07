@@ -15,6 +15,7 @@ datasim_cont(
   sigma,
   trend,
   N_peak,
+  n_wave,
   full = FALSE
 )
 }
@@ -35,9 +36,11 @@ datasim_cont(
 
 \item{sigma}{Residual variance}
 
-\item{trend}{Indicates the time trend pattern ("linear", "stepwise", "stepwise_2", or "inv_u")}
+\item{trend}{Indicates the time trend pattern ("linear", "stepwise", "stepwise_2", "inv_u" or "seasonal")}
 
 \item{N_peak}{Point at which the inverted-u time trend switches direction in terms of overall sample size}
+
+\item{n_wave}{How many cycles (waves) should a seasonal trend have}
 
 \item{full}{Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses, input parameters) should be included (TRUE). Default=FALSE}
 }
