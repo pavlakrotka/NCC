@@ -33,6 +33,7 @@ all_models(
   basis_dim = -1,
   gam_method = "GCV.Cp",
   bs_degree = 3,
+  poly_degree = 3,
   ...
 )
 }

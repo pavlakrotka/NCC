@@ -19,6 +19,8 @@
 
 sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "mixmodel", "MAP_rjags"), endpoint){
 
+  print(paste0("Starting the simulations. ", dim(scenarios)[1], " scenarios will be simulated. Starting time: ", Sys.time()))
+
   if (endpoint=="bin") {
     models <- models[models!="mixmodel"] # not implemented yet
   }
@@ -54,6 +56,7 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
                                                      sigma = scenarios$sigma[i],
                                                      trend = scenarios$trend[i],
                                                      N_peak = scenarios$N_peak[i],
+                                                     n_wave = scenarios$n_wave[i],
                                                      full = FALSE),
                                  arms = arms,
                                  models = models,
@@ -80,7 +83,8 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
                                  smoothing_basis = scenarios$smoothing_basis[i],
                                  basis_dim = scenarios$basis_dim[i],
                                  gam_method = scenarios$gam_method[i],
-                                 bs_degree = scenarios$bs_degree[i]))
+                                 bs_degree = scenarios$bs_degree[i],
+                                 poly_degree = scenarios$poly_degree[i]))
 
       result_i <- cbind(scenarios[i,],
                         study_arm = rep(arms, each = num_models),
@@ -91,7 +95,7 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
 
       result <- rbind(result, result_i)
 
-      print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done"))
+      print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done. Time: ", Sys.time()))
     }
   }
 
@@ -124,6 +128,7 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
                                                     lambda = lambda_i,
                                                     trend = scenarios$trend[i],
                                                     N_peak = scenarios$N_peak[i],
+                                                    n_wave = scenarios$n_wave[i],
                                                     full = FALSE),
                                  arms = arms,
                                  models = models,
@@ -150,7 +155,8 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
                                  smoothing_basis = scenarios$smoothing_basis[i],
                                  basis_dim = scenarios$basis_dim[i],
                                  gam_method = scenarios$gam_method[i],
-                                 bs_degree = scenarios$bs_degree[i]))
+                                 bs_degree = scenarios$bs_degree[i],
+                                 poly_degree = scenarios$poly_degree[i]))
 
       result_i <- cbind(scenarios[i,],
                         study_arm = rep(arms, each = num_models),
@@ -161,7 +167,7 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
 
       result <- rbind(result, result_i)
 
-      print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done"))
+      print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done. Time: ", Sys.time()))
 
     }
   }

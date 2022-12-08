@@ -69,6 +69,7 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                                                      sigma = scenarios$sigma[i],
                                                      trend = scenarios$trend[i],
                                                      N_peak = scenarios$N_peak[i],
+                                                     n_wave = scenarios$n_wave[i],
                                                      full = FALSE),
                                  arms = arms,
                                  models = models,
@@ -95,7 +96,8 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                                  smoothing_basis = scenarios$smoothing_basis[i],
                                  basis_dim = scenarios$basis_dim[i],
                                  gam_method = scenarios$gam_method[i],
-                                 bs_degree = scenarios$bs_degree[i])
+                                 bs_degree = scenarios$bs_degree[i],
+                                 poly_degree = scenarios$poly_degree[i])
 
                     }
 
@@ -148,6 +150,7 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                                                     lambda = lambda_i,
                                                     trend = scenarios$trend[i],
                                                     N_peak = scenarios$N_peak[i],
+                                                    n_wave = scenarios$n_wave[i],
                                                     full = FALSE),
                                  arms = arms,
                                  models = models,
@@ -174,7 +177,8 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                                  smoothing_basis = scenarios$smoothing_basis[i],
                                  basis_dim = scenarios$basis_dim[i],
                                  gam_method = scenarios$gam_method[i],
-                                 bs_degree = scenarios$bs_degree[i])
+                                 bs_degree = scenarios$bs_degree[i],
+                                 poly_degree = scenarios$poly_degree[i])
                     }
 
 
