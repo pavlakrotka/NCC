@@ -106,17 +106,20 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
       result_i <- cbind(scenarios[i,],
                         study_arm = rep(arms, each = num_models),
                         model = models,
-                        reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db))), ncol = nsim), na.rm = TRUE), # get power/T1E
-                        failed = rowSums(is.na(matrix(as.logical(unlist(unname(db))), ncol = nsim))),
-                        nsim = nsim)
+                        reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db[grep("reject_h0_", rownames(db)),]))), ncol = nsim), na.rm = TRUE), # get power/T1E
+                        bias = rowMeans(matrix(as.double(unlist(unname(db[grep("treat_effect", rownames(db)),]))), ncol = nsim)-theta_i[arms], na.rm = TRUE), # get bias
+                        MSE = rowMeans((matrix(as.double(unlist(unname(db[grep("treat_effect", rownames(db)),]))), ncol = nsim)-theta_i[arms])^2, na.rm = TRUE), # get MSE
+                        failed = rowSums(is.na(matrix(as.logical(unlist(unname(db[grep("reject_h0_", rownames(db)),]))), ncol = nsim))),
+                        nsim = nsim,
+                        row.names = NULL)
 
       result <- rbind(result, result_i)
 
       print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done. Time: ", Sys.time()))
     }
 
-     stopCluster(cl)
-      gc()
+    stopCluster(cl)
+    gc()
 
   }
 
@@ -186,9 +189,10 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
       result_i <- cbind(scenarios[i,],
                         study_arm = rep(arms, each = num_models),
                         model = models,
-                        reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db))), ncol = nsim), na.rm = TRUE), # get power/T1E
-                        failed = rowSums(is.na(matrix(as.logical(unlist(unname(db))), ncol = nsim))),
-                        nsim = nsim)
+                        reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db[grep("reject_h0_", rownames(db)),]))), ncol = nsim), na.rm = TRUE), # get power/T1E
+                        failed = rowSums(is.na(matrix(as.logical(unlist(unname(db[grep("reject_h0_", rownames(db)),]))), ncol = nsim))),
+                        nsim = nsim,
+                        row.names = NULL)
 
       result <- rbind(result, result_i)
 

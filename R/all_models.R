@@ -9,6 +9,8 @@
 #' @param alpha Type I error. Default=0.025
 #' @param ... Further arguments for simulation function
 #'
+#' @importFrom rlang try_fetch
+#'
 #' @keywords internal
 #'
 #' @export
@@ -46,34 +48,34 @@ all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel
   for (i in arms) {
     for (j in models) {
 
-      res_i_j <- list(try(do.call(paste0(j, "_", endpoint), list(data = data,
-                                                                 arm = i,
-                                                                 alpha = alpha,
-                                                                 unit_size = unit_size,
-                                                                 ncc = ncc,
-                                                                 opt = opt,
-                                                                 prior_prec_tau = prior_prec_tau,
-                                                                 n.samples = n.samples,
-                                                                 n.chains = n.chains,
-                                                                 n.iter = n.iter,
-                                                                 n.adapt = n.adapt,
-                                                                 robustify = robustify,
-                                                                 weight = weight,
-                                                                 ci = ci,
-                                                                 prec_delta = prec_delta,
-                                                                 prec_gamma = prec_gamma,
-                                                                 tau_a = tau_a,
-                                                                 tau_b = tau_b,
-                                                                 prec_a = prec_a,
-                                                                 prec_b = prec_b,
-                                                                 bucket_size = bucket_size,
-                                                                 smoothing_basis = smoothing_basis,
-                                                                 basis_dim = basis_dim,
-                                                                 gam_method = gam_method,
-                                                                 bs_degree = bs_degree,
-                                                                 poly_degree = poly_degree))$reject_h0, silent = TRUE))
+      res_i_j <- try_fetch(do.call(paste0(j, "_", endpoint), list(data = data,
+                                                                  arm = i,
+                                                                  alpha = alpha,
+                                                                  unit_size = unit_size,
+                                                                  ncc = ncc,
+                                                                  opt = opt,
+                                                                  prior_prec_tau = prior_prec_tau,
+                                                                  n.samples = n.samples,
+                                                                  n.chains = n.chains,
+                                                                  n.iter = n.iter,
+                                                                  n.adapt = n.adapt,
+                                                                  robustify = robustify,
+                                                                  weight = weight,
+                                                                  ci = ci,
+                                                                  prec_delta = prec_delta,
+                                                                  prec_gamma = prec_gamma,
+                                                                  tau_a = tau_a,
+                                                                  tau_b = tau_b,
+                                                                  prec_a = prec_a,
+                                                                  prec_b = prec_b,
+                                                                  bucket_size = bucket_size,
+                                                                  smoothing_basis = smoothing_basis,
+                                                                  basis_dim = basis_dim,
+                                                                  gam_method = gam_method,
+                                                                  bs_degree = bs_degree,
+                                                                  poly_degree = poly_degree))[c("reject_h0", "treat_effect")], error = function(cnd) list(reject_h0 = NA, treat_effect = NA))
 
-      names(res_i_j) <- paste0("reject_h0_", j, "_", i)
+      names(res_i_j) <- c(paste0("reject_h0_", j, "_", i), paste0("treat_effect_", j, "_", i))
 
       res <- append(res, res_i_j)
     }
