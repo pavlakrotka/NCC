@@ -57,24 +57,36 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
       theta_i <- as.numeric(scenarios[i, grepl("^theta\\d", names(scenarios))])
       lambda_i <- as.numeric(scenarios[i, grepl("^lambda\\d", names(scenarios))])
 
+      time_dep_effect_i <- datasim_cont(n_arm = scenarios$n_arm[i],
+                                        num_arms = scenarios$num_arms[i],
+                                        d = d_i,
+                                        period_blocks = scenarios$period_blocks[i],
+                                        mu0 = scenarios$mu0[i],
+                                        theta = theta_i,
+                                        lambda = lambda_i,
+                                        sigma = scenarios$sigma[i],
+                                        trend = scenarios$trend[i],
+                                        N_peak = scenarios$N_peak[i],
+                                        n_wave = scenarios$n_wave[i],
+                                        full = TRUE,
+                                        check = FALSE)$time_dep_effect
+
       db <- foreach(icount(nsim), .combine = cbind,
                     .packages = c("NCC")) %dopar% {
 
-                      data_aux <- datasim_cont(n_arm = scenarios$n_arm[i],
-                                               num_arms = scenarios$num_arms[i],
-                                               d = d_i,
-                                               period_blocks = scenarios$period_blocks[i],
-                                               mu0 = scenarios$mu0[i],
-                                               theta = theta_i,
-                                               lambda = lambda_i,
-                                               sigma = scenarios$sigma[i],
-                                               trend = scenarios$trend[i],
-                                               N_peak = scenarios$N_peak[i],
-                                               n_wave = scenarios$n_wave[i],
-                                               full = TRUE,
-                                               check = FALSE)
-
-                      all_models(data = data_aux$Data,
+                      all_models(data = datasim_cont(n_arm = scenarios$n_arm[i],
+                                                     num_arms = scenarios$num_arms[i],
+                                                     d = d_i,
+                                                     period_blocks = scenarios$period_blocks[i],
+                                                     mu0 = scenarios$mu0[i],
+                                                     theta = theta_i,
+                                                     lambda = lambda_i,
+                                                     sigma = scenarios$sigma[i],
+                                                     trend = scenarios$trend[i],
+                                                     N_peak = scenarios$N_peak[i],
+                                                     n_wave = scenarios$n_wave[i],
+                                                     full = FALSE,
+                                                     check = FALSE),
                                  arms = arms,
                                  models = models,
                                  endpoint = endpoint,
@@ -111,8 +123,8 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                         study_arm = rep(arms, each = num_models),
                         model = models,
                         reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db[grep("reject_h0_", rownames(db)),]))), ncol = nsim), na.rm = TRUE), # get power/T1E
-                        bias = rowMeans(matrix(as.double(unlist(unname(db[grep("treat_effect", rownames(db)),]))), ncol = nsim)-data_aux$time_dep_effect[arms], na.rm = TRUE), # get bias (using time dependent treatment effect)
-                        MSE = rowMeans((matrix(as.double(unlist(unname(db[grep("treat_effect", rownames(db)),]))), ncol = nsim)-data_aux$time_dep_effect[arms])^2, na.rm = TRUE), # get MSE (using time dependent treatment effect)
+                        bias = rowMeans(matrix(as.double(unlist(unname(db[grep("treat_effect", rownames(db)),]))), ncol = nsim)-time_dep_effect_i[arms], na.rm = TRUE), # get bias (using time dependent treatment effect)
+                        MSE = rowMeans((matrix(as.double(unlist(unname(db[grep("treat_effect", rownames(db)),]))), ncol = nsim)-time_dep_effect_i[arms])^2, na.rm = TRUE), # get MSE (using time dependent treatment effect)
                         failed = rowSums(is.na(matrix(as.logical(unlist(unname(db[grep("reject_h0_", rownames(db)),]))), ncol = nsim))),
                         nsim = nsim,
                         row.names = NULL)
@@ -146,23 +158,34 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
       OR_i <- as.numeric(scenarios[i, grepl("^OR\\d", names(scenarios))])
       lambda_i <- as.numeric(scenarios[i, grepl("^lambda\\d", names(scenarios))])
 
+      time_dep_effect_i <- datasim_bin(n_arm = scenarios$n_arm[i],
+                                       num_arms = scenarios$num_arms[i],
+                                       d = d_i,
+                                       period_blocks = scenarios$period_blocks[i],
+                                       p0 = scenarios$p0[i],
+                                       OR = OR_i,
+                                       lambda = lambda_i,
+                                       trend = scenarios$trend[i],
+                                       N_peak = scenarios$N_peak[i],
+                                       n_wave = scenarios$n_wave[i],
+                                       full = TRUE,
+                                       check = FALSE)$time_dep_effect
+
       db <- foreach(icount(nsim), .combine = cbind,
                     .packages = c("NCC")) %dopar% {
 
-                      data_aux <- datasim_bin(n_arm = scenarios$n_arm[i],
-                                              num_arms = scenarios$num_arms[i],
-                                              d = d_i,
-                                              period_blocks = scenarios$period_blocks[i],
-                                              p0 = scenarios$p0[i],
-                                              OR = OR_i,
-                                              lambda = lambda_i,
-                                              trend = scenarios$trend[i],
-                                              N_peak = scenarios$N_peak[i],
-                                              n_wave = scenarios$n_wave[i],
-                                              full = TRUE,
-                                              check = FALSE)
-
-                      all_models(data = data_aux$Data,
+                      all_models(data = datasim_bin(n_arm = scenarios$n_arm[i],
+                                                    num_arms = scenarios$num_arms[i],
+                                                    d = d_i,
+                                                    period_blocks = scenarios$period_blocks[i],
+                                                    p0 = scenarios$p0[i],
+                                                    OR = OR_i,
+                                                    lambda = lambda_i,
+                                                    trend = scenarios$trend[i],
+                                                    N_peak = scenarios$N_peak[i],
+                                                    n_wave = scenarios$n_wave[i],
+                                                    full = FALSE,
+                                                    check = FALSE),
                                  arms = arms,
                                  models = models,
                                  endpoint = endpoint,
@@ -198,8 +221,8 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                         study_arm = rep(arms, each = num_models),
                         model = models,
                         reject_h0 = rowMeans(matrix(as.logical(unlist(unname(db[grep("reject_h0_", rownames(db)),]))), ncol = nsim), na.rm = TRUE), # get power/T1E
-                        bias = rowMeans(matrix(as.double(unlist(unname(db[grep("treat_effect", rownames(db)),]))), ncol = nsim)-log(data_aux$time_dep_effect[arms]), na.rm = TRUE), # get bias (using time dependent treatment effect)
-                        MSE = rowMeans((matrix(as.double(unlist(unname(db[grep("treat_effect", rownames(db)),]))), ncol = nsim)-log(data_aux$time_dep_effect[arms]))^2, na.rm = TRUE), # get MSE (using time dependent treatment effect)
+                        bias = rowMeans(matrix(as.double(unlist(unname(db[grep("treat_effect", rownames(db)),]))), ncol = nsim)-log(time_dep_effect_i[arms]), na.rm = TRUE), # get bias (using time dependent treatment effect)
+                        MSE = rowMeans((matrix(as.double(unlist(unname(db[grep("treat_effect", rownames(db)),]))), ncol = nsim)-log(time_dep_effect_i[arms]))^2, na.rm = TRUE), # get MSE (using time dependent treatment effect)
                         failed = rowSums(is.na(matrix(as.logical(unlist(unname(db[grep("reject_h0_", rownames(db)),]))), ncol = nsim))),
                         nsim = nsim,
                         row.names = NULL)
