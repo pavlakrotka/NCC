@@ -29,8 +29,6 @@
 
 splines_cont <- function(data, arm, alpha=0.025, ncc=TRUE, bs_degree=3, ...){
 
-  data$j <- 1:nrow(data)
-
   min_period <- min(data[data$treatment==arm,]$period)
   max_period <- max(data[data$treatment==arm,]$period)
 

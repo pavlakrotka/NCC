@@ -93,7 +93,68 @@
 <span class="r-in">theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">piecewise_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in piecewise_cont(data = trial_data, arm = 3):</span> could not find function "piecewise_cont"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.008224811</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3307691</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.06077824</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.60076</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lm(formula = response ~ as.factor(treatment) + poly(j, degree = poly_degree, </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     raw = TRUE) * as.factor(period), data = data_new)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                   (Intercept)  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -4.978e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                         as.factor(treatment)1  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     1.558e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                         as.factor(treatment)2  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     4.345e-02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                         as.factor(treatment)3  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     3.308e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    poly(j, degree = poly_degree, raw = TRUE)1  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     5.760e-02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    poly(j, degree = poly_degree, raw = TRUE)2  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -1.307e-03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    poly(j, degree = poly_degree, raw = TRUE)3  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     8.016e-06  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(period)2  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -4.380e+00  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(period)3  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -1.212e+01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(period)4  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -4.534e+02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)1:as.factor(period)2  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     1.914e-02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)2:as.factor(period)2  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     9.505e-04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)3:as.factor(period)2  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -7.507e-06  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)1:as.factor(period)3  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     1.021e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)2:as.factor(period)3  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     6.868e-04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)3:as.factor(period)3  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -7.252e-06  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)1:as.factor(period)4  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     3.072e+00  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)2:as.factor(period)4  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -5.861e-03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)3:as.factor(period)4  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -2.559e-06  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>

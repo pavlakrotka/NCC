@@ -16,11 +16,12 @@ datasim_cont(
   trend,
   N_peak,
   n_wave,
-  full = FALSE
+  full = FALSE,
+  check = TRUE
 )
 }
 \arguments{
-\item{num_arms}{Number of treatment arms in the trial}
+\item{num_arms}{Number of experimental treatment arms in the trial}
 
 \item{n_arm}{Sample size per arm (assumed equal)}
 
@@ -34,7 +35,7 @@ datasim_cont(
 
 \item{lambda}{Vector with strength of time trend in each arm (of length num_arms+1, as time trend in the control is also allowed)}
 
-\item{sigma}{Residual variance}
+\item{sigma}{Standard deviation of the responses}
 
 \item{trend}{Indicates the time trend pattern ("linear", "stepwise", "stepwise_2", "inv_u" or "seasonal")}
 
@@ -43,6 +44,8 @@ datasim_cont(
 \item{n_wave}{How many cycles (waves) should a seasonal trend have}
 
 \item{full}{Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses, input parameters) should be included (TRUE). Default=FALSE}
+
+\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE}
 }
 \value{
 Data frame: simulated trial data (Default, if full=FALSE) or List: simulated trial data, input parameters and additional information (if full=TRUE)

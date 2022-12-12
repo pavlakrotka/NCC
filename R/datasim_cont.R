@@ -2,18 +2,19 @@
 #'
 #' @description Simulates data from a platform trial with binary endpoints and an arbitrary number of treatment arms entering sequentially. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the the sample size per arm (assumed equal).
 #'
-#' @param num_arms Number of treatment arms in the trial
+#' @param num_arms Number of experimental treatment arms in the trial
 #' @param n_arm Sample size per arm (assumed equal)
 #' @param d Vector with timings of adding new arms in terms of number of patients recruited to the trial so far (of length num_arms)
 #' @param period_blocks Number to multiply the number of active arms with in order to get the block size per period
 #' @param mu0 Response in the control arm. Default=0
 #' @param theta Vector with treatment effects for each treatment arm (of length num_arms)
 #' @param lambda Vector with strength of time trend in each arm (of length num_arms+1, as time trend in the control is also allowed)
-#' @param sigma Residual variance
+#' @param sigma Standard deviation of the responses
 #' @param trend Indicates the time trend pattern ("linear", "stepwise", "stepwise_2", "inv_u" or "seasonal")
 #' @param N_peak Point at which the inverted-u time trend switches direction in terms of overall sample size
 #' @param n_wave How many cycles (waves) should a seasonal trend have
 #' @param full Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses, input parameters) should be included (TRUE). Default=FALSE
+#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE
 #'
 #' @importFrom stats na.omit
 #' @importFrom stats rnorm
@@ -30,7 +31,60 @@
 #' @return Data frame: simulated trial data (Default, if full=FALSE) or List: simulated trial data, input parameters and additional information (if full=TRUE)
 #' @author Pavla Krotka, Marta Bofill Roig
 
-datasim_cont <- function(num_arms, n_arm, d, period_blocks=2, mu0=0, theta, lambda, sigma, trend, N_peak, n_wave, full=FALSE){
+datasim_cont <- function(num_arms, n_arm, d, period_blocks=2, mu0=0, theta, lambda, sigma, trend, N_peak, n_wave, full=FALSE, check=TRUE){
+
+  if (check) {
+    if(!is.numeric(num_arms) | length(num_arms)!=1){
+      stop("Number of experimental treatment arms (`num_arms`) must be one number!")
+    }
+
+    if(!is.numeric(n_arm) | length(n_arm)!=1){
+      stop("Sample size per experimental treatment arm (`n_arm`) must be one number! Equal sample sizes in all experimental arms are assumed!")
+    }
+
+    if (!is.numeric(d) | length(d)!=num_arms | d[1]!=0) {
+      stop("Timing of adding new experimental arms (`d`) must be a numeric vector of length `num_arms` and the first entry must be 0!")
+    }
+
+    if(!is.numeric(period_blocks) | length(period_blocks)!=1){
+      stop("`period_blocks` must be one number!")
+    }
+
+    if(!is.numeric(mu0) | length(mu0)!=1){
+      stop("Response in the control arm (`mu0`) must be one number!")
+    }
+
+    if (!is.numeric(theta) | length(theta)!=num_arms) {
+      stop("Vector with treatment effects (`theta`) must be a numeric vector of length `num_arms` and must be ordered by the entry time of the treatment arms
+           (i.e., the first entry in the vector corresponds to the effect of the first experimental treatment arm etc.)!")
+    }
+
+    if (!is.numeric(lambda) | length(lambda)!=(num_arms+1)) {
+      stop("Vector with strength of time trend in each arm (`lambda`) must be a numeric vector of length `num_arms`+1 and must be ordered by the entry time of the treatment arms
+           (i.e., the first entry in the vector corresponds to the time trend in the control arm, second entry to the time trend in the first treatment arm etc.)!")
+    }
+
+    if(!is.numeric(sigma) | length(sigma)!=1){
+      stop("Standard deviation of the responses (`sigma`) must be one number!")
+    }
+
+    if((trend %in% c("linear", "stepwise", "stepwise_2", "inv_u", "seasonal")==FALSE) | length(trend)!=1){
+      stop("Time trend pattern (`trend`) must be one of the following strings: 'linear', 'stepwise', 'stepwise_2', 'inv_u', 'seasonal'!")
+    }
+
+    if(trend=="inv_u"){
+      if(!is.numeric(N_peak) | length(N_peak)!=1){
+        stop("Point at which the inverted-u time trend switches direction (`N_peak`) must be one number!")
+      }
+    }
+
+    if(trend=="seasonal"){
+      if(!is.numeric(n_wave) | length(n_wave)!=1){
+        stop("Number of cycles in the seasonal trend (`n_wave`) must be one number!")
+      }
+    }
+
+  }
 
   SS_matrix <- get_ss_matrix(num_arms, n_arm, d)
 
@@ -245,7 +299,8 @@ datasim_cont <- function(num_arms, n_arm, d, period_blocks=2, mu0=0, theta, lamb
                 trend = trend))
 
   } else {
-    Data <- data.frame(response = X,
+    Data <- data.frame(j = c(1:n_total),
+                       response = X,
                        treatment = t,
                        period = rep(1:num_periods, N_period))
     return(Data)

@@ -32,8 +32,6 @@
 
 gam_cont <- function(data, arm, alpha=0.025, ci = FALSE, smoothing_basis = "tp", basis_dim = -1, gam_method = "GCV.Cp", ...){
 
-  data$j <- 1:nrow(data)
-
   #min_period <- min(data[data$treatment==arm,]$period)
   max_period <- max(data[data$treatment==arm,]$period)
 

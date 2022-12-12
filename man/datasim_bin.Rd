@@ -15,7 +15,8 @@ datasim_bin(
   trend,
   N_peak,
   n_wave,
-  full = FALSE
+  full = FALSE,
+  check = TRUE
 )
 }
 \arguments{
@@ -40,6 +41,8 @@ datasim_bin(
 \item{n_wave}{How many cycles (waves) should a seasonal trend have}
 
 \item{full}{Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses, input parameters) should be included (TRUE). Default=FALSE}
+
+\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE}
 }
 \value{
 Data frame: simulated trial data (Default, if full=FALSE) or List: simulated trial data, input parameters and additional information (if full=TRUE)

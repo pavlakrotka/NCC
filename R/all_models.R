@@ -73,7 +73,8 @@ all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel
                                                                   basis_dim = basis_dim,
                                                                   gam_method = gam_method,
                                                                   bs_degree = bs_degree,
-                                                                  poly_degree = poly_degree))[c("reject_h0", "treat_effect")], error = function(cnd) list(reject_h0 = NA, treat_effect = NA))
+                                                                  poly_degree = poly_degree,
+                                                                  check = FALSE))[c("reject_h0", "treat_effect")], error = function(cnd) list(reject_h0 = NA, treat_effect = NA))
 
       names(res_i_j) <- c(paste0("reject_h0_", j, "_", i), paste0("treat_effect_", j, "_", i))
 

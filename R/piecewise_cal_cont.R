@@ -30,7 +30,6 @@
 
 piecewise_cal_cont <- function(data, arm, alpha=0.025, unit_size=25, ncc=TRUE, poly_degree=3, ...){
 
-  data$j <- 1:nrow(data)
   data$cal_time <- rep(c(1:ceiling((nrow(data)/unit_size))), each=unit_size)[1:nrow(data)]
 
   min_unit <- min(data[data$treatment==arm,]$cal_time)
