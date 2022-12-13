@@ -66,6 +66,7 @@
   ci <span class="op">=</span> <span class="cn">FALSE</span>,
   unit_size <span class="op">=</span> <span class="fl">25</span>,
   ncc <span class="op">=</span> <span class="cn">TRUE</span>,
+  check <span class="op">=</span> <span class="cn">TRUE</span>,
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
     </div>
@@ -73,7 +74,7 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>data</dt>
-<dd><p>Simulated trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function</p></dd>
+<dd><p>Simulated trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function. Must contain columns named 'treatment' and 'response'</p></dd>
 <dt>arm</dt>
 <dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1)</p></dd>
 <dt>alpha</dt>
@@ -84,6 +85,8 @@
 <dd><p>Number of patients per calendar time unit Default=25</p></dd>
 <dt>ncc</dt>
 <dd><p>Boolean. Whether to include NCC data into the analysis. Default=TRUE</p></dd>
+<dt>check</dt>
+<dd><p>Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE</p></dd>
 <dt>...</dt>
 <dd><p>Further arguments for simulation function</p></dd>
 </dl></div>
@@ -103,48 +106,38 @@
 <span class="r-in">theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">mixmodel_cal_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> boundary (singular) fit: see help('isSingular')</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing profile confidence intervals ...</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Last two rows have identical or NA .zeta values: using minstep</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>non-monotonic profile for .sig01</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>bad spline fit for .sig01: falling back to linear interpolation</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>collapsing to unique 'x' values</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing profile confidence intervals ...</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Last two rows have identical or NA .zeta values: using minstep</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>non-monotonic profile for .sig01</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>bad spline fit for .sig01: falling back to linear interpolation</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>collapsing to unique 'x' values</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.05502242</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.001745094</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1959722</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3617568</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.04345857</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1220353</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.435403</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6088765</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Linear mixed model fit by REML ['lmerModLmerTest']</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Formula: response ~ as.factor(treatment) + (1 | cal_time)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Data: data_new</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> REML criterion at convergence: 1426.234</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> REML criterion at convergence: 1423.87</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Random effects:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Groups   Name        Std.Dev.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  cal_time (Intercept) 0.0000  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Residual             0.9995  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  cal_time (Intercept) 0.08238 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Residual             0.99422 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of obs: 500, groups:  cal_time, 20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Fixed Effects:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           (Intercept)  as.factor(treatment)1  as.factor(treatment)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.1213                 0.4299                 0.2499  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.02686                0.23567                0.34302  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.1960  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> optimizer (nloptwrap) convergence code: 0 (OK) ; 0 optimizer warnings; 1 lme4 warnings </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.36176  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>

@@ -11,11 +11,12 @@ splines_cal_cont(
   unit_size = 25,
   ncc = TRUE,
   bs_degree = 3,
+  check = TRUE,
   ...
 )
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function}
+\item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment', 'response' and 'j'}
 
 \item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1)}
 
@@ -26,6 +27,8 @@ splines_cal_cont(
 \item{ncc}{Boolean. Whether to include NCC data into the analysis. Default=TRUE}
 
 \item{bs_degree}{Degree of the piecewise polynomial. Default=3}
+
+\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE}
 
 \item{...}{Further arguments for simulation function}
 }

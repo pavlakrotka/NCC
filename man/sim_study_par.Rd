@@ -24,6 +24,8 @@ sim_study_par(
 \item{models}{Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior")}
 
 \item{endpoint}{Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints}
+
+\item{perc_cores}{What percentage of available cores should be used for the simulations. Default=0.9}
 }
 \value{
 Data frame with all considered scenarios and corresponding results

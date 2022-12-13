@@ -2,11 +2,12 @@
 #'
 #' @description Performs linear regression taking into account all trial data until the arm under study leaves the trial and adjusting for time using regression splines with knots placed according to periods
 #'
-#' @param data Simulated trial data, e.g. result from the `datasim_cont()` function
+#' @param data Simulated trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response', 'period' and 'j'
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
 #' @param alpha Type I error. Default=0.025
 #' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE
 #' @param bs_degree Degree of the piecewise polynomial. Default=3
+#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE
 #' @param ... Further arguments for simulation function
 #'
 #' @importFrom stats lm
@@ -27,7 +28,29 @@
 #' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
 #' @author Pavla Krotka
 
-splines_cont <- function(data, arm, alpha=0.025, ncc=TRUE, bs_degree=3, ...){
+splines_cont <- function(data, arm, alpha=0.025, ncc=TRUE, bs_degree=3, check=TRUE, ...){
+
+  if (check) {
+    if (!is.data.frame(data) | sum(c("treatment", "response", "period", "j") %in% colnames(data))!=4) {
+      stop("The data frame with trial data must contain the columns 'treatment', 'response', 'period' and 'j'!")
+    }
+
+    if(!is.numeric(arm) | length(arm)!=1){
+      stop("The evaluated treatment arm (`arm`) must be one number!")
+    }
+
+    if(!is.numeric(alpha) | length(alpha)!=1){
+      stop("The significance level (`alpha`) must be one number!")
+    }
+
+    if(!is.logical(ncc) | length(ncc)!=1){
+      stop("The indicator of including NCC data to the analysis (`ncc`) must be TRUE or FALSE!")
+    }
+
+    if(!is.numeric(bs_degree) | length(bs_degree)!=1){
+      stop("Degree of the piecewise polynomial (`bs_degree`) must be one number!")
+    }
+  }
 
   min_period <- min(data[data$treatment==arm,]$period)
   max_period <- max(data[data$treatment==arm,]$period)

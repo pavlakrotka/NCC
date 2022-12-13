@@ -59,19 +59,21 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fixmodel_cont</span><span class="op">(</span><span class="va">data</span>, <span class="va">arm</span>, alpha <span class="op">=</span> <span class="fl">0.025</span>, ncc <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fixmodel_cont</span><span class="op">(</span><span class="va">data</span>, <span class="va">arm</span>, alpha <span class="op">=</span> <span class="fl">0.025</span>, ncc <span class="op">=</span> <span class="cn">TRUE</span>, check <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>data</dt>
-<dd><p>Simulated trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function</p></dd>
+<dd><p>Simulated trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function. Must contain columns named 'treatment', 'response' and 'period'</p></dd>
 <dt>arm</dt>
 <dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1)</p></dd>
 <dt>alpha</dt>
 <dd><p>Type I error. Default=0.025</p></dd>
 <dt>ncc</dt>
 <dd><p>Boolean. Whether to include NCC data into the analysis. Default=TRUE</p></dd>
+<dt>check</dt>
+<dd><p>Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE</p></dd>
 <dt>...</dt>
 <dd><p>Further arguments for simulation function</p></dd>
 </dl></div>
@@ -92,16 +94,16 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">fixmodel_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.01655777</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.0222127</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3005026</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2768784</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.02417515</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.006927116</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5768301</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5468298</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
@@ -114,11 +116,11 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           (Intercept)  as.factor(treatment)1  as.factor(treatment)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              -0.03406                0.35686                0.50298  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.05121                0.38620                0.25456  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3     as.factor(period)2     as.factor(period)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.30050                0.04537                0.10305  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.27688               -0.07498                0.25619  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    as.factor(period)4  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.06236  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.06035  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>

@@ -4,10 +4,18 @@
 \alias{mixmodel_AR1_cont}
 \title{Model-based analysis for continuous data adjusting for periods as a random factor with AR1 correlation structure}
 \usage{
-mixmodel_AR1_cont(data, arm, alpha = 0.025, ci = FALSE, ncc = TRUE, ...)
+mixmodel_AR1_cont(
+  data,
+  arm,
+  alpha = 0.025,
+  ci = FALSE,
+  ncc = TRUE,
+  check = TRUE,
+  ...
+)
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function}
+\item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment', 'response' and 'period'}
 
 \item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1)}
 
@@ -16,6 +24,8 @@ mixmodel_AR1_cont(data, arm, alpha = 0.025, ci = FALSE, ncc = TRUE, ...)
 \item{ci}{Boolean. Whether confidence intervals should be computed. Default=FALSE}
 
 \item{ncc}{Boolean. Whether to include NCC data into the analysis. Default=TRUE}
+
+\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE}
 
 \item{...}{Further arguments for simulation function}
 }

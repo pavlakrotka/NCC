@@ -4,10 +4,18 @@
 \alias{fixmodel_cal_bin}
 \title{Model-based analysis for binary data adjusting for calendar time units}
 \usage{
-fixmodel_cal_bin(data, arm, alpha = 0.025, unit_size = 25, ncc = TRUE, ...)
+fixmodel_cal_bin(
+  data,
+  arm,
+  alpha = 0.025,
+  unit_size = 25,
+  ncc = TRUE,
+  check = TRUE,
+  ...
+)
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} function}
+\item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} function. Must contain columns named 'treatment' and 'response'}
 
 \item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1)}
 
@@ -16,6 +24,8 @@ fixmodel_cal_bin(data, arm, alpha = 0.025, unit_size = 25, ncc = TRUE, ...)
 \item{unit_size}{Number of patients per calendar time unit Default=25}
 
 \item{ncc}{Boolean. Whether to include NCC data into the analysis. Default=TRUE}
+
+\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE}
 
 \item{...}{Further arguments for simulation function}
 }

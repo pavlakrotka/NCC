@@ -7,6 +7,7 @@
 #' @param arms Vector with treatment arms to perform inference on. Default - all arms except the first one
 #' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior")
 #' @param endpoint Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints
+#' @param perc_cores What percentage of available cores should be used for the simulations. Default=0.9
 #'
 #' @importFrom parallel detectCores
 #' @importFrom parallel makeCluster
@@ -27,15 +28,49 @@
 
 sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "mixmodel", "MAP_rjags"), endpoint, perc_cores=0.9){
 
+  if(!is.numeric(nsim) | length(nsim)!=1){
+    stop("Number of replications (`nsim`) must be one number!")
+  }
+
+  if(!is.numeric(arms)){
+    stop("Experimental treatment arms to be eveluated (`arms`) must be a numeric vector!")
+  }
+
+  if((endpoint %in% c("cont", "bin")==FALSE) | length(endpoint)!=1){
+    stop("Endpoint indicator (`endpoint`) must be one of the following strings: 'cont', 'bin'!")
+  }
+
+  if(endpoint=="cont" & sum(models %in% c("fixmodel", "fixmodel_cal", "gam", "MAP_rjags",
+                                          "mixmodel", "mixmodel_cal", "mixmodel_AR1", "mixmodel_AR1_cal",
+                                          "piecewise", "piecewise_cal", "poolmodel", "sepmodel", "sepmodel_adj",
+                                          "splines", "splines_cal", "timemachine")==FALSE)>0){
+    stop("For continuous endpoints, only the following models are implemented: 'fixmodel', 'fixmodel_cal', 'gam', 'MAP_rjags',
+                                          'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal',
+                                          'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj',
+                                          'splines', 'splines_cal', 'timemachine'.
+         The argument `models` must contain only these strings!")
+  }
+
+  if(endpoint=="bin" & sum(models %in% c("fixmodel", "fixmodel_cal", "MAP_rjags", "poolmodel", "sepmodel", "sepmodel_adj", "timemachine")==FALSE)>0){
+    stop("For binary endpoints, only the following models are implemented: 'fixmodel', 'fixmodel_cal', 'MAP_rjags', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.
+         The argument `models` must contain only these strings!")
+  }
+
+  if(!is.numeric(perc_cores) | length(perc_cores)!=1 | perc_cores>=1 | perc_cores<=0){
+    stop("Percentage of cores to be used for simulations (`perc_cores`) must be one number between 0 and 1!")
+  }
+
+
+
+
+
+
   print(paste0("Starting the simulations. ", dim(scenarios)[1], " scenarios will be simulated. Starting time: ", Sys.time()))
 
   cores <- detectCores()
   cl <- makeCluster(floor(cores[1]*perc_cores)) # not to overload your computer
   registerDoParallel(cl)
 
-  if (endpoint=="bin") {
-    models <- models[models!="mixmodel"] # not implemented yet
-  }
 
   models <- sort(models)
 
@@ -53,9 +88,9 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
 
       arms <- sort(arms)
 
-      d_i <- as.numeric(scenarios[i, grepl("^d\\d", names(scenarios))])
-      theta_i <- as.numeric(scenarios[i, grepl("^theta\\d", names(scenarios))])
-      lambda_i <- as.numeric(scenarios[i, grepl("^lambda\\d", names(scenarios))])
+      d_i <- as.numeric(scenarios[i, grepl("^d\\d", names(scenarios))])[1:scenarios[i,]$num_arms]
+      theta_i <- as.numeric(scenarios[i, grepl("^theta\\d", names(scenarios))])[1:scenarios[i,]$num_arms]
+      lambda_i <- as.numeric(scenarios[i, grepl("^lambda\\d", names(scenarios))])[1:(scenarios[i,]$num_arms+1)]
 
       time_dep_effect_i <- datasim_cont(n_arm = scenarios$n_arm[i],
                                         num_arms = scenarios$num_arms[i],
@@ -154,9 +189,9 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
 
       arms <- sort(arms)
 
-      d_i <- as.numeric(scenarios[i, grepl("^d\\d", names(scenarios))])
-      OR_i <- as.numeric(scenarios[i, grepl("^OR\\d", names(scenarios))])
-      lambda_i <- as.numeric(scenarios[i, grepl("^lambda\\d", names(scenarios))])
+      d_i <- as.numeric(scenarios[i, grepl("^d\\d", names(scenarios))])[1:scenarios[i,]$num_arms]
+      OR_i <- as.numeric(scenarios[i, grepl("^OR\\d", names(scenarios))])[1:scenarios[i,]$num_arms]
+      lambda_i <- as.numeric(scenarios[i, grepl("^lambda\\d", names(scenarios))])[1:(scenarios[i,]$num_arms+1)]
 
       time_dep_effect_i <- datasim_bin(n_arm = scenarios$n_arm[i],
                                        num_arms = scenarios$num_arms[i],

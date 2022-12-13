@@ -7,8 +7,7 @@
 all_models(
   data,
   arms,
-  models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAP_rjags",
-    "mixmodel"),
+  models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAP_rjags"),
   endpoint,
   alpha = 0.025,
   unit_size = 250,
@@ -33,8 +32,7 @@ all_models(
   basis_dim = -1,
   gam_method = "GCV.Cp",
   bs_degree = 3,
-  poly_degree = 3,
-  ...
+  poly_degree = 3
 )
 }
 \arguments{
@@ -47,14 +45,12 @@ all_models(
 \item{endpoint}{Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints}
 
 \item{alpha}{Type I error. Default=0.025}
-
-\item{...}{Further arguments for simulation function}
 }
 \value{
 List containing an indicator whether the null hypothesis was rejected or not for the investigated treatment for all models
 }
 \description{
-Analyzes given data using the fixed effect model, pooled and separate analyses, and timemachine and MAP prior approach. Performs inference for all treatment arms in the trial except for the first one
+Analyzes given data using different models as indicated by the user. Performs inference for indicated experimental treatment arms.
 }
 \examples{
 

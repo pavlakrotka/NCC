@@ -12,11 +12,12 @@ gam_cont(
   smoothing_basis = "tp",
   basis_dim = -1,
   gam_method = "GCV.Cp",
+  check = TRUE,
   ...
 )
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function}
+\item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment', 'response' and 'period'}
 
 \item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1)}
 
@@ -29,6 +30,8 @@ gam_cont(
 \item{basis_dim}{The dimension of the basis used to represent the smooth term. The default depends on the number of variables that the smooth is a function of.}
 
 \item{gam_method}{The smoothing parameter estimation method. Default="GCV.Cp"}
+
+\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE}
 
 \item{...}{Further arguments for simulation function}
 }
@@ -43,7 +46,7 @@ Performs analysis using a generalized additive model taking into account all tri
 trial_data <- datasim_cont(num_arms = 3, n_arm = 100, d = c(0, 100, 250),
 theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear")
 
-gam_cont(data = trial_data, arm = 3)
+gam_cont(data = trial_data, arm = 3, ci = TRUE)
 
 }
 \author{

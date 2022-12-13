@@ -59,13 +59,21 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">piecewise_cont</span><span class="op">(</span><span class="va">data</span>, <span class="va">arm</span>, alpha <span class="op">=</span> <span class="fl">0.025</span>, ncc <span class="op">=</span> <span class="cn">TRUE</span>, poly_degree <span class="op">=</span> <span class="fl">3</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">piecewise_cont</span><span class="op">(</span>
+  <span class="va">data</span>,
+  <span class="va">arm</span>,
+  alpha <span class="op">=</span> <span class="fl">0.025</span>,
+  ncc <span class="op">=</span> <span class="cn">TRUE</span>,
+  poly_degree <span class="op">=</span> <span class="fl">3</span>,
+  check <span class="op">=</span> <span class="cn">TRUE</span>,
+  <span class="va">...</span>
+<span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>data</dt>
-<dd><p>Simulated trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function</p></dd>
+<dd><p>Simulated trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function. Must contain columns named 'treatment', 'response', 'period' and 'j'</p></dd>
 <dt>arm</dt>
 <dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1)</p></dd>
 <dt>alpha</dt>
@@ -74,6 +82,8 @@
 <dd><p>Boolean. Whether to include NCC data into the analysis. Default=TRUE</p></dd>
 <dt>poly_degree</dt>
 <dd><p>Degree of the piecewise polynomial. Default=3</p></dd>
+<dt>check</dt>
+<dd><p>Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE</p></dd>
 <dt>...</dt>
 <dd><p>Further arguments for simulation function</p></dd>
 </dl></div>
@@ -94,16 +104,16 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">piecewise_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.008224811</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.000743765</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3307691</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4345464</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.06077824</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1673463</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.60076</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7017466</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
@@ -116,43 +126,43 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                   (Intercept)  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -4.978e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     2.981e-01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                         as.factor(treatment)1  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     1.558e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     5.322e-01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                         as.factor(treatment)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     4.345e-02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     5.745e-01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                         as.factor(treatment)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     3.308e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     4.345e-01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    poly(j, degree = poly_degree, raw = TRUE)1  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     5.760e-02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -3.749e-02  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    poly(j, degree = poly_degree, raw = TRUE)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -1.307e-03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     1.016e-03  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    poly(j, degree = poly_degree, raw = TRUE)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     8.016e-06  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -7.364e-06  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(period)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -4.380e+00  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     7.741e+00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(period)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -1.212e+01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     4.018e+01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(period)4  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -4.534e+02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -2.866e+02  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)1:as.factor(period)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     1.914e-02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -1.157e-01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)2:as.factor(period)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     9.505e-04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -9.316e-05  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)3:as.factor(period)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -7.507e-06  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     5.573e-06  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)1:as.factor(period)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     1.021e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -3.594e-01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)2:as.factor(period)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     6.868e-04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     2.641e-04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)3:as.factor(period)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -7.252e-06  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     6.010e-06  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)1:as.factor(period)4  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     3.072e+00  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     1.891e+00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)2:as.factor(period)4  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -5.861e-03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -4.991e-03  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)3:as.factor(period)4  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                    -2.559e-06  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                     1.019e-05  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>

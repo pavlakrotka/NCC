@@ -1,13 +1,12 @@
 #' Wrapper function for simulations analyzing given data with all models
 #'
-#' @description Analyzes given data using the fixed effect model, pooled and separate analyses, and timemachine and MAP prior approach. Performs inference for all treatment arms in the trial except for the first one
+#' @description Analyzes given data using different models as indicated by the user. Performs inference for indicated experimental treatment arms.
 #'
 #' @param data Simulated trial data, e.g. result from the `datasim_bin()` or `datasim_cont()` function
 #' @param arms Vector with treatment arms to perform inference on. Default - all arms except the first one
 #' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAP_rjags")
 #' @param endpoint Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints
 #' @param alpha Type I error. Default=0.025
-#' @param ... Further arguments for simulation function
 #'
 #' @importFrom rlang try_fetch
 #'
@@ -27,18 +26,14 @@
 #' @author Pavla Krotka
 
 
-all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAP_rjags", "mixmodel"), endpoint, alpha = 0.025,
+all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAP_rjags"), endpoint, alpha = 0.025,
                        unit_size = 250,
                        ncc = TRUE,
                        opt = 1, prior_prec_tau = 1, n.samples = 1000, n.chains = 4, n.iter = 4000, n.adapt = 1000, robustify = TRUE, weight = 0.1,
                        ci = FALSE,
                        prec_delta = 0.001, prec_gamma = 0.001, tau_a = 0.1, tau_b = 0.01, prec_a = 0.001, prec_b = 0.001, bucket_size = 25,
                        smoothing_basis = "tp", basis_dim = -1, gam_method = "GCV.Cp",
-                       bs_degree = 3, poly_degree = 3, ...){
-
-  if (endpoint=="bin") {
-    models <- models[models!="mixmodel"]
-  }
+                       bs_degree = 3, poly_degree = 3){
 
   arms <- sort(arms)
   models <- sort(models)

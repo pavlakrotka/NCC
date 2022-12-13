@@ -66,6 +66,7 @@
   ci <span class="op">=</span> <span class="cn">FALSE</span>,
   unit_size <span class="op">=</span> <span class="fl">25</span>,
   ncc <span class="op">=</span> <span class="cn">TRUE</span>,
+  check <span class="op">=</span> <span class="cn">TRUE</span>,
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
     </div>
@@ -73,7 +74,7 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>data</dt>
-<dd><p>Simulated trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function</p></dd>
+<dd><p>Simulated trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function. Must contain columns named 'treatment' and 'response'</p></dd>
 <dt>arm</dt>
 <dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1)</p></dd>
 <dt>alpha</dt>
@@ -84,6 +85,8 @@
 <dd><p>Number of patients per calendar time unit Default=25</p></dd>
 <dt>ncc</dt>
 <dd><p>Boolean. Whether to include NCC data into the analysis. Default=TRUE</p></dd>
+<dt>check</dt>
+<dd><p>Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE</p></dd>
 <dt>...</dt>
 <dd><p>Further arguments for simulation function</p></dd>
 </dl></div>
@@ -104,16 +107,16 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">mixmodel_AR1_cal_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.007009016</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.002171444</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2926288</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3431246</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.05954605</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1079557</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5257084</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5782906</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
@@ -126,24 +129,24 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> family: gaussian( link = identity ) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ------------ Fixed effects (beta) ------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       Estimate Cond. SE t-value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)            0.02588  0.06853  0.3776</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)1  0.36346  0.11869  3.0624</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)2  0.40274  0.11869  3.3933</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3  0.29263  0.11869  2.4655</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)            0.03855  0.06914  0.5576</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)1  0.29395  0.11975  2.4547</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)2  0.09979  0.11975  0.8333</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3  0.34312  0.11975  2.8653</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  --------------- Random effects ---------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Family: gaussian( link = identity ) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    --- Correlation parameters:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1.ARphi </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.5142464 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1.ARphi </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.2121111 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            --- Variance parameters ('lambda'):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lambda = var(u) for u ~ Gaussian; </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    cal_time  :  2.667e-06  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    cal_time  :  2.764e-06  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # of obs: 500; # of groups: cal_time, 20 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  -------------- Residual variance  ------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> phi estimate was 0.93909 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> phi estimate was 0.956021 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ------------- Likelihood values  -------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         logLik</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> p_v(h) (marginal L): -693.7589</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> p_v(h) (marginal L): -698.2261</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>

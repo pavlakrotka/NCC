@@ -66,6 +66,7 @@
   unit_size <span class="op">=</span> <span class="fl">25</span>,
   ncc <span class="op">=</span> <span class="cn">TRUE</span>,
   poly_degree <span class="op">=</span> <span class="fl">3</span>,
+  check <span class="op">=</span> <span class="cn">TRUE</span>,
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
     </div>
@@ -73,7 +74,7 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>data</dt>
-<dd><p>Simulated trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function</p></dd>
+<dd><p>Simulated trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function. Must contain columns named 'treatment', 'response' and 'j'</p></dd>
 <dt>arm</dt>
 <dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1)</p></dd>
 <dt>alpha</dt>
@@ -84,6 +85,8 @@
 <dd><p>Boolean. Whether to include NCC data into the analysis. Default=TRUE</p></dd>
 <dt>poly_degree</dt>
 <dd><p>Degree of the piecewise polynomial. Default=3</p></dd>
+<dt>check</dt>
+<dd><p>Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE</p></dd>
 <dt>...</dt>
 <dd><p>Further arguments for simulation function</p></dd>
 </dl></div>
@@ -104,16 +107,16 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">piecewise_cal_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.003675906</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.02223449</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3738407</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2635133</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1010373</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.006544591</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6466442</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5204819</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
@@ -126,171 +129,171 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                      (Intercept)  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.116e+00  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.707e+00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(treatment)1  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        5.606e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        2.093e-01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(treatment)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        2.663e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        5.147e-01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(treatment)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        3.738e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        2.635e-01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       poly(j, degree = poly_degree, raw = TRUE)1  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -4.468e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        3.868e-01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       poly(j, degree = poly_degree, raw = TRUE)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        3.572e-02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -2.988e-02  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       poly(j, degree = poly_degree, raw = TRUE)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -7.752e-04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        7.217e-04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                             as.factor(cal_time)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        5.342e+00  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -5.600e+01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                             as.factor(cal_time)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.370e+02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.204e+02  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                             as.factor(cal_time)4  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.207e+02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.042e+03  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                             as.factor(cal_time)5  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        2.259e+01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        8.323e+02  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                             as.factor(cal_time)6  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.602e+03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.318e+02  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                             as.factor(cal_time)7  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -3.634e+03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.724e+03  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                             as.factor(cal_time)8  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        7.589e+02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -2.844e+02  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                             as.factor(cal_time)9  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.487e+03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.271e+03  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(cal_time)10  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        2.121e+03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -3.749e+03  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(cal_time)11  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -2.087e+03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.030e+04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(cal_time)12  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -4.628e+03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        8.905e+02  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(cal_time)13  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -2.165e+04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.496e+03  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(cal_time)14  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -5.243e+03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        4.963e+04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(cal_time)15  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -3.367e+04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -5.612e+04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(cal_time)16  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.744e+03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        6.186e+04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(cal_time)17  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -4.917e+04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -6.421e+04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(cal_time)18  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        9.232e+04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -3.177e+04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(cal_time)19  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -3.298e+04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -2.736e+03  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                            as.factor(cal_time)20  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.162e+04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -2.131e+05  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.438e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        4.179e+00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -3.397e-02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -8.750e-02  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        8.078e-04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        2.648e-04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        7.284e+00  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -5.628e+00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.501e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.065e-01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.410e-03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.093e-03  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)4  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        4.463e+00  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -3.623e+01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)4  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -8.031e-02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        4.405e-01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)4  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        9.388e-04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -2.286e-03  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)5  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.112e+00  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -2.233e+01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)5  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.364e-02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        2.224e-01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)5  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        6.859e-04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.283e-03  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)6  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -3.481e+01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        3.180e+00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)6  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        2.223e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -6.748e-04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)6  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.471e-04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -6.370e-04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)7  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        6.704e+01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        3.098e+01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)7  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -4.422e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.599e-01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)7  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.601e-03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -3.394e-04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)8  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.136e+01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        4.894e+00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)8  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        2.571e-02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.808e-03  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)8  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        6.682e-04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -6.595e-04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)9  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -2.070e+01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.791e+01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)9  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        6.441e-02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -5.786e-02  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)9  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        6.172e-04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -5.812e-04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)10  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -2.727e+01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        4.624e+01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)10  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        8.462e-02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.632e-01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)10  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        6.015e-04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -4.552e-04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)11  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        2.477e+01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.174e+02  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)11  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.302e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        4.724e-01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)11  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        8.974e-04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.280e-03  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)12  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        5.033e+01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -8.832e+00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)12  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -2.148e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        5.637e-02  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)12  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        9.894e-04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -7.490e-04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)13  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        2.057e+02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.370e+01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)13  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -6.844e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.430e-02  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)13  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.458e-03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -6.755e-04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)14  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        4.912e+01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -4.415e+02  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)14  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.861e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.337e+00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)14  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        9.299e-04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -2.012e-03  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)15  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        2.782e+02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        4.631e+02  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)15  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -7.992e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.246e+00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)15  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.475e-03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        4.484e-04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)16  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.378e+01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -4.773e+02  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)16  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -6.964e-02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.255e+00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)16  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        8.039e-04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.771e-03  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)17  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        3.567e+02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        4.659e+02  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)17  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -8.962e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.099e+00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)17  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.468e-03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.885e-04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)18  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -6.309e+02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        2.134e+02  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)18  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.403e+00  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -4.495e-01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)18  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -3.177e-04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -3.638e-04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)19  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        2.118e+02  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.763e+01  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)19  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -4.870e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -9.558e-03  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)19  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.097e-03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -6.929e-04  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)1:as.factor(cal_time)20  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        6.620e+01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.309e+03  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)2:as.factor(cal_time)20  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -1.588e-01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                       -2.650e+00  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> poly(j, degree = poly_degree, raw = TRUE)3:as.factor(cal_time)20  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        8.513e-04  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                        1.107e-03  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>

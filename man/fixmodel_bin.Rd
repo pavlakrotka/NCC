@@ -4,16 +4,18 @@
 \alias{fixmodel_bin}
 \title{Model-based analysis for binary data adjusting for periods}
 \usage{
-fixmodel_bin(data, arm, alpha = 0.025, ncc = TRUE, ...)
+fixmodel_bin(data, arm, alpha = 0.025, ncc = TRUE, check = TRUE, ...)
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} function}
+\item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} function. Must contain columns named 'treatment', 'response' and 'period'}
 
 \item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1)}
 
 \item{alpha}{Type I error. Default=0.025}
 
 \item{ncc}{Boolean. Whether to include NCC data into the analysis. Default=TRUE}
+
+\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE}
 
 \item{...}{Further arguments for simulation function}
 }

@@ -66,6 +66,7 @@
   unit_size <span class="op">=</span> <span class="fl">25</span>,
   ncc <span class="op">=</span> <span class="cn">TRUE</span>,
   bs_degree <span class="op">=</span> <span class="fl">3</span>,
+  check <span class="op">=</span> <span class="cn">TRUE</span>,
   <span class="va">...</span>
 <span class="op">)</span></code></pre></div>
     </div>
@@ -73,7 +74,7 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>data</dt>
-<dd><p>Simulated trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function</p></dd>
+<dd><p>Simulated trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function. Must contain columns named 'treatment', 'response' and 'j'</p></dd>
 <dt>arm</dt>
 <dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1)</p></dd>
 <dt>alpha</dt>
@@ -84,6 +85,8 @@
 <dd><p>Boolean. Whether to include NCC data into the analysis. Default=TRUE</p></dd>
 <dt>bs_degree</dt>
 <dd><p>Degree of the piecewise polynomial. Default=3</p></dd>
+<dt>check</dt>
+<dd><p>Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE</p></dd>
 <dt>...</dt>
 <dd><p>Further arguments for simulation function</p></dd>
 </dl></div>
@@ -104,16 +107,16 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">splines_cal_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.0154421</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.02188284</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2752448</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2897087</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.02543184</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.008131837</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5250578</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5712856</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
@@ -129,57 +132,57 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                   (Intercept)  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                     -0.339135  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       0.48739  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         as.factor(treatment)1  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      0.006354  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       0.09486  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         as.factor(treatment)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                     -0.034481  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       0.27628  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         as.factor(treatment)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      0.275245  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       0.28971  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  bs(j, knots = bs_knots, degree = bs_degree)1  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      0.455353  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      -0.54939  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  bs(j, knots = bs_knots, degree = bs_degree)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      0.999646  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       0.38287  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  bs(j, knots = bs_knots, degree = bs_degree)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      0.355329  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      -0.85015  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  bs(j, knots = bs_knots, degree = bs_degree)4  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      0.573628  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      -0.58375  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  bs(j, knots = bs_knots, degree = bs_degree)5  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      0.704265  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      -0.23373  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  bs(j, knots = bs_knots, degree = bs_degree)6  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      0.559077  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      -0.80020  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  bs(j, knots = bs_knots, degree = bs_degree)7  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      1.292159  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      -0.10905  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  bs(j, knots = bs_knots, degree = bs_degree)8  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      0.279517  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      -0.95752  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  bs(j, knots = bs_knots, degree = bs_degree)9  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      1.090751  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       0.43051  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> bs(j, knots = bs_knots, degree = bs_degree)10  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                     -0.342890  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      -0.74784  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> bs(j, knots = bs_knots, degree = bs_degree)11  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      0.985802  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      -0.16323  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> bs(j, knots = bs_knots, degree = bs_degree)12  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      0.700190  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      -0.97650  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> bs(j, knots = bs_knots, degree = bs_degree)13  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      0.980955  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       0.22281  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> bs(j, knots = bs_knots, degree = bs_degree)14  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                     -0.138459  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      -0.78501  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> bs(j, knots = bs_knots, degree = bs_degree)15  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      1.095419  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      -0.73594  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> bs(j, knots = bs_knots, degree = bs_degree)16  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                     -0.532981  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       0.20672  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> bs(j, knots = bs_knots, degree = bs_degree)17  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      1.108706  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      -0.91715  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> bs(j, knots = bs_knots, degree = bs_degree)18  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      0.126500  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       0.07004  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> bs(j, knots = bs_knots, degree = bs_degree)19  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      0.313939  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      -0.99470  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> bs(j, knots = bs_knots, degree = bs_degree)20  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      0.359987  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       0.17661  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> bs(j, knots = bs_knots, degree = bs_degree)21  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      0.083966  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      -0.83703  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> bs(j, knots = bs_knots, degree = bs_degree)22  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      0.940548  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                      -0.92867  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>

@@ -4,7 +4,7 @@
 \alias{get_ss_matrix}
 \title{Sample size matrix for a platform trial with a flexible number of treatment arms}
 \usage{
-get_ss_matrix(num_arms, n_arm, d, alloc_ratio = c(1, 1))
+get_ss_matrix(num_arms, n_arm, d)
 }
 \arguments{
 \item{num_arms}{Number of treatment arms in the trial}
@@ -12,8 +12,6 @@ get_ss_matrix(num_arms, n_arm, d, alloc_ratio = c(1, 1))
 \item{n_arm}{Sample size per arm}
 
 \item{d}{Vector with timings of adding new arms in terms of number of patients recruited to the trial so far (of length num_arms). The first entry must be 0, as the trial is supposed to start with at least one treatment}
-
-\item{alloc_ratio}{Vector of length 2. Allocation ratio control vs treatment (for now only 1:1 implemented!)}
 }
 \value{
 Sample size matrix

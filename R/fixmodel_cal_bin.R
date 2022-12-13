@@ -2,13 +2,13 @@
 #'
 #' @description Performs logistic regression taking into account all trial data until the arm under study leaves the trial and adjusting for calendar time units as factors
 #'
-#' @param data Simulated trial data, e.g. result from the `datasim_bin()` function
+#' @param data Simulated trial data, e.g. result from the `datasim_bin()` function. Must contain columns named 'treatment' and 'response'
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
 #' @param alpha Type I error. Default=0.025
 #' @param unit_size Number of patients per calendar time unit Default=25
 #' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE
+#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE
 #' @param ... Further arguments for simulation function
-#'
 #'
 #' @importFrom stats glm
 #' @importFrom stats pnorm
@@ -28,7 +28,29 @@
 #' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
 #' @author Pavla Krotka
 
-fixmodel_cal_bin <- function(data, arm, alpha=0.025, unit_size=25, ncc=TRUE, ...){
+fixmodel_cal_bin <- function(data, arm, alpha=0.025, unit_size=25, ncc=TRUE, check=TRUE, ...){
+
+  if (check) {
+    if (!is.data.frame(data) | sum(c("treatment", "response") %in% colnames(data))!=2) {
+      stop("The data frame with trial data must contain the columns 'treatment' and 'response'!")
+    }
+
+    if(!is.numeric(arm) | length(arm)!=1){
+      stop("The evaluated treatment arm (`arm`) must be one number!")
+    }
+
+    if(!is.numeric(alpha) | length(alpha)!=1){
+      stop("The significance level (`alpha`) must be one number!")
+    }
+
+    if(!is.numeric(unit_size) | length(unit_size)!=1){
+      stop("The length of calendar time unit (`unit_size`) must be one number!")
+    }
+
+    if(!is.logical(ncc) | length(ncc)!=1){
+      stop("The indicator of including NCC data to the analysis (`ncc`) must be TRUE or FALSE!")
+    }
+  }
 
   data$cal_time <- rep(c(1:ceiling((nrow(data)/unit_size))), each=unit_size)[1:nrow(data)]
 
