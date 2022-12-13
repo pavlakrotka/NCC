@@ -1,8 +1,8 @@
 ---
-title: "datasim_bin"
+title: "How to simulate binary data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{datasim_bin}
+  %\VignetteIndexEntry{How to simulate binary data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -23,7 +23,7 @@ library(NCC)
 ```
 
 
-# datasim_bin()
+## datasim_bin()
 
 The function `datasim_bin()` enables data simulation of a platform trial with binary endpoint and an arbitrary number of treatment arms entering at different time points.
 

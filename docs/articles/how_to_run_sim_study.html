@@ -41,9 +41,11 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/datasim_bin.html">datasim_bin
+    <a class="dropdown-item" href="../articles/ncc_intro.html">NCC Intro
 </a>
-    <a class="dropdown-item" href="../articles/datasim_cont.html">datasim_cont
+    <a class="dropdown-item" href="../articles/datasim_bin.html">How to simulate binary data
+</a>
+    <a class="dropdown-item" href="../articles/datasim_cont.html">How to simulate continuous data
 </a>
     <a class="dropdown-item" href="../articles/how_to_run_sim_study.html">How to run a simulation study
 </a>
@@ -148,25 +150,25 @@ will be replicated 1000 times.</p>
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span>
 <span class="va">sim_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_study_par.html">sim_study_par</a></span><span class="op">(</span>nsim <span class="op">=</span> <span class="fl">1000</span>, scenarios <span class="op">=</span> <span class="va">sim_scenarios</span>, arms <span class="op">=</span> <span class="fl">4</span>, 
                              models <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fixmodel"</span>, <span class="st">"sepmodel"</span>, <span class="st">"poolmodel"</span><span class="op">)</span>, endpoint <span class="op">=</span> <span class="st">"cont"</span><span class="op">)</span></code></pre></div>
-<pre><code>[1] "Starting the simulations. 18 scenarios will be simulated. Starting time: 2022-12-13 20:32:54"
-[1] "Scenario 1/18 done. Time: 2022-12-13 20:33:04"
-[1] "Scenario 2/18 done. Time: 2022-12-13 20:33:10"
-[1] "Scenario 3/18 done. Time: 2022-12-13 20:33:16"
-[1] "Scenario 4/18 done. Time: 2022-12-13 20:33:22"
-[1] "Scenario 5/18 done. Time: 2022-12-13 20:33:27"
-[1] "Scenario 6/18 done. Time: 2022-12-13 20:33:32"
-[1] "Scenario 7/18 done. Time: 2022-12-13 20:33:36"
-[1] "Scenario 8/18 done. Time: 2022-12-13 20:33:41"
-[1] "Scenario 9/18 done. Time: 2022-12-13 20:33:46"
-[1] "Scenario 10/18 done. Time: 2022-12-13 20:33:51"
-[1] "Scenario 11/18 done. Time: 2022-12-13 20:33:56"
-[1] "Scenario 12/18 done. Time: 2022-12-13 20:34:01"
-[1] "Scenario 13/18 done. Time: 2022-12-13 20:34:06"
-[1] "Scenario 14/18 done. Time: 2022-12-13 20:34:11"
-[1] "Scenario 15/18 done. Time: 2022-12-13 20:34:16"
-[1] "Scenario 16/18 done. Time: 2022-12-13 20:34:21"
-[1] "Scenario 17/18 done. Time: 2022-12-13 20:34:25"
-[1] "Scenario 18/18 done. Time: 2022-12-13 20:34:30"</code></pre>
+<pre><code>[1] "Starting the simulations. 18 scenarios will be simulated. Starting time: 2022-12-13 22:55:09"
+[1] "Scenario 1/18 done. Time: 2022-12-13 22:55:19"
+[1] "Scenario 2/18 done. Time: 2022-12-13 22:55:24"
+[1] "Scenario 3/18 done. Time: 2022-12-13 22:55:30"
+[1] "Scenario 4/18 done. Time: 2022-12-13 22:55:34"
+[1] "Scenario 5/18 done. Time: 2022-12-13 22:55:39"
+[1] "Scenario 6/18 done. Time: 2022-12-13 22:55:44"
+[1] "Scenario 7/18 done. Time: 2022-12-13 22:55:49"
+[1] "Scenario 8/18 done. Time: 2022-12-13 22:55:54"
+[1] "Scenario 9/18 done. Time: 2022-12-13 22:55:58"
+[1] "Scenario 10/18 done. Time: 2022-12-13 22:56:03"
+[1] "Scenario 11/18 done. Time: 2022-12-13 22:56:08"
+[1] "Scenario 12/18 done. Time: 2022-12-13 22:56:13"
+[1] "Scenario 13/18 done. Time: 2022-12-13 22:56:18"
+[1] "Scenario 14/18 done. Time: 2022-12-13 22:56:23"
+[1] "Scenario 15/18 done. Time: 2022-12-13 22:56:28"
+[1] "Scenario 16/18 done. Time: 2022-12-13 22:56:32"
+[1] "Scenario 17/18 done. Time: 2022-12-13 22:56:37"
+[1] "Scenario 18/18 done. Time: 2022-12-13 22:56:42"</code></pre>
 <p>The function reports the system time after each scenario finishes in
 order to track the progress of the simulations.</p>
 </div>
@@ -193,12 +195,12 @@ and MSE of the treatment effect estimates.</p>
 5      0 -0.1125 -0.1125 -0.1125 -0.1125 -0.1125 linear 0.025 TRUE         4
 6      0 -0.1125 -0.1125 -0.1125 -0.1125 -0.1125 linear 0.025 TRUE         4
       model reject_h0         bias         MSE failed nsim
-1  fixmodel     0.014 -0.001468982 0.007072377      0 1000
-2 poolmodel     0.005 -0.045199799 0.007730267      0 1000
-3  sepmodel     0.014 -0.003294924 0.007811637      0 1000
-4  fixmodel     0.030  0.003211342 0.007546219      0 1000
-5 poolmodel     0.010 -0.030285777 0.007168983      0 1000
-6  sepmodel     0.033  0.002345229 0.008431698      0 1000</code></pre>
+1  fixmodel     0.021 -0.001928847 0.007131202      0 1000
+2 poolmodel     0.004 -0.047702634 0.007936453      0 1000
+3  sepmodel     0.025 -0.002569883 0.007805700      0 1000
+4  fixmodel     0.026  0.002505048 0.007103221      0 1000
+5 poolmodel     0.013 -0.030675436 0.006814043      0 1000
+6  sepmodel     0.026  0.001548616 0.007884319      0 1000</code></pre>
 <p>We can now visualize the performance of the considered analysis
 methods with respect to the strength and pattern of the time trend.</p>
 <div class="section level3">

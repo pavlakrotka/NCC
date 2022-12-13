@@ -18,10 +18,13 @@ navbar:
       text: Articles
       menu:
       - text: |
-          datasim_bin
+          NCC Intro
+        href: articles/ncc_intro.html
+      - text: |
+          How to simulate binary data
         href: articles/datasim_bin.html
       - text: |
-          datasim_cont
+          How to simulate continuous data
         href: articles/datasim_cont.html
       - text: |
           How to run a simulation study

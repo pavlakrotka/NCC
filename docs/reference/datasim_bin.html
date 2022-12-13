@@ -24,9 +24,11 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/datasim_bin.html">datasim_bin
+    <a class="dropdown-item" href="../articles/ncc_intro.html">NCC Intro
 </a>
-    <a class="dropdown-item" href="../articles/datasim_cont.html">datasim_cont
+    <a class="dropdown-item" href="../articles/datasim_bin.html">How to simulate binary data
+</a>
+    <a class="dropdown-item" href="../articles/datasim_cont.html">How to simulate continuous data
 </a>
     <a class="dropdown-item" href="../articles/how_to_run_sim_study.html">How to run a simulation study
 </a>
@@ -117,11 +119,11 @@
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">datasim_bin</span><span class="op">(</span>num_arms <span class="op">=</span> <span class="fl">3</span>, n_arm <span class="op">=</span> <span class="fl">100</span>, d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, <span class="fl">250</span><span class="op">)</span>,</span>
 <span class="r-in">p0 <span class="op">=</span> <span class="fl">0.7</span>, OR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1.8</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, trend<span class="op">=</span><span class="st">"stepwise"</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   j response treatment period</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1        1         1      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2        1         0      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1        0         0      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2        1         1      1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3 3        1         1      1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4 4        1         0      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 5        0         1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 5        1         0      1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6 6        1         0      1</span>
 <span class="r-in"></span>
 <span class="r-in"></span>

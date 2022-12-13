@@ -1,8 +1,8 @@
 ---
-title: "datasim_cont"
+title: "How to simulate continuous data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{datasim_cont}
+  %\VignetteIndexEntry{How to simulate continuous data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -23,7 +23,7 @@ library(NCC)
 ```
 
 
-# datasim_cont()
+## datasim_cont()
 
 The function `datasim_cont()` enables data simulation of a platform trial with continuous endpoint and an arbitrary number of treatment arms entering at different time points.
 
