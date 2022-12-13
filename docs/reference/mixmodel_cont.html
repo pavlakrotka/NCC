@@ -28,7 +28,7 @@
 </a>
     <a class="dropdown-item" href="../articles/datasim_cont.html">datasim_cont
 </a>
-    <a class="dropdown-item" href="../articles/get_ss_matrix.html">get_ss_matrix
+    <a class="dropdown-item" href="../articles/how_to_run_sim_study.html">How to run a simulation study
 </a>
   </div>
 </li>
@@ -103,40 +103,38 @@
 <span class="r-in">theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">mixmodel_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> boundary (singular) fit: see help('isSingular')</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing profile confidence intervals ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing profile confidence intervals ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.0009673318</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.0356489</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3716889</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2261939</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1384414</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.003232226</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6049365</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4760598</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Linear mixed model fit by REML ['lmerModLmerTest']</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Formula: response ~ as.factor(treatment) + (1 | period)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Data: data_new</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> REML criterion at convergence: 1400.28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> REML criterion at convergence: 1409.704</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Random effects:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Groups   Name        Std.Dev.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  period   (Intercept) 0.0000  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Residual             0.9737  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  period   (Intercept) 0.0786  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Residual             0.9816  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of obs: 500, groups:  period, 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Fixed Effects:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           (Intercept)  as.factor(treatment)1  as.factor(treatment)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.08082                0.19862                0.15815  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.05475                0.26007                0.37427  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.37169  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> optimizer (nloptwrap) convergence code: 0 (OK) ; 0 optimizer warnings; 1 lme4 warnings </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.22619  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>

@@ -7,14 +7,18 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(echo = TRUE,
+               message = FALSE,
+               error = FALSE,
+               warning = FALSE,
+               comment = "",
+               fig.align = "center",
+               out.width = "70%")
 ```
 
-```{r setup}
+```{r}
 library(NCC)
 ```
 

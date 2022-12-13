@@ -4,6 +4,6 @@ pkgdown_sha: ~
 articles:
   datasim_bin: datasim_bin.html
   datasim_cont: datasim_cont.html
-  get_ss_matrix: get_ss_matrix.html
-last_built: 2022-12-13T18:12Z
+  how_to_run_sim_study: how_to_run_sim_study.html
+last_built: 2022-12-13T19:31Z
 

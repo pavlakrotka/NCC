@@ -13,6 +13,9 @@
     <loc>/articles/get_ss_matrix.html</loc>
   </url>
   <url>
+    <loc>/articles/how_to_run_sim_study.html</loc>
+  </url>
+  <url>
     <loc>/articles/index.html</loc>
   </url>
   <url>
@@ -59,9 +62,6 @@
   </url>
   <url>
     <loc>/reference/linear_trend.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MAPprior_bin.html</loc>
   </url>
   <url>
     <loc>/reference/MAP_rjags_bin.html</loc>
@@ -116,9 +116,6 @@
   </url>
   <url>
     <loc>/reference/sim_study_par.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sim_study_par_new.html</loc>
   </url>
   <url>
     <loc>/reference/splines_cal_cont.html</loc>

@@ -24,8 +24,8 @@ navbar:
           datasim_cont
         href: articles/datasim_cont.html
       - text: |
-          get_ss_matrix
-        href: articles/get_ss_matrix.html
+          How to run a simulation study
+        href: articles/how_to_run_sim_study.html
     github:
       icon: fab fa-github fa-lg
       href: https://github.com/pavlakrotka/NCC
