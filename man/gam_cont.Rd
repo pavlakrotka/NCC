@@ -17,7 +17,7 @@ gam_cont(
 )
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment', 'response' and 'period'}
+\item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment', 'response', 'period' and 'j'}
 
 \item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1)}
 

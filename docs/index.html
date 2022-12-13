@@ -75,76 +75,9 @@ controls
 </h1></div>
 <p><code>NCC</code> package allows users to simulate platform trials and
 to compare arms using non-concurrent control data.</p>
-<p>This package contains the following functions:</p>
-<ul>
-<li>
-<code><a href="reference/datasim_bin.html">datasim_bin()</a></code> simulates data with binary outcomes</li>
-<li>
-<code><a href="reference/datasim_cont.html">datasim_cont()</a></code> simulates data with continuous
-outcomes</li>
-<li>
-<code><a href="reference/get_ss_matrix.html">get_ss_matrix()</a></code> computes sample sizes per arm and
-period</li>
-<li>
-<code><a href="reference/linear_trend.html">linear_trend()</a></code> is the linear time trend function, used
-to generate the trend for each patient</li>
-<li>
-<code><a href="reference/sw_trend.html">sw_trend()</a></code> is the step-wise time trend function, used
-generate the trend for each patient</li>
-<li>
-<code><a href="reference/fixmodel_bin.html">fixmodel_bin()</a></code> performs analysis using a regression
-model adjusting for periods for binary data</li>
-<li>
-<code><a href="reference/fixmodel_cal_bin.html">fixmodel_cal_bin()</a></code> performs analysis using a regression
-model adjusting for calendar time for binary data</li>
-<li>
-<code><a href="reference/fixmodel_cont.html">fixmodel_cont()</a></code> performs analysis using a regression
-model adjusting for periods for continuous data</li>
-<li>
-<code><a href="reference/fixmodel_cal_cont.html">fixmodel_cal_cont()</a></code> performs analysis using a
-regression model adjusting for calendar time for continuous data</li>
-<li>
-<code><a href="reference/mixmodel_cont.html">mixmodel_cont()</a></code> performs analysis using a mixed model
-adjusting for periods for continuous data</li>
-<li>
-<code><a href="reference/mixmodel_cal_cont.html">mixmodel_cal_cont()</a></code> performs analysis using a mixed
-model adjusting for calendar time for continuous data</li>
-<li>
-<code>MAPprior_bin()</code> performs analysis using the MAP prior
-approach for binary data</li>
-<li>
-<code><a href="reference/poolmodel_bin.html">poolmodel_bin()</a></code> performs pooled analysis for binary
-data</li>
-<li>
-<code><a href="reference/poolmodel_cont.html">poolmodel_cont()</a></code> performs pooled analysis for
-continuous data</li>
-<li>
-<code><a href="reference/sepmodel_bin.html">sepmodel_bin()</a></code> performs separate analysis for binary
-data</li>
-<li>
-<code><a href="reference/sepmodel_cont.html">sepmodel_cont()</a></code> performs separate analysis for
-continuous data</li>
-<li>
-<code><a href="reference/timemachine_bin.html">timemachine_bin()</a></code> performs analysis using the
-timemachine approach for binary data</li>
-<li>
-<code><a href="reference/timemachine_cont.html">timemachine_cont()</a></code> performs analysis using the
-timemachine approach for continuous data</li>
-<li>
-<code><a href="reference/TT_fixmodel_cont.html">TT_fixmodel_cont()</a></code> performs a treatment-treatment
-comparison for continuous data using a regression model adjusting for
-periods</li>
-<li>
-<code><a href="reference/TT_indirect_cont.html">TT_indirect_cont()</a></code> performs a treatment-treatment
-comparison for continuous data using an indirect comparison</li>
-<li>
-<code><a href="reference/plot_trial.html">plot_trial()</a></code> visualizes the simulated trial</li>
-</ul>
-<p>For a more detailed description of the functions, see the vignettes
-in the R-package website (<a href="https://pavlakrotka.github.io/NCC/" class="external-link uri">https://pavlakrotka.github.io/NCC/</a>).</p>
-<div class="section level3">
-<h3 id="design-overview">Design overview<a class="anchor" aria-label="anchor" href="#design-overview"></a>
-</h3>
+<div class="section level2">
+<h2 id="design-overview">Design overview<a class="anchor" aria-label="anchor" href="#design-overview"></a>
+</h2>
 <p>We consider a platform trial evaluating the efficacy of <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;K" title="K" alt="K"> treatment arms compared to a shared control. We
 assume that treatment arms enter the platform trial sequentially. In
 particular, we consider a trial starting with one initial treatment arm,
@@ -157,8 +90,203 @@ platform.</p>
 <p><img src="./reference/figures/trial_general_3.PNG" width="70%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
+<h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a>
+</h2>
+<p>This package contains the following functions:</p>
+<div class="section level3">
+<h3 id="data-generation">Data generation<a class="anchor" aria-label="anchor" href="#data-generation"></a>
+</h3>
+<div class="section level4">
+<h4 id="main-functions-for-data-generation">Main functions for data generation<a class="anchor" aria-label="anchor" href="#main-functions-for-data-generation"></a>
+</h4>
+<ul>
+<li>
+<code><a href="reference/datasim_bin.html">datasim_bin()</a></code> simulates data with binary outcomes</li>
+<li>
+<code><a href="reference/datasim_cont.html">datasim_cont()</a></code> simulates data with continuous
+outcomes</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="auxiliary-functions-for-data-generation">Auxiliary functions for data generation<a class="anchor" aria-label="anchor" href="#auxiliary-functions-for-data-generation"></a>
+</h4>
+<ul>
+<li>
+<code><a href="reference/get_ss_matrix.html">get_ss_matrix()</a></code> computes sample sizes per arm and
+period</li>
+<li>
+<code><a href="reference/linear_trend.html">linear_trend()</a></code> is the linear time trend function, used
+to generate linear or inverted-u trend for each patient</li>
+<li>
+<code><a href="reference/sw_trend.html">sw_trend()</a></code> is the step-wise time trend function, used
+generate the trend for each patient</li>
+<li>
+<code><a href="reference/seasonal_trend.html">seasonal_trend()</a></code> is the seasonal time trend function,
+used generate the trend for each patient</li>
+</ul>
+</div>
+</div>
+<div class="section level3">
+<h3 id="data-analysis">Data analysis<a class="anchor" aria-label="anchor" href="#data-analysis"></a>
+</h3>
+<div class="section level4">
+<h4 id="treatment-control-comparisons-for-binary-endpoints">Treatment-control comparisons for binary endpoints<a class="anchor" aria-label="anchor" href="#treatment-control-comparisons-for-binary-endpoints"></a>
+</h4>
+<div class="section level5">
+<h5 id="frequentist-approaches">Frequentist approaches<a class="anchor" aria-label="anchor" href="#frequentist-approaches"></a>
+</h5>
+<ul>
+<li>
+<code><a href="reference/fixmodel_bin.html">fixmodel_bin()</a></code> performs analysis using a regression
+model adjusting for periods</li>
+<li>
+<code><a href="reference/fixmodel_cal_bin.html">fixmodel_cal_bin()</a></code> performs analysis using a regression
+model adjusting for calendar time</li>
+<li>
+<code><a href="reference/poolmodel_bin.html">poolmodel_bin()</a></code> performs pooled analysis</li>
+<li>
+<code><a href="reference/sepmodel_bin.html">sepmodel_bin()</a></code> performs separate analysis</li>
+<li>
+<code><a href="reference/sepmodel_adj_bin.html">sepmodel_adj_bin()</a></code> performs separate analysis adjusting
+for periods</li>
+</ul>
+</div>
+<div class="section level5">
+<h5 id="bayesian-approaches">Bayesian approaches<a class="anchor" aria-label="anchor" href="#bayesian-approaches"></a>
+</h5>
+<ul>
+<li>
+<code><a href="reference/MAP_rjags_bin.html">MAP_rjags_bin()</a></code> performs analysis using the MAP prior
+approach</li>
+<li>
+<code><a href="reference/timemachine_bin.html">timemachine_bin()</a></code> performs analysis using the Time
+Machine approach</li>
+</ul>
+</div>
+</div>
+<div class="section level4">
+<h4 id="treatment-control-comparisons-for-continuous-endpoints">Treatment-control comparisons for continuous endpoints<a class="anchor" aria-label="anchor" href="#treatment-control-comparisons-for-continuous-endpoints"></a>
+</h4>
+<div class="section level5">
+<h5 id="frequentist-approaches-1">Frequentist approaches<a class="anchor" aria-label="anchor" href="#frequentist-approaches-1"></a>
+</h5>
+<ul>
+<li>
+<code><a href="reference/fixmodel_cont.html">fixmodel_cont()</a></code> performs analysis using a regression
+model adjusting for periods</li>
+<li>
+<code><a href="reference/fixmodel_cal_cont.html">fixmodel_cal_cont()</a></code> performs analysis using a
+regression model adjusting for calendar time</li>
+<li>
+<code><a href="reference/gam_cont.html">gam_cont()</a></code> performs analysis using generalized additive
+model</li>
+<li>
+<code><a href="reference/mixmodel_cont.html">mixmodel_cont()</a></code> performs analysis using a mixed model
+adjusting for periods as a random factor</li>
+<li>
+<code><a href="reference/mixmodel_cal_cont.html">mixmodel_cal_cont()</a></code> performs analysis using a mixed
+model adjusting for calendar time as a random factor</li>
+<li>
+<code><a href="reference/mixmodel_AR1_cont.html">mixmodel_AR1_cont()</a></code> performs analysis using a mixed
+model adjusting for periods as a random factor with AR1 correlation
+structure</li>
+<li>
+<code><a href="reference/mixmodel_AR1_cal_cont.html">mixmodel_AR1_cal_cont()</a></code> performs analysis using a mixed
+model adjusting for calendar time as a random factor with AR1
+correlation structure</li>
+<li>
+<code><a href="reference/piecewise_cont.html">piecewise_cont()</a></code> performs analysis using discontinuous
+piecewise polynomials per period</li>
+<li>
+<code><a href="reference/piecewise_cal_cont.html">piecewise_cal_cont()</a></code> performs analysis using
+discontinuous piecewise polynomials per calendar time</li>
+<li>
+<code><a href="reference/poolmodel_cont.html">poolmodel_cont()</a></code> performs pooled analysis</li>
+<li>
+<code><a href="reference/sepmodel_cont.html">sepmodel_cont()</a></code> performs separate analysis</li>
+<li>
+<code><a href="reference/sepmodel_adj_cont.html">sepmodel_adj_cont()</a></code> performs separate analysis
+adjusting for periods</li>
+<li>
+<code><a href="reference/splines_cont.html">splines_cont()</a></code> performs analysis using regression
+splines with knots placed according to periods</li>
+<li>
+<code><a href="reference/splines_cal_cont.html">splines_cal_cont()</a></code> performs analysis using regression
+splines with knots placed according to calendar times</li>
+</ul>
+</div>
+<div class="section level5">
+<h5 id="bayesian-approaches-1">Bayesian approaches<a class="anchor" aria-label="anchor" href="#bayesian-approaches-1"></a>
+</h5>
+<ul>
+<li>
+<code><a href="reference/MAP_rjags_cont.html">MAP_rjags_cont()</a></code> performs analysis using the MAP prior
+approach</li>
+<li>
+<code><a href="reference/timemachine_cont.html">timemachine_cont()</a></code> performs analysis using the Time
+Machine approach</li>
+</ul>
+</div>
+</div>
+<div class="section level4">
+<h4 id="treatment-treatment-comparisons-for-continuous-endpoints">Treatment-treatment comparisons for continuous endpoints<a class="anchor" aria-label="anchor" href="#treatment-treatment-comparisons-for-continuous-endpoints"></a>
+</h4>
+<ul>
+<li>
+<code><a href="reference/TT_fixmodel_cont.html">TT_fixmodel_cont()</a></code> performs a treatment-treatment
+comparison using a regression model adjusting for periods</li>
+<li>
+<code><a href="reference/TT_indirect_cont.html">TT_indirect_cont()</a></code> performs a treatment-treatment
+comparison using an indirect comparison</li>
+</ul>
+</div>
+</div>
+<div class="section level3">
+<h3 id="running-simulations">Running simulations<a class="anchor" aria-label="anchor" href="#running-simulations"></a>
+</h3>
+<ul>
+<li>
+<code><a href="reference/all_models.html">all_models()</a></code> is an auxiliary wrapper function to
+analyze given dataset (treatment-control comparisons) with multiple
+models</li>
+<li>
+<code><a href="reference/sim_study.html">sim_study()</a></code> is a wrapper function to run a simulation
+study (treatment-control comparisons) for desired scenarios</li>
+<li>
+<code><a href="reference/sim_study_par.html">sim_study_par()</a></code> is a wrapper function to run a
+simulation study (treatment-control comparisons) for desired scenarios
+in parallel</li>
+<li>
+<code><a href="reference/TT_all_models.html">TT_all_models()</a></code> is an auxiliary wrapper function to
+analyze given dataset (treatment-treatment comparisons) with multiple
+models</li>
+<li>
+<code><a href="reference/TT_sim_study.html">TT_sim_study()</a></code> is a wrapper function to run a
+simulation study (treatment-treatment comparisons) for desired
+scenarios</li>
+<li>
+<code><a href="reference/TT_sim_study_par.html">TT_sim_study_par()</a></code> is a wrapper function to run a
+simulation study (treatment-treatment comparisons) for desired scenarios
+in parallel</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
+</h3>
+<ul>
+<li>
+<code><a href="reference/plot_trial.html">plot_trial()</a></code> visualizes the progress of a simulated
+trial</li>
+</ul>
+<p>For a more detailed description of the functions, see the vignettes
+in the R-package website (<a href="https://pavlakrotka.github.io/NCC/" class="external-link uri">https://pavlakrotka.github.io/NCC/</a>).</p>
+</div>
+</div>
+<div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
+<p>To install the latest version of the <code>NCC</code> package from
+Github, please run the following code:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools") </span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"pavlakrotka/NCC"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -166,22 +294,23 @@ platform.</p>
 <div class="section level2">
 <h2 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html" class="external-link">browseVignettes</a></span><span class="op">(</span><span class="st">"NCC"</span><span class="op">)</span></code></pre></div>
+<p>Documentation of all functions as well as vignettes with further
+description and examples can be found at the package website: <a href="https://pavlakrotka.github.io/NCC/" class="external-link uri">https://pavlakrotka.github.io/NCC/</a></p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<p>[1] Bofill Roig, Marta, et al. <em>“On model-based time trend
-adjustments in platform trials with non-concurrent controls.”</em> BMC
-Medical Research Methodology [<a href="https://arxiv.org/abs/2112.06574" class="external-link">Preprint</a>] [<a href="https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-022-01683-w" class="external-link">Paper</a>]
-(2022).</p>
-<p>[2] Lee, Kim May, and James Wason. <em>“Including non-concurrent
-control patients in the analysis of platform trials: is it worth
-it?.”</em> BMC medical research methodology 20.1 (2020): 1-12.</p>
-<p>[3] Saville, Benjamin R, et al. <em>“The Bayesian Time Machine:
-Accounting for Temporal Drift in Multi-arm Platform Trials.”</em>
-Clinical Trials (In press) (2022).</p>
+<p>[1] Bofill Roig, M., Krotka, P., et al. <a href="https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-022-01683-w" class="external-link"><em>“On
+model-based time trend adjustments in platform trials with
+non-concurrent controls.”</em></a> BMC medical research methodology 22.1
+(2022): 1-16.</p>
+<p>[2] Lee, K. M., and Wason, J. <a href="https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-020-01043-6" class="external-link"><em>“Including
+non-concurrent control patients in the analysis of platform trials: is
+it worth it?.”</em></a> BMC medical research methodology 20.1 (2020):
+1-12.</p>
+<p>[3] Saville, B. R., Berry, D. A., et al. <a href="https://journals.sagepub.com/doi/full/10.1177/17407745221112013" class="external-link"><em>“The
+Bayesian Time Machine: Accounting for Temporal Drift in Multi-arm
+Platform Trials.”</em></a> Clinical Trials 19.5 (2022): 490-501</p>
 <hr>
 <p><strong>Funding</strong></p>
 <p><a href="https://eu-pearl.eu/" class="external-link">EU-PEARL</a> (EU Patient-cEntric
