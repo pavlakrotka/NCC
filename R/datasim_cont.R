@@ -187,38 +187,55 @@ datasim_cont <- function(num_arms, n_arm, d, period_blocks=2, mu0=0, theta, lamb
     }
   }
 
+  # if(trend=="inv_u"){
+  #
+  #   for (i in 0:num_arms) {
+  #     assign(paste0("j", i, "_1"), which(eval(sym(paste0("j", i))) <= N_peak))
+  #     assign(paste0("j", i, "_2"), which(eval(sym(paste0("j", i))) > N_peak))
+  #
+  #     assign(paste0("j", "_1"), which(j <= N_peak))
+  #     assign(paste0("j", "_2"), which(j > N_peak))
+  #
+  #     assign(paste0("ind_trend", i, "_1"), linear_trend(j = eval(sym(paste0("j", i)))[eval(sym(paste0("j", i, "_1")))],
+  #                                                       lambda = lambda[i+1],
+  #                                                       sample_size = c(0, n_total)))
+  #
+  #     assign(paste0("ind_trend", i, "_2"), linear_trend(j = ifelse(eval(sym(paste0("j", i)))[eval(sym(paste0("j", i, "_2")))[1]]==eval(sym(paste0("j", i)))[1],
+  #                                                                  eval(sym(paste0("j", i)))[eval(sym(paste0("j", i, "_2")))],
+  #                                                                  eval(sym(paste0("j", i)))[eval(sym(paste0("j", i, "_2")))]-N_peak+1),
+  #                                                       lambda = -lambda[i+1],
+  #                                                       sample_size = c(0, n_total)) + ifelse(length(eval(sym(paste0("ind_trend", i, "_1"))))==0, 0,
+  #                                                                                             eval(sym(paste0("ind_trend", i, "_1")))[length(eval(sym(paste0("ind_trend", i, "_1"))))]))
+  #
+  #     assign(paste0("ind_trend", i), c(eval(sym(paste0("ind_trend", i, "_1"))), eval(sym(paste0("ind_trend", i, "_2")))))
+  #
+  #
+  #
+  #     assign(paste0("all_trend", i, "_1"), linear_trend(j = j[eval(sym(paste0("j", "_1")))],
+  #                                                       lambda = lambda[i+1],
+  #                                                       sample_size = c(0, n_total)))
+  #
+  #     assign(paste0("all_trend", i, "_2"), linear_trend(j = j[eval(sym(paste0("j", "_2")))]-N_peak+1,
+  #                                                       lambda = -lambda[i+1],
+  #                                                       sample_size = c(0, n_total)) + ifelse(length(eval(sym(paste0("ind_trend", i, "_1"))))==0, 0,
+  #                                                                                             eval(sym(paste0("ind_trend", i, "_1")))[length(eval(sym(paste0("ind_trend", i, "_1"))))]))
+  #
+  #     assign(paste0("all_trend", i), c(eval(sym(paste0("all_trend", i, "_1"))), eval(sym(paste0("all_trend", i, "_2")))))
+  #   }
+  # }
+
+
   if(trend=="inv_u"){
-
     for (i in 0:num_arms) {
-      assign(paste0("j", i, "_1"), which(eval(sym(paste0("j", i))) <= N_peak))
-      assign(paste0("j", i, "_2"), which(eval(sym(paste0("j", i))) > N_peak))
+      assign(paste0("ind_trend", i), inv_u_trend(j=eval(sym(paste0("j", i))),
+                                                 N_peak = N_peak,
+                                                 lambda = lambda[i+1],
+                                                 sample_size = n_total))
 
-      assign(paste0("j", "_1"), which(j <= N_peak))
-      assign(paste0("j", "_2"), which(j > N_peak))
-
-      assign(paste0("ind_trend", i, "_1"), linear_trend(j = eval(sym(paste0("j", i)))[eval(sym(paste0("j", i, "_1")))],
-                                                        lambda = lambda[i+1],
-                                                        sample_size = c(0, n_total)))
-
-      assign(paste0("ind_trend", i, "_2"), linear_trend(j = eval(sym(paste0("j", i)))[eval(sym(paste0("j", i, "_2")))]-N_peak+1,
-                                                        lambda = -lambda[i+1],
-                                                        sample_size = c(0, n_total)) + ifelse(length(eval(sym(paste0("ind_trend", i, "_1"))))==0, 0,
-                                                                                              eval(sym(paste0("ind_trend", i, "_1")))[length(eval(sym(paste0("ind_trend", i, "_1"))))]))
-
-      assign(paste0("ind_trend", i), c(eval(sym(paste0("ind_trend", i, "_1"))), eval(sym(paste0("ind_trend", i, "_2")))))
-
-
-
-      assign(paste0("all_trend", i, "_1"), linear_trend(j = j[eval(sym(paste0("j", "_1")))],
-                                                        lambda = lambda[i+1],
-                                                        sample_size = c(0, n_total)))
-
-      assign(paste0("all_trend", i, "_2"), linear_trend(j = j[eval(sym(paste0("j", "_2")))]-N_peak+1,
-                                                        lambda = -lambda[i+1],
-                                                        sample_size = c(0, n_total)) + ifelse(length(eval(sym(paste0("ind_trend", i, "_1"))))==0, 0,
-                                                                                              eval(sym(paste0("ind_trend", i, "_1")))[length(eval(sym(paste0("ind_trend", i, "_1"))))]))
-
-      assign(paste0("all_trend", i), c(eval(sym(paste0("all_trend", i, "_1"))), eval(sym(paste0("all_trend", i, "_2")))))
+      assign(paste0("all_trend", i), inv_u_trend(j=j,
+                                                 N_peak = N_peak,
+                                                 lambda = lambda[i+1],
+                                                 sample_size = n_total))
     }
   }
 

@@ -40,9 +40,11 @@ This package contains the following functions:
 
 -   `get_ss_matrix()` computes sample sizes per arm and period
 -   `linear_trend()` is the linear time trend function, used to generate
-    linear or inverted-u trend for each patient
+    the trend for each patient
 -   `sw_trend()` is the step-wise time trend function, used generate the
     trend for each patient
+-   `inv_u_trend()` is the inverted-u time trend function, used generate
+    the trend for each patient
 -   `seasonal_trend()` is the seasonal time trend function, used
     generate the trend for each patient
 
