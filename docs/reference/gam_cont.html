@@ -87,7 +87,7 @@
 <dt>smoothing_basis</dt>
 <dd><p>String indicating the (penalized) smoothing basis to use. Default="tp"</p></dd>
 <dt>basis_dim</dt>
-<dd><p>The dimension of the basis used to represent the smooth term. The default depends on the number of variables that the smooth is a function of.</p></dd>
+<dd><p>The dimension of the basis used to represent the smooth term. The default depends on the number of variables that the smooth is a function of. Default=-1.</p></dd>
 <dt>gam_method</dt>
 <dd><p>The smoothing parameter estimation method. Default="GCV.Cp"</p></dd>
 <dt>check</dt>
@@ -112,19 +112,19 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">gam_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.03482214</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.005372521</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2434235</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3360541</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.01962885</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.0781961</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5064758</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.593912</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -138,7 +138,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimated degrees of freedom:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  total = 5 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GCV score: 1.015622     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GCV score: 0.9754431     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>

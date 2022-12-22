@@ -27,7 +27,7 @@ gam_cont(
 
 \item{smoothing_basis}{String indicating the (penalized) smoothing basis to use. Default="tp"}
 
-\item{basis_dim}{The dimension of the basis used to represent the smooth term. The default depends on the number of variables that the smooth is a function of.}
+\item{basis_dim}{The dimension of the basis used to represent the smooth term. The default depends on the number of variables that the smooth is a function of. Default=-1.}
 
 \item{gam_method}{The smoothing parameter estimation method. Default="GCV.Cp"}
 

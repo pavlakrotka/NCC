@@ -1,19 +1,19 @@
-#' Data simulation for binary endpoints for a platform trial with an arbitrary number of treatment arms entering sequentially
+#' Data simulation for binary endpoints for a platform trial with an arbitrary number of treatment arms entering at different time points.
 #'
-#' @description Simulates data from a platform trial with binary endpoints and an arbitrary number of treatment arms entering sequentially. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the the sample size per arm (assumed equal).
+#' @description Simulates data from a platform trial with binary endpoints, an arbitrary number of treatment arms entering at different time points and a shared control arm. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the the sample size per arm (assumed equal). Allocation ratio of 1:1:...:1 in each period is assumed and block randomization is used to assign patients to the active arms.
 #'
-#' @param num_arms Number of treatment arms in the trial
-#' @param n_arm Sample size per arm (assumed equal)
-#' @param d Vector with timings of adding new arms in terms of number of patients recruited to the trial so far (of length num_arms)
-#' @param period_blocks Number to multiply the number of active arms with in order to get the block size per period
-#' @param p0 Response in the control arm
-#' @param OR Vector with odds ratios for each treatment arm (of length num_arms)
-#' @param lambda Vector with strength of time trend in each arm (of length num_arms+1, as time trend in the control is also allowed)
-#' @param trend Indicates the time trend pattern ("linear", "stepwise", "stepwise_2", "inv_u" or "seasonal")
-#' @param N_peak Point at which the inverted-u time trend switches direction in terms of overall sample size
-#' @param n_wave How many cycles (waves) should a seasonal trend have
-#' @param full Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses, input parameters) should be included (TRUE). Default=FALSE
-#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE
+#' @param num_arms Number of treatment arms in the trial.
+#' @param n_arm Sample size per arm (assumed equal).
+#' @param d Vector with timings of adding new arms in terms of number of patients recruited to the trial so far (of length `num_arms`). The first entry must be 0, so that the trial starts with at least one experimental treatment arm.
+#' @param period_blocks Number to multiply the number of active arms with, in order to get the block size per period. I.e., block size in each period = `period_blocks`* (number of active arms in the period). Default=2.
+#' @param p0 Response in the control arm.
+#' @param OR Vector with odds ratios for each treatment arm ordered by the entry time of the treatment arms, i.e., the first entry in the vector corresponds to the odds ratio of the first experimental treatment arm etc. (of length `num_arms`).
+#' @param lambda Vector with strength of time trend in each arm ordered by the entry time of the arms (i.e., the first entry in the vector corresponds to the time trend in the control arm, second entry to the time trend in the first treatment arm etc. (of length `num_arms`+1, as time trend in the control is also allowed).
+#' @param trend Indicates the time trend pattern ("linear", "stepwise", "stepwise_2", "inv_u" or "seasonal").
+#' @param N_peak Point at which the inverted-u time trend switches direction in terms of overall sample size.
+#' @param n_wave How many cycles (waves) should a seasonal trend have.
+#' @param full Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses, input parameters) should be included (TRUE). Default=FALSE.
+#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
 #'
 #' @importFrom stats na.omit
 #' @importFrom stats rbinom
@@ -27,7 +27,7 @@
 #' p0 = 0.7, OR = rep(1.8, 3), lambda = rep(0.15, 4), trend="stepwise"))
 #'
 #'
-#' @return Data frame: simulated trial data (Default, if full=FALSE) or List: simulated trial data, input parameters and additional information (if full=TRUE)
+#' @return Data frame: simulated trial data (if full=FALSE, i.e. default) or List: simulated trial data, input parameters and additional information (if full=TRUE).
 #' @author Pavla Krotka, Marta Bofill Roig
 
 datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, trend, N_peak, n_wave, full=FALSE, check=TRUE){
@@ -59,7 +59,7 @@ datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, tre
     }
 
     if (!is.numeric(lambda) | length(lambda)!=(num_arms+1)) {
-      stop("Vector with strength of time trend in each arm (`lambda`) must be a numeric vector of length `num_arms`+1 and must be ordered by the entry time of the treatment arms
+      stop("Vector with strength of time trend in each arm (`lambda`) must be a numeric vector of length `num_arms`+1 and must be ordered by the entry time of the arms
            (i.e., the first entry in the vector corresponds to the time trend in the control arm, second entry to the time trend in the first treatment arm etc.)!")
     }
 

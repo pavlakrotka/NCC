@@ -1,18 +1,18 @@
-#' Time machine for continuous data
+#' Time machine for continuous endpoints.
 #'
-#' @description Time machine for continuous data
+#' @description Performs analysis of continuous data using the Time machine approach, which uses a second-order Bayesian normal dynamic linear model (NDLM), takes into account all data until the investigated arm left the trial and includes covariate adjustment for time (separating the trial into buckets of pre-defined size) using a hierarchical model that smooths the control response rate over time.
 #'
-#' @param data Simulated trial data, e.g. result from the `datasim_cont()` function
-#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
-#' @param alpha Type I error. Default=0.025
-#' @param prec_delta ...
-#' @param prec_gamma ...
-#' @param tau_a ...
-#' @param tau_b ...
-#' @param prec_a ...
-#' @param prec_b ...
-#' @param bucket_size Number of patients per time bucket. Default=25
-#' @param ... Further arguments for simulation function
+#' @param data Simulated trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment' and 'response'.
+#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1).
+#' @param alpha Type I error. Default=0.025.
+#' @param prec_delta Precision of the prior regarding the treatment effect. Default=0.001.
+#' @param prec_gamma Precision of the prior regarding the control response. Default=0.001.
+#' @param tau_a Parameter \eqn{a} of the Gamma distribution regarding the precision of the drift parameter \eqn{\tau}. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.1.
+#' @param tau_b Parameter \eqn{b} of the Gamma distribution regarding the precision of the drift parameter \eqn{\tau}. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.01.
+#' @param prec_a Parameter \eqn{a} of the Gamma distribution regarding the precision of the responses. I.e., \eqn{\sigma \sim Gamma(a,b)}. Default=0.001.
+#' @param prec_b Parameter \eqn{b} of the Gamma distribution regarding the precision of the responses. I.e., \eqn{\sigma \sim Gamma(a,b)}. Default=0.001.
+#' @param bucket_size Number of patients per time bucket. Default=25.
+#' @param ... Further arguments for simulation function.
 #'
 #' @importFrom stats aggregate
 #' @importFrom stats quantile
@@ -30,7 +30,7 @@
 #' timemachine_cont(data = trial_data, arm = 3)
 #'
 #'
-#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment
+#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment.
 #' @author Dominic Magirr, Peter Jacko
 
 timemachine_cont <- function(data,

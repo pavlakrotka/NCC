@@ -7,7 +7,7 @@
 #' @param alpha Type I error. Default=0.025
 #' @param ci Boolean. Whether confidence intervals should be computed. Default=FALSE
 #' @param smoothing_basis String indicating the (penalized) smoothing basis to use. Default="tp"
-#' @param basis_dim The dimension of the basis used to represent the smooth term. The default depends on the number of variables that the smooth is a function of.
+#' @param basis_dim The dimension of the basis used to represent the smooth term. The default depends on the number of variables that the smooth is a function of. Default=-1.
 #' @param gam_method The smoothing parameter estimation method. Default="GCV.Cp"
 #' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE
 #' @param ... Further arguments for simulation function

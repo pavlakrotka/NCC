@@ -2,7 +2,7 @@
 % Please edit documentation in R/timemachine_cont.R
 \name{timemachine_cont}
 \alias{timemachine_cont}
-\title{Time machine for continuous data}
+\title{Time machine for continuous endpoints.}
 \usage{
 timemachine_cont(
   data,
@@ -19,33 +19,33 @@ timemachine_cont(
 )
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function}
+\item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment' and 'response'.}
 
-\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1)}
+\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1).}
 
-\item{alpha}{Type I error. Default=0.025}
+\item{alpha}{Type I error. Default=0.025.}
 
-\item{prec_delta}{...}
+\item{prec_delta}{Precision of the prior regarding the treatment effect. Default=0.001.}
 
-\item{prec_gamma}{...}
+\item{prec_gamma}{Precision of the prior regarding the control response. Default=0.001.}
 
-\item{tau_a}{...}
+\item{tau_a}{Parameter \eqn{a} of the Gamma distribution regarding the precision of the drift parameter \eqn{\tau}. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.1.}
 
-\item{tau_b}{...}
+\item{tau_b}{Parameter \eqn{b} of the Gamma distribution regarding the precision of the drift parameter \eqn{\tau}. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.01.}
 
-\item{prec_a}{...}
+\item{prec_a}{Parameter \eqn{a} of the Gamma distribution regarding the precision of the responses. I.e., \eqn{\sigma \sim Gamma(a,b)}. Default=0.001.}
 
-\item{prec_b}{...}
+\item{prec_b}{Parameter \eqn{b} of the Gamma distribution regarding the precision of the responses. I.e., \eqn{\sigma \sim Gamma(a,b)}. Default=0.001.}
 
-\item{bucket_size}{Number of patients per time bucket. Default=25}
+\item{bucket_size}{Number of patients per time bucket. Default=25.}
 
-\item{...}{Further arguments for simulation function}
+\item{...}{Further arguments for simulation function.}
 }
 \value{
-List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment
+List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment.
 }
 \description{
-Time machine for continuous data
+Performs analysis of continuous data using the Time machine approach, which uses a second-order Bayesian normal dynamic linear model (NDLM), takes into account all data until the investigated arm left the trial and includes covariate adjustment for time (separating the trial into buckets of pre-defined size) using a hierarchical model that smooths the control response rate over time.
 }
 \examples{
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasim_bin.R
 \name{datasim_bin}
 \alias{datasim_bin}
-\title{Data simulation for binary endpoints for a platform trial with an arbitrary number of treatment arms entering sequentially}
+\title{Data simulation for binary endpoints for a platform trial with an arbitrary number of treatment arms entering at different time points.}
 \usage{
 datasim_bin(
   num_arms,
@@ -20,35 +20,35 @@ datasim_bin(
 )
 }
 \arguments{
-\item{num_arms}{Number of treatment arms in the trial}
+\item{num_arms}{Number of treatment arms in the trial.}
 
-\item{n_arm}{Sample size per arm (assumed equal)}
+\item{n_arm}{Sample size per arm (assumed equal).}
 
-\item{d}{Vector with timings of adding new arms in terms of number of patients recruited to the trial so far (of length num_arms)}
+\item{d}{Vector with timings of adding new arms in terms of number of patients recruited to the trial so far (of length \code{num_arms}). The first entry must be 0, so that the trial starts with at least one experimental treatment arm.}
 
-\item{period_blocks}{Number to multiply the number of active arms with in order to get the block size per period}
+\item{period_blocks}{Number to multiply the number of active arms with, in order to get the block size per period. I.e., block size in each period = \code{period_blocks}* (number of active arms in the period). Default=2.}
 
-\item{p0}{Response in the control arm}
+\item{p0}{Response in the control arm.}
 
-\item{OR}{Vector with odds ratios for each treatment arm (of length num_arms)}
+\item{OR}{Vector with odds ratios for each treatment arm ordered by the entry time of the treatment arms, i.e., the first entry in the vector corresponds to the odds ratio of the first experimental treatment arm etc. (of length \code{num_arms}).}
 
-\item{lambda}{Vector with strength of time trend in each arm (of length num_arms+1, as time trend in the control is also allowed)}
+\item{lambda}{Vector with strength of time trend in each arm ordered by the entry time of the arms (i.e., the first entry in the vector corresponds to the time trend in the control arm, second entry to the time trend in the first treatment arm etc. (of length \code{num_arms}+1, as time trend in the control is also allowed).}
 
-\item{trend}{Indicates the time trend pattern ("linear", "stepwise", "stepwise_2", "inv_u" or "seasonal")}
+\item{trend}{Indicates the time trend pattern ("linear", "stepwise", "stepwise_2", "inv_u" or "seasonal").}
 
-\item{N_peak}{Point at which the inverted-u time trend switches direction in terms of overall sample size}
+\item{N_peak}{Point at which the inverted-u time trend switches direction in terms of overall sample size.}
 
-\item{n_wave}{How many cycles (waves) should a seasonal trend have}
+\item{n_wave}{How many cycles (waves) should a seasonal trend have.}
 
-\item{full}{Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses, input parameters) should be included (TRUE). Default=FALSE}
+\item{full}{Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses, input parameters) should be included (TRUE). Default=FALSE.}
 
-\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE}
+\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
 }
 \value{
-Data frame: simulated trial data (Default, if full=FALSE) or List: simulated trial data, input parameters and additional information (if full=TRUE)
+Data frame: simulated trial data (if full=FALSE, i.e. default) or List: simulated trial data, input parameters and additional information (if full=TRUE).
 }
 \description{
-Simulates data from a platform trial with binary endpoints and an arbitrary number of treatment arms entering sequentially. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the the sample size per arm (assumed equal).
+Simulates data from a platform trial with binary endpoints, an arbitrary number of treatment arms entering at different time points and a shared control arm. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the the sample size per arm (assumed equal). Allocation ratio of 1:1:...:1 in each period is assumed and block randomization is used to assign patients to the active arms.
 }
 \examples{
 

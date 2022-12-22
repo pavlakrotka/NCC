@@ -2,18 +2,18 @@
 % Please edit documentation in R/all_models.R
 \name{all_models}
 \alias{all_models}
-\title{Wrapper function for simulations analyzing given data with all models}
+\title{Wrapper function for simulations performing inference on given treatment arms using given models}
 \usage{
 all_models(
   data,
   arms,
-  models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAP_rjags"),
+  models = c("fixmodel", "sepmodel", "poolmodel", "timemachine"),
   endpoint,
   alpha = 0.025,
   unit_size = 250,
   ncc = TRUE,
-  opt = 1,
-  prior_prec_tau = 1,
+  opt = 2,
+  prior_prec_tau = 4,
   n.samples = 1000,
   n.chains = 4,
   n.iter = 4000,
@@ -36,18 +36,64 @@ all_models(
 )
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} or \code{datasim_cont()} function}
+\item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} or \code{datasim_cont()} function.}
 
-\item{arms}{Vector with treatment arms to perform inference on. Default - all arms except the first one}
+\item{arms}{Vector with treatment arms to perform inference on. Default - all arms except the first one.}
 
-\item{models}{Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAP_rjags")}
+\item{models}{Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine").}
 
-\item{endpoint}{Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints}
+\item{endpoint}{Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.}
 
-\item{alpha}{Type I error. Default=0.025}
+\item{alpha}{Type I error. Default=0.025.}
+
+\item{unit_size}{Number of patients per calendar time unit for frequentist models adjusting for calendar time. Default=25.}
+
+\item{ncc}{Boolean. Whether to include NCC data into the analysis using frequentist models. Default=TRUE.}
+
+\item{opt}{Boolean. In the MAP Prior approach, if opt=1, all former periods are used as one source; if opt=2, periods form different sources get separately included into the final analysis. Default=2.}
+
+\item{prior_prec_tau}{Dispersion parameter of the half normal prior, the prior for the between study heterogeneity in the MAP Prior approach. Default=4.}
+
+\item{n.samples}{How many random samples will get drawn for the calculation of the posterior mean and the CIs in the MAP Prior approach. Default=1000.}
+
+\item{n.chains}{Number of parallel chains for the rjags model in the MAP Prior approach. Default=4.}
+
+\item{n.iter}{Number of iterations to monitor of the jags.model. Needed for coda.samples in the MAP Prior approach. Default=4000.}
+
+\item{n.adapt}{Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model in the MAP Prior approach. Default=1000.}
+
+\item{robustify}{Boolean.}
+
+\item{weight}{Weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP prior according to Schmidli (2014). Default=0.1.}
+
+\item{ci}{Boolean. Whether confidence intervals for the mixed models should be computed. Default=FALSE.}
+
+\item{prec_delta}{Precision of the prior regarding the treatment effect in the Time Machine approach. Default=0.001.}
+
+\item{prec_gamma}{Precision of the prior regarding the control response in the Time Machine approach. Default=0.001.}
+
+\item{tau_a}{Parameter \eqn{a} of the Gamma distribution regarding the precision of the drift parameter \eqn{\tau} in the Time Machine approach. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.1.}
+
+\item{tau_b}{Parameter \eqn{b} of the Gamma distribution regarding the precision of the drift parameter \eqn{\tau} in the Time Machine approach. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.01.}
+
+\item{prec_a}{Parameter \eqn{a} of the Gamma distribution regarding the precision of the responses for continuous endpoints in the Time Machine approach. I.e., \eqn{\sigma \sim Gamma(a,b)}. Default=0.001.}
+
+\item{prec_b}{Parameter \eqn{b} of the Gamma distribution regarding the precision of the responses for continuous endpoints in the Time Machine approach. I.e., \eqn{\sigma \sim Gamma(a,b)}. Default=0.001.}
+
+\item{bucket_size}{Number of patients per time bucket in the Time Machine approach. Default=25.}
+
+\item{smoothing_basis}{String indicating the (penalized) smoothing basis to use in the GAM models. Default="tp".}
+
+\item{basis_dim}{The dimension of the basis used to represent the smooth term in the GAM models. The default depends on the number of variables that the smooth is a function of. Default=-1.}
+
+\item{gam_method}{The smoothing parameter estimation method for the GAM models. Default="GCV.Cp".}
+
+\item{bs_degree}{Degree of the polynomial splines. Default=3.}
+
+\item{poly_degree}{Degree of the discontinuous piecewise polynomials. Default=3.}
 }
 \value{
-List containing an indicator whether the null hypothesis was rejected or not for the investigated treatment for all models
+List containing an indicator whether the null hypothesis was rejected or not, and the estimated treatment effect for all investigated treatment arms and all models.
 }
 \description{
 Analyzes given data using different models as indicated by the user. Performs inference for indicated experimental treatment arms.
