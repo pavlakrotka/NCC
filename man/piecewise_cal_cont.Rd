@@ -2,7 +2,7 @@
 % Please edit documentation in R/piecewise_cal_cont.R
 \name{piecewise_cal_cont}
 \alias{piecewise_cal_cont}
-\title{Model-based analysis for continuous data using discontinuous piecewise polynomials per calendar time}
+\title{Model-based analysis for continuous data using discontinuous piecewise polynomials per calendar time unit}
 \usage{
 piecewise_cal_cont(
   data,
@@ -16,27 +16,27 @@ piecewise_cal_cont(
 )
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment', 'response' and 'j'}
+\item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment', 'response' and 'j'.}
 
-\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1)}
+\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Type I error. Default=0.025}
+\item{alpha}{Type I error rate. Default=0.025.}
 
-\item{unit_size}{Number of patients per calendar time unit Default=25}
+\item{unit_size}{Number of patients per calendar time unit. Default=25.}
 
-\item{ncc}{Boolean. Whether to include NCC data into the analysis. Default=TRUE}
+\item{ncc}{Boolean. Whether to include NCC data into the analysis. Default=TRUE.}
 
-\item{poly_degree}{Degree of the piecewise polynomial. Default=3}
+\item{poly_degree}{Degree of the piecewise polynomial. Default=3.}
 
-\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE}
+\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
 
-\item{...}{Further arguments for simulation function}
+\item{...}{Further arguments for simulation function.}
 }
 \value{
-List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
+List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), and the fitted model.
 }
 \description{
-Performs linear regression taking into account all trial data until the arm under study leaves the trial and adjusting for time using discontinuous piecewise polynomials in each calendar time interval
+Performs linear regression taking into account all trial data until the arm under study leaves the trial and adjusting for time using discontinuous piecewise polynomials in each calendar time unit.
 }
 \examples{
 

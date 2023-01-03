@@ -2,7 +2,7 @@
 % Please edit documentation in R/MAP_rjags_bin.R
 \name{MAP_rjags_bin}
 \alias{MAP_rjags_bin}
-\title{Remarks'}
+\title{MAP Prior approach analysis for binary data}
 \usage{
 MAP_rjags_bin(
   data,
@@ -16,43 +16,42 @@ MAP_rjags_bin(
   n.adapt = 1000,
   robustify = TRUE,
   weight = 0.1,
+  check = TRUE,
   ...
 )
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} function}
+\item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} function. Must contain columns named 'treatment', 'response' and 'period'.}
 
-\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1)}
+\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Type I error. Default=0.025}
+\item{alpha}{Type I error rate. Default=0.025}
 
-\item{opt}{binary, opt=1: all former periods are use as one source, opt=2: periods form different sources get seperately included into the final analysis}
+\item{opt}{Binary. If opt=1, all former periods are used as one source; if opt=2, periods form different sources get separately included into the final analysis. Default=2.}
 
-\item{prior_prec_tau}{dispersion parameter of the half normal prior, the prior for the between study heteroginity}
+\item{prior_prec_tau}{Dispersion parameter of the half normal prior, the prior for the between study heterogeneity. Default=4.}
 
-\item{n.samples}{defines the number of how many random samples will get drwan for the calcualtion of the posterior mean and the CIs, default is 1000}
+\item{n.samples}{How many random samples will get drawn for the calculation of the posterior mean and the CIs. Default=1000.}
 
-\item{n.chains}{the number of parallel chains for the rjags model}
+\item{n.chains}{Number of parallel chains for the rjags model. Default=4.}
 
-\item{n.iter}{needed for coda.samples, number of iterations to monitor of the jags.model}
+\item{n.iter}{Number of iterations to monitor of the jags.model. Needed for coda.samples. Default=4000.}
 
-\item{n.adapt}{needed for jags.model, defines the number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behaviour to maximize their efficiency}
+\item{n.adapt}{Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model. Default=1000.}
 
 \item{robustify}{Booelan.}
 
-\item{weight}{weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP prior according to Schmidli 2014}
+\item{weight}{Weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP prior according to Schmidli (2014). Default=0.1.}
 
-\item{...}{Further arguments for simulation function}
+\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
+
+\item{...}{Further arguments for simulation function.}
 }
 \value{
-containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment
+List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, and an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input).
 }
 \description{
-Borrows data from non-concurrent controls for binary endpoints for the concurrent controls arm by the use of a MAP prior
-}
-\details{
-Check input parmaters for prior specification and whether to include additional ones like robistify yes, no, specifications for robustification in the future...
-So far: Posterior odds estimated by drawing random samples from the posterior distributions of the incidence rates of the two groups seperately
+Performs analysis using the MAP Prior approach. Borrows data from non-concurrent controls to obtain the prior distribution for the control response in the concurrent periods.
 }
 \examples{
 
@@ -62,6 +61,9 @@ p0 = 0.7, OR = rep(1.8, 3), lambda = rep(0.15, 4), trend="stepwise")
 MAP_rjags_bin(data = trial_data, arm = 3)
 
 
+}
+\references{
+Robust meta-analytic-predictive priors in clinical trials with historical control information. Schmidli, H., et al. Biometrics 70.4 (2014): 1023-1032.
 }
 \author{
 Katharina Hees

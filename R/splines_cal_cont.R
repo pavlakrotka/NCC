@@ -1,15 +1,15 @@
-#' Model-based analysis for continuous data using regression splines with knots placed according to calendar times
+#' Spline regression analysis for continuous data with knots placed according to calendar time units
 #'
-#' @description Performs linear regression taking into account all trial data until the arm under study leaves the trial and adjusting for time using regression splines with knots placed according to calendar times
+#' @description Performs linear regression taking into account all trial data until the arm under study leaves the trial and adjusting for time using regression splines with knots placed according to calendar time units.
 #'
-#' @param data Simulated trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response' and 'j'
-#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
-#' @param alpha Type I error. Default=0.025
-#' @param unit_size Number of patients per calendar time unit Default=25
-#' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE
-#' @param bs_degree Degree of the piecewise polynomial. Default=3
-#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE
-#' @param ... Further arguments for simulation function
+#' @param data Simulated trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response' and 'j'.
+#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
+#' @param alpha Type I error rate. Default=0.025.
+#' @param unit_size Number of patients per calendar time unit. Default=25.
+#' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE.
+#' @param bs_degree Degree of the polynomial spline. Default=3 for cubic spline.
+#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
+#' @param ... Further arguments for simulation function.
 #'
 #' @importFrom stats lm
 #' @importFrom splines bs
@@ -26,7 +26,7 @@
 #'
 #' splines_cal_cont(data = trial_data, arm = 3)
 #'
-#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
+#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), the positions of the knots in terms of patient index, and the fitted model.
 #' @author Pavla Krotka
 
 splines_cal_cont <- function(data, arm, alpha=0.025, unit_size=25, ncc=TRUE, bs_degree=3, check=TRUE, ...){

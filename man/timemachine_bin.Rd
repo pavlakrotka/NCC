@@ -2,7 +2,7 @@
 % Please edit documentation in R/timemachine_bin.R
 \name{timemachine_bin}
 \alias{timemachine_bin}
-\title{Time machine for binary endpoints.}
+\title{Time machine analysis for binary data}
 \usage{
 timemachine_bin(
   data,
@@ -13,15 +13,16 @@ timemachine_bin(
   tau_a = 0.1,
   tau_b = 0.01,
   bucket_size = 25,
+  check = TRUE,
   ...
 )
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} function. Must contain columns named 'treatment' and 'response'.}
+\item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} function. Must contain columns named 'treatment', 'response' and 'period'.}
 
-\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1).}
+\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Type I error. Default=0.025.}
+\item{alpha}{Type I error rate. Default=0.025.}
 
 \item{prec_delta}{Precision of the prior regarding the treatment effect. Default=0.001.}
 
@@ -33,10 +34,12 @@ timemachine_bin(
 
 \item{bucket_size}{Number of patients per time bucket. Default=25.}
 
+\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
+
 \item{...}{Further arguments for simulation function.}
 }
 \value{
-List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment.
+List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, and an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input).
 }
 \description{
 Performs analysis of binary data using the Time machine approach, which uses a second-order Bayesian normal dynamic linear model (NDLM), takes into account all data until the investigated arm left the trial and includes covariate adjustment for time (separating the trial into buckets of pre-defined size) using a hierarchical model that smooths the control response rate over time.

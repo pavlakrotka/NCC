@@ -1,13 +1,12 @@
-#' Wrapper function for simulations analyzing given data with given models (treatment-treatment comparisons)
+#' Wrapper function for simulations performing inference on given treatment arms using given models (treatment-treatment comparisons)
 #'
-#' @description Analyzes given data using the fixed effect model and indirect comparison. Compares the indicated treatment arms.
+#' @description Analyzes given data using different models as indicated by the user. Compares two indicated treatment arms.
 #'
-#' @param data Simulated trial data, e.g. result from the `datasim_bin()` or `datasim_cont()` function
-#' @param arms Indicator of the treatment arms to be compared (vector of length 2)
-#' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "indirect")
-#' @param endpoint Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints
-#' @param alpha Type I error. Default=0.025
-#' @param ... Further arguments for simulation function
+#' @param data Simulated trial data, e.g. result from the `datasim_bin()` or `datasim_cont()` function.
+#' @param arms Indicator of the treatment arms to be compared (vector of length 2).
+#' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "indirect").
+#' @param endpoint Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.
+#' @param alpha Type I error rate. Default=0.025.
 #'
 #' @keywords internal
 #'
@@ -21,11 +20,11 @@
 #' TT_all_models(data = trial_data, arms = c(1,3), endpoint = "cont")
 #'
 #'
-#' @return List containing an indicator whether the null hypothesis was rejected or not for the investigated treatment for all models
+#' @return List containing an indicator whether the null hypothesis was rejected or not for the investigated treatment for all models.
 #' @author Pavla Krotka
 
 
-TT_all_models <- function(data, arms, models = c("fixmodel", "indirect"), endpoint, alpha=0.025, ...){
+TT_all_models <- function(data, arms, models = c("fixmodel", "indirect"), endpoint, alpha=0.025){
 
   models <- sort(models)
 

@@ -1,15 +1,15 @@
-#' Model-based analysis for continuous data adjusting for calendar time units as a random factor with AR1 correlation structure
+#' Mixed regression model analysis for continuous data adjusting for calendar time units as a random factor with AR1 correlation structure
 #'
-#' @description Performs linear mixed model regression taking into account all trial data until the arm under study leaves the trial and adjusting for calendar time units as random factors with AR1 correlation structure
+#' @description Performs linear mixed model regression taking into account all trial data until the arm under study leaves the trial and adjusting for calendar time units as random factors with AR1 correlation structure.
 #'
-#' @param data Simulated trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment' and 'response'
-#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
-#' @param alpha Type I error. Default=0.025
-#' @param ci Boolean. Whether confidence intervals should be computed. Default=FALSE
-#' @param unit_size Number of patients per calendar time unit Default=25
-#' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE
-#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE
-#' @param ... Further arguments for simulation function
+#' @param data Simulated trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment' and 'response'.
+#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
+#' @param alpha Type I error rate. Default=0.025.
+#' @param ci Boolean. Whether confidence intervals should be computed. Default=FALSE.
+#' @param unit_size Number of patients per calendar time unit. Default=25.
+#' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE.
+#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
+#' @param ... Further arguments for simulation function.
 #'
 #' @importFrom spaMM fitme
 #' @importFrom spaMM get_any_IC
@@ -27,7 +27,7 @@
 #'
 #' mixmodel_AR1_cal_cont(data = trial_data, arm = 3, ci = TRUE)
 #'
-#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
+#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), and the fitted model.
 #' @author Pavla Krotka
 
 mixmodel_AR1_cal_cont <- function(data, arm, alpha=0.025, ci=FALSE, unit_size=25, ncc=TRUE, check=TRUE, ...){

@@ -68,42 +68,42 @@
           
           <code><a href="datasim_bin.html">datasim_bin()</a></code> 
         </dt>
-        <dd>Data simulation for binary endpoints for a platform trial with an arbitrary number of treatment arms entering at different time points.</dd>
+        <dd>Data simulation for binary endpoints for a platform trial with an arbitrary number of treatment arms entering at different time points</dd>
       </dl><dl><dt>
           
           <code><a href="datasim_cont.html">datasim_cont()</a></code> 
         </dt>
-        <dd>Data simulation for continuous endpoints for a platform trial with an arbitrary number of treatment arms entering at different time points.</dd>
+        <dd>Data simulation for continuous endpoints for a platform trial with an arbitrary number of treatment arms entering at different time points</dd>
       </dl><dl><dt>
           
           <code><a href="fixmodel_bin.html">fixmodel_bin()</a></code> 
         </dt>
-        <dd>Model-based analysis for binary data adjusting for periods</dd>
+        <dd>Frequentist logistic regression model analysis for binary data adjusting for periods</dd>
       </dl><dl><dt>
           
           <code><a href="fixmodel_cal_bin.html">fixmodel_cal_bin()</a></code> 
         </dt>
-        <dd>Model-based analysis for binary data adjusting for calendar time units</dd>
+        <dd>Frequentist logistic regression model analysis for binary data adjusting for calendar time units</dd>
       </dl><dl><dt>
           
           <code><a href="fixmodel_cal_cont.html">fixmodel_cal_cont()</a></code> 
         </dt>
-        <dd>Model-based analysis for continuous data adjusting for calendar time units</dd>
+        <dd>Frequentist linear regression model analysis for continuous data adjusting for calendar time units</dd>
       </dl><dl><dt>
           
           <code><a href="fixmodel_cont.html">fixmodel_cont()</a></code> 
         </dt>
-        <dd>Model-based analysis for continuous data adjusting for periods</dd>
+        <dd>Frequentist linear regression model analysis for continuous data adjusting for periods</dd>
       </dl><dl><dt>
           
           <code><a href="gam_cont.html">gam_cont()</a></code> 
         </dt>
-        <dd>Model-based analysis for continuous data using generalized additive model</dd>
+        <dd>Generalized additive model analysis for continuous data</dd>
       </dl><dl><dt>
           
           <code><a href="get_ss_matrix.html">get_ss_matrix()</a></code> 
         </dt>
-        <dd>Sample size matrix for a platform trial with a flexible number of treatment arms</dd>
+        <dd>Sample size matrix for a platform trial with an arbitrary number of treatment arms</dd>
       </dl><dl><dt>
           
           <code><a href="inv_u_trend.html">inv_u_trend()</a></code> 
@@ -118,37 +118,37 @@
           
           <code><a href="MAP_rjags_bin.html">MAP_rjags_bin()</a></code> 
         </dt>
-        <dd>Remarks'</dd>
+        <dd>MAP Prior approach analysis for binary data</dd>
       </dl><dl><dt>
           
           <code><a href="MAP_rjags_cont.html">MAP_rjags_cont()</a></code> 
         </dt>
-        <dd>Remarks'</dd>
+        <dd>MAP Prior approach analysis for continuous data</dd>
       </dl><dl><dt>
           
           <code><a href="mixmodel_AR1_cal_cont.html">mixmodel_AR1_cal_cont()</a></code> 
         </dt>
-        <dd>Model-based analysis for continuous data adjusting for calendar time units as a random factor with AR1 correlation structure</dd>
+        <dd>Mixed regression model analysis for continuous data adjusting for calendar time units as a random factor with AR1 correlation structure</dd>
       </dl><dl><dt>
           
           <code><a href="mixmodel_AR1_cont.html">mixmodel_AR1_cont()</a></code> 
         </dt>
-        <dd>Model-based analysis for continuous data adjusting for periods as a random factor with AR1 correlation structure</dd>
+        <dd>Mixed regression model analysis for continuous data adjusting for periods as a random factor with AR1 correlation structure</dd>
       </dl><dl><dt>
           
           <code><a href="mixmodel_cal_cont.html">mixmodel_cal_cont()</a></code> 
         </dt>
-        <dd>Model-based analysis for continuous data adjusting for calendar time units as a random factor</dd>
+        <dd>Mixed regression model analysis for continuous data adjusting for calendar time units as a random factor</dd>
       </dl><dl><dt>
           
           <code><a href="mixmodel_cont.html">mixmodel_cont()</a></code> 
         </dt>
-        <dd>Model-based analysis for continuous data adjusting for periods as a random factor</dd>
+        <dd>Mixed regression model analysis for continuous data adjusting for periods as a random factor</dd>
       </dl><dl><dt>
           
           <code><a href="piecewise_cal_cont.html">piecewise_cal_cont()</a></code> 
         </dt>
-        <dd>Model-based analysis for continuous data using discontinuous piecewise polynomials per calendar time</dd>
+        <dd>Model-based analysis for continuous data using discontinuous piecewise polynomials per calendar time unit</dd>
       </dl><dl><dt>
           
           <code><a href="piecewise_cont.html">piecewise_cont()</a></code> 
@@ -196,14 +196,24 @@
         <dd>Separate analysis for continuous data</dd>
       </dl><dl><dt>
           
+          <code><a href="sim_study.html">sim_study()</a></code> 
+        </dt>
+        <dd>Wrapper function performing simulation studies for a given set of scenarios (not parallelized)</dd>
+      </dl><dl><dt>
+          
+          <code><a href="sim_study_par.html">sim_study_par()</a></code> 
+        </dt>
+        <dd>Wrapper function performing simulation studies for a given set of scenarios (parallelized on replication level)</dd>
+      </dl><dl><dt>
+          
           <code><a href="splines_cal_cont.html">splines_cal_cont()</a></code> 
         </dt>
-        <dd>Model-based analysis for continuous data using regression splines with knots placed according to calendar times</dd>
+        <dd>Spline regression analysis for continuous data with knots placed according to calendar time units</dd>
       </dl><dl><dt>
           
           <code><a href="splines_cont.html">splines_cont()</a></code> 
         </dt>
-        <dd>Model-based analysis for continuous data using regression splines with knots placed according to periods</dd>
+        <dd>Spline regression analysis for continuous data with knots placed according to periods</dd>
       </dl><dl><dt>
           
           <code><a href="sw_trend.html">sw_trend()</a></code> 
@@ -218,12 +228,12 @@
           
           <code><a href="timemachine_bin.html">timemachine_bin()</a></code> 
         </dt>
-        <dd>Time machine for binary endpoints.</dd>
+        <dd>Time machine analysis for binary data</dd>
       </dl><dl><dt>
           
           <code><a href="timemachine_cont.html">timemachine_cont()</a></code> 
         </dt>
-        <dd>Time machine for continuous endpoints.</dd>
+        <dd>Time machine analysis for continuous data</dd>
       </dl><dl><dt>
           
           <code><a href="TT_fixmodel_cont.html">TT_fixmodel_cont()</a></code> 

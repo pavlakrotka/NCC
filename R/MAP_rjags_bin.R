@@ -1,23 +1,20 @@
-#'Remarks'
+#' MAP Prior approach analysis for binary data
 #'
-#' Check input parmaters for prior specification and whether to include additional ones like robistify yes, no, specifications for robustification in the future...
-#' So far: Posterior odds estimated by drawing random samples from the posterior distributions of the incidence rates of the two groups seperately
+#' @description Performs analysis using the MAP Prior approach. Borrows data from non-concurrent controls to obtain the prior distribution for the control response in the concurrent periods.
 #'
-#'
-#' @description Borrows data from non-concurrent controls for binary endpoints for the concurrent controls arm by the use of a MAP prior
-#'
-#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
-#' @param data Simulated trial data, e.g. result from the `datasim_bin()` function
-#' @param alpha Type I error. Default=0.025
-#' @param prior_prec_tau dispersion parameter of the half normal prior, the prior for the between study heteroginity
-#' @param opt binary, opt=1: all former periods are use as one source, opt=2: periods form different sources get seperately included into the final analysis
-#' @param n.samples defines the number of how many random samples will get drwan for the calcualtion of the posterior mean and the CIs, default is 1000
-#' @param n.chains the number of parallel chains for the rjags model
-#' @param n.iter needed for coda.samples, number of iterations to monitor of the jags.model
-#' @param n.adapt needed for jags.model, defines the number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behaviour to maximize their efficiency
-#' @param weight weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP prior according to Schmidli 2014
+#' @param data Simulated trial data, e.g. result from the `datasim_bin()` function. Must contain columns named 'treatment', 'response' and 'period'.
+#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
+#' @param alpha Type I error rate. Default=0.025
+#' @param opt Binary. If opt=1, all former periods are used as one source; if opt=2, periods form different sources get separately included into the final analysis. Default=2.
+#' @param prior_prec_tau Dispersion parameter of the half normal prior, the prior for the between study heterogeneity. Default=4.
+#' @param n.samples How many random samples will get drawn for the calculation of the posterior mean and the CIs. Default=1000.
+#' @param n.chains Number of parallel chains for the rjags model. Default=4.
+#' @param n.iter Number of iterations to monitor of the jags.model. Needed for coda.samples. Default=4000.
+#' @param n.adapt Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model. Default=1000.
 #' @param robustify Booelan.
-#' @param ... Further arguments for simulation function
+#' @param weight Weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP prior according to Schmidli (2014). Default=0.1.
+#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
+#' @param ... Further arguments for simulation function.
 #'
 #' @importFrom RBesT automixfit
 #' @importFrom RBesT postmix
@@ -38,8 +35,10 @@
 #' MAP_rjags_bin(data = trial_data, arm = 3)
 #'
 #'
-#' @return containing the p-value (one-sided), estimated treatment effect, 95% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment
+#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, and an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input).
 #' @author Katharina Hees
+#'
+#' @references Robust meta-analytic-predictive priors in clinical trials with historical control information. Schmidli, H., et al. Biometrics 70.4 (2014): 1023-1032.
 
 
 
@@ -53,15 +52,60 @@ MAP_rjags_bin <- function(data,
                           n.iter = 4000,
                           n.adapt = 1000,
                           robustify = TRUE,
-                          weight = 0.1, ...){
+                          weight = 0.1,
+                          check = TRUE, ...){
 
-  if (opt %in% c(1,2) == FALSE) stop("Wrong parameter input. Parameter opt has to be 1 or 2")
+  if (check) {
+    if (!is.data.frame(data) | sum(c("treatment", "response", "period") %in% colnames(data))!=3) {
+      stop("The data frame with trial data must contain the columns 'treatment', 'response' and 'period'!")
+    }
+
+    if(!is.numeric(arm) | length(arm)!=1){
+      stop("The evaluated treatment arm (`arm`) must be one number!")
+    }
+
+    if(!is.numeric(alpha) | length(alpha)!=1){
+      stop("The significance level (`alpha`) must be one number!")
+    }
+
+    if(!is.numeric(opt)| length(opt)!=1 | opt %in% c(1,2) == FALSE){
+      stop("The parameter `opt` must be either 1 or 2!")
+    }
+
+    if(!is.numeric(prior_prec_tau) | length(prior_prec_tau)!=1){
+      stop("The dispersion parameter of the half normal prior, the prior for the between study heterogeneity, (`prior_prec_tau`) must be one number!")
+    }
+
+    if(!is.numeric(n.samples) | length(n.samples)!=1){
+      stop("The numer of random samples (`n.samples`) must be one number!")
+    }
+
+    if(!is.numeric(n.chains) | length(n.chains)!=1){
+      stop("The numer of parallel chains for the rjags model (`n.chains`) must be one number!")
+    }
+
+    if(!is.numeric(n.iter) | length(n.iter)!=1){
+      stop("The number of iterations to monitor of the jags.model (`n.iter`) must be one number!")
+    }
+
+    if(!is.numeric(n.adapt) | length(n.adapt)!=1){
+      stop("The number of iterations for adaptation (`n.adapt`) must be one number!")
+    }
+
+    if(!is.logical(robustify) | length(robustify)!=1){
+      stop("The parameter `robustify` must be  TRUE or FALSE!")
+    }
+
+    if(!is.numeric(weight) | length(weight)!=1 | weight < 0 | weight > 1){
+      stop("The weight given to the non-informative component (`weight`) must be one number between 0 and 1!")
+    }
+  }
 
   # 1-alpha is here the decision boundary for the posterior probability,
   # in case that one uses a non-informative/flat prior instead of a MAP prior, the type one error is equal to alpha
 
-  #Data preparation
-  ##count number of patients for each treatment in each period
+  # Data preparation
+  ## count number of patients for each treatment in each period
   tab_count <- table(data$treatment,data$period)
 
   ## count number of groups and number of periods
@@ -180,7 +224,7 @@ MAP_rjags_bin <- function(data,
 
   ## calculate the "p-value"
   p_value <- mean(samples_treat - samples_control < 0)
-  reject_h0 <- ifelse(p_value<alpha,TRUE,FALSE)
+  reject_h0 <- ifelse(p_value<alpha, TRUE, FALSE)
 
   return(list(p_val = p_value,
               treat_effect = treat_effect,

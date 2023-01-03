@@ -1,8 +1,8 @@
 #' Function for visualizing the simulated trial
 #'
-#' @description Creates a plot visualizing the trial progress over time
+#' @description Creates a plot visualizing the trial progress over time.
 #'
-#' @param treatments Vector with treatment indicators ordered by time, e.g. column `treatment` from the dataframe resulting from the `datasim_bin()` or `datasim_cont()` function
+#' @param treatments Vector with treatment indicators ordered by time, e.g. column `treatment` from the dataframe resulting from the `datasim_bin()` or `datasim_cont()` function.
 #'
 #' @import ggplot2
 #'
@@ -16,7 +16,7 @@
 #' plot_trial(treatments = trial_data$treatment)
 #'
 #'
-#' @return ggplot showing trial progress over time
+#' @return ggplot showing trial progress over time.
 #' @author Pavla Krotka
 
 

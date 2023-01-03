@@ -1,11 +1,11 @@
 #' Separate analysis for binary data adjusted for periods
 #'
-#' @description Performs separate analysis (only taking into account concurrent controls) using a logistic model and adjusting for periods
+#' @description Performs separate analysis (only taking into account concurrent controls) using a logistic model and adjusting for periods, if the treatment arm stays in the trial for more than one period.
 #'
-#' @param data Simulated trial data, e.g. result from the `datasim_bin()` function. Must contain columns named 'treatment', 'response' and 'period'
-#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
-#' @param alpha Type I error. Default=0.025
-#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE
+#' @param data Simulated trial data, e.g. result from the `datasim_bin()` function. Must contain columns named 'treatment', 'response' and 'period'.
+#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
+#' @param alpha Type I error rate. Default=0.025.
+#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
 
 #' @param ... Further arguments for simulation function
 #'
@@ -24,7 +24,7 @@
 #'
 #' sepmodel_adj_bin(data = trial_data, arm = 3)
 #'
-#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
+#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), and the fitted model.
 #' @author Pavla Krotka
 
 sepmodel_adj_bin <- function(data, arm, alpha=0.025, check=TRUE, ...){

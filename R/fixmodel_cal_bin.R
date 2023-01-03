@@ -1,14 +1,14 @@
-#' Model-based analysis for binary data adjusting for calendar time units
+#' Frequentist logistic regression model analysis for binary data adjusting for calendar time units
 #'
-#' @description Performs logistic regression taking into account all trial data until the arm under study leaves the trial and adjusting for calendar time units as factors
+#' @description Performs logistic regression taking into account all trial data until the arm under study leaves the trial and adjusting for calendar time units as factors.
 #'
-#' @param data Simulated trial data, e.g. result from the `datasim_bin()` function. Must contain columns named 'treatment' and 'response'
-#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
-#' @param alpha Type I error. Default=0.025
-#' @param unit_size Number of patients per calendar time unit Default=25
-#' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE
-#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE
-#' @param ... Further arguments for simulation function
+#' @param data Simulated trial data, e.g. result from the `datasim_bin()` function. Must contain columns named 'treatment' and 'response'.
+#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
+#' @param alpha Type I error rate. Default=0.025.
+#' @param unit_size Number of patients per calendar time unit. Default=25.
+#' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE.
+#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
+#' @param ... Further arguments for simulation function.
 #'
 #' @importFrom stats glm
 #' @importFrom stats pnorm
@@ -25,7 +25,7 @@
 #'
 #' fixmodel_cal_bin(data = trial_data, arm = 3)
 #'
-#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
+#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), and the fitted model.
 #' @author Pavla Krotka
 
 fixmodel_cal_bin <- function(data, arm, alpha=0.025, unit_size=25, ncc=TRUE, check=TRUE, ...){

@@ -1,10 +1,10 @@
-#' Sample size matrix for a platform trial with a flexible number of treatment arms
+#' Sample size matrix for a platform trial with an arbitrary number of treatment arms
 #'
-#' @description Computes the sample size matrix - sample sizes per arm (rows) and per period (columns)
+#' @description Computes the sample size matrix - sample sizes per arm (rows), starting with the control arm, and per period (columns).
 #'
-#' @param num_arms Number of treatment arms in the trial
-#' @param n_arm Sample size per arm
-#' @param d Vector with timings of adding new arms in terms of number of patients recruited to the trial so far (of length num_arms). The first entry must be 0, as the trial is supposed to start with at least one treatment
+#' @param num_arms Number of experimental treatment arms in the trial.
+#' @param n_arm Sample size per experimental treatment arm.
+#' @param d Vector with timings of adding new arms in terms of number of patients recruited to the trial so far (of length `num_arms`). The first entry must be 0, as the trial is supposed to start with at least one treatment.
 #'
 #' @export
 #'
@@ -12,7 +12,7 @@
 #'
 #' get_ss_matrix(num_arms = 3, n_arm = 100, d = c(0, 100, 250))
 #'
-#' @return Sample size matrix
+#' @return Sample size matrix - sample sizes per arm (rows) and per period (columns).
 #' @author Pavla Krotka
 #'
 

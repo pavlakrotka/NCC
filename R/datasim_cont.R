@@ -1,4 +1,4 @@
-#' Data simulation for continuous endpoints for a platform trial with an arbitrary number of treatment arms entering at different time points.
+#' Data simulation for continuous endpoints for a platform trial with an arbitrary number of treatment arms entering at different time points
 #'
 #' @description Simulates data from a platform trial with continuous endpoints, an arbitrary number of treatment arms entering at different time points and a shared control arm. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the the sample size per arm (assumed equal). Allocation ratio of 1:1:...:1 in each period is assumed and block randomization is used to assign patients to the active arms.
 #'
@@ -28,7 +28,7 @@
 #' theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear"))
 #'
 #'
-#' @return Data frame: simulated trial data (if full=FALSE, i.e. default) or List: simulated trial data, input parameters and additional information (if full=TRUE).
+#' @return Data frame: simulated trial data (if full=FALSE, i.e. default) or List: simulated trial data, input parameters, and additional information (if full=TRUE).
 #' @author Pavla Krotka, Marta Bofill Roig
 
 datasim_cont <- function(num_arms, n_arm, d, period_blocks=2, mu0=0, theta, lambda, sigma, trend, N_peak, n_wave, full=FALSE, check=TRUE){

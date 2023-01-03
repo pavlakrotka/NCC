@@ -1,15 +1,16 @@
-#' Time machine for binary endpoints.
+#' Time machine analysis for binary data
 #'
 #' @description Performs analysis of binary data using the Time machine approach, which uses a second-order Bayesian normal dynamic linear model (NDLM), takes into account all data until the investigated arm left the trial and includes covariate adjustment for time (separating the trial into buckets of pre-defined size) using a hierarchical model that smooths the control response rate over time.
 #'
-#' @param data Simulated trial data, e.g. result from the `datasim_bin()` function. Must contain columns named 'treatment' and 'response'.
-#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1).
-#' @param alpha Type I error. Default=0.025.
+#' @param data Simulated trial data, e.g. result from the `datasim_bin()` function. Must contain columns named 'treatment', 'response' and 'period'.
+#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
+#' @param alpha Type I error rate. Default=0.025.
 #' @param prec_delta Precision of the prior regarding the treatment effect. Default=0.001.
 #' @param prec_gamma Precision of the prior regarding the control response. Default=0.001.
 #' @param tau_a Parameter \eqn{a} of the Gamma distribution regarding the precision of the drift parameter \eqn{\tau}. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.1.
 #' @param tau_b Parameter \eqn{b} of the Gamma distribution regarding the precision of the drift parameter \eqn{\tau}. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.01.
 #' @param bucket_size Number of patients per time bucket. Default=25.
+#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
 #' @param ... Further arguments for simulation function.
 #'
 #' @importFrom stats aggregate
@@ -27,7 +28,7 @@
 #' timemachine_bin(data = trial_data, arm = 3)
 #'
 #'
-#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval and an indicator whether the null hypothesis was rejected or not for the investigated treatment.
+#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, and an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input).
 #' @author Dominic Magirr, Peter Jacko
 #'
 #' @references The Bayesian Time Machine: Accounting for Temporal Drift in Multi-arm Platform Trials. Saville, B. R., Berry, D. A., et al. Clinical Trials 19.5 (2022): 490-501.
@@ -39,7 +40,42 @@ timemachine_bin <- function(data,
                             prec_gamma = 0.001,
                             tau_a = 0.1,
                             tau_b = 0.01,
-                            bucket_size = 25, ...){
+                            bucket_size = 25,
+                            check = TRUE, ...){
+
+  if (check) {
+    if (!is.data.frame(data) | sum(c("treatment", "response", "period") %in% colnames(data))!=3) {
+      stop("The data frame with trial data must contain the columns 'treatment', 'response' and 'period'!")
+    }
+
+    if(!is.numeric(arm) | length(arm)!=1){
+      stop("The evaluated treatment arm (`arm`) must be one number!")
+    }
+
+    if(!is.numeric(alpha) | length(alpha)!=1){
+      stop("The significance level (`alpha`) must be one number!")
+    }
+
+    if(!is.numeric(prec_delta) | length(prec_delta)!=1){
+      stop("The precision of the prior regarding the treatment effect (`prec_delta`) must be one number!")
+    }
+
+    if(!is.numeric(prec_gamma) | length(prec_gamma)!=1){
+      stop("The precision of the prior regarding the control response (`prec_gamma`) must be one number!")
+    }
+
+    if(!is.numeric(tau_a) | length(tau_a)!=1){
+      stop("The parameter `tau_a` must be one number!")
+    }
+
+    if(!is.numeric(tau_b) | length(tau_b)!=1){
+      stop("The parameter `tau_b` must be one number!")
+    }
+
+    if(!is.numeric(bucket_size) | length(bucket_size)!=1){
+      stop("The number of patients per time bucket (`bucket_size`) must be one number!")
+    }
+  }
 
   max_period <- max(data[data$treatment==arm,]$period)
   data <- data[data$period %in% c(1:max_period),]

@@ -2,35 +2,32 @@
 % Please edit documentation in R/TT_all_models.R
 \name{TT_all_models}
 \alias{TT_all_models}
-\title{Wrapper function for simulations analyzing given data with given models (treatment-treatment comparisons)}
+\title{Wrapper function for simulations performing inference on given treatment arms using given models (treatment-treatment comparisons)}
 \usage{
 TT_all_models(
   data,
   arms,
   models = c("fixmodel", "indirect"),
   endpoint,
-  alpha = 0.025,
-  ...
+  alpha = 0.025
 )
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} or \code{datasim_cont()} function}
+\item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} or \code{datasim_cont()} function.}
 
-\item{arms}{Indicator of the treatment arms to be compared (vector of length 2)}
+\item{arms}{Indicator of the treatment arms to be compared (vector of length 2).}
 
-\item{models}{Vector with models that should be used for the analysis. Default=c("fixmodel", "indirect")}
+\item{models}{Vector with models that should be used for the analysis. Default=c("fixmodel", "indirect").}
 
-\item{endpoint}{Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints}
+\item{endpoint}{Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.}
 
-\item{alpha}{Type I error. Default=0.025}
-
-\item{...}{Further arguments for simulation function}
+\item{alpha}{Type I error rate. Default=0.025.}
 }
 \value{
-List containing an indicator whether the null hypothesis was rejected or not for the investigated treatment for all models
+List containing an indicator whether the null hypothesis was rejected or not for the investigated treatment for all models.
 }
 \description{
-Analyzes given data using the fixed effect model and indirect comparison. Compares the indicated treatment arms.
+Analyzes given data using different models as indicated by the user. Compares two indicated treatment arms.
 }
 \examples{
 

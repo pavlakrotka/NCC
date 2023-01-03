@@ -3,10 +3,10 @@
 #' @description Analyzes given data using different models as indicated by the user. Performs inference for indicated experimental treatment arms.
 #'
 #' @param data Simulated trial data, e.g. result from the `datasim_bin()` or `datasim_cont()` function.
-#' @param arms Vector with treatment arms to perform inference on. Default - all arms except the first one.
-#' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine").
+#' @param arms Vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.
+#' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel",). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAP_rjags', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAP_rjags', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.
 #' @param endpoint Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.
-#' @param alpha Type I error. Default=0.025.
+#' @param alpha Type I error rate. Default=0.025.
 #' @param unit_size Number of patients per calendar time unit for frequentist models adjusting for calendar time. Default=25.
 #' @param ncc Boolean. Whether to include NCC data into the analysis using frequentist models. Default=TRUE.
 #' @param opt Boolean. In the MAP Prior approach, if opt=1, all former periods are used as one source; if opt=2, periods form different sources get separately included into the final analysis. Default=2.
@@ -49,7 +49,7 @@
 #' @author Pavla Krotka
 
 
-all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine"), endpoint, alpha = 0.025,
+all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel"), endpoint, alpha = 0.025,
                        unit_size = 250,
                        ncc = TRUE,
                        opt = 2, prior_prec_tau = 4, n.samples = 1000, n.chains = 4, n.iter = 4000, n.adapt = 1000, robustify = TRUE, weight = 0.1,

@@ -1,7 +1,7 @@
 Package: NCC
 Title: Simulation and analysis of platform trials with non-concurrent controls
 Version: 1.0
-Authors: Pavla Krotka [aut, cre], Marta Bofill Roig [aut], Martin Posch [ctb]
+Authors: Pavla Krotka [aut, cre], Marta Bofill Roig [aut], Katharina Hees [aut], Peter Jacko [aut], Dominic Magirr [aut], Martin Posch [ctb]
 Maintainer: Pavla Krotka <pavla.krotka@meduniwien.ac.at>
 Authors@R: 
 	c(person(given = "Pavla",
@@ -32,7 +32,8 @@ Imports:
   iterators,
   spaMM,
   mgcv,
-  splines
+  splines,
+  magick
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Suggests: 

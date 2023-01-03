@@ -64,7 +64,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">all_models</span><span class="op">(</span>
   <span class="va">data</span>,
   <span class="va">arms</span>,
-  models <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fixmodel"</span>, <span class="st">"sepmodel"</span>, <span class="st">"poolmodel"</span>, <span class="st">"timemachine"</span><span class="op">)</span>,
+  models <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fixmodel"</span>, <span class="st">"sepmodel"</span>, <span class="st">"poolmodel"</span><span class="op">)</span>,
   <span class="va">endpoint</span>,
   alpha <span class="op">=</span> <span class="fl">0.025</span>,
   unit_size <span class="op">=</span> <span class="fl">250</span>,
@@ -98,13 +98,13 @@
     <dl><dt>data</dt>
 <dd><p>Simulated trial data, e.g. result from the <code><a href="datasim_bin.html">datasim_bin()</a></code> or <code><a href="datasim_cont.html">datasim_cont()</a></code> function.</p></dd>
 <dt>arms</dt>
-<dd><p>Vector with treatment arms to perform inference on. Default - all arms except the first one.</p></dd>
+<dd><p>Vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.</p></dd>
 <dt>models</dt>
-<dd><p>Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine").</p></dd>
+<dd><p>Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel",). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAP_rjags', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAP_rjags', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.</p></dd>
 <dt>endpoint</dt>
 <dd><p>Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.</p></dd>
 <dt>alpha</dt>
-<dd><p>Type I error. Default=0.025.</p></dd>
+<dd><p>Type I error rate. Default=0.025.</p></dd>
 <dt>unit_size</dt>
 <dd><p>Number of patients per calendar time unit for frequentist models adjusting for calendar time. Default=25.</p></dd>
 <dt>ncc</dt>
@@ -171,64 +171,64 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using default mean for robust component of 1/2.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using default mean for robust component of 1/2.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_MAP_rjags_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_MAP_rjags_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.395322</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.208578</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_fixmodel_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_fixmodel_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.822215</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.09203801</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_poolmodel_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_poolmodel_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7698778</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2627845</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_sepmodel_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_sepmodel_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8318555</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.07637293</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_timemachine_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_timemachine_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7444606</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1559825</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_MAP_rjags_3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_MAP_rjags_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.86797</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.54537</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_fixmodel_3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_fixmodel_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4296788</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2535019</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_poolmodel_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_poolmodel_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7384347</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4509486</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_sepmodel_3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_sepmodel_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5055486</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3153315</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_timemachine_3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_timemachine_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5187833</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3079026</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 <span class="r-in"></span>

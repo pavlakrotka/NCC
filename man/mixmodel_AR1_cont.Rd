@@ -2,7 +2,7 @@
 % Please edit documentation in R/mixmodel_AR1_cont.R
 \name{mixmodel_AR1_cont}
 \alias{mixmodel_AR1_cont}
-\title{Model-based analysis for continuous data adjusting for periods as a random factor with AR1 correlation structure}
+\title{Mixed regression model analysis for continuous data adjusting for periods as a random factor with AR1 correlation structure}
 \usage{
 mixmodel_AR1_cont(
   data,
@@ -15,25 +15,25 @@ mixmodel_AR1_cont(
 )
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment', 'response' and 'period'}
+\item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment', 'response' and 'period'.}
 
-\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1)}
+\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Type I error. Default=0.025}
+\item{alpha}{Type I error rate. Default=0.025.}
 
-\item{ci}{Boolean. Whether confidence intervals should be computed. Default=FALSE}
+\item{ci}{Boolean. Whether confidence intervals should be computed. Default=FALSE.}
 
-\item{ncc}{Boolean. Whether to include NCC data into the analysis. Default=TRUE}
+\item{ncc}{Boolean. Whether to include NCC data into the analysis. Default=TRUE.}
 
-\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE}
+\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
 
-\item{...}{Further arguments for simulation function}
+\item{...}{Further arguments for simulation function.}
 }
 \value{
-List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
+List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), and the fitted model.
 }
 \description{
-Performs linear mixed model regression taking into account all trial data until the arm under study leaves the trial and adjusting for periods as random factors with AR1 correlation structure
+Performs linear mixed model regression taking into account all trial data until the arm under study leaves the trial and adjusting for periods as random factors with AR1 correlation structure.
 }
 \examples{
 

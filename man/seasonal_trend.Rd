@@ -7,19 +7,19 @@
 seasonal_trend(j, lambda, n_wave, n_total)
 }
 \arguments{
-\item{j}{Patient recruitment index}
+\item{j}{Patient recruitment index.}
 
-\item{lambda}{Strength of time trend}
+\item{lambda}{Strength of time trend.}
 
-\item{n_wave}{How many cycles (waves) should the time trend have}
+\item{n_wave}{How many cycles (waves) should the time trend have (\eqn{\psi}).}
 
-\item{n_total}{Total sample size in the trial}
+\item{n_total}{Total sample size in the trial.}
 }
 \value{
-Time trend for patient j
+Time trend for patient j.
 }
 \description{
-Generates seasonal trend for patient j
+Generates seasonal trend for patient j according to \eqn{f(j) = \lambda \cdot \mathrm{sin} \big( \psi \cdot 2\pi \cdot \frac{j-1}{N-1} \big)}.
 }
 \author{
 Marta Bofill Roig, Pavla Krotka

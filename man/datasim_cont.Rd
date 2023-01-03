@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasim_cont.R
 \name{datasim_cont}
 \alias{datasim_cont}
-\title{Data simulation for continuous endpoints for a platform trial with an arbitrary number of treatment arms entering at different time points.}
+\title{Data simulation for continuous endpoints for a platform trial with an arbitrary number of treatment arms entering at different time points}
 \usage{
 datasim_cont(
   num_arms,
@@ -48,7 +48,7 @@ datasim_cont(
 \item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
 }
 \value{
-Data frame: simulated trial data (if full=FALSE, i.e. default) or List: simulated trial data, input parameters and additional information (if full=TRUE).
+Data frame: simulated trial data (if full=FALSE, i.e. default) or List: simulated trial data, input parameters, and additional information (if full=TRUE).
 }
 \description{
 Simulates data from a platform trial with continuous endpoints, an arbitrary number of treatment arms entering at different time points and a shared control arm. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the the sample size per arm (assumed equal). Allocation ratio of 1:1:...:1 in each period is assumed and block randomization is used to assign patients to the active arms.

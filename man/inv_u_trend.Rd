@@ -7,19 +7,19 @@
 inv_u_trend(j, lambda, N_peak, sample_size)
 }
 \arguments{
-\item{j}{Patient recruitment index}
+\item{j}{Patient recruitment index.}
 
-\item{lambda}{Strength of time trend}
+\item{lambda}{Strength of time trend.}
 
-\item{N_peak}{Point at which the time trend switches direction in terms of overall sample size}
+\item{N_peak}{Point at which the time trend switches direction in terms of overall sample size.}
 
-\item{sample_size}{Total sample size in the trial}
+\item{sample_size}{Total sample size in the trial.}
 }
 \value{
-Time trend for patient j
+Time trend for patient j.
 }
 \description{
-Generates inverted-u trend for patient j
+Generates inverted-u trend for patient j according to \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1} (I(j \leq N_p) - I(j > N_p))}.
 }
 \author{
 Marta Bofill Roig, Pavla Krotka

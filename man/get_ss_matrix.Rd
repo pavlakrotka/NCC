@@ -2,22 +2,22 @@
 % Please edit documentation in R/get_ss_matrix.R
 \name{get_ss_matrix}
 \alias{get_ss_matrix}
-\title{Sample size matrix for a platform trial with a flexible number of treatment arms}
+\title{Sample size matrix for a platform trial with an arbitrary number of treatment arms}
 \usage{
 get_ss_matrix(num_arms, n_arm, d)
 }
 \arguments{
-\item{num_arms}{Number of treatment arms in the trial}
+\item{num_arms}{Number of experimental treatment arms in the trial.}
 
-\item{n_arm}{Sample size per arm}
+\item{n_arm}{Sample size per experimental treatment arm.}
 
-\item{d}{Vector with timings of adding new arms in terms of number of patients recruited to the trial so far (of length num_arms). The first entry must be 0, as the trial is supposed to start with at least one treatment}
+\item{d}{Vector with timings of adding new arms in terms of number of patients recruited to the trial so far (of length \code{num_arms}). The first entry must be 0, as the trial is supposed to start with at least one treatment.}
 }
 \value{
-Sample size matrix
+Sample size matrix - sample sizes per arm (rows) and per period (columns).
 }
 \description{
-Computes the sample size matrix - sample sizes per arm (rows) and per period (columns)
+Computes the sample size matrix - sample sizes per arm (rows), starting with the control arm, and per period (columns).
 }
 \examples{
 

@@ -1,12 +1,12 @@
 #' Pooled analysis for continuous data
 #'
-#' @description Performs pooled analysis (naively pooling concurrent and non-concurrent controls without adjustment) using a linear model
+#' @description Performs pooled analysis (naively pooling concurrent and non-concurrent controls without adjustment) using a linear model.
 #'
-#' @param data Simulated trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response' and 'period'
-#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1)
-#' @param alpha Type I error. Default=0.025
-#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE
-#' @param ... Further arguments for simulation function
+#' @param data Simulated trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response' and 'period'.
+#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
+#' @param alpha Type I error rate. Default=0.025.
+#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
+#' @param ... Further arguments for simulation function.
 #'
 #' @importFrom stats lm
 #' @importFrom stats pt
@@ -22,7 +22,7 @@
 #'
 #' poolmodel_cont(data = trial_data, arm = 3)
 #'
-#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
+#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), and the fitted model.
 #' @author Pavla Krotka
 
 poolmodel_cont <- function(data, arm, alpha=0.025, check=TRUE, ...){

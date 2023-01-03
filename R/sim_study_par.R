@@ -1,13 +1,13 @@
 #' Wrapper function performing simulation studies for a given set of scenarios (parallelized on replication level)
 #'
-#' @description Performs a simulation study for a given set of scenarios, analyzing simulated data using the fixed effect model, pooled and separate analyses, and timemachine and MAP prior approach. Performs inference for all treatment arms in the trial except for the first one
+#' @description Performs a simulation study for a given set of scenarios, analyzing simulated data using different models as indicated by the user. Performs inference for indicated experimental treatment arms. Simulates the probability to reject \eqn{H_0}, and the bias, as well as the mean squared error (MSE) of the treatment effect estimates based on a given number of replications.
 #'
-#' @param nsim Number of replications
-#' @param scenarios Data frame containing all parameters for scenarios that should be simulated
-#' @param arms Vector with treatment arms to perform inference on. Default - all arms except the first one
-#' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel", "timemachine", "MAPprior")
-#' @param endpoint Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints
-#' @param perc_cores What percentage of available cores should be used for the simulations. Default=0.9
+#' @param nsim Number of replications.
+#' @param scenarios Data frame containing all parameters for scenarios that should be simulated.
+#' @param arms Vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.
+#' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel"). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAP_rjags', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAP_rjags', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.
+#' @param endpoint Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.
+#' @param perc_cores What percentage of available cores should be used for the simulations. Default=0.9.
 #'
 #' @importFrom parallel detectCores
 #' @importFrom parallel makeCluster
@@ -17,16 +17,43 @@
 #' @importFrom foreach %dopar%
 #' @importFrom iterators icount
 #'
-#' @keywords internal
-#'
 #' @export
 #'
+#' @examples
 #'
-#' @return Data frame with all considered scenarios and corresponding results
+#' # Create data frame with all parameters:
+#' sim_scenarios <- data.frame(num_arms = 4,
+#' n_arm = 250,
+#' d1 = 250*0,
+#' d2 = 250*1,
+#' d3 = 250*2,
+#' d4 = 250*3,
+#' period_blocks = 2,
+#' mu0 = 0,
+#' sigma = 1,
+#' theta1 = 0,
+#' theta2 = 0,
+#' theta3 = 0,
+#' theta4 = 0,
+#' lambda0 = rep(seq(-0.15, 0.15, length.out = 9), 2),
+#' lambda1 = rep(seq(-0.15, 0.15, length.out = 9), 2),
+#' lambda2 = rep(seq(-0.15, 0.15, length.out = 9), 2),
+#' lambda3 = rep(seq(-0.15, 0.15, length.out = 9), 2),
+#' lambda4 = rep(seq(-0.15, 0.15, length.out = 9), 2),
+#' trend = c(rep("linear", 9), rep("stepwise_2", 9)),
+#' alpha = 0.025,
+#' ncc = TRUE)
+#'
+#' # Run simulation study:
+#' # sim_results <- sim_study_par(nsim = 100, scenarios = sim_scenarios, arms = c(3, 4),
+#' # models = c("fixmodel", "sepmodel", "poolmodel"), endpoint = "cont")
+#'
+#'
+#' @return Data frame with all considered scenarios and corresponding results - the probability to reject \eqn{H_0}, and the bias, as well as the mean squared error (MSE) of the treatment effect estimates.
 #' @author Pavla Krotka
 
 
-sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel", "timemachine", "mixmodel", "MAP_rjags"), endpoint, perc_cores=0.9){
+sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel"), endpoint, perc_cores=0.9){
 
   if(!is.numeric(nsim) | length(nsim)!=1){
     stop("Number of replications (`nsim`) must be one number!")

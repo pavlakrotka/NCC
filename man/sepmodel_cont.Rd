@@ -7,21 +7,21 @@
 sepmodel_cont(data, arm, alpha = 0.025, check = TRUE, ...)
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment', 'response' and 'period'}
+\item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment', 'response' and 'period'.}
 
-\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1)}
+\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Type I error. Default=0.025}
+\item{alpha}{Type I error rate. Default=0.025.}
 
-\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE}
+\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
 
-\item{...}{Further arguments for simulation function}
+\item{...}{Further arguments for simulation function.}
 }
 \value{
-List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated treatment and the fitted model
+List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), and the fitted model.
 }
 \description{
-Performs separate analysis (only taking into account concurrent controls) using a linear model
+Performs separate analysis (only taking into account concurrent controls) using a linear model.
 }
 \examples{
 
