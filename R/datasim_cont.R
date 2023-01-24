@@ -1,6 +1,6 @@
-#' Data simulation for continuous endpoints for a platform trial with an arbitrary number of treatment arms entering at different time points
+#' Simulate continuous data from a platform trial with a shared control arm and an arbitrary number of treatment arms entering at different time points
 #'
-#' @description Simulates data from a platform trial with continuous endpoints, an arbitrary number of treatment arms entering at different time points and a shared control arm. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the the sample size per arm (assumed equal). Allocation ratio of 1:1:...:1 in each period is assumed and block randomization is used to assign patients to the active arms.
+#' @description The `datasim_cont()` function simulates data from a platform trial with continuous endpoints, an arbitrary number of treatment arms entering at different time points and a shared control arm. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the the sample size per arm.
 #'
 #' @param num_arms Number of experimental treatment arms in the trial.
 #' @param n_arm Sample size per arm (assumed equal).
@@ -22,13 +22,39 @@
 #'
 #' @export
 #'
+#' @details Equal sample sizes in all experimental treatment arms are assumed. Furthermore, allocation ratio of 1:1:...:1 in each period is assumed and block randomization is used to assign patients to the active arms.
+#'
 #' @examples
 #'
 #' head(datasim_cont(num_arms = 3, n_arm = 100, d = c(0, 100, 250),
 #' theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear"))
 #'
 #'
-#' @return Data frame: simulated trial data (if full=FALSE, i.e. default) or List: simulated trial data, input parameters, and additional information (if full=TRUE).
+#' @return Data frame: simulated trial data (if full=FALSE, i.e. default) with the following columns:
+#'
+#' - `j` - patient recruitment index
+#' - `response` - continuous response for patient `j`
+#' - `treatment`- indicator of the treatment patient `j` was allocated in
+#' - `period` - indicator of the periods patient `j` was recruited in
+#'
+#' or List (if full=TRUE) with the following elements:
+#'
+#' - `Data` - simulated trial data, including an additional column `means` with the expected value used for the simulation of the response for patient `j`
+#' - `n_total` - total sample size in the trial
+#' - `n_arm` - sample size per arm (assumed equal)
+#' - `num_arms` - number of experimental treatment arms in the trial
+#' - `d` - timings of adding new arms
+#' - `SS_matrix` - matrix with the sample sizes per arm and per period
+#' - `period_blocks` - number to multiply the number of active arms with, in order to get the block size per period
+#' - `mu0` - response in the control arm
+#' - `theta` - treatment effects for each treatment arm
+#' - `lambda` - strength of time trend in each arm
+#' - `time_dep_effect` - time dependent treatment effects for each treatment arm (for computing the bias)
+#' - `sigma` - standard deviation of the responses
+#' - `trend` - time trend pattern
+#'
+#'
+#'
 #' @author Pavla Krotka, Marta Bofill Roig
 
 datasim_cont <- function(num_arms, n_arm, d, period_blocks=2, mu0=0, theta, lambda, sigma, trend, N_peak, n_wave, full=FALSE, check=TRUE){

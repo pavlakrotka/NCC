@@ -25,6 +25,8 @@
 #'
 #' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), and the fitted model.
 #' @author Pavla Krotka
+#'
+#' @references On model-based time trend adjustments in platform trials with non-concurrent controls. Roig, M.B., Krotka, et al. BMC Medical Research Methodology 22.1 (2022): 1-16.
 
 fixmodel_cont <- function(data, arm, alpha=0.025, ncc=TRUE, check=TRUE, ...){
 

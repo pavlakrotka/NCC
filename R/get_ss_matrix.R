@@ -1,6 +1,6 @@
 #' Sample size matrix for a platform trial with an arbitrary number of treatment arms
 #'
-#' @description Computes the sample size matrix - sample sizes per arm (rows), starting with the control arm, and per period (columns).
+#' @description This function computes the sample size matrix necessary for the functions `datasim_bin()` and `datasim_cont()`.
 #'
 #' @param num_arms Number of experimental treatment arms in the trial.
 #' @param n_arm Sample size per experimental treatment arm.
@@ -12,7 +12,7 @@
 #'
 #' get_ss_matrix(num_arms = 3, n_arm = 100, d = c(0, 100, 250))
 #'
-#' @return Sample size matrix - sample sizes per arm (rows) and per period (columns).
+#' @return Sample size matrix, consisting of the sample size per arm and per period, where the arms are represented in the rows (with the control arm in the first row and the experimental arms coming after ordered by entry time) and the periods are represented in the columns.
 #' @author Pavla Krotka
 #'
 
