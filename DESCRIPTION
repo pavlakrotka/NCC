@@ -14,7 +14,12 @@ Authors@R:
 	person("Peter", "Jacko", email = "peter@berryconsultants.net", role = c("aut")),
 	person("Dominic", "Magirr", email = "dominic.magirr@novartis.com", role = c("aut")),
 	person("Martin", "Posch", email = "martin.posch@meduniwien.ac.at", role = c("ctb"), comment = c(ORCID = "0000-0001-8499-8573")))
-Description: Design and analysis of flexible platform trials with non-concurrent controls. Functions for data generation, analysis, visualization and running simulation studies are provided. The implemented analysis methods are described in Bofill Roig et al. (2022) <https://doi.org/10.1186/s12874-022-01683-w>, Saville et al. (2022) <https://doi.org/10.1177/17407745221112013> and Schmidli et al. (2014) <https://doi.org/10.1111/biom.12242>.
+Description: Design and analysis of flexible platform trials with non-concurrent controls. Functions for data generation, analysis, visualization and running simulation studies are provided. 
+    The implemented analysis methods are described in: 
+    Bofill Roig et al. (2022) <https://doi.org/10.1186/s12874-022-01683-w>, 
+    Saville et al. (2022) <https://doi.org/10.1177/17407745221112013> and 
+    Schmidli et al. (2014) <https://doi.org/10.1111/biom.12242>.
+URL: https://pavlakrotka.github.io/NCC/, https://github.com/pavlakrotka/NCC
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: false 
