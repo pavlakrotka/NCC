@@ -65,7 +65,7 @@ This package contains the following functions:
 
 ##### Bayesian approaches
 
--   `MAP_rjags_bin()` performs analysis using the MAP prior approach
+-   `MAPprior_bin()` performs analysis using the MAP prior approach
 -   `timemachine_bin()` performs analysis using the Time Machine
     approach
 
@@ -103,16 +103,9 @@ This package contains the following functions:
 
 ##### Bayesian approaches
 
--   `MAP_rjags_cont()` performs analysis using the MAP prior approach
+-   `MAPprior_cont()` performs analysis using the MAP prior approach
 -   `timemachine_cont()` performs analysis using the Time Machine
     approach
-
-#### Treatment-treatment comparisons for continuous endpoints
-
--   `TT_fixmodel_cont()` performs a treatment-treatment comparison using
-    a regression model adjusting for periods
--   `TT_indirect_cont()` performs a treatment-treatment comparison using
-    an indirect comparison
 
 ### Running simulations
 
@@ -122,12 +115,6 @@ This package contains the following functions:
     (treatment-control comparisons) for desired scenarios
 -   `sim_study_par()` is a wrapper function to run a simulation study
     (treatment-control comparisons) for desired scenarios in parallel
--   `TT_all_models()` is an auxiliary wrapper function to analyze given
-    dataset (treatment-treatment comparisons) with multiple models
--   `TT_sim_study()` is a wrapper function to run a simulation study
-    (treatment-treatment comparisons) for desired scenarios
--   `TT_sim_study_par()` is a wrapper function to run a simulation study
-    (treatment-treatment comparisons) for desired scenarios in parallel
 
 ### Visualization
 
@@ -177,8 +164,8 @@ Clinical Trials 19.5 (2022): 490-501
 pLatforms) project has received funding from the Innovative Medicines
 Initiative (IMI) 2 Joint Undertaking (JU) under grant agreement No
 853966. This Joint Undertaking receives support from the European
-Union’s Horizon 2020 research and innovation programme and EFPIA
-andChildren’s Tumor Foundation, Global Alliance for TB Drug Development
+Union’s Horizon 2020 research and innovation programme and EFPIA and
+Children’s Tumor Foundation, Global Alliance for TB Drug Development
 non-profit organisation, Spring works Therapeutics Inc. This publication
 reflects the authors’ views. Neither IMI nor the European Union, EFPIA,
 or any Associated Partners are responsible for any use that may be made
