@@ -5,7 +5,7 @@
 #' @param nsim Number of replications.
 #' @param scenarios Data frame containing all parameters for scenarios that should be simulated.
 #' @param arms Vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.
-#' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel"). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAP_rjags', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAP_rjags', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.
+#' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel"). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.
 #' @param endpoint Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.
 #' @param perc_cores What percentage of available cores should be used for the simulations. Default=0.9.
 #'
@@ -67,19 +67,19 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
     stop("Endpoint indicator (`endpoint`) must be one of the following strings: 'cont', 'bin'!")
   }
 
-  if(endpoint=="cont" & sum(models %in% c("fixmodel", "fixmodel_cal", "gam", "MAP_rjags",
+  if(endpoint=="cont" & sum(models %in% c("fixmodel", "fixmodel_cal", "gam", "MAPprior",
                                           "mixmodel", "mixmodel_cal", "mixmodel_AR1", "mixmodel_AR1_cal",
                                           "piecewise", "piecewise_cal", "poolmodel", "sepmodel", "sepmodel_adj",
                                           "splines", "splines_cal", "timemachine")==FALSE)>0){
-    stop("For continuous endpoints, only the following models are implemented: 'fixmodel', 'fixmodel_cal', 'gam', 'MAP_rjags',
+    stop("For continuous endpoints, only the following models are implemented: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior',
                                           'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal',
                                           'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj',
                                           'splines', 'splines_cal', 'timemachine'.
          The argument `models` must contain only these strings!")
   }
 
-  if(endpoint=="bin" & sum(models %in% c("fixmodel", "fixmodel_cal", "MAP_rjags", "poolmodel", "sepmodel", "sepmodel_adj", "timemachine")==FALSE)>0){
-    stop("For binary endpoints, only the following models are implemented: 'fixmodel', 'fixmodel_cal', 'MAP_rjags', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.
+  if(endpoint=="bin" & sum(models %in% c("fixmodel", "fixmodel_cal", "MAPprior", "poolmodel", "sepmodel", "sepmodel_adj", "timemachine")==FALSE)>0){
+    stop("For binary endpoints, only the following models are implemented: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.
          The argument `models` must contain only these strings!")
   }
 

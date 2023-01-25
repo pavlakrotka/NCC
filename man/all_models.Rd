@@ -40,7 +40,7 @@ all_models(
 
 \item{arms}{Vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.}
 
-\item{models}{Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel",). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAP_rjags', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAP_rjags', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.}
+\item{models}{Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel",). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.}
 
 \item{endpoint}{Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.}
 

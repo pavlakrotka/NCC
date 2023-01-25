@@ -4,7 +4,7 @@
 #'
 #' @param data Simulated trial data, e.g. result from the `datasim_bin()` or `datasim_cont()` function.
 #' @param arms Vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.
-#' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel",). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAP_rjags', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAP_rjags', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.
+#' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel",). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.
 #' @param endpoint Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.
 #' @param alpha Type I error rate. Default=0.025.
 #' @param unit_size Number of patients per calendar time unit for frequentist models adjusting for calendar time. Default=25.
