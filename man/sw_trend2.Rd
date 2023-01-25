@@ -19,7 +19,7 @@ sw_trend2(cj, lambda, ss_period, ss_total)
 Time trend in period \eqn{c_j}.
 }
 \description{
-Generates stepwise trend for a given period. Jump sizes are adapted to the period sample size.
+This function generates a stepwise trend for a given period. Jump sizes are adapted to the period sample size.
 }
 \author{
 Marta Bofill Roig, Pavla Krotka

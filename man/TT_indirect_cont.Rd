@@ -19,7 +19,7 @@ TT_indirect_cont(data, arms, alpha = 0.025, ...)
 List containing the p-value (one-sided), estimated difference between the treatments and an indicator whether the null hypothesis was rejected or not for the investigated comparison
 }
 \description{
-Performs indirect comparison of two treatments
+This function performs indirect comparison of two treatments.
 }
 \examples{
 

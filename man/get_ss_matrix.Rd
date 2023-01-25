@@ -14,10 +14,10 @@ get_ss_matrix(num_arms, n_arm, d)
 \item{d}{Vector with timings of adding new arms in terms of number of patients recruited to the trial so far (of length \code{num_arms}). The first entry must be 0, as the trial is supposed to start with at least one treatment.}
 }
 \value{
-Sample size matrix - sample sizes per arm (rows) and per period (columns).
+Sample size matrix, consisting of the sample size per arm and per period, where the arms are represented in the rows (with the control arm in the first row and the experimental arms coming after ordered by entry time) and the periods are represented in the columns.
 }
 \description{
-Computes the sample size matrix - sample sizes per arm (rows), starting with the control arm, and per period (columns).
+This function computes the sample size matrix necessary for the functions \code{datasim_bin()} and \code{datasim_cont()}.
 }
 \examples{
 

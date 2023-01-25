@@ -39,7 +39,7 @@ gam_cont(
 List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), and the fitted model.
 }
 \description{
-Performs analysis using a generalized additive model taking into account all trial data until the arm under study leaves the trial and smoothing over the patient entry index.
+This function performs analysis using a generalized additive model taking into account all trial data until the arm under study leaves the trial and smoothing over the patient entry index.
 }
 \examples{
 

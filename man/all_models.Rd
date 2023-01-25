@@ -96,7 +96,7 @@ all_models(
 List containing an indicator whether the null hypothesis was rejected or not, and the estimated treatment effect for all investigated treatment arms and all models.
 }
 \description{
-Analyzes given data using different models as indicated by the user. Performs inference for indicated experimental treatment arms.
+This function analyzes given data using different models as indicated by the user. It performs inference for indicated experimental treatment arms.
 }
 \examples{
 

@@ -27,7 +27,7 @@ TT_all_models(
 List containing an indicator whether the null hypothesis was rejected or not for the investigated treatment for all models.
 }
 \description{
-Analyzes given data using different models as indicated by the user. Compares two indicated treatment arms.
+This function analyzes given data using different models as indicated by the user. It compares two indicated treatment arms.
 }
 \examples{
 

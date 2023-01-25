@@ -21,7 +21,7 @@ poolmodel_bin(data, arm, alpha = 0.025, check = TRUE, ...)
 List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), and the fitted model.
 }
 \description{
-Performs pooled analysis (naively pooling concurrent and non-concurrent controls without adjustment) using a logistic model.
+This function performs pooled analysis (naively pooling concurrent and non-concurrent controls without adjustment) using a logistic model.
 }
 \examples{
 

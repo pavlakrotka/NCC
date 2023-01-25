@@ -23,7 +23,7 @@ fixmodel_cont(data, arm, alpha = 0.025, ncc = TRUE, check = TRUE, ...)
 List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), and the fitted model.
 }
 \description{
-Performs linear regression taking into account all trial data until the arm under study leaves the trial and adjusting for periods as factors.
+This function performs linear regression taking into account all trial data until the arm under study leaves the trial and adjusting for periods as factors.
 }
 \examples{
 
@@ -32,6 +32,9 @@ theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear")
 
 fixmodel_cont(data = trial_data, arm = 3)
 
+}
+\references{
+On model-based time trend adjustments in platform trials with non-concurrent controls. Roig, M.B., Krotka, et al. BMC Medical Research Methodology 22.1 (2022): 1-16.
 }
 \author{
 Pavla Krotka

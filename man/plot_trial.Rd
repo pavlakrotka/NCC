@@ -13,7 +13,7 @@ plot_trial(treatments)
 ggplot showing trial progress over time.
 }
 \description{
-Creates a plot visualizing the trial progress over time.
+This function creates a plot visualizing the trial progress over time.
 }
 \examples{
 

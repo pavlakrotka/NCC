@@ -33,7 +33,7 @@ splines_cont(
 List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), the positions of the knots in terms of patient index, and the fitted model.
 }
 \description{
-Performs linear regression taking into account all trial data until the arm under study leaves the trial and adjusting for time using regression splines with knots placed according to periods.
+This function performs linear regression taking into account all trial data until the arm under study leaves the trial and adjusting for time using regression splines with knots placed according to periods.
 }
 \examples{
 

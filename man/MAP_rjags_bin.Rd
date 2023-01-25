@@ -51,7 +51,7 @@ MAP_rjags_bin(
 List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, and an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input).
 }
 \description{
-Performs analysis using the MAP Prior approach. Borrows data from non-concurrent controls to obtain the prior distribution for the control response in the concurrent periods.
+This function performs analysis of binary data using the MAP Prior approach. The method borrows data from non-concurrent controls to obtain the prior distribution for the control response in the concurrent periods.
 }
 \examples{
 

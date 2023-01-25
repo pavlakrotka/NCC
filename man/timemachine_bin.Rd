@@ -42,7 +42,7 @@ timemachine_bin(
 List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, and an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input).
 }
 \description{
-Performs analysis of binary data using the Time machine approach, which uses a second-order Bayesian normal dynamic linear model (NDLM), takes into account all data until the investigated arm left the trial and includes covariate adjustment for time (separating the trial into buckets of pre-defined size) using a hierarchical model that smooths the control response rate over time.
+This function performs analysis of binary data using the Time machine approach, which uses a second-order Bayesian normal dynamic linear model (NDLM), takes into account all data until the investigated arm left the trial and includes covariate adjustment for time (separating the trial into buckets of pre-defined size) using a hierarchical model that smooths the control response rate over time.
 }
 \examples{
 

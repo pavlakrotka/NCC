@@ -23,7 +23,7 @@ fixmodel_bin(data, arm, alpha = 0.025, ncc = TRUE, check = TRUE, ...)
 List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), and the fitted model.
 }
 \description{
-Performs logistic regression taking into account all trial data until the arm under study leaves the trial and adjusting for periods as factors.
+This function performs logistic regression taking into account all trial data until the arm under study leaves the trial and adjusting for periods as factors.
 }
 \examples{
 
@@ -32,6 +32,9 @@ p0 = 0.7, OR = rep(1.8, 3), lambda = rep(0.15, 4), trend="stepwise")
 
 fixmodel_bin(data = trial_data, arm = 3)
 
+}
+\references{
+On model-based time trend adjustments in platform trials with non-concurrent controls. Roig, M.B., Krotka, et al. BMC Medical Research Methodology 22.1 (2022): 1-16.
 }
 \author{
 Pavla Krotka

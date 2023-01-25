@@ -21,7 +21,7 @@ sepmodel_adj_cont(data, arm, alpha = 0.025, check = TRUE, ...)
 List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), and the fitted model.
 }
 \description{
-Performs separate analysis (only taking into account concurrent controls) using a linear model and adjusting for periods, if the treatment arm stays in the trial for more than one period.
+This function performs separate analysis (only taking into account concurrent controls) using a linear model and adjusting for periods, if the treatment arm stays in the trial for more than one period.
 }
 \examples{
 

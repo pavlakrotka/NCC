@@ -28,7 +28,7 @@ TT_sim_study_par(
 Data frame with all considered scenarios and corresponding results
 }
 \description{
-Performs a simulation study for a given set of scenarios, analyzing simulated data using the fixed effect model and indirect comparison. Compares the indicated treatment arms.
+This function performs a simulation study for a given set of scenarios, analyzing simulated data using the fixed effect model and indirect comparison. It compares the indicated treatment arms.
 }
 \author{
 Pavla Krotka

@@ -19,7 +19,7 @@ TT_fixmodel_cont(data, arms, alpha = 0.025, ...)
 List containing the p-value (one-sided), estimated difference between the treatments, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not for the investigated comparison and the fitted model
 }
 \description{
-Performs linear regression to compare two treatments taking into account all trial data until the last arm under study leaves the trial and adjusting for periods as factors
+This function performs linear regression to compare two treatments taking into account all trial data until the last arm under study leaves the trial and adjusting for periods as factors.
 }
 \examples{
 

@@ -7,17 +7,20 @@
 linear_trend(j, lambda, sample_size)
 }
 \arguments{
-\item{j}{Patient recruitment index.}
+\item{j}{Time points for which the trend should be generated.}
 
 \item{lambda}{Strength of time trend.}
 
 \item{sample_size}{Vector of dimension 2, indicating sample size in the trial period until the time trend starts and the remaining sample size.}
 }
 \value{
-Time trend for patient j.
+Time trend for time points j.
 }
 \description{
-Generates linear trend for patient j according to \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1}}.
+This function generates a time trend for given time points in the trial according to a linear function.
+}
+\details{
+The time trend is generated according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1}}.
 }
 \author{
 Marta Bofill Roig, Pavla Krotka

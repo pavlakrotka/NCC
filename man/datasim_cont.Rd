@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasim_cont.R
 \name{datasim_cont}
 \alias{datasim_cont}
-\title{Data simulation for continuous endpoints for a platform trial with an arbitrary number of treatment arms entering at different time points}
+\title{Simulate continuous data from a platform trial with a shared control arm and an arbitrary number of treatment arms entering at different time points}
 \usage{
 datasim_cont(
   num_arms,
@@ -48,10 +48,36 @@ datasim_cont(
 \item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
 }
 \value{
-Data frame: simulated trial data (if full=FALSE, i.e. default) or List: simulated trial data, input parameters, and additional information (if full=TRUE).
+Data frame: simulated trial data (if full=FALSE, i.e. default) with the following columns:
+\itemize{
+\item \code{j} - patient recruitment index
+\item \code{response} - continuous response for patient \code{j}
+\item \code{treatment}- indicator of the treatment patient \code{j} was allocated in
+\item \code{period} - indicator of the periods patient \code{j} was recruited in
+}
+
+or List (if full=TRUE) with the following elements:
+\itemize{
+\item \code{Data} - simulated trial data, including an additional column \code{means} with the expected value used for the simulation of the response for patient \code{j}
+\item \code{n_total} - total sample size in the trial
+\item \code{n_arm} - sample size per arm (assumed equal)
+\item \code{num_arms} - number of experimental treatment arms in the trial
+\item \code{d} - timings of adding new arms
+\item \code{SS_matrix} - matrix with the sample sizes per arm and per period
+\item \code{period_blocks} - number to multiply the number of active arms with, in order to get the block size per period
+\item \code{mu0} - response in the control arm
+\item \code{theta} - treatment effects for each treatment arm
+\item \code{lambda} - strength of time trend in each arm
+\item \code{time_dep_effect} - time dependent treatment effects for each treatment arm (for computing the bias)
+\item \code{sigma} - standard deviation of the responses
+\item \code{trend} - time trend pattern
+}
 }
 \description{
-Simulates data from a platform trial with continuous endpoints, an arbitrary number of treatment arms entering at different time points and a shared control arm. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the the sample size per arm (assumed equal). Allocation ratio of 1:1:...:1 in each period is assumed and block randomization is used to assign patients to the active arms.
+This function simulates data from a platform trial with continuous endpoints, an arbitrary number of treatment arms entering at different time points and a shared control arm. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the the sample size per arm.
+}
+\details{
+Equal sample sizes in all experimental treatment arms are assumed. Furthermore, allocation ratio of 1:1:...:1 in each period is assumed and block randomization is used to assign patients to the active arms.
 }
 \examples{
 
