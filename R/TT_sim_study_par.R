@@ -1,6 +1,6 @@
 #' Wrapper function performing simulation studies (treatment-treatment comparisons) for a given set of scenarios (parallelized)
 #'
-#' @description Performs a simulation study for a given set of scenarios, analyzing simulated data using the fixed effect model and indirect comparison. Compares the indicated treatment arms.
+#' @description This function performs a simulation study for a given set of scenarios, analyzing simulated data using the fixed effect model and indirect comparison. It compares the indicated treatment arms.
 #'
 #' @param nsim Number of replications
 #' @param scenarios Data frame containing all parameters for scenarios that should be simulated

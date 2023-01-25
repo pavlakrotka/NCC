@@ -1,6 +1,6 @@
 #' Frequentist logistic regression model analysis for binary data adjusting for periods
 #'
-#' @description Performs logistic regression taking into account all trial data until the arm under study leaves the trial and adjusting for periods as factors.
+#' @description This function performs logistic regression taking into account all trial data until the arm under study leaves the trial and adjusting for periods as factors.
 #'
 #' @param data Simulated trial data, e.g. result from the `datasim_bin()` function. Must contain columns named 'treatment', 'response' and 'period'.
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.

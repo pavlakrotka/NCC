@@ -1,6 +1,6 @@
 #' Generalized additive model analysis for continuous data
 #'
-#' @description Performs analysis using a generalized additive model taking into account all trial data until the arm under study leaves the trial and smoothing over the patient entry index.
+#' @description This function performs analysis using a generalized additive model taking into account all trial data until the arm under study leaves the trial and smoothing over the patient entry index.
 #'
 #' @param data Simulated trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response', 'period' and 'j'.
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.

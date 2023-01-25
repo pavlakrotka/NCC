@@ -1,6 +1,6 @@
 #' Model-based analysis for continuous data using discontinuous piecewise polynomials per calendar time unit
 #'
-#' @description Performs linear regression taking into account all trial data until the arm under study leaves the trial and adjusting for time using discontinuous piecewise polynomials in each calendar time unit.
+#' @description This function performs linear regression taking into account all trial data until the arm under study leaves the trial and adjusting for time using discontinuous piecewise polynomials in each calendar time unit.
 #'
 #' @param data Simulated trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response' and 'j'.
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.

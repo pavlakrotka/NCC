@@ -1,6 +1,6 @@
 #' Wrapper function for simulations performing inference on given treatment arms using given models
 #'
-#' @description Analyzes given data using different models as indicated by the user. Performs inference for indicated experimental treatment arms.
+#' @description This function analyzes given data using different models as indicated by the user. It performs inference for indicated experimental treatment arms.
 #'
 #' @param data Simulated trial data, e.g. result from the `datasim_bin()` or `datasim_cont()` function.
 #' @param arms Vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.

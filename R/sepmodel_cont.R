@@ -1,6 +1,6 @@
 #' Separate analysis for continuous data
 #'
-#' @description Performs separate analysis (only taking into account concurrent controls) using a linear model.
+#' @description This function performs separate analysis (only taking into account concurrent controls) using a linear model.
 #'
 #' @param data Simulated trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response' and 'period'.
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.

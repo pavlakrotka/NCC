@@ -1,6 +1,6 @@
 #' Indirect treatment-treatment comparison for continuous data
 #'
-#' @description Performs indirect comparison of two treatments
+#' @description This function performs indirect comparison of two treatments.
 #'
 #' @param data Simulated trial data, e.g. result from the `datasim_cont()` function
 #' @param arms Indicator of the treatment arms to be compared (vector of length 2)

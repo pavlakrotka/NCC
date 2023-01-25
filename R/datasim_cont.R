@@ -1,6 +1,6 @@
 #' Simulate continuous data from a platform trial with a shared control arm and an arbitrary number of treatment arms entering at different time points
 #'
-#' @description The `datasim_cont()` function simulates data from a platform trial with continuous endpoints, an arbitrary number of treatment arms entering at different time points and a shared control arm. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the the sample size per arm.
+#' @description This function simulates data from a platform trial with continuous endpoints, an arbitrary number of treatment arms entering at different time points and a shared control arm. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the the sample size per arm.
 #'
 #' @param num_arms Number of experimental treatment arms in the trial.
 #' @param n_arm Sample size per arm (assumed equal).

@@ -1,6 +1,6 @@
 #' Pooled analysis for continuous data
 #'
-#' @description Performs pooled analysis (naively pooling concurrent and non-concurrent controls without adjustment) using a linear model.
+#' @description This function performs pooled analysis (naively pooling concurrent and non-concurrent controls without adjustment) using a linear model.
 #'
 #' @param data Simulated trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response' and 'period'.
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.

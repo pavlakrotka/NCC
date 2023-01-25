@@ -1,6 +1,6 @@
 #' Pooled analysis for binary data
 #'
-#' @description Performs pooled analysis (naively pooling concurrent and non-concurrent controls without adjustment) using a logistic model.
+#' @description This function performs pooled analysis (naively pooling concurrent and non-concurrent controls without adjustment) using a logistic model.
 #'
 #' @param data Simulated trial data, e.g. result from the `datasim_bin()` function. Must contain columns named 'treatment', 'response' and 'period'.
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.

@@ -1,6 +1,6 @@
 #' Wrapper function performing simulation studies for a given set of scenarios (not parallelized)
 #'
-#' @description Performs a simulation study for a given set of scenarios, analyzing simulated data using different models as indicated by the user. Performs inference for indicated experimental treatment arms. Simulates the probability to reject \eqn{H_0} based on a given number of replications.
+#' @description This function performs a simulation study for a given set of scenarios, analyzing simulated data using different models as indicated by the user. Performs inference for indicated experimental treatment arms. Simulates the probability to reject \eqn{H_0} based on a given number of replications.
 #'
 #' @param nsim Number of replications.
 #' @param scenarios Data frame containing all parameters for scenarios that should be simulated.

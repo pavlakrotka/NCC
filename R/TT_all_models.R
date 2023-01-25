@@ -1,6 +1,6 @@
 #' Wrapper function for simulations performing inference on given treatment arms using given models (treatment-treatment comparisons)
 #'
-#' @description Analyzes given data using different models as indicated by the user. Compares two indicated treatment arms.
+#' @description This function analyzes given data using different models as indicated by the user. It compares two indicated treatment arms.
 #'
 #' @param data Simulated trial data, e.g. result from the `datasim_bin()` or `datasim_cont()` function.
 #' @param arms Indicator of the treatment arms to be compared (vector of length 2).
