@@ -21,8 +21,8 @@ all_models(
   robustify = TRUE,
   weight = 0.1,
   ci = FALSE,
-  prec_delta = 0.001,
-  prec_gamma = 0.001,
+  prec_theta = 0.001,
+  prec_eta = 0.001,
   tau_a = 0.1,
   tau_b = 0.01,
   prec_a = 0.001,
@@ -68,9 +68,9 @@ all_models(
 
 \item{ci}{Boolean. Whether confidence intervals for the mixed models should be computed. Default=FALSE.}
 
-\item{prec_delta}{Precision of the prior regarding the treatment effect in the Time Machine approach. Default=0.001.}
+\item{prec_theta}{Precision (\eqn{1/\sigma^2_{\theta}}) of the prior regarding the treatment effect \eqn{\theta}. I.e. \eqn{\theta \sim N(0, 1/\sigma^2_{\theta})} . Default=0.001.}
 
-\item{prec_gamma}{Precision of the prior regarding the control response in the Time Machine approach. Default=0.001.}
+\item{prec_eta}{Precision (\eqn{1/\sigma^2_{\eta_0}}) of the prior regarding the control response \eqn{\eta_0}. I.e. \eqn{\eta_0 \sim N(0, 1/\sigma^2_{\eta_0})}. Default=0.001.}
 
 \item{tau_a}{Parameter \eqn{a} of the Gamma distribution regarding the precision of the drift parameter \eqn{\tau} in the Time Machine approach. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.1.}
 

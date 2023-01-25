@@ -32,7 +32,7 @@
 #' trial_data <- datasim_bin(num_arms = 3, n_arm = 100, d = c(0, 100, 250),
 #' p0 = 0.7, OR = rep(1.8, 3), lambda = rep(0.15, 4), trend="stepwise")
 #'
-#' MAP_rjags_bin(data = trial_data, arm = 3)
+#' MAPprior_bin(data = trial_data, arm = 3)
 #'
 #'
 #' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, and an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input).
@@ -42,7 +42,7 @@
 
 
 
-MAP_rjags_bin <- function(data,
+MAPprior_bin <- function(data,
                           arm,
                           alpha = 0.025,
                           opt = 2,

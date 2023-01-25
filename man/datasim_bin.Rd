@@ -22,7 +22,7 @@ datasim_bin(
 \arguments{
 \item{num_arms}{Number of treatment arms in the trial.}
 
-\item{n_arm}{Sample size per arm (assumed equal).}
+\item{n_arm}{Sample size per experimental treatment arm (assumed equal).}
 
 \item{d}{Vector with timings of adding new arms in terms of number of patients recruited to the trial so far (of length \code{num_arms}). The first entry must be 0, so that the trial starts with at least one experimental treatment arm.}
 
@@ -70,7 +70,7 @@ or List (if full=TRUE) with the following elements:
 }
 }
 \description{
-This function simulates data from a platform trial with binary endpoints, an arbitrary number of treatment arms entering at different time points and a shared control arm. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the the sample size per arm.
+This function simulates data from a platform trial with binary endpoints, an arbitrary number of treatment arms entering at different time points and a shared control arm. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the sample size per arm.
 }
 \details{
 Equal sample sizes in all experimental treatment arms are assumed. Furthermore, allocation ratio of 1:1:...:1 in each period is assumed and block randomization is used to assign patients to the active arms.

@@ -5,8 +5,8 @@
 #' @param data Simulated trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response' and 'period'.
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
 #' @param alpha Type I error rate. Default=0.025.
-#' @param prec_delta Precision of the prior regarding the treatment effect. Default=0.001.
-#' @param prec_gamma Precision of the prior regarding the control response. Default=0.001.
+#' @param prec_theta Precision (\eqn{1/\sigma^2_{\theta}}) of the prior regarding the treatment effect \eqn{\theta}. I.e. \eqn{\theta \sim N(0, 1/\sigma^2_{\theta})}. Default=0.001.
+#' @param prec_eta Precision (\eqn{1/\sigma^2_{\eta_0}}) of the prior regarding the control response \eqn{\eta_0} (corresponds to `mu0` in `datasim_cont()`). I.e. \eqn{\eta_0 \sim N(0, 1/\sigma^2_{\eta_0})}. Default=0.001.
 #' @param tau_a Parameter \eqn{a} of the Gamma distribution regarding the precision of the drift parameter \eqn{\tau}. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.1.
 #' @param tau_b Parameter \eqn{b} of the Gamma distribution regarding the precision of the drift parameter \eqn{\tau}. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.01.
 #' @param prec_a Parameter \eqn{a} of the Gamma distribution regarding the precision of the responses. I.e., \eqn{\sigma \sim Gamma(a,b)}. Default=0.001.
@@ -37,8 +37,8 @@
 timemachine_cont <- function(data,
                              arm,
                              alpha = 0.025,
-                             prec_delta = 0.001,
-                             prec_gamma = 0.001,
+                             prec_theta = 0.001,
+                             prec_eta = 0.001,
                              tau_a = 0.1,
                              tau_b = 0.01,
                              prec_a = 0.001,
@@ -59,12 +59,12 @@ timemachine_cont <- function(data,
       stop("The significance level (`alpha`) must be one number!")
     }
 
-    if(!is.numeric(prec_delta) | length(prec_delta)!=1){
-      stop("The precision of the prior regarding the treatment effect (`prec_delta`) must be one number!")
+    if(!is.numeric(prec_theta) | length(prec_theta)!=1){
+      stop("The precision of the prior regarding the treatment effect (`prec_theta`) must be one number!")
     }
 
-    if(!is.numeric(prec_gamma) | length(prec_gamma)!=1){
-      stop("The precision of the prior regarding the control response (`prec_gamma`) must be one number!")
+    if(!is.numeric(prec_eta) | length(prec_eta)!=1){
+      stop("The precision of the prior regarding the control response (`prec_eta`) must be one number!")
     }
 
     if(!is.numeric(tau_a) | length(tau_a)!=1){
@@ -122,13 +122,13 @@ timemachine_cont <- function(data,
     ## Other priors
     delta[1] <- 0
     for(i in 2:n_trts){
-      delta[i] ~ dnorm(0, prec_delta)
+      delta[i] ~ dnorm(0, prec_theta)
     }
 
     tau ~  dgamma(tau_a, tau_b)
 
     ### Intercept
-    gamma0 ~ dnorm(0, prec_gamma)
+    gamma0 ~ dnorm(0, prec_eta)
 
     ### Precision (corresponding to random error term)
     prec ~ dgamma(prec_a, prec_b)
@@ -183,13 +183,13 @@ timemachine_cont <- function(data,
     ## Other priors
     delta[1] <- 0
     for(i in 2:n_trts){
-      delta[i] ~ dnorm(0, prec_delta)
+      delta[i] ~ dnorm(0, prec_theta)
     }
 
     tau ~  dgamma(tau_a, tau_b)
 
     ### Intercept
-    gamma0 ~ dnorm(0, prec_gamma)
+    gamma0 ~ dnorm(0, prec_eta)
 
     ### Precision (corresponding to random error term)
     prec ~ dgamma(prec_a, prec_b)
@@ -241,8 +241,8 @@ timemachine_cont <- function(data,
                      n_trts = n_trts,
                      n_buckets = n_buckets,
                      n_trt_buckets = n_trt_buckets,
-                     prec_delta = prec_delta,
-                     prec_gamma = prec_gamma,
+                     prec_theta = prec_theta,
+                     prec_eta = prec_eta,
                      tau_a = tau_a,
                      tau_b = tau_b,
                      prec_a = prec_a,
@@ -289,8 +289,8 @@ timemachine_cont <- function(data,
                      n_buckets = n_buckets,
                      n_trt_buckets = n_trt_buckets,
                      n_trt_buckets_1 = n_trt_buckets_1,
-                     prec_delta = prec_delta,
-                     prec_gamma = prec_gamma,
+                     prec_theta = prec_theta,
+                     prec_eta = prec_eta,
                      tau_a = tau_a,
                      tau_b = tau_b,
                      prec_a = prec_a,

@@ -1,9 +1,9 @@
 #' Simulate binary data from a platform trial with a shared control arm and an arbitrary number of treatment arms entering at different time points
 #'
-#' @description This function simulates data from a platform trial with binary endpoints, an arbitrary number of treatment arms entering at different time points and a shared control arm. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the the sample size per arm.
+#' @description This function simulates data from a platform trial with binary endpoints, an arbitrary number of treatment arms entering at different time points and a shared control arm. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the sample size per arm.
 #'
 #' @param num_arms Number of treatment arms in the trial.
-#' @param n_arm Sample size per arm (assumed equal).
+#' @param n_arm Sample size per experimental treatment arm (assumed equal).
 #' @param d Vector with timings of adding new arms in terms of number of patients recruited to the trial so far (of length `num_arms`). The first entry must be 0, so that the trial starts with at least one experimental treatment arm.
 #' @param period_blocks Number to multiply the number of active arms with, in order to get the block size per period. I.e., block size in each period = `period_blocks`* (number of active arms in the period). Default=2.
 #' @param p0 Response in the control arm.

@@ -8,3 +8,9 @@
 ^hexsticker.R
 ^r_pkg.R
 ^website.R
+sw_trend2.R
+TT_all_models.R
+TT_fixmodel_cont.R
+TT_indirect_cont.R
+TT_sim_study.R
+TT_sim_study_par.R

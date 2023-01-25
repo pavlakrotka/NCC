@@ -8,8 +8,8 @@ timemachine_bin(
   data,
   arm,
   alpha = 0.025,
-  prec_delta = 0.001,
-  prec_gamma = 0.001,
+  prec_theta = 0.001,
+  prec_eta = 0.001,
   tau_a = 0.1,
   tau_b = 0.01,
   bucket_size = 25,
@@ -24,9 +24,9 @@ timemachine_bin(
 
 \item{alpha}{Type I error rate. Default=0.025.}
 
-\item{prec_delta}{Precision of the prior regarding the treatment effect. Default=0.001.}
+\item{prec_theta}{Precision (\eqn{1/\sigma^2_{\theta}}) of the prior regarding the treatment effect \eqn{\theta}. I.e. \eqn{\theta \sim N(0, 1/\sigma^2_{\theta})} . Default=0.001.}
 
-\item{prec_gamma}{Precision of the prior regarding the control response. Default=0.001.}
+\item{prec_eta}{Precision (\eqn{1/\sigma^2_{\eta_0}}) of the prior regarding the control response \eqn{\eta_0} (corresponds to \code{p0} in \code{datasim_bin()}). I.e. \eqn{\eta_0 \sim N(0, 1/\sigma^2_{\eta_0})}. Default=0.001.}
 
 \item{tau_a}{Parameter \eqn{a} of the Gamma distribution regarding the precision of the drift parameter \eqn{\tau}. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.1.}
 

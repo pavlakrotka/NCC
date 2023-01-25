@@ -34,14 +34,14 @@
 #' trial_data<-datasim_cont(num_arms = 3, n_arm = 100, d = c(0, 100, 250),
 #' theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "stepwise")
 #'
-#' MAP_rjags_cont(data = trial_data, arm = 3)
+#' MAPprior_cont(data = trial_data, arm = 3)
 #'
 #'
 #' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, and an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input).
 #' @author Katharina Hees
 
 
-MAP_rjags_cont <- function(data,
+MAPprior_cont <- function(data,
                            arm,
                            alpha = 0.025,
                            opt = 2,

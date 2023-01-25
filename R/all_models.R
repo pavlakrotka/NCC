@@ -18,8 +18,8 @@
 #' @param robustify Boolean.
 #' @param weight Weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP prior according to Schmidli (2014). Default=0.1.
 #' @param ci Boolean. Whether confidence intervals for the mixed models should be computed. Default=FALSE.
-#' @param prec_delta Precision of the prior regarding the treatment effect in the Time Machine approach. Default=0.001.
-#' @param prec_gamma Precision of the prior regarding the control response in the Time Machine approach. Default=0.001.
+#' @param prec_theta Precision (\eqn{1/\sigma^2_{\theta}}) of the prior regarding the treatment effect \eqn{\theta}. I.e. \eqn{\theta \sim N(0, 1/\sigma^2_{\theta})} . Default=0.001.
+#' @param prec_eta Precision (\eqn{1/\sigma^2_{\eta_0}}) of the prior regarding the control response \eqn{\eta_0}. I.e. \eqn{\eta_0 \sim N(0, 1/\sigma^2_{\eta_0})}. Default=0.001.
 #' @param tau_a Parameter \eqn{a} of the Gamma distribution regarding the precision of the drift parameter \eqn{\tau} in the Time Machine approach. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.1.
 #' @param tau_b Parameter \eqn{b} of the Gamma distribution regarding the precision of the drift parameter \eqn{\tau} in the Time Machine approach. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.01.
 #' @param prec_a Parameter \eqn{a} of the Gamma distribution regarding the precision of the responses for continuous endpoints in the Time Machine approach. I.e., \eqn{\sigma \sim Gamma(a,b)}. Default=0.001.
@@ -54,7 +54,7 @@ all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel
                        ncc = TRUE,
                        opt = 2, prior_prec_tau = 4, n.samples = 1000, n.chains = 4, n.iter = 4000, n.adapt = 1000, robustify = TRUE, weight = 0.1,
                        ci = FALSE,
-                       prec_delta = 0.001, prec_gamma = 0.001, tau_a = 0.1, tau_b = 0.01, prec_a = 0.001, prec_b = 0.001, bucket_size = 25,
+                       prec_theta = 0.001, prec_eta = 0.001, tau_a = 0.1, tau_b = 0.01, prec_a = 0.001, prec_b = 0.001, bucket_size = 25,
                        smoothing_basis = "tp", basis_dim = -1, gam_method = "GCV.Cp",
                        bs_degree = 3, poly_degree = 3){
 
@@ -80,8 +80,8 @@ all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel
                                                                   robustify = robustify,
                                                                   weight = weight,
                                                                   ci = ci,
-                                                                  prec_delta = prec_delta,
-                                                                  prec_gamma = prec_gamma,
+                                                                  prec_theta = prec_theta,
+                                                                  prec_eta = prec_eta,
                                                                   tau_a = tau_a,
                                                                   tau_b = tau_b,
                                                                   prec_a = prec_a,
