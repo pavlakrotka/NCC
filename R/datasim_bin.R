@@ -33,7 +33,7 @@
 #' @return Data frame: simulated trial data (if full=FALSE, i.e. default) with the following columns:
 #'
 #' - `j` - patient recruitment index
-#' - `response` - continuous response for patient `j`
+#' - `response` - binary response for patient `j`
 #' - `treatment`- indicator of the treatment patient `j` was allocated in
 #' - `period` - indicator of the periods patient `j` was recruited in
 #'
