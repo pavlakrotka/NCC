@@ -1,7 +1,7 @@
 Package: NCC
 Title: Simulation and analysis of platform trials with non-concurrent controls
 Version: 1.0
-Authors: Pavla Krotka [aut, cre], Marta Bofill Roig [aut], Katharina Hees [aut], Peter Jacko [aut], Dominic Magirr [aut], Martin Posch [ctb]
+Authors: Pavla Krotka [aut, cre], Marta Bofill Roig [aut, ths], Katharina Hees [aut], Peter Jacko [aut], Dominic Magirr [aut], Martin Posch [ctb]
 Maintainer: Pavla Krotka <pavla.krotka@meduniwien.ac.at>
 Authors@R: 
 	c(person(given = "Pavla",
@@ -9,7 +9,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "pavla.krotka@meduniwien.ac.at",
            comment = c(ORCID = "0000-0001-5727-4270")),
-	person("Marta", "Bofill Roig", email = "marta.bofillroig@meduniwien.ac.at", role = c("aut"), comment = c(ORCID = "0000-0002-4400-7541")),
+	person("Marta", "Bofill Roig", email = "marta.bofillroig@meduniwien.ac.at", role = c("aut", "ths"), comment = c(ORCID = "0000-0002-4400-7541")),
 	person("Katharina", "Hees", email = "Katharina.Hees@pei.de", role = c("aut")),
 	person("Peter", "Jacko", email = "peter@berryconsultants.net", role = c("aut")),
 	person("Dominic", "Magirr", email = "dominic.magirr@novartis.com", role = c("aut")),

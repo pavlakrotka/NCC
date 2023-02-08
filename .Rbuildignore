@@ -14,3 +14,4 @@ TT_fixmodel_cont.R
 TT_indirect_cont.R
 TT_sim_study.R
 TT_sim_study_par.R
+^paper$

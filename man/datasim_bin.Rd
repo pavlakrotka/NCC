@@ -48,7 +48,7 @@ datasim_bin(
 Data frame: simulated trial data (if full=FALSE, i.e. default) with the following columns:
 \itemize{
 \item \code{j} - patient recruitment index
-\item \code{response} - continuous response for patient \code{j}
+\item \code{response} - binary response for patient \code{j}
 \item \code{treatment}- indicator of the treatment patient \code{j} was allocated in
 \item \code{period} - indicator of the periods patient \code{j} was recruited in
 }
