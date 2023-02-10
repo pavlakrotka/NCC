@@ -18,7 +18,7 @@ navbar:
       text: Articles
       menu:
       - text: |
-          NCC Intro
+          NCC Introduction
         href: articles/ncc_intro.html
       - text: |
           How to simulate binary data

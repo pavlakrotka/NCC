@@ -2,9 +2,9 @@
 #'
 #' @description This function performs linear mixed model regression taking into account all trial data until the arm under study leaves the trial and adjusting for calendar time units as random factors with AR1 correlation structure.
 #'
-#' @param data Simulated trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment' and 'response'.
+#' @param data Trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment' and 'response'.
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
-#' @param alpha Type I error rate. Default=0.025.
+#' @param alpha Significance level. Default=0.025.
 #' @param ci Boolean. Whether confidence intervals should be computed. Default=FALSE.
 #' @param unit_size Number of patients per calendar time unit. Default=25.
 #' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE.
@@ -27,7 +27,15 @@
 #'
 #' mixmodel_AR1_cal_cont(data = trial_data, arm = 3, ci = TRUE)
 #'
-#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), and the fitted model.
+#' @return List containing the following elements regarding the results of comparing `arm` to control:
+#'
+#' - `p-val` - p-value (one-sided)
+#' - `treat_effect` - estimated treatment effect in terms of the difference in means
+#' - `lower_ci` - lower limit of the 95% confidence interval
+#' - `upper_ci` - upper limit of the 95% confidence interval
+#' - `reject_h0` - indicator of whether the null hypothesis was rejected or not (`p_val` < `alpha`)
+#' - `model` - fitted model
+#'
 #' @author Pavla Krotka
 
 mixmodel_AR1_cal_cont <- function(data, arm, alpha=0.025, ci=FALSE, unit_size=25, ncc=TRUE, check=TRUE, ...){

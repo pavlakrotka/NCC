@@ -24,7 +24,7 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/ncc_intro.html">NCC Intro
+    <a class="dropdown-item" href="../articles/ncc_intro.html">NCC Introduction
 </a>
     <a class="dropdown-item" href="../articles/datasim_bin.html">How to simulate binary data
 </a>
@@ -75,11 +75,11 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>data</dt>
-<dd><p>Simulated trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function. Must contain columns named 'treatment' and 'response'.</p></dd>
+<dd><p>Trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function. Must contain columns named 'treatment' and 'response'.</p></dd>
 <dt>arm</dt>
 <dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
 <dt>alpha</dt>
-<dd><p>Type I error rate. Default=0.025.</p></dd>
+<dd><p>Significance level. Default=0.025.</p></dd>
 <dt>unit_size</dt>
 <dd><p>Number of patients per calendar time unit. Default=25.</p></dd>
 <dt>ncc</dt>
@@ -91,8 +91,13 @@
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), and the fitted model.</p>
-    </div>
+    <p>List containing the following elements regarding the results of comparing <code>arm</code> to control:</p><ul><li><p><code>p-val</code> - p-value (one-sided)</p></li>
+<li><p><code>treat_effect</code> - estimated treatment effect in terms of the difference in means</p></li>
+<li><p><code>lower_ci</code> - lower limit of the 95% confidence interval</p></li>
+<li><p><code>upper_ci</code> - upper limit of the 95% confidence interval</p></li>
+<li><p><code>reject_h0</code> - indicator of whether the null hypothesis was rejected or not (<code>p_val</code> &lt; <code>alpha</code>)</p></li>
+<li><p><code>model</code> - fitted model</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Pavla Krotka</p>
@@ -106,19 +111,19 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">fixmodel_cal_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.02111666</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1165901</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2763227</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1504185</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.009732513</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.09718095</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5429129</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.398018</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -128,21 +133,21 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           (Intercept)  as.factor(treatment)1  as.factor(treatment)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.25966                0.16231                0.25265  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.54707                0.19937                0.21007  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3   as.factor(cal_time)2   as.factor(cal_time)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.27632               -0.12080                0.02902  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.15042               -0.18711               -0.39576  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  as.factor(cal_time)4   as.factor(cal_time)5   as.factor(cal_time)6  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              -0.18888               -0.25337                0.03001  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              -0.72129               -0.58847               -0.60500  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  as.factor(cal_time)7   as.factor(cal_time)8   as.factor(cal_time)9  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              -0.33748               -0.01432               -0.35634  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              -0.26025               -0.18659               -0.63994  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(cal_time)10  as.factor(cal_time)11  as.factor(cal_time)12  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.04816               -0.10848               -0.26826  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              -0.49892               -0.24180               -0.38128  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(cal_time)13  as.factor(cal_time)14  as.factor(cal_time)15  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.03274               -0.38413               -0.12215  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              -0.59802               -0.76213               -0.79064  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(cal_time)16  as.factor(cal_time)17  as.factor(cal_time)18  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.08869               -0.05009               -0.19295  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              -0.39593               -0.55590               -0.18816  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(cal_time)19  as.factor(cal_time)20  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.05888               -0.07278  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              -0.37246               -0.09085  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>

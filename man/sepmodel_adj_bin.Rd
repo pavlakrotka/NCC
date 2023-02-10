@@ -7,18 +7,26 @@
 sepmodel_adj_bin(data, arm, alpha = 0.025, check = TRUE, ...)
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} function. Must contain columns named 'treatment', 'response' and 'period'.}
+\item{data}{Trial data, e.g. result from the \code{datasim_bin()} function. Must contain columns named 'treatment', 'response' and 'period'.}
 
 \item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Type I error rate. Default=0.025.}
+\item{alpha}{Significance level. Default=0.025.}
 
 \item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
 
 \item{...}{Further arguments for simulation function}
 }
 \value{
-List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), and the fitted model.
+List containing the following elements regarding the results of comparing \code{arm} to control:
+\itemize{
+\item \code{p-val} - p-value (one-sided)
+\item \code{treat_effect} - estimated treatment effect in terms of the log-odds ratio
+\item \code{lower_ci} - lower limit of the 95\% confidence interval
+\item \code{upper_ci} - upper limit of the 95\% confidence interval
+\item \code{reject_h0} - indicator of whether the null hypothesis was rejected or not (\code{p_val} < \code{alpha})
+\item \code{model} - fitted model
+}
 }
 \description{
 This function performs separate analysis (only taking into account concurrent controls) using a logistic model and adjusting for periods, if the treatment arm stays in the trial for more than one period.

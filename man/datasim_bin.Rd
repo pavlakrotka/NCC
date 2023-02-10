@@ -40,7 +40,7 @@ datasim_bin(
 
 \item{n_wave}{How many cycles (waves) should a seasonal trend have.}
 
-\item{full}{Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses, input parameters) should be included (TRUE). Default=FALSE.}
+\item{full}{Boolean. Indicates whether the output should be in form of a data frame with variables needed for the analysis only (FALSE) or in form of a list containing more information (TRUE). Default=FALSE.}
 
 \item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
 }
@@ -53,7 +53,7 @@ Data frame: simulated trial data (if full=FALSE, i.e. default) with the followin
 \item \code{period} - indicator of the periods patient \code{j} was recruited in
 }
 
-or List (if full=TRUE) with the following elements:
+or List (if full=TRUE) containing the following elements:
 \itemize{
 \item \code{Data} - simulated trial data, including an additional column \code{p} with the expected value used for the simulation of the response for patient \code{j}
 \item \code{n_total} - total sample size in the trial

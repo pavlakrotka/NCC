@@ -18,19 +18,19 @@ timemachine_bin(
 )
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} function. Must contain columns named 'treatment', 'response' and 'period'.}
+\item{data}{Trial data, e.g. result from the \code{datasim_bin()} function. Must contain columns named 'treatment', 'response' and 'period'.}
 
 \item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Type I error rate. Default=0.025.}
+\item{alpha}{Significance level. Default=0.025.}
 
 \item{prec_theta}{Precision (\eqn{1/\sigma^2_{\theta}}) of the prior regarding the treatment effect \eqn{\theta}. I.e. \eqn{\theta \sim N(0, \sigma^2_{\theta})} . Default=0.001.}
 
-\item{prec_eta}{Precision (\eqn{1/\sigma^2_{\eta_0}}) of the prior regarding the control response \eqn{\eta_0} (corresponds to \code{p0} in the \code{datasim_bin()} function). I.e. \eqn{\eta_0 \sim N(0, \sigma^2_{\eta_0})}. Default=0.001.}
+\item{prec_eta}{Precision (\eqn{1/\sigma^2_{\eta_0}}) of the prior regarding the control log-odds \eqn{\eta_0} (corresponds to \code{p0} in the \code{datasim_bin()} function). I.e. \eqn{\eta_0 \sim N(0, \sigma^2_{\eta_0})}. Default=0.001.}
 
-\item{tau_a}{Parameter \eqn{a} of the Gamma distribution regarding the precision of the drift parameter \eqn{\tau}. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.1.}
+\item{tau_a}{Parameter \eqn{a} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.1.}
 
-\item{tau_b}{Parameter \eqn{b} of the Gamma distribution regarding the precision of the drift parameter \eqn{\tau}. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.01.}
+\item{tau_b}{Parameter \eqn{b} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.01.}
 
 \item{bucket_size}{Number of patients per time bucket. Default=25.}
 
@@ -39,10 +39,17 @@ timemachine_bin(
 \item{...}{Further arguments for simulation function.}
 }
 \value{
-List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, and an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input).
+List containing the following elements regarding the results of comparing \code{arm} to control:
+\itemize{
+\item \code{p-val} - posterior probability that the log-odds ratio is less than zero
+\item \code{treat_effect} - posterior mean of log-odds ratio
+\item \code{lower_ci} - lower limit of the 95\% credible interval for log-odds ratio
+\item \code{upper_ci} - upper limit of the 95\% credible interval for log-odds ratio
+\item \code{reject_h0} - indicator of whether the null hypothesis was rejected or not (\code{p_val} < \code{alpha})
+}
 }
 \description{
-This function performs analysis of binary data using the Time machine approach, which uses a second-order Bayesian normal dynamic linear model (NDLM), takes into account all data until the investigated arm left the trial and includes covariate adjustment for time (separating the trial into buckets of pre-defined size) using a hierarchical model that smooths the control response rate over time.
+This function performs analysis of binary data using the Time Machine approach. It takes into account all data until the investigated arm leaves the trial. It is based on logsitic regression with treatment as a categorical variable and covariate adjustment for time via a second-order Bayesian normal dynamic linear model (separating the trial into buckets of pre-defined size).
 }
 \examples{
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/MAPprior_cont.R
 \name{MAPprior_cont}
 \alias{MAPprior_cont}
-\title{MAP Prior approach analysis for continuous data}
+\title{Analysis for continuous data using the MAP Prior approach}
 \usage{
 MAPprior_cont(
   data,
@@ -21,17 +21,17 @@ MAPprior_cont(
 )
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} function. Must contain columns named 'treatment', 'response' and 'period'.}
+\item{data}{Trial data, e.g. result from the \code{datasim_bin()} function. Must contain columns named 'treatment', 'response' and 'period'.}
 
 \item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Type I error rate. Default=0.025}
+\item{alpha}{Significance level. Default=0.025}
 
-\item{opt}{Binary. If opt=1, all former periods are used as one source; if opt=2, periods form different sources get separately included into the final analysis. Default=2.}
+\item{opt}{Binary. If opt==1, all former periods are used as one source; if opt==2, periods get separately included into the final analysis. Default=2.}
 
 \item{prior_prec_tau}{Dispersion parameter of the half normal prior, the prior for the between study heterogeneity. Default=4.}
 
-\item{n.samples}{How many random samples will get drawn for the calculation of the posterior mean and the CIs. Default=1000.}
+\item{n.samples}{Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's. Default=1000.}
 
 \item{n.chains}{Number of parallel chains for the rjags model. Default=4.}
 
@@ -39,7 +39,7 @@ MAPprior_cont(
 
 \item{n.adapt}{Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model. Default=1000.}
 
-\item{robustify}{Booelan.}
+\item{robustify}{Boolean. Indicates whether a robust prior is to be used. If TRUE, a mixture prior is considered combining a MAP prior and a weakly non-informative component prior. Default=TRUE.}
 
 \item{weight}{Weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP prior according to Schmidli (2014). Default=0.1.}
 
@@ -48,14 +48,26 @@ MAPprior_cont(
 \item{...}{Further arguments for simulation function.}
 }
 \value{
-List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, and an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input).
+List containing the following elements regarding the results of comparing \code{arm} to control:
+\itemize{
+\item \code{p-val} - p-value (one-sided) obtained by drawing \code{n.samples} random samples from each posterior distribution
+\item \code{treat_effect} - estimated treatment effect in terms of the difference in means obtained by drawing \code{n.samples} random samples from each posterior distribution
+\item \code{lower_ci} - lower limit of the 95\% confidence interval obtained by drawing \code{n.samples} random samples from each posterior distribution
+\item \code{upper_ci} - upper limit of the 95\% confidence interval obtained by drawing \code{n.samples} random samples from each posterior distribution
+\item \code{reject_h0} - indicator of whether the null hypothesis was rejected or not (\code{p_val} < \code{alpha})
+}
 }
 \description{
-This function performs analysis of continuous data using the MAP Prior approach. The method borrows data from non-concurrent controls to obtain the prior distribution for the control response in the concurrent periods.
+This function performs analysis of continuous data using the Meta-Analytic-Predictive (MAP) Prior approach. The method borrows data from non-concurrent controls to obtain the prior distribution for the control response in the concurrent periods.
+}
+\details{
+In this function, the argument \code{alpha} corresponds to \eqn{1-\gamma}, where \eqn{\gamma} is the decision boundary. Specifically, the posterior probability of the difference distribution under the null hypothesis is such that:
+\eqn{P(\mu_{treatment}-\mu_{control}>0) \ge 1-}\code{alpha}.
+In case of a non-informative prior this coincides with the frequentist type I error.
 }
 \examples{
 
-trial_data<-datasim_cont(num_arms = 3, n_arm = 100, d = c(0, 100, 250),
+trial_data <- datasim_cont(num_arms = 3, n_arm = 100, d = c(0, 100, 250),
 theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "stepwise")
 
 MAPprior_cont(data = trial_data, arm = 3)

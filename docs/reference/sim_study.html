@@ -24,7 +24,7 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/ncc_intro.html">NCC Intro
+    <a class="dropdown-item" href="../articles/ncc_intro.html">NCC Introduction
 </a>
     <a class="dropdown-item" href="../articles/datasim_bin.html">How to simulate binary data
 </a>
@@ -121,25 +121,25 @@
 <span class="r-in"><span class="co"># Run simulation study:</span></span>
 <span class="r-in"><span class="va">sim_results</span> <span class="op">&lt;-</span> <span class="fu">sim_study</span><span class="op">(</span>nsim <span class="op">=</span> <span class="fl">100</span>, scenarios <span class="op">=</span> <span class="va">sim_scenarios</span>, arms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>,</span>
 <span class="r-in">models <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fixmodel"</span>, <span class="st">"sepmodel"</span>, <span class="st">"poolmodel"</span><span class="op">)</span>, endpoint <span class="op">=</span> <span class="st">"cont"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Starting the simulations. 18 scenarios will be simulated. Starting time: 2023-02-08 18:09:19"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 1/18 done. Time: 2023-02-08 18:09:22"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 2/18 done. Time: 2023-02-08 18:09:24"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 3/18 done. Time: 2023-02-08 18:09:27"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 4/18 done. Time: 2023-02-08 18:09:30"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 5/18 done. Time: 2023-02-08 18:09:33"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 6/18 done. Time: 2023-02-08 18:09:36"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 7/18 done. Time: 2023-02-08 18:09:39"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 8/18 done. Time: 2023-02-08 18:09:42"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 9/18 done. Time: 2023-02-08 18:09:44"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 10/18 done. Time: 2023-02-08 18:09:47"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 11/18 done. Time: 2023-02-08 18:09:50"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 12/18 done. Time: 2023-02-08 18:09:53"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 13/18 done. Time: 2023-02-08 18:09:56"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 14/18 done. Time: 2023-02-08 18:09:58"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 15/18 done. Time: 2023-02-08 18:10:01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 16/18 done. Time: 2023-02-08 18:10:04"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 17/18 done. Time: 2023-02-08 18:10:07"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 18/18 done. Time: 2023-02-08 18:10:10"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Starting the simulations. 18 scenarios will be simulated. Starting time: 2023-02-10 17:08:23"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 1/18 done. Time: 2023-02-10 17:08:26"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 2/18 done. Time: 2023-02-10 17:08:29"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 3/18 done. Time: 2023-02-10 17:08:32"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 4/18 done. Time: 2023-02-10 17:08:35"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 5/18 done. Time: 2023-02-10 17:08:37"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 6/18 done. Time: 2023-02-10 17:08:40"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 7/18 done. Time: 2023-02-10 17:08:43"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 8/18 done. Time: 2023-02-10 17:08:46"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 9/18 done. Time: 2023-02-10 17:08:48"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 10/18 done. Time: 2023-02-10 17:08:51"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 11/18 done. Time: 2023-02-10 17:08:54"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 12/18 done. Time: 2023-02-10 17:08:56"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 13/18 done. Time: 2023-02-10 17:08:59"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 14/18 done. Time: 2023-02-10 17:09:02"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 15/18 done. Time: 2023-02-10 17:09:05"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 16/18 done. Time: 2023-02-10 17:09:08"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 17/18 done. Time: 2023-02-10 17:09:10"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 18/18 done. Time: 2023-02-10 17:09:13"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># View results:</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">sim_results</span><span class="op">)</span></span>
@@ -158,12 +158,12 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5      0   -0.15   -0.15   -0.15   -0.15   -0.15 linear 0.025 TRUE         4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6      0   -0.15   -0.15   -0.15   -0.15   -0.15 linear 0.025 TRUE         4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       model reject_h0 failed nsim</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  fixmodel      0.03      0  100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 poolmodel      0.00      0  100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  fixmodel      0.01      0  100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 poolmodel      0.01      0  100</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3  sepmodel      0.03      0  100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  fixmodel      0.01      0  100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 poolmodel      0.00      0  100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  sepmodel      0.01      0  100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  fixmodel      0.02      0  100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 poolmodel      0.01      0  100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  sepmodel      0.03      0  100</span>
 <span class="r-in"></span>
 <span class="r-in"></span>
 </code></pre></div>

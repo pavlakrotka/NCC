@@ -24,7 +24,7 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/ncc_intro.html">NCC Intro
+    <a class="dropdown-item" href="../articles/ncc_intro.html">NCC Introduction
 </a>
     <a class="dropdown-item" href="../articles/datasim_bin.html">How to simulate binary data
 </a>
@@ -103,7 +103,7 @@
 <dt>n_wave</dt>
 <dd><p>How many cycles (waves) should a seasonal trend have.</p></dd>
 <dt>full</dt>
-<dd><p>Boolean. Indicates whether only variables needed for the analysis should be in the output (FALSE) or also additional information (lambdas, underlying responses, input parameters) should be included (TRUE). Default=FALSE.</p></dd>
+<dd><p>Boolean. Indicates whether the output should be in form of a data frame with variables needed for the analysis only (FALSE) or in form of a list containing more information (TRUE). Default=FALSE.</p></dd>
 <dt>check</dt>
 <dd><p>Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.</p></dd>
 </dl></div>
@@ -113,7 +113,7 @@
 <li><p><code>response</code> - continuous response for patient <code>j</code></p></li>
 <li><p><code>treatment</code>- indicator of the treatment patient <code>j</code> was allocated in</p></li>
 <li><p><code>period</code> - indicator of the periods patient <code>j</code> was recruited in</p></li>
-</ul><p>or List (if full=TRUE) with the following elements:</p><ul><li><p><code>Data</code> - simulated trial data, including an additional column <code>means</code> with the expected value used for the simulation of the response for patient <code>j</code></p></li>
+</ul><p>or List (if full=TRUE) containing the following elements:</p><ul><li><p><code>Data</code> - simulated trial data, including an additional column <code>means</code> with the expected value used for the simulation of the response for patient <code>j</code></p></li>
 <li><p><code>n_total</code> - total sample size in the trial</p></li>
 <li><p><code>n_arm</code> - sample size per arm (assumed equal)</p></li>
 <li><p><code>num_arms</code> - number of experimental treatment arms in the trial</p></li>
@@ -142,12 +142,12 @@
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">datasim_cont</span><span class="op">(</span>num_arms <span class="op">=</span> <span class="fl">3</span>, n_arm <span class="op">=</span> <span class="fl">100</span>, d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, <span class="fl">250</span><span class="op">)</span>,</span>
 <span class="r-in">theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">3</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, sigma <span class="op">=</span> <span class="fl">1</span>, trend <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   j    response treatment period</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1 -0.49300602         0      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2 -0.78321354         1      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3 -0.05894203         1      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 4 -0.83498132         0      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 5  0.41656914         0      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 6 -0.49475806         0      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 1  0.90407437         1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2  0.08845793         0      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 3  0.79539227         1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 4  1.27972896         0      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 5 -0.74736697         1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 6  0.94716307         0      1</span>
 <span class="r-in"></span>
 <span class="r-in"></span>
 </code></pre></div>

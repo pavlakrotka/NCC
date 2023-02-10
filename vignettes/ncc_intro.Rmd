@@ -1,8 +1,8 @@
 ---
-title: "NCC Intro"
+title: "NCC Introduction"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{NCC Intro}
+  %\VignetteIndexEntry{NCC Introduction}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

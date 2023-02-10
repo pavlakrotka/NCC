@@ -15,11 +15,11 @@ splines_cont(
 )
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment', 'response', 'period' and 'j'.}
+\item{data}{Trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment', 'response', 'period' and 'j'.}
 
 \item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Type I error rate. Default=0.025.}
+\item{alpha}{Significance level. Default=0.025.}
 
 \item{ncc}{Boolean. Whether to include NCC data into the analysis. Default=TRUE.}
 
@@ -30,7 +30,16 @@ splines_cont(
 \item{...}{Further arguments for simulation function.}
 }
 \value{
-List containing the p-value (one-sided), estimated treatment effect, 95\% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), the positions of the knots in terms of patient index, and the fitted model.
+List containing the following elements regarding the results of comparing \code{arm} to control:
+\itemize{
+\item \code{p-val} - p-value (one-sided)
+\item \code{treat_effect} - estimated treatment effect in terms of the difference in means
+\item \code{lower_ci} - lower limit of the 95\% confidence interval
+\item \code{upper_ci} - upper limit of the 95\% confidence interval
+\item \code{reject_h0} - indicator of whether the null hypothesis was rejected or not (\code{p_val} < \code{alpha})
+\item \code{knots} - positions of the knots in terms of patient index
+\item \code{model} - fitted model
+}
 }
 \description{
 This function performs linear regression taking into account all trial data until the arm under study leaves the trial and adjusting for time using regression splines with knots placed according to periods.

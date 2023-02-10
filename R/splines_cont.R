@@ -2,9 +2,9 @@
 #'
 #' @description This function performs linear regression taking into account all trial data until the arm under study leaves the trial and adjusting for time using regression splines with knots placed according to periods.
 #'
-#' @param data Simulated trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response', 'period' and 'j'.
+#' @param data Trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response', 'period' and 'j'.
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
-#' @param alpha Type I error rate. Default=0.025.
+#' @param alpha Significance level. Default=0.025.
 #' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE.
 #' @param bs_degree Degree of the polynomial spline. Default=3 for cubic spline.
 #' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
@@ -25,7 +25,16 @@
 #'
 #' splines_cont(data = trial_data, arm = 3)
 #'
-#' @return List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), the positions of the knots in terms of patient index, and the fitted model.
+#' @return List containing the following elements regarding the results of comparing `arm` to control:
+#'
+#' - `p-val` - p-value (one-sided)
+#' - `treat_effect` - estimated treatment effect in terms of the difference in means
+#' - `lower_ci` - lower limit of the 95% confidence interval
+#' - `upper_ci` - upper limit of the 95% confidence interval
+#' - `reject_h0` - indicator of whether the null hypothesis was rejected or not (`p_val` < `alpha`)
+#' - `knots` - positions of the knots in terms of patient index
+#' - `model` - fitted model
+#'
 #' @author Pavla Krotka
 
 splines_cont <- function(data, arm, alpha=0.025, ncc=TRUE, bs_degree=3, check=TRUE, ...){

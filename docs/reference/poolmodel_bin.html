@@ -24,7 +24,7 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/ncc_intro.html">NCC Intro
+    <a class="dropdown-item" href="../articles/ncc_intro.html">NCC Introduction
 </a>
     <a class="dropdown-item" href="../articles/datasim_bin.html">How to simulate binary data
 </a>
@@ -67,11 +67,11 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>data</dt>
-<dd><p>Simulated trial data, e.g. result from the <code><a href="datasim_bin.html">datasim_bin()</a></code> function. Must contain columns named 'treatment', 'response' and 'period'.</p></dd>
+<dd><p>Trial data, e.g. result from the <code><a href="datasim_bin.html">datasim_bin()</a></code> function. Must contain columns named 'treatment', 'response' and 'period'.</p></dd>
 <dt>arm</dt>
 <dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
 <dt>alpha</dt>
-<dd><p>Type I error rate. Default=0.025.</p></dd>
+<dd><p>Significance level. Default=0.025.</p></dd>
 <dt>check</dt>
 <dd><p>Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.</p></dd>
 <dt>...</dt>
@@ -79,8 +79,13 @@
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>List containing the p-value (one-sided), estimated treatment effect, 95% confidence interval, an indicator whether the null hypothesis was rejected or not (for the investigated treatment specified in the input), and the fitted model.</p>
-    </div>
+    <p>List containing the following elements regarding the results of comparing <code>arm</code> to control:</p><ul><li><p><code>p-val</code> - p-value (one-sided)</p></li>
+<li><p><code>treat_effect</code> - estimated treatment effect in terms of the log-odds ratio</p></li>
+<li><p><code>lower_ci</code> - lower limit of the 95% confidence interval</p></li>
+<li><p><code>upper_ci</code> - upper limit of the 95% confidence interval</p></li>
+<li><p><code>reject_h0</code> - indicator of whether the null hypothesis was rejected or not (<code>p_val</code> &lt; <code>alpha</code>)</p></li>
+<li><p><code>model</code> - fitted model</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Pavla Krotka</p>
@@ -94,19 +99,19 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">poolmodel_bin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.0002286823</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.07249069</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.344234</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4903646</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6369197</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.1479531</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.157197</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.179612</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -115,11 +120,11 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           (Intercept)  as.factor(treatment)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                0.9694                 1.3442  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                1.3249                 0.4904  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Degrees of Freedom: 299 Total (i.e. Null);  298 Residual</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Null Deviance:	    311 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 295.8 	AIC: 299.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Null Deviance:	    288.8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 286.6 	AIC: 290.6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>
