@@ -10,6 +10,7 @@
 #' @param perc_cores What percentage of available cores should be used for the simulations. Default=0.9.
 #'
 #' @importFrom parallel detectCores
+#' @importFrom parallelly availableCores
 #' @importFrom parallel makeCluster
 #' @importFrom parallel stopCluster
 #' @importFrom doParallel registerDoParallel
@@ -55,8 +56,8 @@
 
 sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel"), endpoint, perc_cores=0.9){
 
-  if(!is.numeric(nsim) | length(nsim)!=1){
-    stop("Number of replications (`nsim`) must be one number!")
+  if(!is.numeric(nsim) | length(nsim)!=1 | nsim<=1){
+    stop("Number of replications (`nsim`) must be one number and must be larger than 1!")
   }
 
   if(!is.numeric(arms)){
@@ -94,8 +95,8 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
 
   print(paste0("Starting the simulations. ", dim(scenarios)[1], " scenarios will be simulated. Starting time: ", Sys.time()))
 
-  cores <- detectCores()
-  cl <- makeCluster(floor(cores[1]*perc_cores)) # not to overload your computer
+  cores <- availableCores()
+  cl <- makeCluster(floor(unname(cores)*perc_cores)) # not to overload your computer
   registerDoParallel(cl)
 
 
