@@ -228,10 +228,10 @@ MAPprior_bin <- function(data,
   p2 <- samples_control
 
   ## calculate log odds ratio and with that the estimated treatment effect
-  oddsratio <- log((p1 / (1 - p1)) / (p2 / (1 - p2)))
-  treat_effect <- mean(oddsratio)
+  logoddsratio <- log((p1 / (1 - p1)) / (p2 / (1 - p2)))
+  treat_effect <- mean(logoddsratio)
 
-  delta_ci <- quantile(oddsratio, probs = c(alpha, 1 - alpha))
+  delta_ci <- quantile(logoddsratio, probs = c(alpha, 1 - alpha))
   lower_ci <- as.numeric(delta_ci[1])
   upper_ci <- as.numeric(delta_ci[2])
 
