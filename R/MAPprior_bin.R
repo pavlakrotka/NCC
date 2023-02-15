@@ -7,6 +7,7 @@
 #' @param alpha Significance level. Default=0.025
 #' @param opt Binary. If opt==1, all former periods are used as one source; if opt==2, periods get separately included into the final analysis. Default=2.
 #' @param prior_prec_tau Dispersion parameter of the half normal prior, the prior for the between study heterogeneity. Default=4.
+#' @param prior_prec_mu Dispersion parameter of the normal prior, the prior for the control log-odds. Default=0.001.
 #' @param n.samples Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's. Default=1000.
 #' @param n.chains Number of parallel chains for the rjags model. Default=4.
 #' @param n.iter Number of iterations to monitor of the jags.model. Needed for coda.samples. Default=4000.
@@ -60,6 +61,7 @@ MAPprior_bin <- function(data,
                           alpha = 0.025,
                           opt = 2,
                           prior_prec_tau = 4,
+                          prior_prec_mu=0.001,
                           n.samples = 1000,
                           n.chains = 4,
                           n.iter = 4000,
@@ -87,6 +89,10 @@ MAPprior_bin <- function(data,
 
     if(!is.numeric(prior_prec_tau) | length(prior_prec_tau)!=1){
       stop("The dispersion parameter of the half normal prior, the prior for the between study heterogeneity, (`prior_prec_tau`) must be one number!")
+    }
+
+    if(!is.numeric(prior_prec_tau) | length(prior_prec_mu)!=1){
+      stop("The dispersion parameter of the normal prior, the prior for the control log-odds, (`prior_prec_mu`) must be one number!")
     }
 
     if(!is.numeric(n.samples) | length(n.samples)!=1){
@@ -153,7 +159,8 @@ MAPprior_bin <- function(data,
       N_std = length(unique(ncc$period)),
       y = sapply(unique(ncc$period), function(x) sum(ncc[ncc$period == x, ]$response)),
       n = sapply(unique(ncc$period), function(x) length(ncc[ncc$period == x, ]$response)),
-      prior_prec_tau = prior_prec_tau
+      prior_prec_tau = prior_prec_tau,
+      prior_prec_mu = prior_prec_mu
     )
 
 
@@ -170,7 +177,7 @@ MAPprior_bin <- function(data,
         # prior distributions
         inv_tau2 <- pow(tau, -2)
         tau ~ dnorm(0, prior_prec_tau)I(0,) # HN(scale = 1 / sqrt(prior_prec_tau)), I(0,) means censoring on positive values
-        mu  ~ dnorm(0, 0.001)
+        mu  ~ dnorm(0, prior_prec_mu)
 
         # prediction for p in a new study
         logit_p.pred ~ dnorm(mu, inv_tau2)
@@ -228,10 +235,10 @@ MAPprior_bin <- function(data,
   p2 <- samples_control
 
   ## calculate log odds ratio and with that the estimated treatment effect
-  oddsratio <- log((p1 / (1 - p1)) / (p2 / (1 - p2)))
-  treat_effect <- mean(oddsratio)
+  logoddsratio <- log((p1 / (1 - p1)) / (p2 / (1 - p2)))
+  treat_effect <- mean(logoddsratio)
 
-  delta_ci <- quantile(oddsratio, probs = c(alpha, 1 - alpha))
+  delta_ci <- quantile(logoddsratio, probs = c(alpha, 1 - alpha))
   lower_ci <- as.numeric(delta_ci[1])
   upper_ci <- as.numeric(delta_ci[2])
 
