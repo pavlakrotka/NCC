@@ -17,7 +17,7 @@ opts_chunk$set(echo = TRUE,
                fig.align = "center",
                out.width = "100%")
 
-options(mc.cores=2)
+options(mc.cores=3)
 ```
 
 

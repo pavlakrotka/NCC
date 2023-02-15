@@ -14,7 +14,7 @@ sim_study_par(
 )
 }
 \arguments{
-\item{nsim}{Number of replications.}
+\item{nsim}{Number of replications. Must be larger than 1.}
 
 \item{scenarios}{Data frame containing all parameters for scenarios that should be simulated.}
 

@@ -2,7 +2,7 @@
 #'
 #' @description This function performs a simulation study for a given set of scenarios, analyzing simulated data using different models as indicated by the user. Performs inference for indicated experimental treatment arms. Simulates the probability to reject \eqn{H_0} based on a given number of replications.
 #'
-#' @param nsim Number of replications.
+#' @param nsim Number of replications. Must be larger than 1.
 #' @param scenarios Data frame containing all parameters for scenarios that should be simulated.
 #' @param arms Vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.
 #' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel"). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.
@@ -36,7 +36,7 @@
 #' ncc = TRUE)
 #'
 #' # Run simulation study:
-#' sim_results <- sim_study(nsim = 100, scenarios = sim_scenarios, arms = c(3, 4),
+#' sim_results <- sim_study(nsim = 10, scenarios = sim_scenarios, arms = c(3, 4),
 #' models = c("fixmodel", "sepmodel", "poolmodel"), endpoint = "cont")
 #'
 #' # View results:
@@ -49,11 +49,38 @@
 
 sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel"), endpoint){
 
-  print(paste0("Starting the simulations. ", dim(scenarios)[1], " scenarios will be simulated. Starting time: ", Sys.time()))
-
-  if (endpoint=="bin") {
-    models <- models[models!="mixmodel"] # not implemented yet
+  if(!is.numeric(nsim) | length(nsim)!=1 | nsim<=1){
+    stop("Number of replications (`nsim`) must be one number and must be larger than 1!")
   }
+
+  if(!is.numeric(arms)){
+    stop("Experimental treatment arms to be eveluated (`arms`) must be a numeric vector!")
+  }
+
+  if((endpoint %in% c("cont", "bin")==FALSE) | length(endpoint)!=1){
+    stop("Endpoint indicator (`endpoint`) must be one of the following strings: 'cont', 'bin'!")
+  }
+
+  if(endpoint=="cont" & sum(models %in% c("fixmodel", "fixmodel_cal", "gam", "MAPprior",
+                                          "mixmodel", "mixmodel_cal", "mixmodel_AR1", "mixmodel_AR1_cal",
+                                          "piecewise", "piecewise_cal", "poolmodel", "sepmodel", "sepmodel_adj",
+                                          "splines", "splines_cal", "timemachine")==FALSE)>0){
+    stop("For continuous endpoints, only the following models are implemented: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior',
+                                          'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal',
+                                          'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj',
+                                          'splines', 'splines_cal', 'timemachine'.
+         The argument `models` must contain only these strings!")
+  }
+
+  if(endpoint=="bin" & sum(models %in% c("fixmodel", "fixmodel_cal", "MAPprior", "poolmodel", "sepmodel", "sepmodel_adj", "timemachine")==FALSE)>0){
+    stop("For binary endpoints, only the following models are implemented: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.
+         The argument `models` must contain only these strings!")
+  }
+
+
+
+
+  print(paste0("Starting the simulations. ", dim(scenarios)[1], " scenarios will be simulated. Starting time: ", Sys.time()))
 
   models <- sort(models)
 
@@ -97,6 +124,7 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
                                  ncc = scenarios$ncc[i],
                                  opt = scenarios$opt[i],
                                  prior_prec_tau = scenarios$prior_prec_tau[i],
+                                 prior_prec_eta = scenarios$prior_prec_eta[i],
                                  n.samples = scenarios$n.samples[i],
                                  n.chains = scenarios$n.chains[i],
                                  n.iter = scenarios$n.iter[i],
@@ -171,6 +199,7 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
                                  ncc = scenarios$ncc[i],
                                  opt = scenarios$opt[i],
                                  prior_prec_tau = scenarios$prior_prec_tau[i],
+                                 prior_prec_eta = scenarios$prior_prec_eta[i],
                                  n.samples = scenarios$n.samples[i],
                                  n.chains = scenarios$n.chains[i],
                                  n.iter = scenarios$n.iter[i],

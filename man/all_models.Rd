@@ -14,6 +14,7 @@ all_models(
   ncc = TRUE,
   opt = 2,
   prior_prec_tau = 4,
+  prior_prec_eta = 0.001,
   n.samples = 1000,
   n.chains = 4,
   n.iter = 4000,
@@ -53,6 +54,8 @@ all_models(
 \item{opt}{Boolean. In the MAP Prior approach, if opt=1, all former periods are used as one source; if opt=2, periods form different sources get separately included into the final analysis. Default=2.}
 
 \item{prior_prec_tau}{Dispersion parameter of the half normal prior, the prior for the between study heterogeneity in the MAP Prior approach. Default=4.}
+
+\item{prior_prec_eta}{Dispersion parameter of the normal prior, the prior for the control response (log-odds or mean) in the MAP Prior approach. Default=0.001.}
 
 \item{n.samples}{How many random samples will get drawn for the calculation of the posterior mean and the CIs in the MAP Prior approach. Default=1000.}
 

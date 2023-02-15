@@ -11,6 +11,7 @@
 #' @param ncc Boolean. Whether to include NCC data into the analysis using frequentist models. Default=TRUE.
 #' @param opt Boolean. In the MAP Prior approach, if opt=1, all former periods are used as one source; if opt=2, periods form different sources get separately included into the final analysis. Default=2.
 #' @param prior_prec_tau Dispersion parameter of the half normal prior, the prior for the between study heterogeneity in the MAP Prior approach. Default=4.
+#' @param prior_prec_eta Dispersion parameter of the normal prior, the prior for the control response (log-odds or mean) in the MAP Prior approach. Default=0.001.
 #' @param n.samples How many random samples will get drawn for the calculation of the posterior mean and the CIs in the MAP Prior approach. Default=1000.
 #' @param n.chains Number of parallel chains for the rjags model in the MAP Prior approach. Default=4.
 #' @param n.iter Number of iterations to monitor of the jags.model. Needed for coda.samples in the MAP Prior approach. Default=4000.
@@ -52,7 +53,7 @@
 all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel"), endpoint, alpha = 0.025,
                        unit_size = 250,
                        ncc = TRUE,
-                       opt = 2, prior_prec_tau = 4, n.samples = 1000, n.chains = 4, n.iter = 4000, n.adapt = 1000, robustify = TRUE, weight = 0.1,
+                       opt = 2, prior_prec_tau = 4, prior_prec_eta = 0.001, n.samples = 1000, n.chains = 4, n.iter = 4000, n.adapt = 1000, robustify = TRUE, weight = 0.1,
                        ci = FALSE,
                        prec_theta = 0.001, prec_eta = 0.001, tau_a = 0.1, tau_b = 0.01, prec_a = 0.001, prec_b = 0.001, bucket_size = 25,
                        smoothing_basis = "tp", basis_dim = -1, gam_method = "GCV.Cp",
@@ -73,6 +74,7 @@ all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel
                                                                   ncc = ncc,
                                                                   opt = opt,
                                                                   prior_prec_tau = prior_prec_tau,
+                                                                  prior_prec_eta = prior_prec_eta,
                                                                   n.samples = n.samples,
                                                                   n.chains = n.chains,
                                                                   n.iter = n.iter,

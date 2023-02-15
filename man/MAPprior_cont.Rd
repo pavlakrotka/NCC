@@ -10,6 +10,7 @@ MAPprior_cont(
   alpha = 0.025,
   opt = 2,
   prior_prec_tau = 4,
+  prior_prec_eta = 0.001,
   n.samples = 1000,
   n.chains = 4,
   n.iter = 4000,
@@ -30,6 +31,8 @@ MAPprior_cont(
 \item{opt}{Binary. If opt==1, all former periods are used as one source; if opt==2, periods get separately included into the final analysis. Default=2.}
 
 \item{prior_prec_tau}{Dispersion parameter of the half normal prior, the prior for the between study heterogeneity. Default=4.}
+
+\item{prior_prec_eta}{Dispersion parameter of the normal prior, the prior for the control mean. Default=0.001.}
 
 \item{n.samples}{Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's. Default=1000.}
 

@@ -9,7 +9,6 @@
 #' @param endpoint Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.
 #' @param perc_cores What percentage of available cores should be used for the simulations. Default=0.9.
 #'
-#' @importFrom parallel detectCores
 #' @importFrom parallelly availableCores
 #' @importFrom parallel makeCluster
 #' @importFrom parallel stopCluster
@@ -96,7 +95,8 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
   print(paste0("Starting the simulations. ", dim(scenarios)[1], " scenarios will be simulated. Starting time: ", Sys.time()))
 
   cores <- availableCores()
-  cl <- makeCluster(floor(unname(cores)*perc_cores)) # not to overload your computer
+  n_cores <- ifelse(floor(unname(cores)*perc_cores)<=1, 1, floor(unname(cores)*perc_cores)) # always use at least one core
+  cl <- makeCluster(n_cores)
   registerDoParallel(cl)
 
 
@@ -158,6 +158,7 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                                  ncc = scenarios$ncc[i],
                                  opt = scenarios$opt[i],
                                  prior_prec_tau = scenarios$prior_prec_tau[i],
+                                 prior_prec_eta = scenarios$prior_prec_eta[i],
                                  n.samples = scenarios$n.samples[i],
                                  n.chains = scenarios$n.chains[i],
                                  n.iter = scenarios$n.iter[i],
@@ -257,6 +258,7 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                                  ncc = scenarios$ncc[i],
                                  opt = scenarios$opt[i],
                                  prior_prec_tau = scenarios$prior_prec_tau[i],
+                                 prior_prec_eta = scenarios$prior_prec_eta[i],
                                  n.samples = scenarios$n.samples[i],
                                  n.chains = scenarios$n.chains[i],
                                  n.iter = scenarios$n.iter[i],

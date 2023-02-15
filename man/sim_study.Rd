@@ -13,7 +13,7 @@ sim_study(
 )
 }
 \arguments{
-\item{nsim}{Number of replications.}
+\item{nsim}{Number of replications. Must be larger than 1.}
 
 \item{scenarios}{Data frame containing all parameters for scenarios that should be simulated.}
 
@@ -55,7 +55,7 @@ alpha = 0.025,
 ncc = TRUE)
 
 # Run simulation study:
-sim_results <- sim_study(nsim = 100, scenarios = sim_scenarios, arms = c(3, 4),
+sim_results <- sim_study(nsim = 10, scenarios = sim_scenarios, arms = c(3, 4),
 models = c("fixmodel", "sepmodel", "poolmodel"), endpoint = "cont")
 
 # View results:

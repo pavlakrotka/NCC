@@ -8,9 +8,9 @@
 #' @param n_total Total sample size in the trial.
 #'
 #' @export
-#' 
-#' @details The time trend is generated according to the function \eqn{f(j) = \lambda \cdot \mathrm{sin} \big( \psi \cdot 2\pi \cdot \frac{j-1}{N-1} \big)}.
-#' 
+#'
+#' @details The time trend is generated according to the function \eqn{f(j) = \lambda \cdot \mathrm{sin} \big( \psi \cdot 2\pi \cdot \frac{j-1}{N-1} \big)}, where the parameter \eqn{\psi} corresponds to the input parameter `n_wave`.
+#'
 #' @return Time trend for time points j.
 #' @author Marta Bofill Roig, Pavla Krotka
 
