@@ -9,7 +9,7 @@ devtools::document()
 devtools::load_all()
 
 # Build & check the package
-devtools::build(pkg = "C:/Users/pavla/Nextcloud/GitKraken/NCC", path = NULL, binary = FALSE, manual = TRUE, vignettes = F)
+devtools::build(pkg = "C:/Users/pavla/Nextcloud/GitKraken/NCC", path = NULL, binary = FALSE, manual = TRUE, vignettes = TRUE)
 devtools::check_built(path = "C:/Users/pavla/Nextcloud/GitKraken/NCC", cran = TRUE, manual = TRUE)
 devtools::build_manual(pkg = "C:/Users/pavla/Nextcloud/GitKraken/NCC", path = NULL)
 

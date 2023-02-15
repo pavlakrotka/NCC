@@ -67,6 +67,7 @@
   alpha <span class="op">=</span> <span class="fl">0.025</span>,
   opt <span class="op">=</span> <span class="fl">2</span>,
   prior_prec_tau <span class="op">=</span> <span class="fl">4</span>,
+  prior_prec_eta <span class="op">=</span> <span class="fl">0.001</span>,
   n.samples <span class="op">=</span> <span class="fl">1000</span>,
   n.chains <span class="op">=</span> <span class="fl">4</span>,
   n.iter <span class="op">=</span> <span class="fl">4000</span>,
@@ -90,6 +91,8 @@
 <dd><p>Binary. If opt==1, all former periods are used as one source; if opt==2, periods get separately included into the final analysis. Default=2.</p></dd>
 <dt>prior_prec_tau</dt>
 <dd><p>Dispersion parameter of the half normal prior, the prior for the between study heterogeneity. Default=4.</p></dd>
+<dt>prior_prec_eta</dt>
+<dd><p>Dispersion parameter of the normal prior, the prior for the control log-odds. Default=0.001.</p></dd>
 <dt>n.samples</dt>
 <dd><p>Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's. Default=1000.</p></dd>
 <dt>n.chains</dt>
@@ -139,19 +142,19 @@ In case of a non-informative prior this coincides with the frequentist type I er
 <span class="r-in"><span class="fu">MAPprior_bin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using default mean for robust component of 1/2.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.492</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.021</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.007758486</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7171235</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.6464857</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.044407</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6172036</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.460932</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 <span class="r-in"></span>

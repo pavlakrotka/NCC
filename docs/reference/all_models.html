@@ -71,6 +71,7 @@
   ncc <span class="op">=</span> <span class="cn">TRUE</span>,
   opt <span class="op">=</span> <span class="fl">2</span>,
   prior_prec_tau <span class="op">=</span> <span class="fl">4</span>,
+  prior_prec_eta <span class="op">=</span> <span class="fl">0.001</span>,
   n.samples <span class="op">=</span> <span class="fl">1000</span>,
   n.chains <span class="op">=</span> <span class="fl">4</span>,
   n.iter <span class="op">=</span> <span class="fl">4000</span>,
@@ -113,6 +114,8 @@
 <dd><p>Boolean. In the MAP Prior approach, if opt=1, all former periods are used as one source; if opt=2, periods form different sources get separately included into the final analysis. Default=2.</p></dd>
 <dt>prior_prec_tau</dt>
 <dd><p>Dispersion parameter of the half normal prior, the prior for the between study heterogeneity in the MAP Prior approach. Default=4.</p></dd>
+<dt>prior_prec_eta</dt>
+<dd><p>Dispersion parameter of the normal prior, the prior for the control response (log-odds or mean) in the MAP Prior approach. Default=0.001.</p></dd>
 <dt>n.samples</dt>
 <dd><p>How many random samples will get drawn for the calculation of the posterior mean and the CIs in the MAP Prior approach. Default=1000.</p></dd>
 <dt>n.chains</dt>
@@ -172,37 +175,37 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_fixmodel_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.464244</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8858793</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_poolmodel_2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_poolmodel_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.381475</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9564972</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_sepmodel_2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_sepmodel_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.397105</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8023465</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_fixmodel_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_fixmodel_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6062456</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7813792</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_poolmodel_3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_poolmodel_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5965541</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.0706</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_sepmodel_3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_sepmodel_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5718859</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6407309</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 <span class="r-in"></span>
