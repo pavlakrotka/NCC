@@ -150,25 +150,25 @@ will be replicated 1000 times.</p>
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span>
 <span class="va">sim_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_study_par.html">sim_study_par</a></span><span class="op">(</span>nsim <span class="op">=</span> <span class="fl">1000</span>, scenarios <span class="op">=</span> <span class="va">sim_scenarios</span>, arms <span class="op">=</span> <span class="fl">4</span>, 
                              models <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fixmodel"</span>, <span class="st">"sepmodel"</span>, <span class="st">"poolmodel"</span><span class="op">)</span>, endpoint <span class="op">=</span> <span class="st">"cont"</span><span class="op">)</span></code></pre></div>
-<pre><code>[1] "Starting the simulations. 18 scenarios will be simulated. Starting time: 2023-02-15 17:33:13"
-[1] "Scenario 1/18 done. Time: 2023-02-15 17:33:28"
-[1] "Scenario 2/18 done. Time: 2023-02-15 17:33:40"
-[1] "Scenario 3/18 done. Time: 2023-02-15 17:33:51"
-[1] "Scenario 4/18 done. Time: 2023-02-15 17:34:03"
-[1] "Scenario 5/18 done. Time: 2023-02-15 17:34:14"
-[1] "Scenario 6/18 done. Time: 2023-02-15 17:34:24"
-[1] "Scenario 7/18 done. Time: 2023-02-15 17:34:36"
-[1] "Scenario 8/18 done. Time: 2023-02-15 17:34:48"
-[1] "Scenario 9/18 done. Time: 2023-02-15 17:35:00"
-[1] "Scenario 10/18 done. Time: 2023-02-15 17:35:11"
-[1] "Scenario 11/18 done. Time: 2023-02-15 17:35:22"
-[1] "Scenario 12/18 done. Time: 2023-02-15 17:35:35"
-[1] "Scenario 13/18 done. Time: 2023-02-15 17:35:47"
-[1] "Scenario 14/18 done. Time: 2023-02-15 17:35:59"
-[1] "Scenario 15/18 done. Time: 2023-02-15 17:36:10"
-[1] "Scenario 16/18 done. Time: 2023-02-15 17:36:20"
-[1] "Scenario 17/18 done. Time: 2023-02-15 17:36:30"
-[1] "Scenario 18/18 done. Time: 2023-02-15 17:36:41"</code></pre>
+<pre><code>[1] "Starting the simulations. 18 scenarios will be simulated. Starting time: 2023-02-16 18:40:46"
+[1] "Scenario 1/18 done. Time: 2023-02-16 18:41:02"
+[1] "Scenario 2/18 done. Time: 2023-02-16 18:41:13"
+[1] "Scenario 3/18 done. Time: 2023-02-16 18:41:25"
+[1] "Scenario 4/18 done. Time: 2023-02-16 18:41:37"
+[1] "Scenario 5/18 done. Time: 2023-02-16 18:41:48"
+[1] "Scenario 6/18 done. Time: 2023-02-16 18:41:59"
+[1] "Scenario 7/18 done. Time: 2023-02-16 18:42:10"
+[1] "Scenario 8/18 done. Time: 2023-02-16 18:42:22"
+[1] "Scenario 9/18 done. Time: 2023-02-16 18:42:33"
+[1] "Scenario 10/18 done. Time: 2023-02-16 18:42:45"
+[1] "Scenario 11/18 done. Time: 2023-02-16 18:42:58"
+[1] "Scenario 12/18 done. Time: 2023-02-16 18:43:11"
+[1] "Scenario 13/18 done. Time: 2023-02-16 18:43:23"
+[1] "Scenario 14/18 done. Time: 2023-02-16 18:43:34"
+[1] "Scenario 15/18 done. Time: 2023-02-16 18:43:45"
+[1] "Scenario 16/18 done. Time: 2023-02-16 18:43:57"
+[1] "Scenario 17/18 done. Time: 2023-02-16 18:44:09"
+[1] "Scenario 18/18 done. Time: 2023-02-16 18:44:20"</code></pre>
 <p>The function reports the system time after each scenario finishes in
 order to track the progress of the simulations.</p>
 </div>
@@ -195,12 +195,12 @@ and MSE of the treatment effect estimates.</p>
 5      0 -0.1125 -0.1125 -0.1125 -0.1125 -0.1125 linear 0.025 TRUE         4
 6      0 -0.1125 -0.1125 -0.1125 -0.1125 -0.1125 linear 0.025 TRUE         4
       model reject_h0         bias         MSE failed nsim
-1  fixmodel     0.019 -0.003656852 0.007022335      0 1000
-2 poolmodel     0.004 -0.048407167 0.008013916      0 1000
-3  sepmodel     0.019 -0.002725764 0.007783577      0 1000
-4  fixmodel     0.025  0.004414737 0.006380196      0 1000
-5 poolmodel     0.010 -0.028257855 0.006059994      0 1000
-6  sepmodel     0.026  0.004925629 0.007132329      0 1000</code></pre>
+1  fixmodel     0.023 -0.002855975 0.006966115      0 1000
+2 poolmodel     0.002 -0.046867970 0.007942164      0 1000
+3  sepmodel     0.020 -0.001711842 0.007438759      0 1000
+4  fixmodel     0.037  0.004566921 0.007512798      0 1000
+5 poolmodel     0.012 -0.029560149 0.006865394      0 1000
+6  sepmodel     0.038  0.005899559 0.008202747      0 1000</code></pre>
 <p>We can now visualize the performance of the considered analysis
 methods with respect to the strength and pattern of the time trend.</p>
 <div class="section level3">
