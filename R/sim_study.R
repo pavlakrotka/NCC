@@ -36,7 +36,7 @@
 #' ncc = TRUE)
 #'
 #' # Run simulation study:
-#' sim_results <- sim_study(nsim = 10, scenarios = sim_scenarios, arms = c(3, 4),
+#' sim_results <- sim_study(nsim = 5, scenarios = sim_scenarios, arms = c(3, 4),
 #' models = c("fixmodel", "sepmodel", "poolmodel"), endpoint = "cont")
 #'
 #' # View results:

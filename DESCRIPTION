@@ -1,12 +1,12 @@
 Package: NCC
 Title: Simulation and Analysis of Platform Trials with Non-Concurrent Controls
 Version: 1.0
-Author: Pavla Krotka [aut, cre], 
-  Marta Bofill Roig [aut, ths], 
+Author: Pavla Krotka [aut, cre] (<https://orcid.org/0000-0001-5727-4270>), 
+  Marta Bofill Roig [aut, ths] (<https://orcid.org/0000-0002-4400-7541>), 
   Katharina Hees [aut], 
   Peter Jacko [aut], 
   Dominic Magirr [aut], 
-  Martin Posch [ctb]
+  Martin Posch [ctb] (<https://orcid.org/0000-0001-8499-8573>)
 Maintainer: Pavla Krotka <pavla.krotka@meduniwien.ac.at>
 Authors@R: 
 	c(person(given = "Pavla",
