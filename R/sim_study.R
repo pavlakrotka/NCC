@@ -79,6 +79,159 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
 
 
 
+  # Add default parameters
+
+  if(("period_blocks" %in% colnames(scenarios))==FALSE){
+    scenarios$period_blocks <- 2
+  }
+
+  if(endpoint=="cont" & ("mu0" %in% colnames(scenarios))==FALSE){
+    scenarios$mu0 <- 0
+  }
+
+  if(("alpha" %in% colnames(scenarios))==FALSE){
+    scenarios$alpha <- 0.025
+  }
+
+  if((("fixmodel" %in% models) | ("fixmodel_cal" %in% models) | ("mixmodel" %in% models) | ("mixmodel_cal" %in% models) | ("mixmodel_AR1" %in% models) | ("mixmodel_AR1_cal" %in% models) | ("piecewise" %in% models) | ("piecewise_cal" %in% models) | ("splines" %in% models) | ("splines_cal" %in% models)) & ("ncc" %in% colnames(scenarios))==FALSE){
+    scenarios$ncc <- TRUE
+  }
+
+  if((("fixmodel_cal" %in% models) | ("mixmodel_cal" %in% models) | ("mixmodel_AR1_cal" %in% models) | ("piecewise_cal" %in% models) | ("splines_cal" %in% models)) & ("unit_size" %in% colnames(scenarios))==FALSE){
+    scenarios$unit_size <- 25
+  }
+
+  if((("mixmodel" %in% models) | ("mixmodel_cal" %in% models) | ("mixmodel_AR1" %in% models) | ("mixmodel_AR1_cal" %in% models) | ("gam" %in% models)) & ("ci" %in% colnames(scenarios))==FALSE){
+    scenarios$ci <- FALSE
+  }
+
+  if(("gam" %in% models) & ("smoothing_basis" %in% colnames(scenarios))==FALSE){
+    scenarios$smoothing_basis <- "tp"
+  }
+
+  if(("gam" %in% models) & ("basis_dim" %in% colnames(scenarios))==FALSE){
+    scenarios$basis_dim <- -1
+  }
+
+  if(("gam" %in% models) & ("gam_method" %in% colnames(scenarios))==FALSE){
+    scenarios$gam_method <- "GCV.Cp"
+  }
+
+  if(("gam" %in% models) & ("gam_method" %in% colnames(scenarios))==FALSE){
+    scenarios$gam_method <- "GCV.Cp"
+  }
+
+  if((("splines" %in% models) | ("splines_cal" %in% models)) & ("bs_degree" %in% colnames(scenarios))==FALSE){
+    scenarios$bs_degree <- 3
+  }
+
+  if((("piecewise" %in% models) | ("piecewise_cal" %in% models)) & ("poly_degree" %in% colnames(scenarios))==FALSE){
+    scenarios$poly_degree <- 3
+  }
+
+  if(("MAPprior" %in% models) & ("opt" %in% colnames(scenarios))==FALSE){
+    scenarios$opt <- 2
+  }
+
+  if(("MAPprior" %in% models) & ("prior_prec_tau" %in% colnames(scenarios))==FALSE){
+    scenarios$prior_prec_tau <- 4
+  }
+
+  if(("MAPprior" %in% models) & ("prior_prec_eta" %in% colnames(scenarios))==FALSE){
+    scenarios$prior_prec_eta <- 0.001
+  }
+
+  if(("MAPprior" %in% models) & ("n.samples" %in% colnames(scenarios))==FALSE){
+    scenarios$n.samples <- 1000
+  }
+
+  if(("MAPprior" %in% models) & ("n.chains" %in% colnames(scenarios))==FALSE){
+    scenarios$n.chains <- 4
+  }
+
+  if(("MAPprior" %in% models) & ("n.iter" %in% colnames(scenarios))==FALSE){
+    scenarios$n.iter <- 4000
+  }
+
+  if(("MAPprior" %in% models) & ("n.adapt" %in% colnames(scenarios))==FALSE){
+    scenarios$n.adapt <- 1000
+  }
+
+  if(("MAPprior" %in% models) & ("robustify" %in% colnames(scenarios))==FALSE){
+    scenarios$robustify <- TRUE
+  }
+
+  if(("MAPprior" %in% models) & ("weight" %in% colnames(scenarios))==FALSE){
+    scenarios$weight <- 0.1
+  }
+
+  if(("timemachine" %in% models) & ("prec_theta" %in% colnames(scenarios))==FALSE){
+    scenarios$prec_theta <- 0.001
+  }
+
+  if(("timemachine" %in% models) & ("prec_eta" %in% colnames(scenarios))==FALSE){
+    scenarios$prec_eta <- 0.001
+  }
+
+  if(("timemachine" %in% models) & ("tau_a" %in% colnames(scenarios))==FALSE){
+    scenarios$tau_a <- 0.1
+  }
+
+  if(("timemachine" %in% models) & ("tau_b" %in% colnames(scenarios))==FALSE){
+    scenarios$tau_b <- 0.01
+  }
+
+  if(("timemachine" %in% models) & ("bucket_size" %in% colnames(scenarios))==FALSE){
+    scenarios$bucket_size <- 25
+  }
+
+  if(("timemachine" %in% models) & endpoint=="cont" & ("prec_a" %in% colnames(scenarios))==FALSE){
+    scenarios$prec_a <- 0.001
+  }
+
+  if(("timemachine" %in% models) & endpoint=="cont" & ("prec_b" %in% colnames(scenarios))==FALSE){
+    scenarios$prec_b <- 0.001
+  }
+
+
+  # Check scenarios data frame
+
+
+  if(endpoint=="cont" & sum(c("num_arms", "n_arm", "d1", "theta1", "lambda1", "sigma", "trend") %in% colnames(scenarios)==FALSE)>0){
+    stop("The `scenarios` data frame must include the parameters 'num_arms', 'n_arm', 'd', 'theta', 'lambda', 'sigma' and 'trend'!")
+  }
+
+  if(endpoint=="bin" & sum(c("num_arms", "n_arm", "d1", "p0", "OR1", "lambda1", "trend") %in% colnames(scenarios)==FALSE)>0){
+    stop("The `scenarios` data frame must include the parameters 'num_arms', 'n_arm', 'd', 'p0', 'OR', 'lambda' and 'trend'!")
+  }
+
+  if(("inv_u" %in% scenarios$trend) & ("N_peak" %in% colnames(scenarios))==FALSE){
+    stop("If the time trend pattern is 'inv_u', the parameter 'N_peak' must be specified!")
+  }
+
+  if(("seasonal" %in% scenarios$trend) & ("n_wave" %in% colnames(scenarios))==FALSE){
+    stop("If the time trend pattern is 'seasonal', the parameter 'n_wave' must be specified!")
+  }
+
+  if(sum(grepl("^d\\d", colnames(scenarios)))!=max(scenarios$num_arms)){
+    stop("The number of columns specifying the parameter 'd' (columns must be named 'd1', 'd2', ect.) must correspond to the number of treatment arms ('n_arms')!")
+  }
+
+  if(endpoint=="cont" & sum(grepl("^theta\\d", colnames(scenarios)))!=max(scenarios$num_arms)){
+    stop("The number of columns specifying the parameter 'theta' (columns must be named 'theta1', 'theta2', ect.) must correspond to the number of treatment arms ('n_arms')!")
+  }
+
+  if(endpoint=="bin" & sum(grepl("^OR\\d", colnames(scenarios)))!=max(scenarios$num_arms)){
+    stop("The number of columns specifying the parameter 'OR' (columns must be named 'OR1', 'OR2', ect.) must correspond to the number of treatment arms ('n_arms')!")
+  }
+
+  if(sum(grepl("^lambda\\d", colnames(scenarios)))!=max(scenarios$num_arms)+1){
+    stop("The number of columns specifying the parameter 'lambda' (columns must be named 'lambda0', 'lambda1', ect.) must correspond to the number of arms ('n_arms'+1)!")
+  }
+
+
+
+
 
   print(paste0("Starting the simulations. ", dim(scenarios)[1], " scenarios will be simulated. Starting time: ", Sys.time()))
 
