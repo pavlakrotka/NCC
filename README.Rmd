@@ -109,7 +109,7 @@ For a more detailed description of the functions, see the vignettes in the R-pac
 
 ## Scheme of available functions
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.align='center', out.width="100%"}
 include_graphics("./man/figures/NCC_graph.png")
 ```
 

@@ -125,7 +125,7 @@ the R-package website (<https://pavlakrotka.github.io/NCC/>).
 
 ## Scheme of available functions
 
-<img src="./man/figures/NCC_graph.png" width="70%" style="display: block; margin: auto;" />
+<img src="./man/figures/NCC_graph.png" width="100%" style="display: block; margin: auto;" />
 
 ## Installation
 
