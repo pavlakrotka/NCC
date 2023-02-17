@@ -123,6 +123,10 @@ This package contains the following functions:
 For a more detailed description of the functions, see the vignettes in
 the R-package website (<https://pavlakrotka.github.io/NCC/>).
 
+## Scheme of available functions
+
+<img src="./man/figures/NCC_graph.PNG" width="70%" style="display: block; margin: auto;" />
+
 ## Installation
 
 To install the latest version of the `NCC` package from Github, please
