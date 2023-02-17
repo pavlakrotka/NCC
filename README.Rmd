@@ -109,7 +109,9 @@ For a more detailed description of the functions, see the vignettes in the R-pac
 
 ## Scheme of available functions
 
-```{r, echo=FALSE, fig.align='center', out.width="100%"}
+The below figure illustrates the `NCC` package functions by functionality.
+
+```{r, echo=FALSE, out.width="100%"}
 include_graphics("./man/figures/NCC_graph.png")
 ```
 

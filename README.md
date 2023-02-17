@@ -125,6 +125,9 @@ the R-package website (<https://pavlakrotka.github.io/NCC/>).
 
 ## Scheme of available functions
 
+The below figure illustrates the `NCC` package functions by
+functionality.
+
 <img src="./man/figures/NCC_graph.png" width="100%" style="display: block; margin: auto;" />
 
 ## Installation
