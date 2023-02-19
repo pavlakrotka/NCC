@@ -149,26 +149,27 @@ will be replicated 1000 times.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span>
 <span class="va">sim_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sim_study_par.html">sim_study_par</a></span><span class="op">(</span>nsim <span class="op">=</span> <span class="fl">1000</span>, scenarios <span class="op">=</span> <span class="va">sim_scenarios</span>, arms <span class="op">=</span> <span class="fl">4</span>, 
-                             models <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fixmodel"</span>, <span class="st">"sepmodel"</span>, <span class="st">"poolmodel"</span><span class="op">)</span>, endpoint <span class="op">=</span> <span class="st">"cont"</span><span class="op">)</span></code></pre></div>
-<pre><code>[1] "Starting the simulations. 18 scenarios will be simulated. Starting time: 2023-02-17 11:15:00"
-[1] "Scenario 1/18 done. Time: 2023-02-17 11:15:15"
-[1] "Scenario 2/18 done. Time: 2023-02-17 11:15:25"
-[1] "Scenario 3/18 done. Time: 2023-02-17 11:15:37"
-[1] "Scenario 4/18 done. Time: 2023-02-17 11:15:48"
-[1] "Scenario 5/18 done. Time: 2023-02-17 11:15:58"
-[1] "Scenario 6/18 done. Time: 2023-02-17 11:16:09"
-[1] "Scenario 7/18 done. Time: 2023-02-17 11:16:20"
-[1] "Scenario 8/18 done. Time: 2023-02-17 11:16:30"
-[1] "Scenario 9/18 done. Time: 2023-02-17 11:16:40"
-[1] "Scenario 10/18 done. Time: 2023-02-17 11:16:50"
-[1] "Scenario 11/18 done. Time: 2023-02-17 11:17:01"
-[1] "Scenario 12/18 done. Time: 2023-02-17 11:17:11"
-[1] "Scenario 13/18 done. Time: 2023-02-17 11:17:21"
-[1] "Scenario 14/18 done. Time: 2023-02-17 11:17:31"
-[1] "Scenario 15/18 done. Time: 2023-02-17 11:17:42"
-[1] "Scenario 16/18 done. Time: 2023-02-17 11:17:53"
-[1] "Scenario 17/18 done. Time: 2023-02-17 11:18:04"
-[1] "Scenario 18/18 done. Time: 2023-02-17 11:18:14"</code></pre>
+                             models <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fixmodel"</span>, <span class="st">"sepmodel"</span>, <span class="st">"poolmodel"</span><span class="op">)</span>, 
+                             endpoint <span class="op">=</span> <span class="st">"cont"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Starting the simulations. 18 scenarios will be simulated. Starting time: 2023-02-19 14:24:09"</span>  </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Scenario 1/18 done. Time: 2023-02-19 14:24:21"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Scenario 2/18 done. Time: 2023-02-19 14:24:26"</span>  </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Scenario 3/18 done. Time: 2023-02-19 14:24:32"</span>  </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Scenario 4/18 done. Time: 2023-02-19 14:24:37"</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Scenario 5/18 done. Time: 2023-02-19 14:24:42"</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Scenario 6/18 done. Time: 2023-02-19 14:24:47"</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Scenario 7/18 done. Time: 2023-02-19 14:24:53"</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Scenario 8/18 done. Time: 2023-02-19 14:24:58"</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Scenario 9/18 done. Time: 2023-02-19 14:25:03"</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Scenario 10/18 done. Time: 2023-02-19 14:25:08"</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Scenario 11/18 done. Time: 2023-02-19 14:25:13"</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Scenario 12/18 done. Time: 2023-02-19 14:25:19"</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Scenario 13/18 done. Time: 2023-02-19 14:25:24"</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Scenario 14/18 done. Time: 2023-02-19 14:25:30"</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Scenario 15/18 done. Time: 2023-02-19 14:25:36"</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Scenario 16/18 done. Time: 2023-02-19 14:25:41"</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Scenario 17/18 done. Time: 2023-02-19 14:25:47"</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"Scenario 18/18 done. Time: 2023-02-19 14:25:52"</span></span></code></pre></div>
 <p>The function reports the system time after each scenario finishes in
 order to track the progress of the simulations.</p>
 </div>
@@ -195,12 +196,12 @@ and MSE of the treatment effect estimates.</p>
 5      0 -0.1125 -0.1125 -0.1125 -0.1125 -0.1125 linear 0.025 TRUE         4
 6      0 -0.1125 -0.1125 -0.1125 -0.1125 -0.1125 linear 0.025 TRUE         4
       model reject_h0          bias         MSE failed nsim
-1  fixmodel     0.033 -1.326369e-03 0.008393008      0 1000
-2 poolmodel     0.006 -4.697172e-02 0.009011221      0 1000
-3  sepmodel     0.036  1.805088e-04 0.009165475      0 1000
-4  fixmodel     0.017  8.590828e-05 0.006956683      0 1000
-5 poolmodel     0.010 -3.372945e-02 0.007128031      0 1000
-6  sepmodel     0.021  1.221764e-03 0.007894031      0 1000</code></pre>
+1  fixmodel     0.030 -0.0005506988 0.007717052      0 1000
+2 poolmodel     0.007 -0.0438708399 0.008220890      0 1000
+3  sepmodel     0.027  0.0005236461 0.008487647      0 1000
+4  fixmodel     0.020 -0.0001912505 0.006601056      0 1000
+5 poolmodel     0.008 -0.0332907139 0.006741297      0 1000
+6  sepmodel     0.020 -0.0002745666 0.007570587      0 1000</code></pre>
 <p>We can now visualize the performance of the considered analysis
 methods with respect to the strength and pattern of the time trend.</p>
 <div class="section level3">
@@ -214,7 +215,7 @@ methods with respect to the strength and pattern of the time trend.</p>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0.025</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dotted"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Strength of time trend"</span>, y<span class="op">=</span><span class="st">"Type I error"</span>, color<span class="op">=</span><span class="st">"Analysis approach"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="how_to_run_sim_study_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="how_to_run_sim_study_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="bias">Bias<a class="anchor" aria-label="anchor" href="#bias"></a>
@@ -227,7 +228,7 @@ methods with respect to the strength and pattern of the time trend.</p>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dotted"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Strength of time trend"</span>, y<span class="op">=</span><span class="st">"Bias"</span>, color<span class="op">=</span><span class="st">"Analysis approach"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="how_to_run_sim_study_files/figure-html/unnamed-chunk-6-1.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="how_to_run_sim_study_files/figure-html/unnamed-chunk-8-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="mse">MSE<a class="anchor" aria-label="anchor" href="#mse"></a>
@@ -239,7 +240,7 @@ methods with respect to the strength and pattern of the time trend.</p>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="op">~</span> <span class="va">trend</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"Strength of time trend"</span>, y<span class="op">=</span><span class="st">"MSE"</span>, color<span class="op">=</span><span class="st">"Analysis approach"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="how_to_run_sim_study_files/figure-html/unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;"></p>
+<p><img src="how_to_run_sim_study_files/figure-html/unnamed-chunk-9-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

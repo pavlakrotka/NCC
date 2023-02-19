@@ -31,20 +31,19 @@ LazyData: false
 Imports: 
   rlang,
   stats,
-  MASS,
   RBesT,
   rjags,
   ggplot2,
   lmerTest,
   parallel,
   doParallel,
+  parallelly,
   foreach,
   iterators,
   spaMM,
   mgcv,
   splines,
-  magick,
-  parallelly
+  magick
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Suggests: 
