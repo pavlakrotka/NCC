@@ -51,6 +51,33 @@ List containing the following elements regarding the results of comparing \code{
 \description{
 This function performs analysis of binary data using the Time Machine approach. It takes into account all data until the investigated arm leaves the trial. It is based on logsitic regression with treatment as a categorical variable and covariate adjustment for time via a second-order Bayesian normal dynamic linear model (separating the trial into buckets of pre-defined size).
 }
+\details{
+The Time Machine uses the division of the trial into \eqn{C} calendar time intervals of equal length ("buckets"), which are indexed backwards in time, so that the most recent time interval is denoted by \eqn{c=1} and the time interval corresponding to the beginning of the trial by \eqn{c=C}.
+The the analysis is performed as soon as the analyzed treatment arm finishes in the trial.
+
+The model is defined as follows:
+
+\deqn{g(E(y_j)) = \eta_0 + \theta_{k_j} + \alpha_{c_j}}
+
+where \eqn{y_j} is the binary response for patient \eqn{j} and \eqn{g(\cdot)} is the logit link function, which maps the expected value of the patient response to the linear predictors in the model.
+The model intercept \eqn{\eta_0} denotes the response of the control group at time of the analysis, \eqn{\theta_{k_j}} is the effect of the treatment arm \eqn{k} that patient \eqn{j} was enrolled in, relative to control in terms of the log odds ratio.
+For the parameters \eqn{\eta_0} and \eqn{\theta_{k_j}}, normal prior distributions are assumed, with mean 0 and variances \eqn{\sigma^2_{\eta_0}} and \eqn{\sigma^2_{\theta}}, respectively:
+
+\deqn{\eta_0 \sim \mathcal{N}(0, \sigma^2_{\eta_0})}
+
+\deqn{\theta_{k_j} \sim \mathcal{N}(0, \sigma^2_{\theta})}
+
+In the Time Machine, time trend is represented by \eqn{\alpha_{c_j}}, which is the change in the response in time bucket \eqn{c_j} (which denotes the time bucket in which patient \eqn{j} is enrolled) compared to the most recent time bucket \eqn{c=1} and is modeled using a Bayesian second-order normal dynamic linear model.
+This creates a smoothing over the control response, such that closer time buckets are modeled with more similar response rates:
+
+\deqn{\alpha_1 = 0}
+\deqn{\alpha_2 \sim \mathcal{N}(0, 1/\tau)}
+\deqn{\alpha_c \sim \mathcal{N}(2 \alpha_{c-1} - \alpha_{c-2}, 1/\tau), 3 \le c \le C}
+
+where \eqn{\tau} denotes the drift parameter that controls the degree of smoothing over the time buckets and is assumed to have a Gamma hyperprior distribution:
+
+\deqn{\tau \sim Gamma(a,b)}
+}
 \examples{
 
 trial_data <- datasim_bin(num_arms = 3, n_arm = 100, d = c(0, 100, 250),

@@ -17,6 +17,17 @@
 #'
 #' @export
 #'
+#' @details
+#'
+#' The model adjusts for the time effect by including the factor calendar time interval to the model (i.e., using a step-function) and models the continuous response \eqn{y_j} for patient \eqn{j} as follows:
+#'
+#' \deqn{y_j = \eta_0  + \sum_{k \in \mathcal{K}_M} \theta_k \cdot I(k_j=k) + \sum_{c=2}^{C_M} \tau_c \cdot I(t_j \in T_{C_c}) + \varepsilon_j}
+#'
+#' where \eqn{\eta_0} is the response in the control arm in the first period;
+#' \eqn{\theta_k} represents the effect of treatment \eqn{k} compared to control for \eqn{k\in\mathcal{K}_M}, where \eqn{\mathcal{K}_M} is the set of treatments
+#' that were active in the trial during periods prior or up to the time when the investigated treatment arm left the trial;
+#' \eqn{\tau_c} indicates the stepwise period effect between calendar time units 1 and \eqn{c} (\eqn{c = 2, \ldots, C_M}), where \eqn{C_M} denotes the calendar time unit, in which the investigated treatment arm left the trial.
+#'
 #' @examples
 #'
 #' trial_data <- datasim_cont(num_arms = 3, n_arm = 100, d = c(0, 100, 250),

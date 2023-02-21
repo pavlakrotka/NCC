@@ -16,6 +16,17 @@
 #'
 #' @export
 #'
+#' @details
+#'
+#' The model adjusts for the time effect by including the factor period to the model (i.e., using a step-function) and models the continuous response \eqn{y_j} for patient \eqn{j} as follows:
+#'
+#' \deqn{y_j = \eta_0  + \sum_{k \in \mathcal{K}_M} \theta_k \cdot I(k_j=k) + \sum_{s=2}^{S_M} \tau_s \cdot I(t_j \in T_{S_s}) + \varepsilon_j}
+#'
+#' where \eqn{\eta_0} is the response in the control arm in the first period;
+#' \eqn{\theta_k} represents the effect of treatment \eqn{k} compared to control for \eqn{k\in\mathcal{K}_M}, where \eqn{\mathcal{K}_M} is the set of treatments
+#' that were active in the trial during periods prior or up to the time when the investigated treatment arm left the trial;
+#' \eqn{\tau_s} indicates the stepwise period effect between periods 1 and \eqn{s} (\eqn{s = 2, \ldots, S_M}), where \eqn{S_M} denotes the period, in which the investigated treatment arm left the trial.
+#'
 #' @examples
 #'
 #' trial_data <- datasim_cont(num_arms = 3, n_arm = 100, d = c(0, 100, 250),

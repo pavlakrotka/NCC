@@ -34,11 +34,11 @@ datasim_bin(
 
 \item{lambda}{Vector with strength of time trend in each arm ordered by the entry time of the arms (i.e., the first entry in the vector corresponds to the time trend in the control arm, second entry to the time trend in the first treatment arm etc. (of length \code{num_arms}+1, as time trend in the control is also allowed).}
 
-\item{trend}{Indicates the time trend pattern ("linear", "stepwise", "stepwise_2", "inv_u" or "seasonal").}
+\item{trend}{Indicates the time trend pattern ("linear", "linear_2, "stepwise", "stepwise_2", "inv_u" or "seasonal"). See Details for more information.}
 
 \item{N_peak}{Point at which the inverted-u time trend switches direction in terms of overall sample size.}
 
-\item{n_wave}{How many cycles (waves) should a seasonal trend have.}
+\item{n_wave}{How many cycles (waves) should the seasonal trend have.}
 
 \item{full}{Boolean. Indicates whether the output should be in form of a data frame with variables needed for the analysis only (FALSE) or in form of a list containing more information (TRUE). Default=FALSE.}
 
@@ -73,7 +73,24 @@ or List (if full=TRUE) containing the following elements:
 This function simulates data from a platform trial with binary endpoints, an arbitrary number of treatment arms entering at different time points and a shared control arm. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the sample size per arm.
 }
 \details{
-Equal sample sizes in all experimental treatment arms are assumed. Furthermore, allocation ratio of 1:1:...:1 in each period is assumed and block randomization is used to assign patients to the active arms.
+Equal sample sizes (given by parameter \code{n_arm}) in all experimental treatment arms are assumed.
+Furthermore, allocation ratio of 1:1:...:1 in each period is assumed and block randomization is used to assign patients to the active arms. Block size in each period = \code{period_blocks}* (number of active arms in the period).
+
+The binary response \eqn{y_j} for patient \eqn{j} is generated according to:
+
+\deqn{g(E(y_j)) = \eta_0 + \sum_{k=1}^K \cdot I(k_j=k) + f(j)}
+
+where \eqn{g(\cdot)} is the logit link function, and \eqn{\eta_0} (parameter \code{p0}) and \eqn{\theta_k} (log of the parameter \code{OR}) are the response in the control arm and the log odds ratio of treatment \eqn{k}. \eqn{K} is the total number of treatment arms in the trial (parameter \code{num_arms}) and \eqn{k_j} is an indicator of the treatment arm patient \eqn{j} is allocated to.
+
+The function \eqn{f(j)} denotes the time trend, whose strength is indicated by \eqn{\lambda_{k_j}} (parameter \code{lambda}) and which can have the following patterns (parameter \code{trend}):
+\itemize{
+\item "linear" - trend starts at the beginning of the trial and the log odds ratio increases or decreases linearly with a slope of \eqn{\lambda}, according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1}}, where \eqn{N} is the total sample size in the trial
+\item "linear_2" - trend starts after the first period (i.e. there is no time trend in the first period) and the log odds ratio increases or decreases linearly with a slope of \eqn{\lambda}, according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1}}, where \eqn{N} is the total sample size in the trial
+\item "stepwise" - the log odds ratio is constant in each period and increases or decreases by \eqn{\lambda} each time any treatment arm enters or leaves the trial (i.e. in each period), according to the function \eqn{f(j) = \lambda_{k_j} \cdot (c_j - 1)}, where \eqn{c_j} is an indicator of the period patient \eqn{j} was enrolled in
+\item "stepwise_2" - the log odds ratio is constant in each period and increases or decreases by \eqn{\lambda} each time a new treatment arm is added to the trial, according to the function \eqn{f(j) = \lambda_{k_j} \cdot (w_j - 1)}, where \eqn{w_j} is an indicator of how many treatment arms have already entered the ongoing trial, when patient \eqn{j} was enrolled
+\item "inv_u" - the log odds ratio increases up to the point \eqn{N_p} (parameter \code{N_peak}) and decreases afterwards, linearly with a slope of \eqn{\lambda}, according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1} (I(j \leq N_p) - I(j > N_p))}, where \eqn{N_p} indicates the point at which the trend turns from positive to negative in terms of the sample size (note that for negative \eqn{\lambda}, the log odds ratio decreases first and increases after)
+\item "seasonal" - the log odds ratio increases and decreases periodically with a magnitude of \eqn{\lambda}, according to the function \eqn{f(j) = \lambda \cdot \mathrm{sin} \big( \psi \cdot 2\pi \cdot \frac{j-1}{N-1} \big)}, where \eqn{\psi} indicates how many cycles should the time trend have (parameter \code{n_wave})
+}
 }
 \examples{
 

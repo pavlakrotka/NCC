@@ -130,10 +130,6 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
     scenarios$gam_method <- "GCV.Cp"
   }
 
-  if(("gam" %in% models) & ("gam_method" %in% colnames(scenarios))==FALSE){
-    scenarios$gam_method <- "GCV.Cp"
-  }
-
   if((("splines" %in% models) | ("splines_cal" %in% models)) & ("bs_degree" %in% colnames(scenarios))==FALSE){
     scenarios$bs_degree <- 3
   }
@@ -211,11 +207,15 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
 
 
   if(endpoint=="cont" & sum(c("num_arms", "n_arm", "d1", "theta1", "lambda1", "sigma", "trend") %in% colnames(scenarios)==FALSE)>0){
-    stop("The `scenarios` data frame must include the parameters 'num_arms', 'n_arm', 'd', 'theta', 'lambda', 'sigma' and 'trend'!")
+    stop("The `scenarios` data frame must include the parameters 'num_arms', 'n_arm', 'd', 'theta', 'lambda', 'sigma' and 'trend' in separate columns!")
   }
 
   if(endpoint=="bin" & sum(c("num_arms", "n_arm", "d1", "p0", "OR1", "lambda1", "trend") %in% colnames(scenarios)==FALSE)>0){
-    stop("The `scenarios` data frame must include the parameters 'num_arms', 'n_arm', 'd', 'p0', 'OR', 'lambda' and 'trend'!")
+    stop("The `scenarios` data frame must include the parameters 'num_arms', 'n_arm', 'd', 'p0', 'OR', 'lambda' and 'trend' in separate columns!")
+  }
+
+  if(sum(scenarios$trend %in% c("linear", "linear_2", "stepwise", "stepwise_2", "inv_u", "seasonal")==FALSE)>0){
+    stop("Values allowed for the time trend pattern (column 'trend') are: 'linear', 'linear_2', 'stepwise', 'stepwise_2', 'inv_u', 'seasonal'!")
   }
 
   if(("inv_u" %in% scenarios$trend) & ("N_peak" %in% colnames(scenarios))==FALSE){
@@ -270,9 +270,38 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
 
       arms <- sort(arms)
 
-      d_i <- as.numeric(scenarios[i, grepl("^d\\d", names(scenarios))])[1:scenarios[i,]$num_arms]
-      theta_i <- as.numeric(scenarios[i, grepl("^theta\\d", names(scenarios))])[1:scenarios[i,]$num_arms]
-      lambda_i <- as.numeric(scenarios[i, grepl("^lambda\\d", names(scenarios))])[1:(scenarios[i,]$num_arms+1)]
+      # d_i <- as.numeric(scenarios[i, grepl("^d\\d", names(scenarios))])[1:scenarios[i,]$num_arms]
+
+      d_i <- scenarios[i, grepl("^d\\d", names(scenarios))]
+
+      if (sum(c(1:scenarios[i,]$num_arms) %in% as.numeric(gsub("d","", colnames(d_i))))!=scenarios[i,]$num_arms) {
+        stop("Each experimental treatment arm needs to have an entry time specified in a separate column (columns must be named 'd1', 'd2', ect.)!")
+      }
+
+      d_i <- d_i[, order(as.numeric(gsub("d","", colnames(d_i))))] # Sort to correct order
+      d_i <- as.numeric(d_i)[1:scenarios[i,]$num_arms]
+
+      # theta_i <- as.numeric(scenarios[i, grepl("^theta\\d", names(scenarios))])[1:scenarios[i,]$num_arms]
+
+      theta_i <- scenarios[i, grepl("^theta\\d", names(scenarios))]
+
+      if (sum(c(1:scenarios[i,]$num_arms) %in% as.numeric(gsub("theta","", colnames(theta_i))))!=scenarios[i,]$num_arms) {
+        stop("Each experimental treatment arm needs to have a treatment effect specified in a separate column (columns must be named 'theta1', 'theta2', ect.)!")
+      }
+
+      theta_i <- theta_i[, order(as.numeric(gsub("theta","", colnames(theta_i))))] # Sort to correct order
+      theta_i <- as.numeric(theta_i)[1:scenarios[i,]$num_arms]
+
+      # lambda_i <- as.numeric(scenarios[i, grepl("^lambda\\d", names(scenarios))])[1:(scenarios[i,]$num_arms+1)]
+
+      lambda_i <- scenarios[i, grepl("^lambda\\d", names(scenarios))]
+
+      if (sum(c(0:scenarios[i,]$num_arms) %in% as.numeric(gsub("lambda","", colnames(lambda_i))))!=(scenarios[i,]$num_arms+1)) {
+        stop("Each arm needs to have a strength of time trend specified in a separate column (columns must be named 'lambda0', 'lambda1', ect.)!")
+      }
+
+      lambda_i <- lambda_i[, order(as.numeric(gsub("lambda","", colnames(lambda_i))))] # Sort to correct order
+      lambda_i <- as.numeric(lambda_i)[1:(scenarios[i,]$num_arms+1)]
 
       time_dep_effect_i <- datasim_cont(n_arm = scenarios$n_arm[i],
                                         num_arms = scenarios$num_arms[i],
@@ -372,9 +401,38 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
 
       arms <- sort(arms)
 
-      d_i <- as.numeric(scenarios[i, grepl("^d\\d", names(scenarios))])[1:scenarios[i,]$num_arms]
-      OR_i <- as.numeric(scenarios[i, grepl("^OR\\d", names(scenarios))])[1:scenarios[i,]$num_arms]
-      lambda_i <- as.numeric(scenarios[i, grepl("^lambda\\d", names(scenarios))])[1:(scenarios[i,]$num_arms+1)]
+      # d_i <- as.numeric(scenarios[i, grepl("^d\\d", names(scenarios))])[1:scenarios[i,]$num_arms]
+
+      d_i <- scenarios[i, grepl("^d\\d", names(scenarios))]
+
+      if (sum(c(1:scenarios[i,]$num_arms) %in% as.numeric(gsub("d","", colnames(d_i))))!=scenarios[i,]$num_arms) {
+        stop("Each experimental treatment arm needs to have an entry time specified in a separate column (columns must be named 'd1', 'd2', ect.)!")
+      }
+
+      d_i <- d_i[, order(as.numeric(gsub("d","", colnames(d_i))))] # Sort to correct order
+      d_i <- as.numeric(d_i)[1:scenarios[i,]$num_arms]
+
+      # OR_i <- as.numeric(scenarios[i, grepl("^OR\\d", names(scenarios))])[1:scenarios[i,]$num_arms]
+
+      OR_i <- scenarios[i, grepl("^OR\\d", names(scenarios))]
+
+      if (sum(c(1:scenarios[i,]$num_arms) %in% as.numeric(gsub("OR","", colnames(OR_i))))!=scenarios[i,]$num_arms) {
+        stop("Each experimental treatment arm needs to have an odds ratio specified in a separate column (columns must be named 'OR1', 'OR2', ect.)!")
+      }
+
+      OR_i <- OR_i[, order(as.numeric(gsub("OR","", colnames(OR_i))))] # Sort to correct order
+      OR_i <- as.numeric(OR_i)[1:scenarios[i,]$num_arms]
+
+      # lambda_i <- as.numeric(scenarios[i, grepl("^lambda\\d", names(scenarios))])[1:(scenarios[i,]$num_arms+1)]
+
+      lambda_i <- scenarios[i, grepl("^lambda\\d", names(scenarios))]
+
+      if (sum(c(0:scenarios[i,]$num_arms) %in% as.numeric(gsub("lambda","", colnames(lambda_i))))!=(scenarios[i,]$num_arms+1)) {
+        stop("Each arm needs to have a strength of time trend specified in a separate column (columns must be named 'lambda0', 'lambda1', ect.)!")
+      }
+
+      lambda_i <- lambda_i[, order(as.numeric(gsub("lambda","", colnames(lambda_i))))] # Sort to correct order
+      lambda_i <- as.numeric(lambda_i)[1:(scenarios[i,]$num_arms+1)]
 
       time_dep_effect_i <- datasim_bin(n_arm = scenarios$n_arm[i],
                                        num_arms = scenarios$num_arms[i],

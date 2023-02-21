@@ -10,9 +10,9 @@
 #' @param theta Vector with treatment effects for each treatment arm ordered by the entry time of the treatment arms, i.e., the first entry in the vector corresponds to the effect of the first experimental treatment arm etc. (of length `num_arms`).
 #' @param lambda Vector with strength of time trend in each arm ordered by the entry time of the arms (i.e., the first entry in the vector corresponds to the time trend in the control arm, second entry to the time trend in the first treatment arm etc. (of length `num_arms`+1, as time trend in the control is also allowed).
 #' @param sigma Standard deviation of the responses.
-#' @param trend Indicates the time trend pattern ("linear", "stepwise", "stepwise_2", "inv_u" or "seasonal").
+#' @param trend Indicates the time trend pattern ("linear", "linear_2, "stepwise", "stepwise_2", "inv_u" or "seasonal"). See Details for more information.
 #' @param N_peak Point at which the inverted-u time trend switches direction in terms of overall sample size.
-#' @param n_wave How many cycles (waves) should a seasonal trend have.
+#' @param n_wave How many cycles (waves) should the seasonal trend have.
 #' @param full Boolean. Indicates whether the output should be in form of a data frame with variables needed for the analysis only (FALSE) or in form of a list containing more information (TRUE). Default=FALSE.
 #' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
 #'
@@ -22,7 +22,26 @@
 #'
 #' @export
 #'
-#' @details Equal sample sizes in all experimental treatment arms are assumed. Furthermore, allocation ratio of 1:1:...:1 in each period is assumed and block randomization is used to assign patients to the active arms.
+#' @details
+#'
+#' Equal sample sizes (given by parameter `n_arm`) in all experimental treatment arms are assumed.
+#' Furthermore, allocation ratio of 1:1:...:1 in each period is assumed and block randomization is used to assign patients to the active arms. Block size in each period = `period_blocks`* (number of active arms in the period).
+#'
+#' The continuous response \eqn{y_j} for patient \eqn{j} is generated according to:
+#'
+#' \deqn{E(y_j) = \eta_0 + \sum_{k=1}^K \cdot I(k_j=k) + f(j)}
+#'
+#' where \eqn{\eta_0} (parameter `mu0`) and \eqn{\theta_k} (parameter `theta`) are the response in the control arm and the effect of treatment \eqn{k}. \eqn{K} is the total number of treatment arms in the trial (parameter `num_arms`) and \eqn{k_j} is an indicator of the treatment arm patient \eqn{j} is allocated to.
+#'
+#' The function \eqn{f(j)} denotes the time trend, whose strength is indicated by \eqn{\lambda_{k_j}} (parameter `lambda`) and which can have the following patterns (parameter `trend`):
+#'
+#' - "linear" - trend starts at the beginning of the trial and the mean response increases or decreases linearly with a slope of \eqn{\lambda}, according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1}}, where \eqn{N} is the total sample size in the trial
+#' - "linear_2" - trend starts after the first period (i.e. there is no time trend in the first period) and the mean response increases or decreases linearly with a slope of \eqn{\lambda}, according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1}}, where \eqn{N} is the total sample size in the trial
+#' - "stepwise" - the mean response is constant in each period and increases or decreases by \eqn{\lambda} each time any treatment arm enters or leaves the trial (i.e. in each period), according to the function \eqn{f(j) = \lambda_{k_j} \cdot (c_j - 1)}, where \eqn{c_j} is an indicator of the period patient \eqn{j} was enrolled in
+#' - "stepwise_2" - the mean response is constant in each period and increases or decreases by \eqn{\lambda} each time a new treatment arm is added to the trial, according to the function \eqn{f(j) = \lambda_{k_j} \cdot (w_j - 1)}, where \eqn{w_j} is an indicator of how many treatment arms have already entered the ongoing trial, when patient \eqn{j} was enrolled
+#' - "inv_u" - the mean response increases up to the point \eqn{N_p} (parameter `N_peak`) and decreases afterwards, linearly with a slope of \eqn{\lambda}, according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1} (I(j \leq N_p) - I(j > N_p))}, where \eqn{N_p} indicates the point at which the trend turns from positive to negative in terms of the sample size (note that for negative \eqn{\lambda}, the mean response decreases first and increases after)
+#' - "seasonal" - the mean response increases and decreases periodically with a magnitude of \eqn{\lambda}, according to the function \eqn{f(j) = \lambda \cdot \mathrm{sin} \big( \psi \cdot 2\pi \cdot \frac{j-1}{N-1} \big)}, where \eqn{\psi} indicates how many cycles should the time trend have (parameter `n_wave`)
+#'
 #'
 #' @examples
 #'
@@ -94,8 +113,8 @@ datasim_cont <- function(num_arms, n_arm, d, period_blocks=2, mu0=0, theta, lamb
       stop("Standard deviation of the responses (`sigma`) must be one number!")
     }
 
-    if((trend %in% c("linear", "stepwise", "stepwise_2", "inv_u", "seasonal")==FALSE) | length(trend)!=1){
-      stop("Time trend pattern (`trend`) must be one of the following strings: 'linear', 'stepwise', 'stepwise_2', 'inv_u', 'seasonal'!")
+    if((trend %in% c("linear", "linear_2", "stepwise", "stepwise_2", "inv_u", "seasonal")==FALSE) | length(trend)!=1){
+      stop("Time trend pattern (`trend`) must be one of the following strings: 'linear', 'linear_2',  'stepwise', 'stepwise_2', 'inv_u', 'seasonal'!")
     }
 
     if(trend=="inv_u"){
@@ -181,7 +200,7 @@ datasim_cont <- function(num_arms, n_arm, d, period_blocks=2, mu0=0, theta, lamb
     }
   }
 
-  if(trend=="linear2"){ # trend starts in the second period and is linear
+  if(trend=="linear_2"){ # trend starts in the second period and is linear
     for (i in 0:num_arms) {
       assign(paste0("ind_trend", i), linear_trend(j=eval(sym(paste0("j", i))),
                                                   lambda = lambda[i+1],
@@ -212,43 +231,6 @@ datasim_cont <- function(num_arms, n_arm, d, period_blocks=2, mu0=0, theta, lamb
                                               lambda = lambda[i+1]))
     }
   }
-
-  # if(trend=="inv_u"){
-  #
-  #   for (i in 0:num_arms) {
-  #     assign(paste0("j", i, "_1"), which(eval(sym(paste0("j", i))) <= N_peak))
-  #     assign(paste0("j", i, "_2"), which(eval(sym(paste0("j", i))) > N_peak))
-  #
-  #     assign(paste0("j", "_1"), which(j <= N_peak))
-  #     assign(paste0("j", "_2"), which(j > N_peak))
-  #
-  #     assign(paste0("ind_trend", i, "_1"), linear_trend(j = eval(sym(paste0("j", i)))[eval(sym(paste0("j", i, "_1")))],
-  #                                                       lambda = lambda[i+1],
-  #                                                       sample_size = c(0, n_total)))
-  #
-  #     assign(paste0("ind_trend", i, "_2"), linear_trend(j = ifelse(eval(sym(paste0("j", i)))[eval(sym(paste0("j", i, "_2")))[1]]==eval(sym(paste0("j", i)))[1],
-  #                                                                  eval(sym(paste0("j", i)))[eval(sym(paste0("j", i, "_2")))],
-  #                                                                  eval(sym(paste0("j", i)))[eval(sym(paste0("j", i, "_2")))]-N_peak+1),
-  #                                                       lambda = -lambda[i+1],
-  #                                                       sample_size = c(0, n_total)) + ifelse(length(eval(sym(paste0("ind_trend", i, "_1"))))==0, 0,
-  #                                                                                             eval(sym(paste0("ind_trend", i, "_1")))[length(eval(sym(paste0("ind_trend", i, "_1"))))]))
-  #
-  #     assign(paste0("ind_trend", i), c(eval(sym(paste0("ind_trend", i, "_1"))), eval(sym(paste0("ind_trend", i, "_2")))))
-  #
-  #
-  #
-  #     assign(paste0("all_trend", i, "_1"), linear_trend(j = j[eval(sym(paste0("j", "_1")))],
-  #                                                       lambda = lambda[i+1],
-  #                                                       sample_size = c(0, n_total)))
-  #
-  #     assign(paste0("all_trend", i, "_2"), linear_trend(j = j[eval(sym(paste0("j", "_2")))]-N_peak+1,
-  #                                                       lambda = -lambda[i+1],
-  #                                                       sample_size = c(0, n_total)) + ifelse(length(eval(sym(paste0("ind_trend", i, "_1"))))==0, 0,
-  #                                                                                             eval(sym(paste0("ind_trend", i, "_1")))[length(eval(sym(paste0("ind_trend", i, "_1"))))]))
-  #
-  #     assign(paste0("all_trend", i), c(eval(sym(paste0("all_trend", i, "_1"))), eval(sym(paste0("all_trend", i, "_2")))))
-  #   }
-  # }
 
 
   if(trend=="inv_u"){
