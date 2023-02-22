@@ -1,17 +1,17 @@
 #' Simulate binary data from a platform trial with a shared control arm and an arbitrary number of treatment arms entering at different time points
 #'
-#' @description This function simulates data from a platform trial with binary endpoints, an arbitrary number of treatment arms entering at different time points and a shared control arm. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the sample size per arm.
+#' @description This function simulates data from a platform trial with a given number of treatment arms entering at given time points and a shared control arm. The primary endpoint is a binary endpoint. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the sample size per arm.
 #'
 #' @param num_arms Number of treatment arms in the trial.
 #' @param n_arm Sample size per experimental treatment arm (assumed equal).
-#' @param d Vector with timings of adding new arms in terms of number of patients recruited to the trial so far (of length `num_arms`). The first entry must be 0, so that the trial starts with at least one experimental treatment arm.
-#' @param period_blocks Number to multiply the number of active arms with, in order to get the block size per period. I.e., block size in each period = `period_blocks`* (number of active arms in the period). Default=2.
+#' @param d Vector with timings of adding new arms in terms of number of patients recruited to the trial so far. The first entry must be 0, so that the trial starts with at least one experimental treatment arm. The vector length equals `num_arms`. 
+#' @param period_blocks Number to define the size of the blocks for the block randomisation. The block size in each period equals `period_blocks`times the number of active arms in the period (see Details). Default=2.
 #' @param p0 Response in the control arm.
-#' @param OR Vector with odds ratios for each treatment arm ordered by the entry time of the treatment arms, i.e., the first entry in the vector corresponds to the odds ratio of the first experimental treatment arm etc. (of length `num_arms`).
-#' @param lambda Vector with strength of time trend in each arm ordered by the entry time of the arms (i.e., the first entry in the vector corresponds to the time trend in the control arm, second entry to the time trend in the first treatment arm etc. (of length `num_arms`+1, as time trend in the control is also allowed).
+#' @param OR Vector with treatment effects in terms of odds ratios for each treatment arm compared to control. The elements of the vector (odds ratios) are ordered by the entry time of the treatment arms (e.g., the first entry in the vector corresponds to the odds ratio of the first experimental treatment arm). The vector length equals `num_arms`. 
+#' @param lambda Vector with strength of time trend in each arm ordered by the entry time of the arms (e.g., the first entry in the vector corresponds to the time trend in the control arm, second entry to the time trend in the first treatment arm). The vector length equals `num_arms`+1, as time trend in the control is also allowed.
 #' @param trend Indicates the time trend pattern ("linear", "linear_2, "stepwise", "stepwise_2", "inv_u" or "seasonal"). See Details for more information.
-#' @param N_peak Point at which the inverted-u time trend switches direction in terms of overall sample size.
-#' @param n_wave How many cycles (waves) should the seasonal trend have.
+#' @param N_peak Timepoint at which the inverted-u time trend switches direction in terms of overall sample size.
+#' @param n_wave Number of cycles (waves) should the seasonal trend have.
 #' @param full Boolean. Indicates whether the output should be in form of a data frame with variables needed for the analysis only (FALSE) or in form of a list containing more information (TRUE). Default=FALSE.
 #' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
 #'
@@ -23,9 +23,14 @@
 #'
 #' @details
 #'
-#' Equal sample sizes (given by parameter `n_arm`) in all experimental treatment arms are assumed.
-#' Furthermore, allocation ratio of 1:1:...:1 in each period is assumed and block randomization is used to assign patients to the active arms. Block size in each period = `period_blocks`* (number of active arms in the period).
+#' \strong{Design assumptions:}
+#' 
+#' - Participants are indexed by entry order, assuming that at each time unit exactly one participant is recruited and the time of recruitment and observation of the response are equal.
+#' - Equal sample sizes (given by parameter `n_arm`) in all experimental treatment arms are assumed.
+#' - Allocation ratio of 1:1:...:1 in each period. Furthermore, block randomization is used to assign patients to the active arms. Block size in each period = `period_blocks`* (number of active arms in the period).
 #'
+#' \strong{Data generation:}
+#' 
 #' The binary response \eqn{y_j} for patient \eqn{j} is generated according to:
 #'
 #' \deqn{g(E(y_j)) = \eta_0 + \sum_{k=1}^K \cdot I(k_j=k) + f(j)}
@@ -56,7 +61,7 @@
 #'
 #' or List (if full=TRUE) containing the following elements:
 #'
-#' - `Data` - simulated trial data, including an additional column `p` with the expected value used for the simulation of the response for patient `j`
+#' - `Data` - simulated trial data, including an additional column `p` with the probability used for simulating the response for patient `j`
 #' - `n_total` - total sample size in the trial
 #' - `n_arm` - sample size per arm (assumed equal)
 #' - `num_arms` - number of experimental treatment arms in the trial
