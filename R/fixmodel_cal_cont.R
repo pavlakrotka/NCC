@@ -19,7 +19,7 @@
 #'
 #' @details
 #'
-#' The model adjusts for the time effect by including the factor calendar time interval to the model (i.e., using a step-function) and models the continuous response \eqn{y_j} for patient \eqn{j} as follows:
+#' The model-based analysis adjusts for the time effect by including the factor calendar time interval. The time is then modelled as a step-function with jumps at calendar times. Denoting by \eqn{y_j} the continuous response  for patient \eqn{j} and by \eqn{M} the treatment arm under evaluation, the regression model is given by:
 #'
 #' \deqn{y_j = \eta_0  + \sum_{k \in \mathcal{K}_M} \theta_k \cdot I(k_j=k) + \sum_{c=2}^{C_M} \tau_c \cdot I(t_j \in T_{C_c}) + \varepsilon_j}
 #'

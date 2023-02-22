@@ -18,7 +18,8 @@
 #'
 #' @details
 #'
-#' The model adjusts for the time effect by including the factor period to the model (i.e., using a step-function) and models the continuous response \eqn{y_j} for patient \eqn{j} as follows:
+#'
+#' The model-based analysis adjusts for the time effect by including the factor period. The time is then modelled as a step-function with jumps at times where treatments enter or leave the platform trial. Denoting by \eqn{y_j} the continuous response  for patient \eqn{j} and by \eqn{M} the treatment arm under evaluation, the regression model is given by: 
 #'
 #' \deqn{y_j = \eta_0  + \sum_{k \in \mathcal{K}_M} \theta_k \cdot I(k_j=k) + \sum_{s=2}^{S_M} \tau_s \cdot I(t_j \in T_{S_s}) + \varepsilon_j}
 #'
