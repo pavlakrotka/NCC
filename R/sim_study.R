@@ -141,20 +141,20 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
     scenarios$prior_prec_eta <- 0.001
   }
 
-  if(("MAPprior" %in% models) & ("n.samples" %in% colnames(scenarios))==FALSE){
-    scenarios$n.samples <- 1000
+  if(("MAPprior" %in% models) & ("n_samples" %in% colnames(scenarios))==FALSE){
+    scenarios$n_samples <- 1000
   }
 
-  if(("MAPprior" %in% models) & ("n.chains" %in% colnames(scenarios))==FALSE){
-    scenarios$n.chains <- 4
+  if(("MAPprior" %in% models) & ("n_chains" %in% colnames(scenarios))==FALSE){
+    scenarios$n_chains <- 4
   }
 
-  if(("MAPprior" %in% models) & ("n.iter" %in% colnames(scenarios))==FALSE){
-    scenarios$n.iter <- 4000
+  if(("MAPprior" %in% models) & ("n_iter" %in% colnames(scenarios))==FALSE){
+    scenarios$n_iter <- 4000
   }
 
-  if(("MAPprior" %in% models) & ("n.adapt" %in% colnames(scenarios))==FALSE){
-    scenarios$n.adapt <- 1000
+  if(("MAPprior" %in% models) & ("n_adapt" %in% colnames(scenarios))==FALSE){
+    scenarios$n_adapt <- 1000
   }
 
   if(("MAPprior" %in% models) & ("robustify" %in% colnames(scenarios))==FALSE){
@@ -311,10 +311,10 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
                                  opt = scenarios$opt[i],
                                  prior_prec_tau = scenarios$prior_prec_tau[i],
                                  prior_prec_eta = scenarios$prior_prec_eta[i],
-                                 n.samples = scenarios$n.samples[i],
-                                 n.chains = scenarios$n.chains[i],
-                                 n.iter = scenarios$n.iter[i],
-                                 n.adapt = scenarios$n.adapt[i],
+                                 n_samples = scenarios$n_samples[i],
+                                 n_chains = scenarios$n_chains[i],
+                                 n_iter = scenarios$n_iter[i],
+                                 n_adapt = scenarios$n_adapt[i],
                                  robustify = scenarios$robustify[i],
                                  weight = scenarios$weight[i],
                                  ci = scenarios$ci[i],
@@ -415,10 +415,10 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
                                  opt = scenarios$opt[i],
                                  prior_prec_tau = scenarios$prior_prec_tau[i],
                                  prior_prec_eta = scenarios$prior_prec_eta[i],
-                                 n.samples = scenarios$n.samples[i],
-                                 n.chains = scenarios$n.chains[i],
-                                 n.iter = scenarios$n.iter[i],
-                                 n.adapt = scenarios$n.adapt[i],
+                                 n_samples = scenarios$n_samples[i],
+                                 n_chains = scenarios$n_chains[i],
+                                 n_iter = scenarios$n_iter[i],
+                                 n_adapt = scenarios$n_adapt[i],
                                  robustify = scenarios$robustify[i],
                                  weight = scenarios$weight[i],
                                  ci = scenarios$ci[i],

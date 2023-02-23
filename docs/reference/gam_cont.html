@@ -81,7 +81,7 @@
 <dt>arm</dt>
 <dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
 <dt>alpha</dt>
-<dd><p>Significance level. Default=0.025.</p></dd>
+<dd><p>Significance level (one-sided). Default=0.025.</p></dd>
 <dt>ci</dt>
 <dd><p>Boolean. Whether confidence intervals should be computed. Default=FALSE.</p></dd>
 <dt>smoothing_basis</dt>
@@ -99,8 +99,8 @@
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>List containing the following elements regarding the results of comparing <code>arm</code> to control:</p><ul><li><p><code>p-val</code> - p-value (one-sided)</p></li>
 <li><p><code>treat_effect</code> - estimated treatment effect in terms of the difference in means</p></li>
-<li><p><code>lower_ci</code> - lower limit of the 95% confidence interval</p></li>
-<li><p><code>upper_ci</code> - upper limit of the 95% confidence interval</p></li>
+<li><p><code>lower_ci</code> - lower limit of the (1-2*<code>alpha</code>)*100% confidence interval</p></li>
+<li><p><code>upper_ci</code> - upper limit of the (1-2*<code>alpha</code>)*100% confidence interval</p></li>
 <li><p><code>reject_h0</code> - indicator of whether the null hypothesis was rejected or not (<code>p_val</code> &lt; <code>alpha</code>)</p></li>
 <li><p><code>model</code> - fitted model</p></li>
 </ul></div>
@@ -117,16 +117,16 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">gam_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6936851</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.04102379</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.06889402</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2346351</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.3360653</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.02993553</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1982773</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4992058</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
@@ -141,9 +141,9 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>     k = basis_dim)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimated degrees of freedom:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1.34  total = 5.34 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7.07  total = 11.07 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GCV score: 1.04698     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GCV score: 1.01289     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>

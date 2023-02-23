@@ -6,16 +6,16 @@
 #' @param arms Vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.
 #' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel"). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.
 #' @param endpoint Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.
-#' @param alpha Type I error rate. Default=0.025.
+#' @param alpha Significance level (one-sided). Default=0.025.
 #' @param unit_size Number of patients per calendar time unit for frequentist models adjusting for calendar time. Default=25.
 #' @param ncc Boolean. Whether to include NCC data into the analysis using frequentist models. Default=TRUE.
 #' @param opt Binary. In the MAP Prior approach, if opt==1, all former periods are used as one source; if opt==2, periods get separately included into the final analysis. Default=2.
 #' @param prior_prec_tau Dispersion parameter of the half normal prior, the prior for the between study heterogeneity in the MAP Prior approach. Default=4.
 #' @param prior_prec_eta Dispersion parameter of the normal prior, the prior for the control response (log-odds or mean) in the MAP Prior approach. Default=0.001.
-#' @param n.samples Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's in the MAP Prior approach. Default=1000.
-#' @param n.chains Number of parallel chains for the rjags model in the MAP Prior approach. Default=4.
-#' @param n.iter Number of iterations to monitor of the jags.model. Needed for coda.samples in the MAP Prior approach. Default=4000.
-#' @param n.adapt Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model in the MAP Prior approach. Default=1000.
+#' @param n_samples Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's in the MAP Prior approach. Default=1000.
+#' @param n_chains Number of parallel chains for the rjags model in the MAP Prior approach. Default=4.
+#' @param n_iter Number of iterations to monitor of the jags.model. Needed for coda.samples in the MAP Prior approach. Default=4000.
+#' @param n_adapt Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model in the MAP Prior approach. Default=1000.
 #' @param robustify Boolean. Indicates whether a robust prior is to be used. If TRUE, a mixture prior is considered combining a MAP prior and a weakly non-informative component prior. Default=TRUE.
 #' @param weight Weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP Prior according to Schmidli (2014). Default=0.1.
 #' @param ci Boolean. Whether confidence intervals for the mixed models should be computed. Default=FALSE.
@@ -53,7 +53,7 @@
 all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel"), endpoint, alpha = 0.025,
                        unit_size = 250,
                        ncc = TRUE,
-                       opt = 2, prior_prec_tau = 4, prior_prec_eta = 0.001, n.samples = 1000, n.chains = 4, n.iter = 4000, n.adapt = 1000, robustify = TRUE, weight = 0.1,
+                       opt = 2, prior_prec_tau = 4, prior_prec_eta = 0.001, n_samples = 1000, n_chains = 4, n_iter = 4000, n_adapt = 1000, robustify = TRUE, weight = 0.1,
                        ci = FALSE,
                        prec_theta = 0.001, prec_eta = 0.001, tau_a = 0.1, tau_b = 0.01, prec_a = 0.001, prec_b = 0.001, bucket_size = 25,
                        smoothing_basis = "tp", basis_dim = -1, gam_method = "GCV.Cp",
@@ -75,10 +75,10 @@ all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel
                                                                   opt = opt,
                                                                   prior_prec_tau = prior_prec_tau,
                                                                   prior_prec_eta = prior_prec_eta,
-                                                                  n.samples = n.samples,
-                                                                  n.chains = n.chains,
-                                                                  n.iter = n.iter,
-                                                                  n.adapt = n.adapt,
+                                                                  n_samples = n_samples,
+                                                                  n_chains = n_chains,
+                                                                  n_iter = n_iter,
+                                                                  n_adapt = n_adapt,
                                                                   robustify = robustify,
                                                                   weight = weight,
                                                                   ci = ci,

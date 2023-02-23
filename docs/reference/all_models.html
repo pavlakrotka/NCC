@@ -72,10 +72,10 @@
   opt <span class="op">=</span> <span class="fl">2</span>,
   prior_prec_tau <span class="op">=</span> <span class="fl">4</span>,
   prior_prec_eta <span class="op">=</span> <span class="fl">0.001</span>,
-  n.samples <span class="op">=</span> <span class="fl">1000</span>,
-  n.chains <span class="op">=</span> <span class="fl">4</span>,
-  n.iter <span class="op">=</span> <span class="fl">4000</span>,
-  n.adapt <span class="op">=</span> <span class="fl">1000</span>,
+  n_samples <span class="op">=</span> <span class="fl">1000</span>,
+  n_chains <span class="op">=</span> <span class="fl">4</span>,
+  n_iter <span class="op">=</span> <span class="fl">4000</span>,
+  n_adapt <span class="op">=</span> <span class="fl">1000</span>,
   robustify <span class="op">=</span> <span class="cn">TRUE</span>,
   weight <span class="op">=</span> <span class="fl">0.1</span>,
   ci <span class="op">=</span> <span class="cn">FALSE</span>,
@@ -105,7 +105,7 @@
 <dt>endpoint</dt>
 <dd><p>Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.</p></dd>
 <dt>alpha</dt>
-<dd><p>Type I error rate. Default=0.025.</p></dd>
+<dd><p>Significance level (one-sided). Default=0.025.</p></dd>
 <dt>unit_size</dt>
 <dd><p>Number of patients per calendar time unit for frequentist models adjusting for calendar time. Default=25.</p></dd>
 <dt>ncc</dt>
@@ -116,13 +116,13 @@
 <dd><p>Dispersion parameter of the half normal prior, the prior for the between study heterogeneity in the MAP Prior approach. Default=4.</p></dd>
 <dt>prior_prec_eta</dt>
 <dd><p>Dispersion parameter of the normal prior, the prior for the control response (log-odds or mean) in the MAP Prior approach. Default=0.001.</p></dd>
-<dt>n.samples</dt>
+<dt>n_samples</dt>
 <dd><p>Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's in the MAP Prior approach. Default=1000.</p></dd>
-<dt>n.chains</dt>
+<dt>n_chains</dt>
 <dd><p>Number of parallel chains for the rjags model in the MAP Prior approach. Default=4.</p></dd>
-<dt>n.iter</dt>
+<dt>n_iter</dt>
 <dd><p>Number of iterations to monitor of the jags.model. Needed for coda.samples in the MAP Prior approach. Default=4000.</p></dd>
-<dt>n.adapt</dt>
+<dt>n_adapt</dt>
 <dd><p>Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model in the MAP Prior approach. Default=1000.</p></dd>
 <dt>robustify</dt>
 <dd><p>Boolean. Indicates whether a robust prior is to be used. If TRUE, a mixture prior is considered combining a MAP prior and a weakly non-informative component prior. Default=TRUE.</p></dd>
@@ -175,37 +175,37 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_fixmodel_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3922486</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2109789</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_poolmodel_2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_poolmodel_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5047466</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3335403</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_sepmodel_2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_sepmodel_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5718859</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.06371581</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_fixmodel_3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_fixmodel_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.03877765</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5168713</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_poolmodel_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_poolmodel_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2263131</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8669706</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_sepmodel_3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_sepmodel_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.06136895</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4068029</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 <span class="r-in"></span>

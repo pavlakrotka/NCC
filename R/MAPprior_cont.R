@@ -4,14 +4,14 @@
 #'
 #' @param data Trial data, e.g. result from the `datasim_bin()` function. Must contain columns named 'treatment', 'response' and 'period'.
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
-#' @param alpha Significance level. Default=0.025
+#' @param alpha Significance level (one-sided). Default=0.025
 #' @param opt Binary. If opt==1, all former periods are used as one source; if opt==2, periods get separately included into the final analysis. Default=2.
 #' @param prior_prec_tau Dispersion parameter of the half normal prior, the prior for the between study heterogeneity. Default=4.
 #' @param prior_prec_eta Dispersion parameter of the normal prior, the prior for the control mean. Default=0.001.
-#' @param n.samples Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's. Default=1000.
-#' @param n.chains Number of parallel chains for the rjags model. Default=4.
-#' @param n.iter Number of iterations to monitor of the jags.model. Needed for coda.samples. Default=4000.
-#' @param n.adapt Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model. Default=1000.
+#' @param n_samples Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's. Default=1000.
+#' @param n_chains Number of parallel chains for the rjags model. Default=4.
+#' @param n_iter Number of iterations to monitor of the jags.model. Needed for coda.samples. Default=4000.
+#' @param n_adapt Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model. Default=1000.
 #' @param robustify Boolean. Indicates whether a robust prior is to be used. If TRUE, a mixture prior is considered combining a MAP prior and a weakly non-informative component prior. Default=TRUE.
 #' @param weight Weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP prior according to Schmidli (2014). Default=0.1.
 #' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
@@ -46,10 +46,10 @@
 #'
 #' @return List containing the following elements regarding the results of comparing `arm` to control:
 #'
-#' - `p-val` - p-value (one-sided) obtained by drawing `n.samples` random samples from each posterior distribution
-#' - `treat_effect` - estimated treatment effect in terms of the difference in means obtained by drawing `n.samples` random samples from each posterior distribution
-#' - `lower_ci` - lower limit of the 95% confidence interval obtained by drawing `n.samples` random samples from each posterior distribution
-#' - `upper_ci` - upper limit of the 95% confidence interval obtained by drawing `n.samples` random samples from each posterior distribution
+#' - `p-val` - p-value (one-sided) obtained by drawing `n_samples` random samples from each posterior distribution
+#' - `treat_effect` - estimated treatment effect in terms of the difference in means obtained by drawing `n_samples` random samples from each posterior distribution
+#' - `lower_ci` - lower limit of the (1-2*`alpha`)*100% confidence interval obtained by drawing `n_samples` random samples from each posterior distribution
+#' - `upper_ci` - upper limit of the (1-2*`alpha`)*100% confidence interval obtained by drawing `n_samples` random samples from each posterior distribution
 #' - `reject_h0` - indicator of whether the null hypothesis was rejected or not (`p_val` < `alpha`)
 #'
 #' @author Katharina Hees
@@ -61,10 +61,10 @@ MAPprior_cont <- function(data,
                            opt = 2,
                            prior_prec_tau = 4,
                            prior_prec_eta = 0.001,
-                           n.samples = 1000,
-                           n.chains = 4,
-                           n.iter = 4000,
-                           n.adapt = 1000,
+                           n_samples = 1000,
+                           n_chains = 4,
+                           n_iter = 4000,
+                           n_adapt = 1000,
                            robustify = TRUE,
                            weight = 0.1,
                            check = TRUE,...){
@@ -94,20 +94,20 @@ MAPprior_cont <- function(data,
       stop("The dispersion parameter of the normal prior, the prior for the control mean, (`prior_prec_eta`) must be one number!")
     }
 
-    if(!is.numeric(n.samples) | length(n.samples)!=1){
-      stop("The numer of random samples (`n.samples`) must be one number!")
+    if(!is.numeric(n_samples) | length(n_samples)!=1){
+      stop("The numer of random samples (`n_samples`) must be one number!")
     }
 
-    if(!is.numeric(n.chains) | length(n.chains)!=1){
-      stop("The numer of parallel chains for the rjags model (`n.chains`) must be one number!")
+    if(!is.numeric(n_chains) | length(n_chains)!=1){
+      stop("The numer of parallel chains for the rjags model (`n_chains`) must be one number!")
     }
 
-    if(!is.numeric(n.iter) | length(n.iter)!=1){
-      stop("The number of iterations to monitor of the jags.model (`n.iter`) must be one number!")
+    if(!is.numeric(n_iter) | length(n_iter)!=1){
+      stop("The number of iterations to monitor of the jags.model (`n_iter`) must be one number!")
     }
 
-    if(!is.numeric(n.adapt) | length(n.adapt)!=1){
-      stop("The number of iterations for adaptation (`n.adapt`) must be one number!")
+    if(!is.numeric(n_adapt) | length(n_adapt)!=1){
+      stop("The number of iterations for adaptation (`n_adapt`) must be one number!")
     }
 
     if(!is.logical(robustify) | length(robustify)!=1){
@@ -124,19 +124,19 @@ MAPprior_cont <- function(data,
 
   # Data preparation
   ## count number of patients for each treatment in each period
-  tab_count <- table(data$treatment,data$period)
+  tab_count <- table(data$treatment, data$period)
 
   ## count number of groups and number of periods
-  number_of_groups <- dim(table(data$treatment,data$period))[1] # number of groups incl control
-  number_of_periods <- dim(table(data$treatment,data$period))[2] #total number of periods
+  number_of_groups <- dim(table(data$treatment, data$period))[1] # number of groups incl control
+  number_of_periods <- dim(table(data$treatment, data$period))[2] #total number of periods
 
 
   ## get start and end period of each treatment
   treatment_start_period <- numeric(number_of_groups)
   treatment_end_period <- numeric(number_of_groups)
   for (i in 1:number_of_groups){
-    treatment_start_period[i] <- min(which(table(data$treatment,data$period)[i,] > 0))
-    treatment_end_period[i] <- max(which(table(data$treatment,data$period)[i,] > 0))
+    treatment_start_period[i] <- min(which(table(data$treatment, data$period)[i,] > 0))
+    treatment_end_period[i] <- max(which(table(data$treatment, data$period)[i,] > 0))
   }
 
   ## get concurrent and non-concurrent controls of treatment = arm
@@ -186,27 +186,27 @@ MAPprior_cont <- function(data,
     fit <- jags.model(file = textConnection(model_text),
                       data = ncc_control_data_jags,
                       #inits = inits,
-                      n.chains = n.chains,
-                      n.adapt = n.adapt,
+                      n.chains = n_chains,
+                      n.adapt = n_adapt,
                       quiet = TRUE
     )
 
 
     # Draw samples from the above fitted MCMC model
-    help_mcmc_samples <- coda.samples(fit, "theta.pred ", n.iter = n.iter)
+    help_mcmc_samples <- coda.samples(fit, "theta.pred ", n.iter = n_iter)
     help_samples <- do.call(rbind.data.frame, help_mcmc_samples)[,1]
 
 
     ## Fit Beta mixture to MCMC samples
-    prior_control <- automixfit(help_samples,type="norm",Nc=3) # Nc=3: fixed number of mixture components, to speed the code up
+    prior_control <- automixfit(help_samples, type="norm", Nc=3) # Nc=3: fixed number of mixture components, to speed the code up
 
 
     if (robustify==TRUE) {
-      prior_control<-robustify(prior_control,weight=weight,mean=0,sigma=2)
+      prior_control <- robustify(prior_control, weight=weight, mean=0, sigma=2)
     }
   } else {
 
-    prior_control <- mixnorm(c(1,0,1000), param = 'ms') # creates weak prior for the control group, in case there are no NCCs
+    prior_control <- mixnorm(c(1, 0, 1000), param = 'ms') # creates weak prior for the control group, in case there are no NCCs
   }
 
   # Create prior for treatment group
@@ -217,7 +217,7 @@ MAPprior_cont <- function(data,
   ## get summary data of treatment group and concurrent controls
   y.act <- mean(t_treatment$response)
   n.act <- length(t_treatment$response)
-  y.act.se <-sd(t_treatment$response)/sqrt(n.act)
+  y.act.se <- sd(t_treatment$response)/sqrt(n.act)
 
 
   y.pbo <- mean(cc$response)
@@ -225,27 +225,27 @@ MAPprior_cont <- function(data,
   y.pbo.se <- sd(cc$response)/sqrt(n.pbo)
 
   ## obtain posterior distributions
-  post_act <- postmix(weak_prior_treatment, m=y.act,se=y.act.se)
+  post_act <- postmix(weak_prior_treatment, m=y.act, se=y.act.se)
   # postmix calculates the posterior distribution given a prior (here "weak_prior"),
   # where the prior is a mixture of conjugate distributions.
   # The posterior is then also a mixture of conjugate distributions.
 
-  post_control <- postmix(prior_control,m=y.pbo,se=y.pbo.se)
+  post_control <- postmix(prior_control, m=y.pbo, se=y.pbo.se)
 
 
 
   ## Calculate Treatment effect and confidence interval by simulation of posterior mean
-  random_gen<-as.numeric(rmixdiff(post_act,post_control,n=1000))
+  random_gen <- as.numeric(rmixdiff(post_act, post_control, n=n_samples))
   # rmixdiff = random number generation for the difference of two mixture distributions
-  theta_hat<-mean(random_gen)
-  theta_ci<-quantile(random_gen,probs=c(alpha,1-alpha))
+  theta_hat <- mean(random_gen)
+  theta_ci <- quantile(random_gen, probs=c(alpha, 1-alpha))
   lower_ci <- as.numeric(theta_ci[1])
   upper_ci <- as.numeric(theta_ci[2])
 
 
 
   ## calculate the "p-value"
-  p_value <- 1-pmixdiff(post_control,post_act,0)
+  p_value <- 1-pmixdiff(post_control, post_act, 0)
   reject_h0 <- ifelse(p_value<alpha, TRUE, FALSE)
 
   return(list(p_val = p_value,

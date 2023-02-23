@@ -4,7 +4,7 @@
 #'
 #' @param data Trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response' and 'j'.
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
-#' @param alpha Significance level. Default=0.025.
+#' @param alpha Significance level (one-sided). Default=0.025.
 #' @param unit_size Number of patients per calendar time unit. Default=25.
 #' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE.
 #' @param bs_degree Degree of the polynomial spline. Default=3 for cubic spline.
@@ -30,8 +30,8 @@
 #'
 #' - `p-val` - p-value (one-sided)
 #' - `treat_effect` - estimated treatment effect in terms of the difference in means
-#' - `lower_ci` - lower limit of the 95% confidence interval
-#' - `upper_ci` - upper limit of the 95% confidence interval
+#' - `lower_ci` - lower limit of the (1-2*`alpha`)*100% confidence interval
+#' - `upper_ci` - upper limit of the (1-2*`alpha`)*100% confidence interval
 #' - `reject_h0` - indicator of whether the null hypothesis was rejected or not (`p_val` < `alpha`)
 #' - `knots` - positions of the knots in terms of patient index
 #' - `model` - fitted model
@@ -93,8 +93,8 @@ splines_cal_cont <- function(data, arm, alpha=0.025, unit_size=25, ncc=TRUE, bs_
 
   # metrics
   treat_effect <- res$coefficients[paste0("as.factor(treatment)", arm), "Estimate"]
-  lower_ci <- confint(mod)[paste0("as.factor(treatment)", arm), 1]
-  upper_ci <- confint(mod)[paste0("as.factor(treatment)", arm), 2]
+  lower_ci <- confint(mod, level = 1-(2*alpha))[paste0("as.factor(treatment)", arm), 1]
+  upper_ci <- confint(mod, level = 1-(2*alpha))[paste0("as.factor(treatment)", arm), 2]
   reject_h0 <- (p_val < alpha)
 
   return(list(p_val = p_val,

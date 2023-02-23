@@ -22,15 +22,15 @@ timemachine_bin(
 
 \item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Significance level. Default=0.025.}
+\item{alpha}{Significance level (one-sided). Default=0.025.}
 
 \item{prec_theta}{Precision (\eqn{1/\sigma^2_{\theta}}) of the prior regarding the treatment effect \eqn{\theta}. I.e. \eqn{\theta \sim N(0, \sigma^2_{\theta})} . Default=0.001.}
 
-\item{prec_eta}{Precision (\eqn{1/\sigma^2_{\eta_0}}) of the prior regarding the control log-odds \eqn{\eta_0} (corresponds to \code{p0} in the \code{datasim_bin()} function). I.e. \eqn{\eta_0 \sim N(0, \sigma^2_{\eta_0})}. Default=0.001.}
+\item{prec_eta}{Precision (\eqn{1/\sigma^2_{\eta_0}}) of the prior regarding the control log-odds \eqn{\eta_0}. I.e. \eqn{\eta_0 \sim N(0, \sigma^2_{\eta_0})}. Default=0.001.}
 
-\item{tau_a}{Parameter \eqn{a} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.1.}
+\item{tau_a}{Parameter \eqn{a_{\tau}} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend. I.e., \eqn{\tau \sim Gamma(a_{\tau},b_{\tau})}. Default=0.1.}
 
-\item{tau_b}{Parameter \eqn{b} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.01.}
+\item{tau_b}{Parameter \eqn{b_{\tau}} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend. I.e., \eqn{\tau \sim Gamma(a_{\tau},b_{\tau})}. Default=0.01.}
 
 \item{bucket_size}{Number of patients per time bucket. Default=25.}
 
@@ -43,17 +43,17 @@ List containing the following elements regarding the results of comparing \code{
 \itemize{
 \item \code{p-val} - posterior probability that the log-odds ratio is less than zero
 \item \code{treat_effect} - posterior mean of log-odds ratio
-\item \code{lower_ci} - lower limit of the 95\% credible interval for log-odds ratio
-\item \code{upper_ci} - upper limit of the 95\% credible interval for log-odds ratio
+\item \code{lower_ci} - lower limit of the (1-2*\code{alpha})*100\% credible interval for log-odds ratio
+\item \code{upper_ci} - upper limit of the (1-2*\code{alpha})*100\% credible interval for log-odds ratio
 \item \code{reject_h0} - indicator of whether the null hypothesis was rejected or not (\code{p_val} < \code{alpha})
 }
 }
 \description{
-This function performs analysis of binary data using the Time Machine approach. It takes into account all data until the investigated arm leaves the trial. It is based on logsitic regression with treatment as a categorical variable and covariate adjustment for time via a second-order Bayesian normal dynamic linear model (separating the trial into buckets of pre-defined size).
+This function performs analysis of binary data using the Time Machine approach. It takes into account all data until the investigated arm leaves the trial. It is based on logistic regression with treatment as a categorical variable and covariate adjustment for time via a second-order Bayesian normal dynamic linear model (separating the trial into buckets of pre-defined size).
 }
 \details{
-The Time Machine uses the division of the trial into \eqn{C} calendar time intervals of equal length ("buckets"), which are indexed backwards in time, so that the most recent time interval is denoted by \eqn{c=1} and the time interval corresponding to the beginning of the trial by \eqn{c=C}.
-The the analysis is performed as soon as the analyzed treatment arm finishes in the trial.
+The Time Machine divides the trial duration into \eqn{C} calendar time intervals of equal length ("buckets"), which are indexed backwards in time. That is to say, the most recent time interval is denoted by \eqn{c=1} and the time interval corresponding to the beginning of the trial by \eqn{c=C}.
+The analysis is performed as soon as the analyzed treatment arm finishes in the trial.
 
 The model is defined as follows:
 
@@ -67,7 +67,7 @@ For the parameters \eqn{\eta_0} and \eqn{\theta_{k_j}}, normal prior distributio
 
 \deqn{\theta_{k_j} \sim \mathcal{N}(0, \sigma^2_{\theta})}
 
-In the Time Machine, time trend is represented by \eqn{\alpha_{c_j}}, which is the change in the response in time bucket \eqn{c_j} (which denotes the time bucket in which patient \eqn{j} is enrolled) compared to the most recent time bucket \eqn{c=1} and is modeled using a Bayesian second-order normal dynamic linear model.
+In the Time Machine, time effect is represented by \eqn{\alpha_{c_j}}, which is the change in the response in time bucket \eqn{c_j} (which denotes the time bucket in which patient \eqn{j} is enrolled) compared to the most recent time bucket \eqn{c=1} and is modeled using a Bayesian second-order normal dynamic linear model.
 This creates a smoothing over the control response, such that closer time buckets are modeled with more similar response rates:
 
 \deqn{\alpha_1 = 0}
@@ -76,7 +76,7 @@ This creates a smoothing over the control response, such that closer time bucket
 
 where \eqn{\tau} denotes the drift parameter that controls the degree of smoothing over the time buckets and is assumed to have a Gamma hyperprior distribution:
 
-\deqn{\tau \sim Gamma(a,b)}
+\deqn{\tau \sim Gamma(a_{\tau}, b_{\tau})}
 }
 \examples{
 

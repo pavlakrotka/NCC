@@ -71,7 +71,7 @@
 <dt>arm</dt>
 <dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
 <dt>alpha</dt>
-<dd><p>Significance level. Default=0.025.</p></dd>
+<dd><p>Significance level (one-sided). Default=0.025.</p></dd>
 <dt>ncc</dt>
 <dd><p>Boolean. Whether to include NCC data into the analysis. Default=TRUE.</p></dd>
 <dt>check</dt>
@@ -83,8 +83,8 @@
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>List containing the following elements regarding the results of comparing <code>arm</code> to control:</p><ul><li><p><code>p-val</code> - p-value (one-sided)</p></li>
 <li><p><code>treat_effect</code> - estimated treatment effect in terms of the log-odds ratio</p></li>
-<li><p><code>lower_ci</code> - lower limit of the 95% confidence interval</p></li>
-<li><p><code>upper_ci</code> - upper limit of the 95% confidence interval</p></li>
+<li><p><code>lower_ci</code> - lower limit of the (1-2*<code>alpha</code>)*100% confidence interval</p></li>
+<li><p><code>upper_ci</code> - upper limit of the (1-2*<code>alpha</code>)*100% confidence interval</p></li>
 <li><p><code>reject_h0</code> - indicator of whether the null hypothesis was rejected or not (<code>p_val</code> &lt; <code>alpha</code>)</p></li>
 <li><p><code>model</code> - fitted model</p></li>
 </ul></div>
@@ -105,19 +105,19 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">fixmodel_bin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.007474235</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1363732</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9461098</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4170587</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2086098</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.3189408</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.74495</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.18144</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -126,15 +126,15 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           (Intercept)  as.factor(treatment)1  as.factor(treatment)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               1.51994               -0.00718                0.58430  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               1.01501                0.54253                1.35790  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3     as.factor(period)2     as.factor(period)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.94611               -0.46404               -0.26856  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.41706               -0.08133               -0.03682  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    as.factor(period)4  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              -0.47385  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.99102  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Degrees of Freedom: 499 Total (i.e. Null);  493 Residual</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Null Deviance:	    483.3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 472.6 	AIC: 486.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Null Deviance:	    465.3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 445.3 	AIC: 459.3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>

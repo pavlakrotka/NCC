@@ -71,7 +71,7 @@
 <dt>arm</dt>
 <dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
 <dt>alpha</dt>
-<dd><p>Significance level. Default=0.025.</p></dd>
+<dd><p>Significance level (one-sided). Default=0.025.</p></dd>
 <dt>check</dt>
 <dd><p>Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.</p></dd>
 <dt>...</dt>
@@ -81,8 +81,8 @@
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>List containing the following elements regarding the results of comparing <code>arm</code> to control:</p><ul><li><p><code>p-val</code> - p-value (one-sided)</p></li>
 <li><p><code>treat_effect</code> - estimated treatment effect in terms of the log-odds ratio</p></li>
-<li><p><code>lower_ci</code> - lower limit of the 95% confidence interval</p></li>
-<li><p><code>upper_ci</code> - upper limit of the 95% confidence interval</p></li>
+<li><p><code>lower_ci</code> - lower limit of the (1-2*<code>alpha</code>)*100% confidence interval</p></li>
+<li><p><code>upper_ci</code> - upper limit of the (1-2*<code>alpha</code>)*100% confidence interval</p></li>
 <li><p><code>reject_h0</code> - indicator of whether the null hypothesis was rejected or not (<code>p_val</code> &lt; <code>alpha</code>)</p></li>
 <li><p><code>model</code> - fitted model</p></li>
 </ul></div>
@@ -99,19 +99,19 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">sepmodel_bin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.03440076</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.01242797</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6926476</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8206674</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.04045407</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1176487</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.462299</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.560477</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -120,11 +120,11 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           (Intercept)  as.factor(treatment)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                1.2083                 0.6926  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.9946                 0.8207  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Degrees of Freedom: 199 Total (i.e. Null);  198 Residual</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Null Deviance:	    188.6 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 185.1 	AIC: 189.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Null Deviance:	    202.9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 197.6 	AIC: 201.6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>

@@ -79,7 +79,7 @@
 <dt>arm</dt>
 <dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
 <dt>alpha</dt>
-<dd><p>Significance level. Default=0.025.</p></dd>
+<dd><p>Significance level (one-sided). Default=0.025.</p></dd>
 <dt>unit_size</dt>
 <dd><p>Number of patients per calendar time unit. Default=25.</p></dd>
 <dt>ncc</dt>
@@ -93,8 +93,8 @@
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>List containing the following elements regarding the results of comparing <code>arm</code> to control:</p><ul><li><p><code>p-val</code> - p-value (one-sided)</p></li>
 <li><p><code>treat_effect</code> - estimated treatment effect in terms of the log-odds ratio</p></li>
-<li><p><code>lower_ci</code> - lower limit of the 95% confidence interval</p></li>
-<li><p><code>upper_ci</code> - upper limit of the 95% confidence interval</p></li>
+<li><p><code>lower_ci</code> - lower limit of the (1-2*<code>alpha</code>)*100% confidence interval</p></li>
+<li><p><code>upper_ci</code> - upper limit of the (1-2*<code>alpha</code>)*100% confidence interval</p></li>
 <li><p><code>reject_h0</code> - indicator of whether the null hypothesis was rejected or not (<code>p_val</code> &lt; <code>alpha</code>)</p></li>
 <li><p><code>model</code> - fitted model</p></li>
 </ul></div>
@@ -111,19 +111,19 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">fixmodel_cal_bin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4107585</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.005566476</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.08063777</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8944044</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.6186664</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2194256</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7893063</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.608067</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -132,25 +132,25 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           (Intercept)  as.factor(treatment)1  as.factor(treatment)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.87450                0.63405                0.80935  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.38738                0.75361                1.12938  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3   as.factor(cal_time)2   as.factor(cal_time)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.08064                0.21219               -0.40679  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.89440                0.64955                0.98617  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  as.factor(cal_time)4   as.factor(cal_time)5   as.factor(cal_time)6  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.82628               -0.39886               -1.11559  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               1.26684                0.42961                0.18679  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  as.factor(cal_time)7   as.factor(cal_time)8   as.factor(cal_time)9  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               1.15972               -0.18537                0.08739  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.72239               -0.18357                0.13912  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(cal_time)10  as.factor(cal_time)11  as.factor(cal_time)12  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.05962                1.30504                0.02400  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.74557               -0.07857                0.18029  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(cal_time)13  as.factor(cal_time)14  as.factor(cal_time)15  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              -0.73825                1.30504                0.90519  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.13214                0.18793                0.60993  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(cal_time)16  as.factor(cal_time)17  as.factor(cal_time)18  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.51196                1.52982                0.23667  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.70741                0.17221                1.21534  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(cal_time)19  as.factor(cal_time)20  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.74235                0.23990  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.62932                0.87343  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Degrees of Freedom: 499 Total (i.e. Null);  477 Residual</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Null Deviance:	    508.6 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 471 	AIC: 517</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Null Deviance:	    514 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 486.6 	AIC: 532.6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>

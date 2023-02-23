@@ -15,10 +15,10 @@ all_models(
   opt = 2,
   prior_prec_tau = 4,
   prior_prec_eta = 0.001,
-  n.samples = 1000,
-  n.chains = 4,
-  n.iter = 4000,
-  n.adapt = 1000,
+  n_samples = 1000,
+  n_chains = 4,
+  n_iter = 4000,
+  n_adapt = 1000,
   robustify = TRUE,
   weight = 0.1,
   ci = FALSE,
@@ -45,7 +45,7 @@ all_models(
 
 \item{endpoint}{Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.}
 
-\item{alpha}{Type I error rate. Default=0.025.}
+\item{alpha}{Significance level (one-sided). Default=0.025.}
 
 \item{unit_size}{Number of patients per calendar time unit for frequentist models adjusting for calendar time. Default=25.}
 
@@ -57,13 +57,13 @@ all_models(
 
 \item{prior_prec_eta}{Dispersion parameter of the normal prior, the prior for the control response (log-odds or mean) in the MAP Prior approach. Default=0.001.}
 
-\item{n.samples}{Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's in the MAP Prior approach. Default=1000.}
+\item{n_samples}{Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's in the MAP Prior approach. Default=1000.}
 
-\item{n.chains}{Number of parallel chains for the rjags model in the MAP Prior approach. Default=4.}
+\item{n_chains}{Number of parallel chains for the rjags model in the MAP Prior approach. Default=4.}
 
-\item{n.iter}{Number of iterations to monitor of the jags.model. Needed for coda.samples in the MAP Prior approach. Default=4000.}
+\item{n_iter}{Number of iterations to monitor of the jags.model. Needed for coda.samples in the MAP Prior approach. Default=4000.}
 
-\item{n.adapt}{Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model in the MAP Prior approach. Default=1000.}
+\item{n_adapt}{Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model in the MAP Prior approach. Default=1000.}
 
 \item{robustify}{Boolean. Indicates whether a robust prior is to be used. If TRUE, a mixture prior is considered combining a MAP prior and a weakly non-informative component prior. Default=TRUE.}
 

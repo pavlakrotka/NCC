@@ -11,7 +11,7 @@ fixmodel_cont(data, arm, alpha = 0.025, ncc = TRUE, check = TRUE, ...)
 
 \item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Significance level. Default=0.025.}
+\item{alpha}{Significance level (one-sided). Default=0.025.}
 
 \item{ncc}{Boolean. Whether to include NCC data into the analysis. Default=TRUE.}
 
@@ -24,8 +24,8 @@ List containing the following elements regarding the results of comparing \code{
 \itemize{
 \item \code{p-val} - p-value (one-sided)
 \item \code{treat_effect} - estimated treatment effect in terms of the difference in means
-\item \code{lower_ci} - lower limit of the 95\% confidence interval
-\item \code{upper_ci} - upper limit of the 95\% confidence interval
+\item \code{lower_ci} - lower limit of the (1-2*\code{alpha})*100\% confidence interval
+\item \code{upper_ci} - upper limit of the (1-2*\code{alpha})*100\% confidence interval
 \item \code{reject_h0} - indicator of whether the null hypothesis was rejected or not (\code{p_val} < \code{alpha})
 \item \code{model} - fitted model
 }
@@ -34,7 +34,7 @@ List containing the following elements regarding the results of comparing \code{
 This function performs linear regression taking into account all trial data until the arm under study leaves the trial and adjusting for periods as factors.
 }
 \details{
-The model adjusts for the time effect by including the factor period to the model (i.e., using a step-function) and models the continuous response \eqn{y_j} for patient \eqn{j} as follows:
+The model-based analysis adjusts for the time effect by including the factor period. The time is then modelled as a step-function with jumps at times where treatments enter or leave the platform trial. Denoting by \eqn{y_j} the continuous response  for patient \eqn{j} and by \eqn{M} the treatment arm under evaluation, the regression model is given by:
 
 \deqn{y_j = \eta_0  + \sum_{k \in \mathcal{K}_M} \theta_k \cdot I(k_j=k) + \sum_{s=2}^{S_M} \tau_s \cdot I(t_j \in T_{S_s}) + \varepsilon_j}
 

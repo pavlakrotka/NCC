@@ -80,7 +80,7 @@
 <dt>arm</dt>
 <dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
 <dt>alpha</dt>
-<dd><p>Significance level. Default=0.025.</p></dd>
+<dd><p>Significance level (one-sided). Default=0.025.</p></dd>
 <dt>ci</dt>
 <dd><p>Boolean. Whether confidence intervals should be computed. Default=FALSE.</p></dd>
 <dt>unit_size</dt>
@@ -96,8 +96,8 @@
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>List containing the following elements regarding the results of comparing <code>arm</code> to control:</p><ul><li><p><code>p-val</code> - p-value (one-sided)</p></li>
 <li><p><code>treat_effect</code> - estimated treatment effect in terms of the difference in means</p></li>
-<li><p><code>lower_ci</code> - lower limit of the 95% confidence interval</p></li>
-<li><p><code>upper_ci</code> - upper limit of the 95% confidence interval</p></li>
+<li><p><code>lower_ci</code> - lower limit of the (1-2*<code>alpha</code>)*100% confidence interval</p></li>
+<li><p><code>upper_ci</code> - upper limit of the (1-2*<code>alpha</code>)*100% confidence interval</p></li>
 <li><p><code>reject_h0</code> - indicator of whether the null hypothesis was rejected or not (<code>p_val</code> &lt; <code>alpha</code>)</p></li>
 <li><p><code>model</code> - fitted model</p></li>
 </ul></div>
@@ -114,19 +114,19 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">mixmodel_AR1_cal_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.001627695</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.06856752</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3502161</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1805866</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.08727811</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.05758612</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6292426</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.41877</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> formula: response ~ as.factor(treatment) + AR1(1 | cal_time)</span>
@@ -136,24 +136,24 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> family: gaussian( link = identity ) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ------------ Fixed effects (beta) ------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       Estimate Cond. SE t-value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)             0.1069  0.07263  1.4718</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)1   0.1038  0.11842  0.8763</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)2   0.3222  0.11771  2.7371</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3   0.3502  0.11844  2.9570</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)            0.09249  0.07039   1.314</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)1  0.18875  0.12132   1.556</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)2  0.30160  0.12138   2.485</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3  0.18059  0.12128   1.489</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  --------------- Random effects ---------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Family: gaussian( link = identity ) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    --- Correlation parameters:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1.ARphi </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.6787159 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    1.ARphi </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.7428687 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            --- Variance parameters ('lambda'):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lambda = var(u) for u ~ Gaussian; </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    cal_time  :  0.003452  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    cal_time  :  0.009208  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # of obs: 500; # of groups: cal_time, 20 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  -------------- Residual variance  ------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> phi estimate was 0.901611 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> phi estimate was 0.974457 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ------------- Likelihood values  -------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         logLik</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> p_v(h) (marginal L): -684.4378</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> p_v(h) (marginal L): -704.8208</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>

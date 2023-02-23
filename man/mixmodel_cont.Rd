@@ -19,7 +19,7 @@ mixmodel_cont(
 
 \item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Significance level. Default=0.025.}
+\item{alpha}{Significance level (one-sided). Default=0.025.}
 
 \item{ci}{Boolean. Whether confidence intervals should be computed. Default=FALSE.}
 
@@ -34,8 +34,8 @@ List containing the following elements regarding the results of comparing \code{
 \itemize{
 \item \code{p-val} - p-value (one-sided)
 \item \code{treat_effect} - estimated treatment effect in terms of the difference in means
-\item \code{lower_ci} - lower limit of the 95\% confidence interval
-\item \code{upper_ci} - upper limit of the 95\% confidence interval
+\item \code{lower_ci} - lower limit of the (1-2*\code{alpha})*100\% confidence interval
+\item \code{upper_ci} - upper limit of the (1-2*\code{alpha})*100\% confidence interval
 \item \code{reject_h0} - indicator of whether the null hypothesis was rejected or not (\code{p_val} < \code{alpha})
 \item \code{model} - fitted model
 }

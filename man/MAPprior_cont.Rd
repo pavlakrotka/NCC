@@ -11,10 +11,10 @@ MAPprior_cont(
   opt = 2,
   prior_prec_tau = 4,
   prior_prec_eta = 0.001,
-  n.samples = 1000,
-  n.chains = 4,
-  n.iter = 4000,
-  n.adapt = 1000,
+  n_samples = 1000,
+  n_chains = 4,
+  n_iter = 4000,
+  n_adapt = 1000,
   robustify = TRUE,
   weight = 0.1,
   check = TRUE,
@@ -26,7 +26,7 @@ MAPprior_cont(
 
 \item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Significance level. Default=0.025}
+\item{alpha}{Significance level (one-sided). Default=0.025}
 
 \item{opt}{Binary. If opt==1, all former periods are used as one source; if opt==2, periods get separately included into the final analysis. Default=2.}
 
@@ -34,13 +34,13 @@ MAPprior_cont(
 
 \item{prior_prec_eta}{Dispersion parameter of the normal prior, the prior for the control mean. Default=0.001.}
 
-\item{n.samples}{Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's. Default=1000.}
+\item{n_samples}{Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's. Default=1000.}
 
-\item{n.chains}{Number of parallel chains for the rjags model. Default=4.}
+\item{n_chains}{Number of parallel chains for the rjags model. Default=4.}
 
-\item{n.iter}{Number of iterations to monitor of the jags.model. Needed for coda.samples. Default=4000.}
+\item{n_iter}{Number of iterations to monitor of the jags.model. Needed for coda.samples. Default=4000.}
 
-\item{n.adapt}{Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model. Default=1000.}
+\item{n_adapt}{Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model. Default=1000.}
 
 \item{robustify}{Boolean. Indicates whether a robust prior is to be used. If TRUE, a mixture prior is considered combining a MAP prior and a weakly non-informative component prior. Default=TRUE.}
 
@@ -53,10 +53,10 @@ MAPprior_cont(
 \value{
 List containing the following elements regarding the results of comparing \code{arm} to control:
 \itemize{
-\item \code{p-val} - p-value (one-sided) obtained by drawing \code{n.samples} random samples from each posterior distribution
-\item \code{treat_effect} - estimated treatment effect in terms of the difference in means obtained by drawing \code{n.samples} random samples from each posterior distribution
-\item \code{lower_ci} - lower limit of the 95\% confidence interval obtained by drawing \code{n.samples} random samples from each posterior distribution
-\item \code{upper_ci} - upper limit of the 95\% confidence interval obtained by drawing \code{n.samples} random samples from each posterior distribution
+\item \code{p-val} - p-value (one-sided) obtained by drawing \code{n_samples} random samples from each posterior distribution
+\item \code{treat_effect} - estimated treatment effect in terms of the difference in means obtained by drawing \code{n_samples} random samples from each posterior distribution
+\item \code{lower_ci} - lower limit of the (1-2*\code{alpha})*100\% confidence interval obtained by drawing \code{n_samples} random samples from each posterior distribution
+\item \code{upper_ci} - upper limit of the (1-2*\code{alpha})*100\% confidence interval obtained by drawing \code{n_samples} random samples from each posterior distribution
 \item \code{reject_h0} - indicator of whether the null hypothesis was rejected or not (\code{p_val} < \code{alpha})
 }
 }

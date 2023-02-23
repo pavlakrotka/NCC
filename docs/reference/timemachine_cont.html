@@ -84,19 +84,19 @@
 <dt>arm</dt>
 <dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
 <dt>alpha</dt>
-<dd><p>Significance level. Default=0.025.</p></dd>
+<dd><p>Significance level (one-sided). Default=0.025.</p></dd>
 <dt>prec_theta</dt>
 <dd><p>Precision (\(1/\sigma^2_{\theta}\)) of the prior regarding the treatment effect \(\theta\). I.e. \(\theta \sim N(0, \sigma^2_{\theta})\). Default=0.001.</p></dd>
 <dt>prec_eta</dt>
-<dd><p>Precision (\(1/\sigma^2_{\eta_0}\)) of the prior regarding the control mean \(\eta_0\) (corresponds to <code>mu0</code> in the <code><a href="datasim_cont.html">datasim_cont()</a></code> function). I.e. \(\eta_0 \sim N(0, \sigma^2_{\eta_0})\). Default=0.001.</p></dd>
+<dd><p>Precision (\(1/\sigma^2_{\eta_0}\)) of the prior regarding the control mean \(\eta_0\). I.e. \(\eta_0 \sim N(0, \sigma^2_{\eta_0})\). Default=0.001.</p></dd>
 <dt>tau_a</dt>
-<dd><p>Parameter \(a\) of the Gamma distribution for the precision parameter \(\tau\) in the model for the time trend. I.e., \(\tau \sim Gamma(a,b)\). Default=0.1.</p></dd>
+<dd><p>Parameter \(a_{\tau}\) of the Gamma distribution for the precision parameter \(\tau\) in the model for the time trend. I.e., \(\tau \sim Gamma(a_{\tau},b_{\tau})\). Default=0.1.</p></dd>
 <dt>tau_b</dt>
-<dd><p>Parameter \(b\) of the Gamma distribution for the precision parameter \(\tau\) in the model for the time trend. I.e., \(\tau \sim Gamma(a,b)\). Default=0.01.</p></dd>
+<dd><p>Parameter \(b_{\tau}\) of the Gamma distribution for the precision parameter \(\tau\) in the model for the time trend. I.e., \(\tau \sim Gamma(a_{\tau},b_{\tau})\). Default=0.01.</p></dd>
 <dt>prec_a</dt>
-<dd><p>Parameter \(a\) of the Gamma distribution regarding the precision of the responses. I.e., \(\sigma \sim Gamma(a,b)\). Default=0.001.</p></dd>
+<dd><p>Parameter \(a_{\sigma^2}\) of the Gamma distribution regarding the precision of the responses. I.e., \(1/\sigma^2 \sim Gamma(a_{\sigma^2},b_{\sigma^2})\). Default=0.001.</p></dd>
 <dt>prec_b</dt>
-<dd><p>Parameter \(b\) of the Gamma distribution regarding the precision of the responses. I.e., \(\sigma \sim Gamma(a,b)\). Default=0.001.</p></dd>
+<dd><p>Parameter \(b_{\sigma^2}\) of the Gamma distribution regarding the precision of the responses. I.e., \(1/\sigma^2 \sim Gamma(a_{\sigma^2},b_{\sigma^2})\). Default=0.001.</p></dd>
 <dt>bucket_size</dt>
 <dd><p>Number of patients per time bucket. Default=25.</p></dd>
 <dt>check</dt>
@@ -108,10 +108,31 @@
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>List containing the following elements regarding the results of comparing <code>arm</code> to control:</p><ul><li><p><code>p-val</code> - posterior probability that the difference in means is less than zero</p></li>
 <li><p><code>treat_effect</code> - posterior mean of difference in means</p></li>
-<li><p><code>lower_ci</code> - lower limit of the 95% credible interval for difference in means</p></li>
-<li><p><code>upper_ci</code> - upper limit of the 95% credible interval for difference in means</p></li>
+<li><p><code>lower_ci</code> - lower limit of the (1-2*<code>alpha</code>)*100% credible interval for difference in means</p></li>
+<li><p><code>upper_ci</code> - upper limit of the (1-2*<code>alpha</code>)*100% credible interval for difference in means</p></li>
 <li><p><code>reject_h0</code> - indicator of whether the null hypothesis was rejected or not (<code>p_val</code> &lt; <code>alpha</code>)</p></li>
 </ul></div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>The Time Machine divides the trial duration into \(C\) calendar time intervals of equal length ("buckets"), which are indexed backwards in time. That is to say, the most recent time interval is denoted by \(c=1\) and the time interval corresponding to the beginning of the trial by \(c=C\).
+The analysis is performed as soon as the analyzed treatment arm finishes in the trial.</p>
+<p>The model is defined as follows:</p>
+<p>$$E(y_j) = \eta_0 + \theta_{k_j} + \alpha_{c_j}$$</p>
+<p>where \(y_j\) is the continuous response for patient \(j\).
+The model intercept \(\eta_0\) denotes the response of the control group at time of the analysis, \(\theta_{k_j}\) is the effect of the treatment arm \(k\) that patient \(j\) was enrolled in, relative to control.
+For the parameters \(\eta_0\) and \(\theta_{k_j}\), normal prior distributions are assumed, with mean 0 and variances \(\sigma^2_{\eta_0}\) and \(\sigma^2_{\theta}\), respectively:</p>
+<p>$$\eta_0 \sim \mathcal{N}(0, \sigma^2_{\eta_0})$$</p>
+<p>$$\theta_{k_j} \sim \mathcal{N}(0, \sigma^2_{\theta})$$</p>
+<p>In the Time Machine, time effect is represented by \(\alpha_{c_j}\), which is the change in the response in time bucket \(c_j\) (which denotes the time bucket in which patient \(j\) is enrolled) compared to the most recent time bucket \(c=1\) and is modeled using a Bayesian second-order normal dynamic linear model.
+This creates a smoothing over the control response, such that closer time buckets are modeled with more similar response rates:</p>
+<p>$$\alpha_1 = 0$$
+$$\alpha_2 \sim \mathcal{N}(0, 1/\tau)$$
+$$\alpha_c \sim \mathcal{N}(2 \alpha_{c-1} - \alpha_{c-2}, 1/\tau), 3 \le c \le C$$</p>
+<p>where \(\tau\) denotes the drift parameter that controls the degree of smoothing over the time buckets and is assumed to have a Gamma hyperprior distribution:</p>
+<p>$$\tau \sim Gamma(a_{\tau}, b_{\tau})$$</p>
+<p>The precision of the individual patient responses (\(1/\sigma^2\)) is also assumed to have a Gamma hyperprior distribution:</p>
+<p>$$1/\sigma^2 \sim Gamma(a_{\sigma^2}, b_{\sigma^2})$$</p>
+    </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Dominic Magirr, Peter Jacko</p>
@@ -125,19 +146,19 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">timemachine_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8.333333e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1361417</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5045788</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1461423</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2348756</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.1134328</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7745897</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4074435</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 <span class="r-in"></span>

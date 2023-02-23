@@ -4,7 +4,7 @@
 #'
 #' @param data Trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response' and 'period'.
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
-#' @param alpha Significance level. Default=0.025.
+#' @param alpha Significance level (one-sided). Default=0.025.
 #' @param ci Boolean. Whether confidence intervals should be computed. Default=FALSE.
 #' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE.
 #' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
@@ -28,8 +28,8 @@
 #'
 #' - `p-val` - p-value (one-sided)
 #' - `treat_effect` - estimated treatment effect in terms of the difference in means
-#' - `lower_ci` - lower limit of the 95% confidence interval
-#' - `upper_ci` - upper limit of the 95% confidence interval
+#' - `lower_ci` - lower limit of the (1-2*`alpha`)*100% confidence interval
+#' - `upper_ci` - upper limit of the (1-2*`alpha`)*100% confidence interval
 #' - `reject_h0` - indicator of whether the null hypothesis was rejected or not (`p_val` < `alpha`)
 #' - `model` - fitted model
 #'
@@ -93,8 +93,8 @@ mixmodel_cont <- function(data, arm, alpha=0.025, ci=FALSE, ncc=TRUE, check=TRUE
 
   # confidence intervals
   if (ci) {
-    lower_ci <- confint(mod, parallel="no")[paste0("as.factor(treatment)", arm), 1]
-    upper_ci <- confint(mod, parallel="no")[paste0("as.factor(treatment)", arm), 2]
+    lower_ci <- confint(mod, level = 1-(2*alpha), parallel="no")[paste0("as.factor(treatment)", arm), 1]
+    upper_ci <- confint(mod, level = 1-(2*alpha), parallel="no")[paste0("as.factor(treatment)", arm), 2]
   }
 
   return(list(p_val = p_val,

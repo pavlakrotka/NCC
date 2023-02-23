@@ -4,7 +4,7 @@
 #'
 #' @param data Trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response', 'period' and 'j'.
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
-#' @param alpha Significance level. Default=0.025.
+#' @param alpha Significance level (one-sided). Default=0.025.
 #' @param ci Boolean. Whether confidence intervals should be computed. Default=FALSE.
 #' @param smoothing_basis String indicating the (penalized) smoothing basis to use. Default="tp" for thin plate regression spline. Available strings are 'tp', 'ts', 'ds', 'cr', 'cs', 'cc', 'sos', 'ps', 'cp', 're', 'mrf', 'gp', and 'so'. For more information see https://stat.ethz.ch/R-manual/R-devel/library/mgcv/html/smooth.terms.html.
 #' @param basis_dim The dimension of the basis used to represent the smooth term. The default depends on the number of variables that the smooth is a function of. Default=-1. For more information see the description of the parameter 'k' in https://stat.ethz.ch/R-manual/R-devel/library/mgcv/html/s.html.
@@ -32,8 +32,8 @@
 #'
 #' - `p-val` - p-value (one-sided)
 #' - `treat_effect` - estimated treatment effect in terms of the difference in means
-#' - `lower_ci` - lower limit of the 95% confidence interval
-#' - `upper_ci` - upper limit of the 95% confidence interval
+#' - `lower_ci` - lower limit of the (1-2*`alpha`)*100% confidence interval
+#' - `upper_ci` - upper limit of the (1-2*`alpha`)*100% confidence interval
 #' - `reject_h0` - indicator of whether the null hypothesis was rejected or not (`p_val` < `alpha`)
 #' - `model` - fitted model
 #'
@@ -94,8 +94,8 @@ gam_cont <- function(data, arm, alpha=0.025, ci=FALSE, smoothing_basis="tp", bas
     Vb <- vcov(mod, unconditional = TRUE)
     se <- sqrt(diag(Vb))
 
-    lower_ci <- treat_effect - (qt(0.975, df = rdf) * se[paste0("as.factor(treatment)", arm)])
-    upper_ci <- treat_effect + (qt(0.975, df = rdf) * se[paste0("as.factor(treatment)", arm)])
+    lower_ci <- treat_effect - (qt(1-alpha, df = rdf) * se[paste0("as.factor(treatment)", arm)])
+    upper_ci <- treat_effect + (qt(1-alpha, df = rdf) * se[paste0("as.factor(treatment)", arm)])
   }
 
   return(list(p_val = p_val,

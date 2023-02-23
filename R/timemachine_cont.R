@@ -4,13 +4,13 @@
 #'
 #' @param data Trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response' and 'period'.
 #' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
-#' @param alpha Significance level. Default=0.025.
+#' @param alpha Significance level (one-sided). Default=0.025.
 #' @param prec_theta Precision (\eqn{1/\sigma^2_{\theta}}) of the prior regarding the treatment effect \eqn{\theta}. I.e. \eqn{\theta \sim N(0, \sigma^2_{\theta})}. Default=0.001.
 #' @param prec_eta Precision (\eqn{1/\sigma^2_{\eta_0}}) of the prior regarding the control mean \eqn{\eta_0}. I.e. \eqn{\eta_0 \sim N(0, \sigma^2_{\eta_0})}. Default=0.001.
-#' @param tau_a Parameter \eqn{a} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.1.
-#' @param tau_b Parameter \eqn{b} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.01.
-#' @param prec_a Parameter \eqn{a} of the Gamma distribution regarding the precision of the responses. I.e., \eqn{1/\sigma^2 \sim Gamma(a,b)}. Default=0.001.
-#' @param prec_b Parameter \eqn{b} of the Gamma distribution regarding the precision of the responses. I.e., \eqn{1/\sigma^2 \sim Gamma(a,b)}. Default=0.001.
+#' @param tau_a Parameter \eqn{a_{\tau}} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend. I.e., \eqn{\tau \sim Gamma(a_{\tau},b_{\tau})}. Default=0.1.
+#' @param tau_b Parameter \eqn{b_{\tau}} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend. I.e., \eqn{\tau \sim Gamma(a_{\tau},b_{\tau})}. Default=0.01.
+#' @param prec_a Parameter \eqn{a_{\sigma^2}} of the Gamma distribution regarding the precision of the responses. I.e., \eqn{1/\sigma^2 \sim Gamma(a_{\sigma^2},b_{\sigma^2})}. Default=0.001.
+#' @param prec_b Parameter \eqn{b_{\sigma^2}} of the Gamma distribution regarding the precision of the responses. I.e., \eqn{1/\sigma^2 \sim Gamma(a_{\sigma^2},b_{\sigma^2})}. Default=0.001.
 #' @param bucket_size Number of patients per time bucket. Default=25.
 #' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
 #' @param ... Further arguments for simulation function.
@@ -49,11 +49,11 @@
 #'
 #' where \eqn{\tau} denotes the drift parameter that controls the degree of smoothing over the time buckets and is assumed to have a Gamma hyperprior distribution:
 #'
-#' \deqn{\tau \sim Gamma(a,b)}
+#' \deqn{\tau \sim Gamma(a_{\tau}, b_{\tau})}
 #'
 #' The precision of the individual patient responses (\eqn{1/\sigma^2}) is also assumed to have a Gamma hyperprior distribution:
 #'
-#' \deqn{1/\sigma^2 \sim Gamma(a,b)}
+#' \deqn{1/\sigma^2 \sim Gamma(a_{\sigma^2}, b_{\sigma^2})}
 #'
 #' @examples
 #'
@@ -67,8 +67,8 @@
 #'
 #' - `p-val` - posterior probability that the difference in means is less than zero
 #' - `treat_effect` - posterior mean of difference in means
-#' - `lower_ci` - lower limit of the 95% credible interval for difference in means
-#' - `upper_ci` - upper limit of the 95% credible interval for difference in means
+#' - `lower_ci` - lower limit of the (1-2*`alpha`)*100% credible interval for difference in means
+#' - `upper_ci` - upper limit of the (1-2*`alpha`)*100% credible interval for difference in means
 #' - `reject_h0` - indicator of whether the null hypothesis was rejected or not (`p_val` < `alpha`)
 #'
 #' @author Dominic Magirr, Peter Jacko
