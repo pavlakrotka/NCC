@@ -2,20 +2,20 @@
 #'
 #' @description This function performs analysis of continuous data using the Meta-Analytic-Predictive (MAP) Prior approach. The method borrows data from non-concurrent controls to obtain the prior distribution for the control response in the concurrent periods.
 #'
-#' @param data Trial data, e.g. result from the `datasim_bin()` function. Must contain columns named 'treatment', 'response' and 'period'.
-#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
-#' @param alpha Significance level (one-sided). Default=0.025
-#' @param opt Binary. If opt==1, all former periods are used as one source; if opt==2, periods get separately included into the final analysis. Default=2.
-#' @param prior_prec_tau Dispersion parameter of the half normal prior, the prior for the between study heterogeneity. Default=4.
-#' @param prior_prec_eta Dispersion parameter of the normal prior, the prior for the control mean. Default=0.001.
-#' @param n_samples Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's. Default=1000.
-#' @param n_chains Number of parallel chains for the rjags model. Default=4.
-#' @param n_iter Number of iterations to monitor of the jags.model. Needed for coda.samples. Default=4000.
-#' @param n_adapt Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model. Default=1000.
-#' @param robustify Boolean. Indicates whether a robust prior is to be used. If TRUE, a mixture prior is considered combining a MAP prior and a weakly non-informative component prior. Default=TRUE.
-#' @param weight Weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP prior according to Schmidli (2014). Default=0.1.
-#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
-#' @param ... Further arguments for simulation function.
+#' @param data Data frame with trial data, e.g. result from the `datasim_bin()` function. Must contain columns named 'treatment', 'response' and 'period'.
+#' @param arm Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
+#' @param alpha Double. Decision boundary (one-sided). Default=0.025
+#' @param opt Integer (1 or 2). If opt==1, all former periods are used as one source; if opt==2, periods get separately included into the final analysis. Default=2.
+#' @param prior_prec_tau Double. Dispersion parameter of the half normal prior, the prior for the between study heterogeneity. Default=4.
+#' @param prior_prec_eta Double. Dispersion parameter of the normal prior, the prior for the control mean. Default=0.001.
+#' @param n_samples Integer. Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's. Default=1000.
+#' @param n_chains Integer. Number of parallel chains for the rjags model. Default=4.
+#' @param n_iter Integer. Number of iterations to monitor of the jags.model. Needed for coda.samples. Default=4000.
+#' @param n_adapt Integer. Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model. Default=1000.
+#' @param robustify Logical. Indicates whether a robust prior is to be used. If TRUE, a mixture prior is considered combining a MAP prior and a weakly non-informative component prior. Default=TRUE.
+#' @param weight Double. Weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP prior according to Schmidli (2014). Default=0.1.
+#' @param check Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
+#' @param ... Further arguments passed by wrapper functions when running simulations.
 #'
 #' @importFrom RBesT automixfit
 #' @importFrom RBesT postmix
@@ -46,10 +46,10 @@
 #'
 #' @return List containing the following elements regarding the results of comparing `arm` to control:
 #'
-#' - `p-val` - p-value (one-sided) obtained by drawing `n_samples` random samples from each posterior distribution
-#' - `treat_effect` - estimated treatment effect in terms of the difference in means obtained by drawing `n_samples` random samples from each posterior distribution
-#' - `lower_ci` - lower limit of the (1-2*`alpha`)*100% confidence interval obtained by drawing `n_samples` random samples from each posterior distribution
-#' - `upper_ci` - upper limit of the (1-2*`alpha`)*100% confidence interval obtained by drawing `n_samples` random samples from each posterior distribution
+#' - `p-val` - posterior probability that the difference in means is less than zero
+#' - `treat_effect` - posterior mean of difference in means
+#' - `lower_ci` - lower limit of the (1-2*`alpha`)*100% credible interval for difference in means
+#' - `upper_ci` - upper limit of the (1-2*`alpha`)*100% credible interval for difference in means
 #' - `reject_h0` - indicator of whether the null hypothesis was rejected or not (`p_val` < `alpha`)
 #'
 #' @author Katharina Hees
@@ -78,8 +78,8 @@ MAPprior_cont <- function(data,
       stop("The evaluated treatment arm (`arm`) must be one number!")
     }
 
-    if(!is.numeric(alpha) | length(alpha)!=1){
-      stop("The significance level (`alpha`) must be one number!")
+    if(!is.numeric(alpha) | length(alpha)!=1 | alpha>=1 | alpha<=0){
+      stop("The significance level (`alpha`) must be one number between 0 and 1!")
     }
 
     if(!is.numeric(opt)| length(opt)!=1 | opt %in% c(1,2) == FALSE){

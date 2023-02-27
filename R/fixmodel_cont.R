@@ -2,12 +2,12 @@
 #'
 #' @description This function performs linear regression taking into account all trial data until the arm under study leaves the trial and adjusting for periods as factors.
 #'
-#' @param data Trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response' and 'period'.
-#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
-#' @param alpha Significance level (one-sided). Default=0.025.
-#' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE.
-#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
-#' @param ... Further arguments for simulation function.
+#' @param data Data frame with trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response' and 'period'.
+#' @param arm Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
+#' @param alpha Double. Significance level (one-sided). Default=0.025.
+#' @param ncc Logical. Indicates whether to include NCC data into the analysis. Default=TRUE.
+#' @param check Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
+#' @param ... Further arguments passed by wrapper functions when running simulations.
 #'
 #' @importFrom stats lm
 #' @importFrom stats pt
@@ -18,15 +18,17 @@
 #'
 #' @details
 #'
+#' The model-based analysis adjusts for the time effect by including the factor period (defined as a time interval bounded by any treatment arm entering or leaving the platform). The time is then modelled as a step-function with jumps at the beginning of each period. 
+#' Denoting by \eqn{y_j} the continuous response for patient \eqn{j}, by \eqn{k_j} the arm patient \eqn{j} was allocated to, and by \eqn{M} the treatment arm under evaluation, the regression model is given by:
 #'
-#' The model-based analysis adjusts for the time effect by including the factor period. The time is then modelled as a step-function with jumps at times where treatments enter or leave the platform trial. Denoting by \eqn{y_j} the continuous response  for patient \eqn{j} and by \eqn{M} the treatment arm under evaluation, the regression model is given by:
-#'
-#' \deqn{y_j = \eta_0  + \sum_{k \in \mathcal{K}_M} \theta_k \cdot I(k_j=k) + \sum_{s=2}^{S_M} \tau_s \cdot I(t_j \in T_{S_s}) + \varepsilon_j}
+#' \deqn{E(y_j) = \eta_0  + \sum_{k \in \mathcal{K}_M} \theta_k \cdot I(k_j=k) + \sum_{s=2}^{S_M} \tau_s \cdot I(t_j \in T_{S_s})}
 #'
 #' where \eqn{\eta_0} is the response in the control arm in the first period;
 #' \eqn{\theta_k} represents the effect of treatment \eqn{k} compared to control for \eqn{k\in\mathcal{K}_M}, where \eqn{\mathcal{K}_M} is the set of treatments
 #' that were active in the trial during periods prior or up to the time when the investigated treatment arm left the trial;
 #' \eqn{\tau_s} indicates the stepwise period effect between periods 1 and \eqn{s} (\eqn{s = 2, \ldots, S_M}), where \eqn{S_M} denotes the period, in which the investigated treatment arm left the trial.
+#' 
+#' If the data consists of only one period (e.g. in case of a multi-arm trial), the period in not used as covariate.
 #'
 #' @examples
 #'
@@ -59,8 +61,8 @@ fixmodel_cont <- function(data, arm, alpha=0.025, ncc=TRUE, check=TRUE, ...){
       stop("The evaluated treatment arm (`arm`) must be one number!")
     }
 
-    if(!is.numeric(alpha) | length(alpha)!=1){
-      stop("The significance level (`alpha`) must be one number!")
+    if(!is.numeric(alpha) | length(alpha)!=1 | alpha>=1 | alpha<=0){
+      stop("The significance level (`alpha`) must be one number between 0 and 1!")
     }
 
     if(!is.logical(ncc) | length(ncc)!=1){

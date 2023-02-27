@@ -2,16 +2,17 @@
 #'
 #' @description This function performs a simulation study for a given set of scenarios, analyzing simulated data using different models as indicated by the user. Performs inference for indicated experimental treatment arms. Simulates the probability to reject \eqn{H_0} based on a given number of replications.
 #'
-#' @param nsim Number of replications. Must be larger than 1.
+#' @param nsim Integer. Number of replications. Must be larger than 1.
 #' @param scenarios Data frame containing all parameters for scenarios that should be simulated.
-#' @param arms Vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.
-#' @param models Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel"). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.
+#' @param arms Integer vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.
+#' @param models Character vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel"). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.
 #' @param endpoint Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.
 #'
 #' @export
 #'
 #' @examples
-#'
+#' 
+#' \dontrun{
 #' # Create data frame with all parameters:
 #' sim_scenarios <- data.frame(num_arms = 4,
 #' n_arm = 250,
@@ -36,11 +37,9 @@
 #' ncc = TRUE)
 #'
 #' # Run simulation study:
-#' sim_results <- sim_study(nsim = 5, scenarios = sim_scenarios, arms = c(3, 4),
+#' sim_results <- sim_study(nsim = 100, scenarios = sim_scenarios, arms = c(3, 4),
 #' models = c("fixmodel", "sepmodel", "poolmodel"), endpoint = "cont")
-#'
-#' # View results:
-#' head(sim_results)
+#' }
 #'
 #'
 #' @return Data frame with all considered scenarios and corresponding results - the probability to reject \eqn{H_0}.

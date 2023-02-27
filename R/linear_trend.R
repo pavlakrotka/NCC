@@ -8,7 +8,7 @@
 #'
 #' @export
 #' 
-#' @details The time trend is generated according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1}}.
+#' @details The time trend is generated according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1}}, where \eqn{N} is the total sample size.
 #' 
 #' @return Time trend for time points j.
 #' @author Marta Bofill Roig, Pavla Krotka

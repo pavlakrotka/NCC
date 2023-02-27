@@ -2,16 +2,16 @@
 #'
 #' @description This function performs analysis of binary data using the Time Machine approach. It takes into account all data until the investigated arm leaves the trial. It is based on logistic regression with treatment as a categorical variable and covariate adjustment for time via a second-order Bayesian normal dynamic linear model (separating the trial into buckets of pre-defined size).
 #'
-#' @param data Trial data, e.g. result from the `datasim_bin()` function. Must contain columns named 'treatment', 'response' and 'period'.
-#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
-#' @param alpha Significance level (one-sided). Default=0.025.
-#' @param prec_theta Precision (\eqn{1/\sigma^2_{\theta}}) of the prior regarding the treatment effect \eqn{\theta}. I.e. \eqn{\theta \sim N(0, \sigma^2_{\theta})} . Default=0.001.
-#' @param prec_eta Precision (\eqn{1/\sigma^2_{\eta_0}}) of the prior regarding the control log-odds \eqn{\eta_0}. I.e. \eqn{\eta_0 \sim N(0, \sigma^2_{\eta_0})}. Default=0.001.
-#' @param tau_a Parameter \eqn{a_{\tau}} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend. I.e., \eqn{\tau \sim Gamma(a_{\tau},b_{\tau})}. Default=0.1.
-#' @param tau_b Parameter \eqn{b_{\tau}} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend. I.e., \eqn{\tau \sim Gamma(a_{\tau},b_{\tau})}. Default=0.01.
-#' @param bucket_size Number of patients per time bucket. Default=25.
-#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
-#' @param ... Further arguments for simulation function.
+#' @param data Data frame with trial data, e.g. result from the `datasim_bin()` function. Must contain columns named 'treatment', 'response' and 'period'.
+#' @param arm Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
+#' @param alpha Double. Decision boundary (one-sided). Default=0.025.
+#' @param prec_theta Double. Precision (\eqn{1/\sigma^2_{\theta}}) of the prior regarding the treatment effect \eqn{\theta}. I.e. \eqn{\theta \sim N(0, \sigma^2_{\theta})} . Default=0.001.
+#' @param prec_eta Double. Precision (\eqn{1/\sigma^2_{\eta_0}}) of the prior regarding the control log-odds \eqn{\eta_0}. I.e. \eqn{\eta_0 \sim N(0, \sigma^2_{\eta_0})}. Default=0.001.
+#' @param tau_a Double. Parameter \eqn{a_{\tau}} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend. I.e., \eqn{\tau \sim Gamma(a_{\tau},b_{\tau})}. Default=0.1.
+#' @param tau_b Double. Parameter \eqn{b_{\tau}} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend. I.e., \eqn{\tau \sim Gamma(a_{\tau},b_{\tau})}. Default=0.01.
+#' @param bucket_size Integer. Number of patients per time bucket. Default=25.
+#' @param check Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
+#' @param ... Further arguments passed by wrapper functions when running simulations.
 #'
 #' @importFrom stats aggregate
 #' @importFrom stats quantile
@@ -87,8 +87,8 @@ timemachine_bin <- function(data,
       stop("The evaluated treatment arm (`arm`) must be one number!")
     }
 
-    if(!is.numeric(alpha) | length(alpha)!=1){
-      stop("The significance level (`alpha`) must be one number!")
+    if(!is.numeric(alpha) | length(alpha)!=1 | alpha>=1 | alpha<=0){
+      stop("The significance level (`alpha`) must be one number between 0 and 1!")
     }
 
     if(!is.numeric(prec_theta) | length(prec_theta)!=1){

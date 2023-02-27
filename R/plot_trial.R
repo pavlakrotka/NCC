@@ -2,7 +2,7 @@
 #'
 #' @description This function creates a plot visualizing the trial progress over time.
 #'
-#' @param treatments Vector with treatment indicators ordered by time, e.g. column `treatment` from the dataframe resulting from the `datasim_bin()` or `datasim_cont()` function.
+#' @param treatments Vector with indices of assigned arms for each participant, ordered by time, e.g. column `treatment` from the dataframe resulting from the `datasim_bin()` or `datasim_cont()` function.
 #'
 #' @import ggplot2
 #'

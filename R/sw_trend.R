@@ -7,7 +7,7 @@
 #'
 #' @export
 #' 
-#' @details The time trend is generated according to the function \eqn{f(j) = \lambda \cdot (c_j - 1)}.
+#' @details The time trend is generated according to the function \eqn{f(j) = \lambda \cdot (c_j - 1)}, where \eqn{c_j} is an index of the period patient \eqn{j} was enrolled in.
 #' 
 #' @return Time trend in period \eqn{c_j}.
 #' @author Marta Bofill Roig, Pavla Krotka

@@ -2,14 +2,14 @@
 #'
 #' @description This function performs linear mixed model regression taking into account all trial data until the arm under study leaves the trial and adjusting for calendar time units as random factors with AR1 correlation structure.
 #'
-#' @param data Trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment' and 'response'.
-#' @param arm Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
-#' @param alpha Significance level (one-sided). Default=0.025.
-#' @param ci Boolean. Whether confidence intervals should be computed. Default=FALSE.
-#' @param unit_size Number of patients per calendar time unit. Default=25.
-#' @param ncc Boolean. Whether to include NCC data into the analysis. Default=TRUE.
-#' @param check Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
-#' @param ... Further arguments for simulation function.
+#' @param data Data frame with trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment' and 'response'.
+#' @param arm Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
+#' @param alpha Double. Significance level (one-sided). Default=0.025.
+#' @param ci Logical. Indicates whether confidence intervals should be computed. Default=FALSE.
+#' @param unit_size Integer. Number of patients per calendar time unit. Default=25.
+#' @param ncc Logical. Indicates whether to include NCC data into the analysis. Default=TRUE.
+#' @param check Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
+#' @param ... Further arguments passed by wrapper functions when running simulations.
 #'
 #' @importFrom spaMM fitme
 #' @importFrom spaMM get_any_IC
@@ -49,8 +49,8 @@ mixmodel_AR1_cal_cont <- function(data, arm, alpha=0.025, ci=FALSE, unit_size=25
       stop("The evaluated treatment arm (`arm`) must be one number!")
     }
 
-    if(!is.numeric(alpha) | length(alpha)!=1){
-      stop("The significance level (`alpha`) must be one number!")
+    if(!is.numeric(alpha) | length(alpha)!=1 | alpha>=1 | alpha<=0){
+      stop("The significance level (`alpha`) must be one number between 0 and 1!")
     }
 
     if(!is.logical(ci) | length(ci)!=1){
