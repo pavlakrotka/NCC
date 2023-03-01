@@ -4,10 +4,10 @@
 #'
 #' @param num_arms Integer. Number of experimental treatment arms in the trial.
 #' @param n_arm Integer. Sample size per experimental treatment arm (assumed equal).
-#' @param d Integer vector with timings of adding new arms in terms of number of patients recruited to the trial so far. The first entry must be 0, so that the trial starts with at least one experimental treatment arm, and the entries must be non-decreasing. The vector length equals `num_arms`. 
+#' @param d Integer vector with timings of adding new arms in terms of number of patients recruited to the trial so far. The first entry must be 0, so that the trial starts with at least one experimental treatment arm, and the entries must be non-decreasing. The vector length equals `num_arms`.
 #' @param period_blocks Integer. Number to define the size of the blocks for the block randomization. The block size in each period equals `period_blocks`times the number of active arms in the period (see Details). Default=2.
 #' @param mu0 Double. Response in the control arm. Default=0.
-#' @param theta Double vector with treatment effects in terms of difference of means for each experimental treatment arm compared to control. The elements of the vector (treatment effects) are ordered by the entry time of the experimental treatment arms (e.g., the first entry in the vector corresponds to the treatment effect of the first experimental treatment arm). The vector length equals `num_arms`. 
+#' @param theta Double vector with treatment effects in terms of difference of means for each experimental treatment arm compared to control. The elements of the vector (treatment effects) are ordered by the entry time of the experimental treatment arms (e.g., the first entry in the vector corresponds to the treatment effect of the first experimental treatment arm). The vector length equals `num_arms`.
 #' @param lambda Double vector with strength of time trend in each arm ordered by the entry time of the arms (e.g., the first entry in the vector corresponds to the time trend in the control arm, second entry to the time trend in the first experimental treatment arm). The vector length equals `num_arms`+1, as time trend in the control is also allowed.
 #' @param sigma Double. Standard deviation of the responses.
 #' @param trend String indicating the time trend pattern ("linear", "linear_2, "stepwise", "stepwise_2", "inv_u" or "seasonal"). See Details for more information.
@@ -25,15 +25,15 @@
 #' @details
 #'
 #' \strong{Design assumptions:}
-#' 
+#'
 #' - The simulated platform trial consists of a given number of experimental treatment arms (specified by the argument `num_arms`) and one control arm that is shared across the whole platform.
 #' - Participants are indexed by entry order, assuming that at each time unit exactly one participant is recruited and the time of recruitment and observation of the response are equal.
 #' - All participants are assumed to be eligible for all arms in the trial, i.e. the same inclusion and exclusion criteria apply to all experimental and control arms.
 #' - Equal sample sizes (given by parameter `n_arm`) in all experimental treatment arms are assumed.
-#' - The duration of a platform trial is divided into so-called periods, defined as time intervals bounded by distinct time points of any treatment arm entering or leaving the platform. 
+#' - The duration of a platform trial is divided into so-called periods, defined as time intervals bounded by distinct time points of any treatment arm entering or leaving the platform.
 #' Hence, multiple treatment arms entering or leaving at the same time point imply the start of only one additional period.
 #' - Allocation ratio of 1:1:...:1 in each period. Furthermore, block randomization is used to assign patients to the active arms. Block size in each period = `period_blocks`* (number of active arms in the period).
-#' - If the period sample size is not a multiple of the block size, the remaining participants in the last block are allocated randomly to the active arms.
+#' - If the period sample size is not a multiple of the block size, arms for the remaining participants are chosen by sampling without replacement from a vector containing the indices of active arms replicated times `ceiling(remaining sample size/number of active arms)`.
 #'
 #' \strong{Data generation:}
 #'
@@ -161,7 +161,7 @@ datasim_cont <- function(num_arms, n_arm, d, period_blocks=2, mu0=0, theta, lamb
   for (i in 1:num_periods){
     m_i <- t(replicate(trunc(sum(SS_matrix[,i], na.rm = T)/block_sizes[i]),
                        sample(rep(rep(c(0:(num_arms)), alloc_ratios[,i]), block_sizes[i]/length(rep(c(0:(num_arms)), alloc_ratios[,i]))))))
-    
+
     rest <- sum(SS_matrix[,i], na.rm = T)-block_sizes[i]*trunc(sum(SS_matrix[,i], na.rm = T)/block_sizes[i])
 
     t_i <- c(t(m_i), sample(rep(c(0:(num_arms)), alloc_ratios[,i]*ceiling(rest/active_arms[i])),

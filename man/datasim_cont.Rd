@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasim_cont.R
 \name{datasim_cont}
 \alias{datasim_cont}
-\title{Simulate continuous data from a platform trial with a shared control arm and an arbitrary number of treatment arms entering at different time points}
+\title{Simulate continuous data from a platform trial with a shared control arm and a given number of experimental treatment arms entering at given time points}
 \usage{
 datasim_cont(
   num_arms,
@@ -21,44 +21,44 @@ datasim_cont(
 )
 }
 \arguments{
-\item{num_arms}{Number of experimental treatment arms in the trial.}
+\item{num_arms}{Integer. Number of experimental treatment arms in the trial.}
 
-\item{n_arm}{Sample size per experimental treatment arm (assumed equal).}
+\item{n_arm}{Integer. Sample size per experimental treatment arm (assumed equal).}
 
-\item{d}{Vector with timings of adding new arms in terms of number of patients recruited to the trial so far. The first entry must be 0, so that the trial starts with at least one experimental treatment arm. The vector length equals \code{num_arms}.}
+\item{d}{Integer vector with timings of adding new arms in terms of number of patients recruited to the trial so far. The first entry must be 0, so that the trial starts with at least one experimental treatment arm, and the entries must be non-decreasing. The vector length equals \code{num_arms}.}
 
-\item{period_blocks}{Number to define the size of the blocks for the block randomisation. The block size in each period equals \code{period_blocks}times the number of active arms in the period (see Details). Default=2.}
+\item{period_blocks}{Integer. Number to define the size of the blocks for the block randomization. The block size in each period equals \code{period_blocks}times the number of active arms in the period (see Details). Default=2.}
 
-\item{mu0}{Response in the control arm. Default=0.}
+\item{mu0}{Double. Response in the control arm. Default=0.}
 
-\item{theta}{Vector with treatment effects in terms of difference of means for each treatment arm compared to control. The elements of the vector (treatment effects) are ordered by the entry time of the treatment arms (e.g., the first entry in the vector corresponds to the odds ratio of the first experimental treatment arm). The vector length equals \code{num_arms}.}
+\item{theta}{Double vector with treatment effects in terms of difference of means for each experimental treatment arm compared to control. The elements of the vector (treatment effects) are ordered by the entry time of the experimental treatment arms (e.g., the first entry in the vector corresponds to the treatment effect of the first experimental treatment arm). The vector length equals \code{num_arms}.}
 
-\item{lambda}{Vector with strength of time trend in each arm ordered by the entry time of the arms (e.g., the first entry in the vector corresponds to the time trend in the control arm, second entry to the time trend in the first treatment arm). The vector length equals \code{num_arms}+1, as time trend in the control is also allowed.}
+\item{lambda}{Double vector with strength of time trend in each arm ordered by the entry time of the arms (e.g., the first entry in the vector corresponds to the time trend in the control arm, second entry to the time trend in the first experimental treatment arm). The vector length equals \code{num_arms}+1, as time trend in the control is also allowed.}
 
-\item{sigma}{Standard deviation of the responses.}
+\item{sigma}{Double. Standard deviation of the responses.}
 
-\item{trend}{Indicates the time trend pattern ("linear", "linear_2, "stepwise", "stepwise_2", "inv_u" or "seasonal"). See Details for more information.}
+\item{trend}{String indicating the time trend pattern ("linear", "linear_2, "stepwise", "stepwise_2", "inv_u" or "seasonal"). See Details for more information.}
 
-\item{N_peak}{Point at which the inverted-u time trend switches direction in terms of overall sample size.}
+\item{N_peak}{Integer. Timepoint at which the inverted-u time trend switches direction in terms of overall sample size (i.e. after how many recruited participants the trend direction switches).}
 
-\item{n_wave}{Number of cycles (waves) should the seasonal trend have.}
+\item{n_wave}{Integer. Number of cycles (waves) should the seasonal trend have.}
 
-\item{full}{Boolean. Indicates whether the output should be in form of a data frame with variables needed for the analysis only (FALSE) or in form of a list containing more information (TRUE). Default=FALSE.}
+\item{full}{Logical. Indicates whether the output should be in form of a data frame with variables needed for the analysis only (FALSE) or in form of a list containing more information (TRUE). Default=FALSE.}
 
-\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
+\item{check}{Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
 }
 \value{
 Data frame: simulated trial data (if full=FALSE, i.e. default) with the following columns:
 \itemize{
 \item \code{j} - patient recruitment index
 \item \code{response} - continuous response for patient \code{j}
-\item \code{treatment}- indicator of the treatment patient \code{j} was allocated in
-\item \code{period} - indicator of the periods patient \code{j} was recruited in
+\item \code{treatment}- index of the treatment patient \code{j} was allocated to
+\item \code{period} - index of the period patient \code{j} was recruited in
 }
 
 or List (if full=TRUE) containing the following elements:
 \itemize{
-\item \code{Data} - simulated trial data, including an additional column \code{means} with the expected value used for the simulation of the response for patient \code{j}
+\item \code{Data} - simulated trial data, including an additional column \code{means} with the theoretical means used for the simulation of the response for patient \code{j}
 \item \code{n_total} - total sample size in the trial
 \item \code{n_arm} - sample size per arm (assumed equal)
 \item \code{num_arms} - number of experimental treatment arms in the trial
@@ -66,22 +66,27 @@ or List (if full=TRUE) containing the following elements:
 \item \code{SS_matrix} - matrix with the sample sizes per arm and per period
 \item \code{period_blocks} - number to multiply the number of active arms with, in order to get the block size per period
 \item \code{mu0} - response in the control arm
-\item \code{theta} - treatment effects for each treatment arm
+\item \code{theta} - treatment effects for each experimental treatment arm
 \item \code{lambda} - strength of time trend in each arm
-\item \code{time_dep_effect} - time dependent treatment effects for each treatment arm (for computing the bias)
+\item \code{time_dep_effect} - time dependent treatment effects for each experimental treatment arm (for computing the bias)
 \item \code{sigma} - standard deviation of the responses
 \item \code{trend} - time trend pattern
 }
 }
 \description{
-This function simulates data from a platform trial with a given number of treatment arms entering at given time points and a shared control arm. The primary endpoint is a continuous endpoint. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the sample size per arm.
+This function simulates data from a platform trial with a given number of experimental treatment arms entering at given time points and a shared control arm. The primary endpoint is a continuous endpoint. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the sample size per arm.
 }
 \details{
 \strong{Design assumptions:}
 \itemize{
+\item The simulated platform trial consists of a given number of experimental treatment arms (specified by the argument \code{num_arms}) and one control arm that is shared across the whole platform.
 \item Participants are indexed by entry order, assuming that at each time unit exactly one participant is recruited and the time of recruitment and observation of the response are equal.
+\item All participants are assumed to be eligible for all arms in the trial, i.e. the same inclusion and exclusion criteria apply to all experimental and control arms.
 \item Equal sample sizes (given by parameter \code{n_arm}) in all experimental treatment arms are assumed.
+\item The duration of a platform trial is divided into so-called periods, defined as time intervals bounded by distinct time points of any treatment arm entering or leaving the platform.
+Hence, multiple treatment arms entering or leaving at the same time point imply the start of only one additional period.
 \item Allocation ratio of 1:1:...:1 in each period. Furthermore, block randomization is used to assign patients to the active arms. Block size in each period = \code{period_blocks}* (number of active arms in the period).
+\item If the period sample size is not a multiple of the block size, arms for the remaining participants are chosen by sampling without replacement from a vector containing the indices of active arms replicated times \verb{ceiling(remaining sample size/number of active arms)}.
 }
 
 \strong{Data generation:}
@@ -94,13 +99,15 @@ where \eqn{\eta_0} (parameter \code{mu0}) and \eqn{\theta_k} (parameter \code{th
 
 The function \eqn{f(j)} denotes the time trend, whose strength is indicated by \eqn{\lambda_{k_j}} (parameter \code{lambda}) and which can have the following patterns (parameter \code{trend}):
 \itemize{
-\item "linear" - trend starts at the beginning of the trial and the mean response increases or decreases linearly with a slope of \eqn{\lambda}, according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1}}, where \eqn{N} is the total sample size in the trial
-\item "linear_2" - trend starts after the first period (i.e. there is no time trend in the first period) and the mean response increases or decreases linearly with a slope of \eqn{\lambda}, according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1}}, where \eqn{N} is the total sample size in the trial
-\item "stepwise" - the mean response is constant in each period and increases or decreases by \eqn{\lambda} each time any treatment arm enters or leaves the trial (i.e. in each period), according to the function \eqn{f(j) = \lambda_{k_j} \cdot (c_j - 1)}, where \eqn{c_j} is an indicator of the period patient \eqn{j} was enrolled in
-\item "stepwise_2" - the mean response is constant in each period and increases or decreases by \eqn{\lambda} each time a new treatment arm is added to the trial, according to the function \eqn{f(j) = \lambda_{k_j} \cdot (w_j - 1)}, where \eqn{w_j} is an indicator of how many treatment arms have already entered the ongoing trial, when patient \eqn{j} was enrolled
-\item "inv_u" - the mean response increases up to the point \eqn{N_p} (parameter \code{N_peak}) and decreases afterwards, linearly with a slope of \eqn{\lambda}, according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1} (I(j \leq N_p) - I(j > N_p))}, where \eqn{N_p} indicates the point at which the trend turns from positive to negative in terms of the sample size (note that for negative \eqn{\lambda}, the mean response decreases first and increases after)
-\item "seasonal" - the mean response increases and decreases periodically with a magnitude of \eqn{\lambda}, according to the function \eqn{f(j) = \lambda \cdot \mathrm{sin} \big( \psi \cdot 2\pi \cdot \frac{j-1}{N-1} \big)}, where \eqn{\psi} indicates how many cycles should the time trend have (parameter \code{n_wave})
+\item \strong{"linear"} - trend starts at the beginning of the trial and the mean response increases or decreases linearly with a slope of \eqn{\lambda}, according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1}}, where \eqn{N} is the total sample size in the trial
+\item \strong{"linear_2"} - trend starts after the first period (i.e. there is no time trend in the first period) and the mean response increases or decreases linearly with a slope of \eqn{\lambda}, according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1}}, where \eqn{N} is the total sample size in the trial
+\item \strong{"stepwise"} - the mean response is constant in each period and increases or decreases by \eqn{\lambda} each time any treatment arm enters or leaves the trial (i.e. in each period), according to the function \eqn{f(j) = \lambda_{k_j} \cdot (c_j - 1)}, where \eqn{c_j} is an index of the period patient \eqn{j} was enrolled in
+\item \strong{"stepwise_2"} - the mean response is constant in each period and increases or decreases by \eqn{\lambda} each time a new treatment arm is added to the trial, according to the function \eqn{f(j) = \lambda_{k_j} \cdot (w_j - 1)}, where \eqn{w_j} is an indicator of how many treatment arms have already entered the ongoing trial, when patient \eqn{j} was enrolled
+\item \strong{"inv_u"} - the mean response increases up to the point \eqn{N_p} (parameter \code{N_peak}) and decreases afterwards, linearly with a slope of \eqn{\lambda}, according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1} (I(j \leq N_p) - I(j > N_p))}, where \eqn{N_p} indicates the point at which the trend turns from positive to negative in terms of the sample size (note that for negative \eqn{\lambda}, the mean response decreases first and increases after)
+\item \strong{"seasonal"} - the mean response increases and decreases periodically with a magnitude of \eqn{\lambda}, according to the function \eqn{f(j) = \lambda \cdot \mathrm{sin} \big( \psi \cdot 2\pi \cdot \frac{j-1}{N-1} \big)}, where \eqn{\psi} indicates how many cycles should the time trend have (parameter \code{n_wave})
 }
+
+Trials with no time trend can be simulated too, by setting all elements of the vector \code{lambda} to zero and choosing an arbitrary pattern.
 }
 \examples{
 

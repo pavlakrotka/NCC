@@ -6,8 +6,8 @@
 #' @param arm Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
 #' @param alpha Double. Decision boundary (one-sided). Default=0.025
 #' @param opt Integer (1 or 2). If opt==1, all former periods are used as one source; if opt==2, periods get separately included into the final analysis. Default=2.
-#' @param prior_prec_tau Double. Dispersion parameter of the half normal prior, the prior for the between study heterogeneity. Default=4.
-#' @param prior_prec_eta Double. Dispersion parameter of the normal prior, the prior for the control log-odds. Default=0.001.
+#' @param prior_prec_tau Double. Precision parameter (\eqn{1/\sigma^2_{\tau}}) of the half normal hyperprior, the prior for the between study heterogeneity. Default=4.
+#' @param prior_prec_eta Double. Precision parameter (\eqn{1/\sigma^2_{\eta}}) of the normal hyperprior, the prior for the hyperparameter mean of the control log-odds. Default=0.001.
 #' @param n_samples Integer. Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's. Default=1000.
 #' @param n_chains Integer. Number of parallel chains for the rjags model. Default=4.
 #' @param n_iter Integer. Number of iterations to monitor of the jags.model. Needed for coda.samples. Default=4000.
@@ -29,6 +29,36 @@
 #' @export
 #'
 #' @details
+#'
+#' The MAP approach derives the prior distribution for the control response in the concurrent periods based on the control information from the non-concurrent periods.
+#'
+#' The model for the binary response \eqn{y_{js}} for the control patient \eqn{j} in the non-concurrent period \eqn{s} is defined as follows:
+#'
+#' \deqn{g(E((y_{js})) = \eta_s}
+#'
+#' where \eqn{g(\cdot)} denotes the logit link function and \eqn{\eta_s} represents the control log odds in the non-concurrent period \eqn{s}.
+#'
+#' The log odds for the non-concurrent controls in period \eqn{s} are assumed to have a normal prior distribution with mean \eqn{\mu_{\eta}} and variance \eqn{\tau^2}:
+#'
+#' \deqn{\eta_s \sim \mathcal{N}(\mu_{\eta}, \tau^2)}
+#'
+#'
+#' For the hyperparameters \eqn{\mu_{\eta}} and \eqn{\tau}, normal and half-normal hyperprior distributions are assumed, with mean 0 and variances \eqn{\sigma^2_{\eta}} and \eqn{\sigma^2_{\tau}}, respectively:
+#'
+#' \deqn{\mu_{\eta} \sim \mathcal{N}(0, \sigma^2_{\eta})}
+#'
+#' \deqn{\tau \sim HalfNormal(0, \sigma^2_{\tau})}
+#'
+#'
+#' The MAP prior distribution \eqn{p_{MAP}(\eta_{CC})} for the control response in the concurrent periods is then obtained as the posterior distribution of the parameters \eqn{\eta_s} from the above specified model.
+#'
+#' If `robustify=TRUE`, the MAP prior is robustified by adding a weakly-informative mixture component \eqn{p_{\mathrm{non-inf}}}, leading to a robustified MAP prior distribution:
+#'
+#' \deqn{p_{rMAP}(\eta_{CC}) = (1-w) \cdot p_{MAP}(\eta_{CC}) + w \cdot p_{\mathrm{non-inf}}(\eta_{CC})}
+#'
+#' where \eqn{w} (parameter `weight`) may be interpreted as the degree of skepticism towards borrowing strength.
+#'
+#'
 #'
 #' In this function, the argument `alpha` corresponds to \eqn{1-\gamma}, where \eqn{\gamma} is the decision boundary. Specifically, the posterior probability of the difference distribution under the null hypothesis is such that:
 #' \eqn{P(p_{treatment}-p_{control}>0) \ge 1-}`alpha`.
@@ -57,18 +87,18 @@
 
 
 MAPprior_bin <- function(data,
-                          arm,
-                          alpha = 0.025,
-                          opt = 2,
-                          prior_prec_tau = 4,
-                          prior_prec_eta = 0.001,
-                          n_samples = 1000,
-                          n_chains = 4,
-                          n_iter = 4000,
-                          n_adapt = 1000,
-                          robustify = TRUE,
-                          weight = 0.1,
-                          check = TRUE, ...){
+                         arm,
+                         alpha = 0.025,
+                         opt = 2,
+                         prior_prec_tau = 4,
+                         prior_prec_eta = 0.001,
+                         n_samples = 1000,
+                         n_chains = 4,
+                         n_iter = 4000,
+                         n_adapt = 1000,
+                         robustify = TRUE,
+                         weight = 0.1,
+                         check = TRUE, ...){
 
   if (check) {
     if (!is.data.frame(data) | sum(c("treatment", "response", "period") %in% colnames(data))!=3) {

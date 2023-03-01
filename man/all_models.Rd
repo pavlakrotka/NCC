@@ -37,63 +37,63 @@ all_models(
 )
 }
 \arguments{
-\item{data}{Simulated trial data, e.g. result from the \code{datasim_bin()} or \code{datasim_cont()} function.}
+\item{data}{Data frame with trial data, e.g. result from the \code{datasim_bin()} or \code{datasim_cont()} function.}
 
-\item{arms}{Vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.}
+\item{arms}{Integer vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.}
 
-\item{models}{Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel"). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.}
+\item{models}{Character vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel"). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.}
 
 \item{endpoint}{Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.}
 
-\item{alpha}{Significance level (one-sided). Default=0.025.}
+\item{alpha}{Double. Significance level (one-sided). Default=0.025.}
 
-\item{unit_size}{Number of patients per calendar time unit for frequentist models adjusting for calendar time. Default=25.}
+\item{unit_size}{Integer. Number of patients per calendar time unit for frequentist models adjusting for calendar time. Default=25.}
 
-\item{ncc}{Boolean. Whether to include NCC data into the analysis using frequentist models. Default=TRUE.}
+\item{ncc}{Logical. Whether to include NCC data into the analysis using frequentist models. Default=TRUE.}
 
-\item{opt}{Binary. In the MAP Prior approach, if opt==1, all former periods are used as one source; if opt==2, periods get separately included into the final analysis. Default=2.}
+\item{opt}{Integer (1 or 2). In the MAP Prior approach, if opt==1, all former periods are used as one source; if opt==2, periods get separately included into the final analysis. Default=2.}
 
-\item{prior_prec_tau}{Dispersion parameter of the half normal prior, the prior for the between study heterogeneity in the MAP Prior approach. Default=4.}
+\item{prior_prec_tau}{Double. Dispersion parameter of the half normal prior, the prior for the between study heterogeneity in the MAP Prior approach. Default=4.}
 
-\item{prior_prec_eta}{Dispersion parameter of the normal prior, the prior for the control response (log-odds or mean) in the MAP Prior approach. Default=0.001.}
+\item{prior_prec_eta}{Double. Dispersion parameter of the normal prior, the prior for the control response (log-odds or mean) in the MAP Prior approach. Default=0.001.}
 
-\item{n_samples}{Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's in the MAP Prior approach. Default=1000.}
+\item{n_samples}{Integer. Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's in the MAP Prior approach. Default=1000.}
 
-\item{n_chains}{Number of parallel chains for the rjags model in the MAP Prior approach. Default=4.}
+\item{n_chains}{Integer. Number of parallel chains for the rjags model in the MAP Prior approach. Default=4.}
 
-\item{n_iter}{Number of iterations to monitor of the jags.model. Needed for coda.samples in the MAP Prior approach. Default=4000.}
+\item{n_iter}{Integer. Number of iterations to monitor of the jags.model. Needed for coda.samples in the MAP Prior approach. Default=4000.}
 
-\item{n_adapt}{Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model in the MAP Prior approach. Default=1000.}
+\item{n_adapt}{Integer. Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model in the MAP Prior approach. Default=1000.}
 
-\item{robustify}{Boolean. Indicates whether a robust prior is to be used. If TRUE, a mixture prior is considered combining a MAP prior and a weakly non-informative component prior. Default=TRUE.}
+\item{robustify}{Logical. Indicates whether a robust prior is to be used. If TRUE, a mixture prior is considered combining a MAP prior and a weakly non-informative component prior. Default=TRUE.}
 
-\item{weight}{Weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP Prior according to Schmidli (2014). Default=0.1.}
+\item{weight}{Double. Weight given to the non-informative component (0 < weight < 1) for the robustification of the MAP Prior according to Schmidli (2014). Default=0.1.}
 
-\item{ci}{Boolean. Whether confidence intervals for the mixed models should be computed. Default=FALSE.}
+\item{ci}{Logical. Whether confidence intervals for the mixed models should be computed. Default=FALSE.}
 
-\item{prec_theta}{Precision (\eqn{1/\sigma^2_{\theta}}) of the prior regarding the treatment effect \eqn{\theta}. I.e. \eqn{\theta \sim N(0, \sigma^2_{\theta})} . Default=0.001.}
+\item{prec_theta}{Double. Precision (\eqn{1/\sigma^2_{\theta}}) of the prior regarding the treatment effect \eqn{\theta}. I.e. \eqn{\theta \sim N(0, \sigma^2_{\theta})} . Default=0.001.}
 
-\item{prec_eta}{Precision (\eqn{1/\sigma^2_{\eta_0}}) of the prior regarding the control response \eqn{\eta_0}. I.e. \eqn{\eta_0 \sim N(0, \sigma^2_{\eta_0})}. Default=0.001.}
+\item{prec_eta}{Double. Precision (\eqn{1/\sigma^2_{\eta_0}}) of the prior regarding the control response \eqn{\eta_0}. I.e. \eqn{\eta_0 \sim N(0, \sigma^2_{\eta_0})}. Default=0.001.}
 
-\item{tau_a}{Parameter \eqn{a} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend in the Time Machine approach. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.1.}
+\item{tau_a}{Double. Parameter \eqn{a} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend in the Time Machine approach. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.1.}
 
-\item{tau_b}{Parameter \eqn{b} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend in the Time Machine approach. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.01.}
+\item{tau_b}{Double. Parameter \eqn{b} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend in the Time Machine approach. I.e., \eqn{\tau \sim Gamma(a,b)}. Default=0.01.}
 
-\item{prec_a}{Parameter \eqn{a} of the Gamma distribution regarding the precision of the responses for continuous endpoints in the Time Machine approach. I.e., \eqn{\sigma \sim Gamma(a,b)}. Default=0.001.}
+\item{prec_a}{Double. Parameter \eqn{a} of the Gamma distribution regarding the precision of the responses for continuous endpoints in the Time Machine approach. I.e., \eqn{\sigma \sim Gamma(a,b)}. Default=0.001.}
 
-\item{prec_b}{Parameter \eqn{b} of the Gamma distribution regarding the precision of the responses for continuous endpoints in the Time Machine approach. I.e., \eqn{\sigma \sim Gamma(a,b)}. Default=0.001.}
+\item{prec_b}{Double. Parameter \eqn{b} of the Gamma distribution regarding the precision of the responses for continuous endpoints in the Time Machine approach. I.e., \eqn{\sigma \sim Gamma(a,b)}. Default=0.001.}
 
-\item{bucket_size}{Number of patients per time bucket in the Time Machine approach. Default=25.}
+\item{bucket_size}{Integer. Number of patients per time bucket in the Time Machine approach. Default=25.}
 
 \item{smoothing_basis}{String indicating the (penalized) smoothing basis to use in the GAM models. Default="tp".}
 
-\item{basis_dim}{The dimension of the basis used to represent the smooth term in the GAM models. The default depends on the number of variables that the smooth is a function of. Default=-1.}
+\item{basis_dim}{Integer. The dimension of the basis used to represent the smooth term in the GAM models. The default depends on the number of variables that the smooth is a function of. Default=-1.}
 
-\item{gam_method}{The smoothing parameter estimation method for the GAM models. Default="GCV.Cp".}
+\item{gam_method}{String indicating the smoothing parameter estimation method for the GAM models. Default="GCV.Cp".}
 
-\item{bs_degree}{Degree of the polynomial splines. Default=3.}
+\item{bs_degree}{Integer. Degree of the polynomial splines. Default=3.}
 
-\item{poly_degree}{Degree of the discontinuous piecewise polynomials. Default=3.}
+\item{poly_degree}{Integer. Degree of the discontinuous piecewise polynomials. Default=3.}
 }
 \value{
 List containing an indicator whether the null hypothesis was rejected or not, and the estimated treatment effect for all investigated treatment arms and all models.

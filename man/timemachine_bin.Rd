@@ -18,25 +18,25 @@ timemachine_bin(
 )
 }
 \arguments{
-\item{data}{Trial data, e.g. result from the \code{datasim_bin()} function. Must contain columns named 'treatment', 'response' and 'period'.}
+\item{data}{Data frame with trial data, e.g. result from the \code{datasim_bin()} function. Must contain columns named 'treatment', 'response' and 'period'.}
 
-\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
+\item{arm}{Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Significance level (one-sided). Default=0.025.}
+\item{alpha}{Double. Decision boundary (one-sided). Default=0.025.}
 
-\item{prec_theta}{Precision (\eqn{1/\sigma^2_{\theta}}) of the prior regarding the treatment effect \eqn{\theta}. I.e. \eqn{\theta \sim N(0, \sigma^2_{\theta})} . Default=0.001.}
+\item{prec_theta}{Double. Precision (\eqn{1/\sigma^2_{\theta}}) of the prior regarding the treatment effect \eqn{\theta}. I.e. \eqn{\theta \sim N(0, \sigma^2_{\theta})} . Default=0.001.}
 
-\item{prec_eta}{Precision (\eqn{1/\sigma^2_{\eta_0}}) of the prior regarding the control log-odds \eqn{\eta_0}. I.e. \eqn{\eta_0 \sim N(0, \sigma^2_{\eta_0})}. Default=0.001.}
+\item{prec_eta}{Double. Precision (\eqn{1/\sigma^2_{\eta_0}}) of the prior regarding the control log-odds \eqn{\eta_0}. I.e. \eqn{\eta_0 \sim N(0, \sigma^2_{\eta_0})}. Default=0.001.}
 
-\item{tau_a}{Parameter \eqn{a_{\tau}} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend. I.e., \eqn{\tau \sim Gamma(a_{\tau},b_{\tau})}. Default=0.1.}
+\item{tau_a}{Double. Parameter \eqn{a_{\tau}} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend. I.e., \eqn{\tau \sim Gamma(a_{\tau},b_{\tau})}. Default=0.1.}
 
-\item{tau_b}{Parameter \eqn{b_{\tau}} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend. I.e., \eqn{\tau \sim Gamma(a_{\tau},b_{\tau})}. Default=0.01.}
+\item{tau_b}{Double. Parameter \eqn{b_{\tau}} of the Gamma distribution for the precision parameter \eqn{\tau} in the model for the time trend. I.e., \eqn{\tau \sim Gamma(a_{\tau},b_{\tau})}. Default=0.01.}
 
-\item{bucket_size}{Number of patients per time bucket. Default=25.}
+\item{bucket_size}{Integer. Number of patients per time bucket. Default=25.}
 
-\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
+\item{check}{Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
 
-\item{...}{Further arguments for simulation function.}
+\item{...}{Further arguments passed by wrapper functions when running simulations.}
 }
 \value{
 List containing the following elements regarding the results of comparing \code{arm} to control:

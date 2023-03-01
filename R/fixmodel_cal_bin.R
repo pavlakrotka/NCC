@@ -6,7 +6,7 @@
 #' @param arm Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
 #' @param alpha Double. Significance level (one-sided). Default=0.025.
 #' @param unit_size Integer. Number of patients per calendar time unit. Default=25.
-#' @param ncc Logical. Indicates whether to include NCC data into the analysis. Default=TRUE.
+#' @param ncc Logical. Indicates whether to include non-concurrent data into the analysis. Default=TRUE.
 #' @param check Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
 #' @param ... Further arguments passed by wrapper functions when running simulations.
 #'
@@ -17,10 +17,10 @@
 #' @importFrom stats binomial
 #'
 #' @export
-#' 
-#' @details 
 #'
-#' The model-based analysis adjusts for the time effect by including the factor calendar time unit (defined as time units of fixed length, defined by `ùnit_size`). The time is then modelled as a step-function with jumps at the beginning of each calendar time unit. 
+#' @details
+#'
+#' The model-based analysis adjusts for the time effect by including the factor calendar time unit (defined as time units of fixed length, defined by `ùnit_size`). The time is then modelled as a step-function with jumps at the beginning of each calendar time unit.
 #' Denoting by \eqn{y_j} the response probability for patient \eqn{j}, by \eqn{k_j} the arm patient \eqn{j} was allocated to, and by \eqn{M} the treatment arm under evaluation, the regression model is given by:
 #'
 #' \deqn{g(E(y_j)) = \eta_0  + \sum_{k \in \mathcal{K}_M} \theta_k \cdot I(k_j=k) + \sum_{c=2}^{C_M} \tau_c \cdot I(t_j \in T_{C_c})}
@@ -29,7 +29,7 @@
 #' \eqn{\theta_k} represents the log odds ratio of treatment \eqn{k} and control for \eqn{k\in\mathcal{K}_M}, where \eqn{\mathcal{K}_M} is the set of treatments
 #' that were active in the trial during calendar time units prior or up to the time when the investigated treatment arm left the trial;
 #' \eqn{\tau_c} indicates the stepwise calendar time effect in terms of the log odds ratio between calendar time units 1 and \eqn{c} (\eqn{c = 2, \ldots, C_M}), where \eqn{C_M} denotes the calendar time unit, in which the investigated treatment arm left the trial.
-#' 
+#'
 #' If the data consists of only one calendar time unit, the calendar time unit in not used as covariate.
 #'
 #' @examples

@@ -17,23 +17,23 @@ gam_cont(
 )
 }
 \arguments{
-\item{data}{Trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment', 'response', 'period' and 'j'.}
+\item{data}{Data frame with trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment', 'response', 'period' and 'j'.}
 
-\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
+\item{arm}{Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Significance level (one-sided). Default=0.025.}
+\item{alpha}{Double. Significance level (one-sided). Default=0.025.}
 
-\item{ci}{Boolean. Whether confidence intervals should be computed. Default=FALSE.}
+\item{ci}{Logical. Indicates whether confidence intervals should be computed. Default=FALSE.}
 
 \item{smoothing_basis}{String indicating the (penalized) smoothing basis to use. Default="tp" for thin plate regression spline. Available strings are 'tp', 'ts', 'ds', 'cr', 'cs', 'cc', 'sos', 'ps', 'cp', 're', 'mrf', 'gp', and 'so'. For more information see https://stat.ethz.ch/R-manual/R-devel/library/mgcv/html/smooth.terms.html.}
 
-\item{basis_dim}{The dimension of the basis used to represent the smooth term. The default depends on the number of variables that the smooth is a function of. Default=-1. For more information see the description of the parameter 'k' in https://stat.ethz.ch/R-manual/R-devel/library/mgcv/html/s.html.}
+\item{basis_dim}{Integer. The dimension of the basis used to represent the smooth term. The default depends on the number of variables that the smooth is a function of. Default=-1. For more information see the description of the parameter 'k' in https://stat.ethz.ch/R-manual/R-devel/library/mgcv/html/s.html.}
 
-\item{gam_method}{The smoothing parameter estimation method. Default="GCV.Cp". Available strings are 'GCV.Cp', 'GACV.Cp', 'REML', 'P-REML', 'ML', and 'P-ML'. For more information see the description of the parameter 'method' in https://stat.ethz.ch/R-manual/R-devel/library/mgcv/html/gam.html.}
+\item{gam_method}{String indicating the smoothing parameter estimation method. Default="GCV.Cp". Available strings are 'GCV.Cp', 'GACV.Cp', 'REML', 'P-REML', 'ML', and 'P-ML'. For more information see the description of the parameter 'method' in https://stat.ethz.ch/R-manual/R-devel/library/mgcv/html/gam.html.}
 
-\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
+\item{check}{Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
 
-\item{...}{Further arguments for simulation function.}
+\item{...}{Further arguments passed by wrapper functions when running simulations.}
 }
 \value{
 List containing the following elements regarding the results of comparing \code{arm} to control:

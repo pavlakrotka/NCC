@@ -15,19 +15,19 @@ fixmodel_cal_cont(
 )
 }
 \arguments{
-\item{data}{Trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment' and 'response'.}
+\item{data}{Data frame with trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment' and 'response'.}
 
-\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
+\item{arm}{Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Significance level (one-sided). Default=0.025.}
+\item{alpha}{Double. Significance level (one-sided). Default=0.025.}
 
-\item{unit_size}{Number of patients per calendar time unit. Default=25.}
+\item{unit_size}{Integer. Number of patients per calendar time unit. Default=25.}
 
-\item{ncc}{Boolean. Whether to include NCC data into the analysis. Default=TRUE.}
+\item{ncc}{Logical. Indicates whether to include non-concurrent data into the analysis. Default=TRUE.}
 
-\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
+\item{check}{Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
 
-\item{...}{Further arguments for simulation function.}
+\item{...}{Further arguments passed by wrapper functions when running simulations.}
 }
 \value{
 List containing the following elements regarding the results of comparing \code{arm} to control:
@@ -44,14 +44,17 @@ List containing the following elements regarding the results of comparing \code{
 This function performs linear regression taking into account all trial data until the arm under study leaves the trial and adjusting for calendar time units as factors.
 }
 \details{
-The model-based analysis adjusts for the time effect by including the factor calendar time interval. The time is then modelled as a step-function with jumps at calendar times. Denoting by \eqn{y_j} the continuous response  for patient \eqn{j} and by \eqn{M} the treatment arm under evaluation, the regression model is given by:
+The model-based analysis adjusts for the time effect by including the factor calendar time unit (defined as time units of fixed length, defined by \code{ùnit_size}). The time is then modelled as a step-function with jumps at the beginning of each calendar time unit.
+Denoting by \eqn{y_j} the continuous response for patient \eqn{j}, by \eqn{k_j} the arm patient \eqn{j} was allocated to, and by \eqn{M} the treatment arm under evaluation, the regression model is given by:
 
-\deqn{y_j = \eta_0  + \sum_{k \in \mathcal{K}_M} \theta_k \cdot I(k_j=k) + \sum_{c=2}^{C_M} \tau_c \cdot I(t_j \in T_{C_c}) + \varepsilon_j}
+\deqn{E(y_j) = \eta_0  + \sum_{k \in \mathcal{K}_M} \theta_k \cdot I(k_j=k) + \sum_{c=2}^{C_M} \tau_c \cdot I(t_j \in T_{C_c})}
 
-where \eqn{\eta_0} is the response in the control arm in the first period;
+where \eqn{\eta_0} is the response in the control arm in the first calendar time unit;
 \eqn{\theta_k} represents the effect of treatment \eqn{k} compared to control for \eqn{k\in\mathcal{K}_M}, where \eqn{\mathcal{K}_M} is the set of treatments
-that were active in the trial during periods prior or up to the time when the investigated treatment arm left the trial;
-\eqn{\tau_c} indicates the stepwise period effect between calendar time units 1 and \eqn{c} (\eqn{c = 2, \ldots, C_M}), where \eqn{C_M} denotes the calendar time unit, in which the investigated treatment arm left the trial.
+that were active in the trial during calendar time units prior or up to the time when the investigated treatment arm left the trial;
+\eqn{\tau_c} indicates the stepwise calendar time effect between calendar time units 1 and \eqn{c} (\eqn{c = 2, \ldots, C_M}), where \eqn{C_M} denotes the calendar time unit, in which the investigated treatment arm left the trial.
+
+If the data consists of only one calendar time unit, the calendar time unit in not used as covariate.
 }
 \examples{
 

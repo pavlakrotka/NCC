@@ -4,7 +4,7 @@
 \alias{inv_u_trend}
 \title{Generation of an inverted-u trend}
 \usage{
-inv_u_trend(j, lambda, N_peak, sample_size)
+inv_u_trend(j, lambda, N_peak, n_total)
 }
 \arguments{
 \item{j}{Time points for which the trend should be generated.}
@@ -13,7 +13,7 @@ inv_u_trend(j, lambda, N_peak, sample_size)
 
 \item{N_peak}{Point at which the time trend switches direction in terms of overall sample size.}
 
-\item{sample_size}{Total sample size in the trial.}
+\item{n_total}{Total sample size in the trial.}
 }
 \value{
 Time trend for time points j.
@@ -22,7 +22,8 @@ Time trend for time points j.
 This function generates a time trend for given time points in the trial according to an inverted-u function.
 }
 \details{
-The time trend is generated according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1} (I(j \leq N_p) - I(j > N_p))}.
+The time trend is generated according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1} (I(j \leq N_p) - I(j > N_p))},
+where \eqn{N} is the total sample size (parameter \code{n_total}) and \eqn{N_p} (parameter \code{N_peak}) indicates the point at which the trend switches direction.
 }
 \author{
 Marta Bofill Roig, Pavla Krotka

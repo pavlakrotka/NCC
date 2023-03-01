@@ -7,7 +7,7 @@
 plot_trial(treatments)
 }
 \arguments{
-\item{treatments}{Vector with treatment indicators ordered by time, e.g. column \code{treatment} from the dataframe resulting from the \code{datasim_bin()} or \code{datasim_cont()} function.}
+\item{treatments}{Vector with indices of assigned arms for each participant, ordered by time, e.g. column \code{treatment} from the dataframe resulting from the \code{datasim_bin()} or \code{datasim_cont()} function.}
 }
 \value{
 ggplot showing trial progress over time.

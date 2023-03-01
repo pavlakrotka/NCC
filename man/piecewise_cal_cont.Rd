@@ -16,21 +16,21 @@ piecewise_cal_cont(
 )
 }
 \arguments{
-\item{data}{Trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment', 'response' and 'j'.}
+\item{data}{Data frame with trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment', 'response' and 'j'.}
 
-\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
+\item{arm}{Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Significance level (one-sided). Default=0.025.}
+\item{alpha}{Double. Significance level (one-sided). Default=0.025.}
 
-\item{unit_size}{Number of patients per calendar time unit. Default=25.}
+\item{unit_size}{Integer. Number of patients per calendar time unit. Default=25.}
 
-\item{ncc}{Boolean. Whether to include NCC data into the analysis. Default=TRUE.}
+\item{ncc}{Logical. Indicates whether to include non-concurrent data into the analysis. Default=TRUE.}
 
-\item{poly_degree}{Degree of the piecewise polynomial. Default=3.}
+\item{poly_degree}{Integer. Degree of the piecewise polynomial. Default=3.}
 
-\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
+\item{check}{Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
 
-\item{...}{Further arguments for simulation function.}
+\item{...}{Further arguments passed by wrapper functions when running simulations.}
 }
 \value{
 List containing the following elements regarding the results of comparing \code{arm} to control:

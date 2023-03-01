@@ -14,17 +14,17 @@ sim_study_par(
 )
 }
 \arguments{
-\item{nsim}{Number of replications. Must be larger than 1.}
+\item{nsim}{Integer. Number of replications. Must be larger than 1.}
 
 \item{scenarios}{Data frame containing all parameters for scenarios that should be simulated.}
 
-\item{arms}{Vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.}
+\item{arms}{Integer vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.}
 
-\item{models}{Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel"). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.}
+\item{models}{Character vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel"). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.}
 
 \item{endpoint}{Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.}
 
-\item{perc_cores}{What percentage of available cores should be used for the simulations. Default=0.9.}
+\item{perc_cores}{Double. What percentage of available cores should be used for the simulations. Default=0.9.}
 }
 \value{
 Data frame with all considered scenarios and corresponding results - the probability to reject \eqn{H_0}, and the bias, as well as the mean squared error (MSE) of the treatment effect estimates.
@@ -34,6 +34,7 @@ This function performs a simulation study for a given set of scenarios, analyzin
 }
 \examples{
 
+\dontrun{
 # Create data frame with all parameters:
 sim_scenarios <- data.frame(num_arms = 4,
 n_arm = 250,
@@ -58,8 +59,9 @@ alpha = 0.025,
 ncc = TRUE)
 
 # Run simulation study:
-# sim_results <- sim_study_par(nsim = 100, scenarios = sim_scenarios, arms = c(3, 4),
-# models = c("fixmodel", "sepmodel", "poolmodel"), endpoint = "cont")
+sim_results <- sim_study_par(nsim = 100, scenarios = sim_scenarios, arms = c(3, 4), 
+models = c("fixmodel", "sepmodel", "poolmodel"), endpoint = "cont")
+}
 
 
 }

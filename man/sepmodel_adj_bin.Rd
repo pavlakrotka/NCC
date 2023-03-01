@@ -7,15 +7,15 @@
 sepmodel_adj_bin(data, arm, alpha = 0.025, check = TRUE, ...)
 }
 \arguments{
-\item{data}{Trial data, e.g. result from the \code{datasim_bin()} function. Must contain columns named 'treatment', 'response' and 'period'.}
+\item{data}{Data frame with trial data, e.g. result from the \code{datasim_bin()} function. Must contain columns named 'treatment', 'response' and 'period'.}
 
-\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
+\item{arm}{Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Significance level (one-sided). Default=0.025.}
+\item{alpha}{Double. Significance level (one-sided). Default=0.025.}
 
-\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
+\item{check}{Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
 
-\item{...}{Further arguments for simulation function}
+\item{...}{Further arguments passed by wrapper functions when running simulations.}
 }
 \value{
 List containing the following elements regarding the results of comparing \code{arm} to control:
@@ -30,6 +30,18 @@ List containing the following elements regarding the results of comparing \code{
 }
 \description{
 This function performs separate analysis (only taking into account concurrent controls) using a logistic model and adjusting for periods, if the treatment arm stays in the trial for more than one period.
+}
+\details{
+The adjusted separate analysis takes into account only the data from the evaluated experimental treatment arm and its concurrent controls and adjusts for the time effect by including the factor period (defined as a time interval bounded by any treatment arm entering or leaving the platform). The time is then modelled as a step-function with jumps at the beginning of each period.
+Denoting by \eqn{y_j} the response probability for patient \eqn{j}, by \eqn{k_j} the arm patient \eqn{j} was allocated to, and by \eqn{M} the treatment arm under evaluation, the regression model is given by:
+
+\deqn{g(E(y_j)) = \eta_0  + \theta_M \cdot I(k_j=M) + \sum_{s=S_{M_1}+1}^{S_{M_2}} \tau_s \cdot I(t_j \in T_{S_s})}
+
+where \eqn{g(\cdot)} denotes the logit link function and \eqn{\eta_0} is the log odds in the concurrent controls;
+\eqn{\theta_M} represents the log odds ratio of treatment \eqn{M} and control;
+\eqn{\tau_s} indicates the stepwise period effect in terms of the log odds ratio between periods \eqn{S_{M_1}} and \eqn{s} (\eqn{s = S_{M_1}+1, \ldots, S_{M_2}}), where \eqn{S_{M_1}} and \eqn{S_{M_2}} denote the periods, in which the investigated treatment arm joined and left the trial, respectively.
+
+If the data consists of only one period, the period in not used as covariate.
 }
 \examples{
 

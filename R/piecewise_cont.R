@@ -5,7 +5,7 @@
 #' @param data Data frame with trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response', 'period' and 'j'.
 #' @param arm Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
 #' @param alpha Double. Significance level (one-sided). Default=0.025.
-#' @param ncc Logical. Indicates whether to include NCC data into the analysis. Default=TRUE.
+#' @param ncc Logical. Indicates whether to include non-concurrent data into the analysis. Default=TRUE.
 #' @param poly_degree Integer. Degree of the piecewise polynomial. Default=3.
 #' @param check Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
 #' @param ... Further arguments passed by wrapper functions when running simulations.

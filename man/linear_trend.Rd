@@ -20,7 +20,7 @@ Time trend for time points j.
 This function generates a time trend for given time points in the trial according to a linear function.
 }
 \details{
-The time trend is generated according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1}}.
+The time trend is generated according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1}}, where \eqn{N} is the total sample size.
 }
 \author{
 Marta Bofill Roig, Pavla Krotka

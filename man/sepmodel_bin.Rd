@@ -7,15 +7,15 @@
 sepmodel_bin(data, arm, alpha = 0.025, check = TRUE, ...)
 }
 \arguments{
-\item{data}{Trial data, e.g. result from the \code{datasim_bin()} function. Must contain columns named 'treatment', 'response' and 'period'.}
+\item{data}{Data frame with trial data, e.g. result from the \code{datasim_bin()} function. Must contain columns named 'treatment', 'response' and 'period'.}
 
-\item{arm}{Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
+\item{arm}{Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 
-\item{alpha}{Significance level (one-sided). Default=0.025.}
+\item{alpha}{Double. Significance level (one-sided). Default=0.025.}
 
-\item{check}{Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
+\item{check}{Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.}
 
-\item{...}{Further arguments for simulation function.}
+\item{...}{Further arguments passed by wrapper functions when running simulations.}
 }
 \value{
 List containing the following elements regarding the results of comparing \code{arm} to control:
@@ -30,6 +30,15 @@ List containing the following elements regarding the results of comparing \code{
 }
 \description{
 This function performs separate analysis (only taking into account concurrent controls) using a logistic model.
+}
+\details{
+The separate analysis takes into account only the data from the evaluated experimental treatment arm and its concurrent controls and uses a logistic regression model to evaluate the given treatment arm.
+Denoting by \eqn{y_j} the response probability for patient \eqn{j}, by \eqn{k_j} the arm patient \eqn{j} was allocated to, and by \eqn{M} the treatment arm under evaluation, the regression model is given by:
+
+\deqn{g(E(y_j)) = \eta_0  + \theta_M \cdot I(k_j=M)}
+
+where \eqn{g(\cdot)} denotes the logit link function and \eqn{\eta_0} is the log odds in the concurrent controls;
+\eqn{\theta_M} represents the log odds ratio of treatment \eqn{M} and control.
 }
 \examples{
 

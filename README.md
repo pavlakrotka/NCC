@@ -10,8 +10,8 @@ We consider a platform trial evaluating the efficacy of
 ![K](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;K "K")
 treatment arms compared to a shared control. We assume that treatment
 arms enter the platform trial sequentially. In particular, we consider a
-trial starting with one initial treatment arm, where a new arm is added
-after every
+trial starting with at least one initial treatment arm, where a new arm
+is added after every
 ![d=(d_1,...,d_K)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;d%3D%28d_1%2C...%2Cd_K%29 "d=(d_1,...,d_K)")
 patients have been recruited to the trial (with
 ![d_1=0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;d_1%3D0 "d_1=0")).
@@ -123,7 +123,7 @@ This package contains the following functions:
 For a more detailed description of the functions, see the vignettes in
 the R-package website (<https://pavlakrotka.github.io/NCC/>).
 
-## Scheme of available functions
+## Scheme of the package structure
 
 The below figure illustrates the `NCC` package functions by
 functionality.
