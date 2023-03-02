@@ -67,7 +67,8 @@
   <span class="va">arms</span>,
   models <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fixmodel"</span>, <span class="st">"sepmodel"</span>, <span class="st">"poolmodel"</span><span class="op">)</span>,
   <span class="va">endpoint</span>,
-  perc_cores <span class="op">=</span> <span class="fl">0.9</span>
+  perc_cores <span class="op">=</span> <span class="fl">0.9</span>,
+  verbose <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -85,6 +86,8 @@
 <dd><p>Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.</p></dd>
 <dt>perc_cores</dt>
 <dd><p>Double. What percentage of available cores should be used for the simulations. Default=0.9.</p></dd>
+<dt>verbose</dt>
+<dd><p>Logical. Indicates whether to print a message (system time and number of finished scenarios) after simulating each scenario in order to track the progress of the simulations. Default=TRUE.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -98,7 +101,7 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span class="r-in"><span class="co"># \donttest{</span></span>
 <span class="r-in"><span class="co"># Create data frame with all parameters:</span></span>
 <span class="r-in"><span class="va">sim_scenarios</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>num_arms <span class="op">=</span> <span class="fl">4</span>,</span>
 <span class="r-in">n_arm <span class="op">=</span> <span class="fl">250</span>,</span>
@@ -123,9 +126,28 @@
 <span class="r-in">ncc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Run simulation study:</span></span>
-<span class="r-in"><span class="va">sim_results</span> <span class="op">&lt;-</span> <span class="fu">sim_study_par</span><span class="op">(</span>nsim <span class="op">=</span> <span class="fl">100</span>, scenarios <span class="op">=</span> <span class="va">sim_scenarios</span>, arms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>, </span>
+<span class="r-in"><span class="va">sim_results</span> <span class="op">&lt;-</span> <span class="fu">sim_study_par</span><span class="op">(</span>nsim <span class="op">=</span> <span class="fl">100</span>, scenarios <span class="op">=</span> <span class="va">sim_scenarios</span>, arms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>,</span>
 <span class="r-in">models <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fixmodel"</span>, <span class="st">"sepmodel"</span>, <span class="st">"poolmodel"</span><span class="op">)</span>, endpoint <span class="op">=</span> <span class="st">"cont"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Starting the simulations. 18 scenarios will be simulated. Starting time: 2023-03-02 21:34:18"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 1/18 done. Time: 2023-03-02 21:34:24"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 2/18 done. Time: 2023-03-02 21:34:25"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 3/18 done. Time: 2023-03-02 21:34:26"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 4/18 done. Time: 2023-03-02 21:34:26"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 5/18 done. Time: 2023-03-02 21:34:27"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 6/18 done. Time: 2023-03-02 21:34:28"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 7/18 done. Time: 2023-03-02 21:34:29"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 8/18 done. Time: 2023-03-02 21:34:29"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 9/18 done. Time: 2023-03-02 21:34:30"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 10/18 done. Time: 2023-03-02 21:34:31"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 11/18 done. Time: 2023-03-02 21:34:32"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 12/18 done. Time: 2023-03-02 21:34:32"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 13/18 done. Time: 2023-03-02 21:34:33"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 14/18 done. Time: 2023-03-02 21:34:34"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 15/18 done. Time: 2023-03-02 21:34:35"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 16/18 done. Time: 2023-03-02 21:34:35"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 17/18 done. Time: 2023-03-02 21:34:36"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Scenario 18/18 done. Time: 2023-03-02 21:34:37"</span>
+<span class="r-in"><span class="co"># }</span></span>
 <span class="r-in"></span>
 <span class="r-in"></span>
 </code></pre></div>
