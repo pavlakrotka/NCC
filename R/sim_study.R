@@ -7,12 +7,13 @@
 #' @param arms Integer vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.
 #' @param models Character vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel"). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.
 #' @param endpoint Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.
+#' @param verbose Logical. Indicates whether to print a message (system time and number of finished scenarios) after simulating each scenario in order to track the progress of the simulations. Default=TRUE.
 #'
 #' @export
 #'
 #' @examples
-#' 
-#' \dontrun{
+#'
+#' \donttest{
 #' # Create data frame with all parameters:
 #' sim_scenarios <- data.frame(num_arms = 4,
 #' n_arm = 250,
@@ -46,7 +47,7 @@
 #' @author Pavla Krotka
 
 
-sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel"), endpoint){
+sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel"), endpoint, verbose = TRUE){
 
   if(!is.numeric(nsim) | length(nsim)!=1 | nsim<=1){
     stop("Number of replications (`nsim`) must be one number and must be larger than 1!")
@@ -236,7 +237,9 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
 
 
 
-  print(paste0("Starting the simulations. ", dim(scenarios)[1], " scenarios will be simulated. Starting time: ", Sys.time()))
+  if (verbose) {
+    print(paste0("Starting the simulations. ", dim(scenarios)[1], " scenarios will be simulated. Starting time: ", Sys.time()))
+  }
 
   models <- sort(models)
 
@@ -340,7 +343,11 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
 
       result <- rbind(result, result_i)
 
-      print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done. Time: ", Sys.time()))
+
+      if (verbose) {
+        print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done. Time: ", Sys.time()))
+      }
+
     }
   }
 
@@ -444,7 +451,10 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
 
       result <- rbind(result, result_i)
 
-      print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done. Time: ", Sys.time()))
+
+      if (verbose) {
+        print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done. Time: ", Sys.time()))
+      }
 
     }
   }

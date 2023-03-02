@@ -8,6 +8,7 @@
 #' @param models Character vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel"). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.
 #' @param endpoint Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.
 #' @param perc_cores Double. What percentage of available cores should be used for the simulations. Default=0.9.
+#' @param verbose Logical. Indicates whether to print a message (system time and number of finished scenarios) after simulating each scenario in order to track the progress of the simulations. Default=TRUE.
 #'
 #' @importFrom parallelly availableCores
 #' @importFrom parallel makeCluster
@@ -20,8 +21,8 @@
 #' @export
 #'
 #' @examples
-#' 
-#' \dontrun{
+#'
+#' \donttest{
 #' # Create data frame with all parameters:
 #' sim_scenarios <- data.frame(num_arms = 4,
 #' n_arm = 250,
@@ -46,7 +47,7 @@
 #' ncc = TRUE)
 #'
 #' # Run simulation study:
-#' sim_results <- sim_study_par(nsim = 100, scenarios = sim_scenarios, arms = c(3, 4), 
+#' sim_results <- sim_study_par(nsim = 100, scenarios = sim_scenarios, arms = c(3, 4),
 #' models = c("fixmodel", "sepmodel", "poolmodel"), endpoint = "cont")
 #' }
 #'
@@ -55,7 +56,7 @@
 #' @author Pavla Krotka
 
 
-sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel"), endpoint, perc_cores=0.9){
+sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", "poolmodel"), endpoint, perc_cores = 0.9, verbose = TRUE){
 
   if(!is.numeric(nsim) | length(nsim)!=1 | nsim<=1){
     stop("Number of replications (`nsim`) must be one number and must be larger than 1!")
@@ -247,8 +248,10 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
 
 
 
+  if(verbose){
+    print(paste0("Starting the simulations. ", dim(scenarios)[1], " scenarios will be simulated. Starting time: ", Sys.time()))
+  }
 
-  print(paste0("Starting the simulations. ", dim(scenarios)[1], " scenarios will be simulated. Starting time: ", Sys.time()))
 
   cores <- availableCores()
   n_cores <- ifelse(floor(unname(cores)*perc_cores)<=1, 1, floor(unname(cores)*perc_cores)) # always use at least one core
@@ -380,7 +383,10 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
 
       result <- rbind(result, result_i)
 
-      print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done. Time: ", Sys.time()))
+      if (verbose) {
+        print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done. Time: ", Sys.time()))
+      }
+
     }
 
     stopCluster(cl)
@@ -508,7 +514,11 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
 
       result <- rbind(result, result_i)
 
-      print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done. Time: ", Sys.time()))
+
+      if (verbose) {
+        print(paste0("Scenario ", i, "/", dim(scenarios)[1], " done. Time: ", Sys.time()))
+      }
+
 
     }
 

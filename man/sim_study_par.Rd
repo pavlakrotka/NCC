@@ -10,7 +10,8 @@ sim_study_par(
   arms,
   models = c("fixmodel", "sepmodel", "poolmodel"),
   endpoint,
-  perc_cores = 0.9
+  perc_cores = 0.9,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ sim_study_par(
 \item{endpoint}{Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.}
 
 \item{perc_cores}{Double. What percentage of available cores should be used for the simulations. Default=0.9.}
+
+\item{verbose}{Logical. Indicates whether to print a message (system time and number of finished scenarios) after simulating each scenario in order to track the progress of the simulations. Default=TRUE.}
 }
 \value{
 Data frame with all considered scenarios and corresponding results - the probability to reject \eqn{H_0}, and the bias, as well as the mean squared error (MSE) of the treatment effect estimates.
@@ -34,7 +37,7 @@ This function performs a simulation study for a given set of scenarios, analyzin
 }
 \examples{
 
-\dontrun{
+\donttest{
 # Create data frame with all parameters:
 sim_scenarios <- data.frame(num_arms = 4,
 n_arm = 250,
@@ -59,7 +62,7 @@ alpha = 0.025,
 ncc = TRUE)
 
 # Run simulation study:
-sim_results <- sim_study_par(nsim = 100, scenarios = sim_scenarios, arms = c(3, 4), 
+sim_results <- sim_study_par(nsim = 100, scenarios = sim_scenarios, arms = c(3, 4),
 models = c("fixmodel", "sepmodel", "poolmodel"), endpoint = "cont")
 }
 
