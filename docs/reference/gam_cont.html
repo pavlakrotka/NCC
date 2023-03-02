@@ -77,23 +77,23 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>data</dt>
-<dd><p>Trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function. Must contain columns named 'treatment', 'response', 'period' and 'j'.</p></dd>
+<dd><p>Data frame with trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function. Must contain columns named 'treatment', 'response', 'period' and 'j'.</p></dd>
 <dt>arm</dt>
-<dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
+<dd><p>Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
 <dt>alpha</dt>
-<dd><p>Significance level (one-sided). Default=0.025.</p></dd>
+<dd><p>Double. Significance level (one-sided). Default=0.025.</p></dd>
 <dt>ci</dt>
-<dd><p>Boolean. Whether confidence intervals should be computed. Default=FALSE.</p></dd>
+<dd><p>Logical. Indicates whether confidence intervals should be computed. Default=FALSE.</p></dd>
 <dt>smoothing_basis</dt>
 <dd><p>String indicating the (penalized) smoothing basis to use. Default="tp" for thin plate regression spline. Available strings are 'tp', 'ts', 'ds', 'cr', 'cs', 'cc', 'sos', 'ps', 'cp', 're', 'mrf', 'gp', and 'so'. For more information see https://stat.ethz.ch/R-manual/R-devel/library/mgcv/html/smooth.terms.html.</p></dd>
 <dt>basis_dim</dt>
-<dd><p>The dimension of the basis used to represent the smooth term. The default depends on the number of variables that the smooth is a function of. Default=-1. For more information see the description of the parameter 'k' in https://stat.ethz.ch/R-manual/R-devel/library/mgcv/html/s.html.</p></dd>
+<dd><p>Integer. The dimension of the basis used to represent the smooth term. The default depends on the number of variables that the smooth is a function of. Default=-1. For more information see the description of the parameter 'k' in https://stat.ethz.ch/R-manual/R-devel/library/mgcv/html/s.html.</p></dd>
 <dt>gam_method</dt>
-<dd><p>The smoothing parameter estimation method. Default="GCV.Cp". Available strings are 'GCV.Cp', 'GACV.Cp', 'REML', 'P-REML', 'ML', and 'P-ML'. For more information see the description of the parameter 'method' in https://stat.ethz.ch/R-manual/R-devel/library/mgcv/html/gam.html.</p></dd>
+<dd><p>String indicating the smoothing parameter estimation method. Default="GCV.Cp". Available strings are 'GCV.Cp', 'GACV.Cp', 'REML', 'P-REML', 'ML', and 'P-ML'. For more information see the description of the parameter 'method' in https://stat.ethz.ch/R-manual/R-devel/library/mgcv/html/gam.html.</p></dd>
 <dt>check</dt>
-<dd><p>Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.</p></dd>
+<dd><p>Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.</p></dd>
 <dt>...</dt>
-<dd><p>Further arguments for simulation function.</p></dd>
+<dd><p>Further arguments passed by wrapper functions when running simulations.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -117,19 +117,19 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">gam_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.04102379</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3.32603e-05</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2346351</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5337835</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.02993553</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2730739</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4992058</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7944931</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -141,9 +141,9 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>     k = basis_dim)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Estimated degrees of freedom:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7.07  total = 11.07 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  total = 5 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GCV score: 1.01289     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GCV score: 0.9965178     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>

@@ -32,7 +32,7 @@
 #'
 #' @details
 #'
-#' The MAP approach derives the prior distribution for the control response in the concurrent periods based on the control information from the non-concurrent periods.
+#' The MAP approach derives the prior distribution for the control response in the concurrent periods by combining the control information from the non-concurrent periods with a non-informative prior.
 #'
 #' The model for the continuous response \eqn{y_{js}} for the control patient \eqn{j} in the non-concurrent period \eqn{s} is defined as follows:
 #'
@@ -83,6 +83,12 @@
 #' - `reject_h0` - indicator of whether the null hypothesis was rejected or not (`p_val` < `alpha`)
 #'
 #' @author Katharina Hees
+#'
+#' @references
+#'
+#' Robust meta-analytic-predictive priors in clinical trials with historical control information. Schmidli, H., et al. Biometrics 70.4 (2014): 1023-1032.
+#'
+#' Applying Meta-Analytic-Predictive Priors with the R Bayesian Evidence Synthesis Tools. Weber, S., et al. Journal of Statistical Software 100.19 (2021): 1548-7660.
 
 
 MAPprior_cont <- function(data,

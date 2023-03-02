@@ -75,19 +75,19 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>data</dt>
-<dd><p>Trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function. Must contain columns named 'treatment', 'response' and 'period'.</p></dd>
+<dd><p>Data frame with trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function. Must contain columns named 'treatment', 'response' and 'period'.</p></dd>
 <dt>arm</dt>
-<dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
+<dd><p>Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
 <dt>alpha</dt>
-<dd><p>Significance level (one-sided). Default=0.025.</p></dd>
+<dd><p>Double. Significance level (one-sided). Default=0.025.</p></dd>
 <dt>ci</dt>
-<dd><p>Boolean. Whether confidence intervals should be computed. Default=FALSE.</p></dd>
+<dd><p>Logical. Indicates whether confidence intervals should be computed. Default=FALSE.</p></dd>
 <dt>ncc</dt>
-<dd><p>Boolean. Whether to include NCC data into the analysis. Default=TRUE.</p></dd>
+<dd><p>Logical. Indicates whether to include non-concurrent data into the analysis. Default=TRUE.</p></dd>
 <dt>check</dt>
-<dd><p>Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.</p></dd>
+<dd><p>Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.</p></dd>
 <dt>...</dt>
-<dd><p>Further arguments for simulation function.</p></dd>
+<dd><p>Further arguments passed by wrapper functions when running simulations.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -113,35 +113,35 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing profile confidence intervals ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing profile confidence intervals ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.905069e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.03118803</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.513995</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2455997</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2803183</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.007353718</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7536095</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5244178</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Linear mixed model fit by REML ['lmerModLmerTest']</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Formula: response ~ as.factor(treatment) + (1 | period)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Data: data_new</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> REML criterion at convergence: 1414.632</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> REML criterion at convergence: 1459.893</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Random effects:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Groups   Name        Std.Dev.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  period   (Intercept) 0.03637 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Residual             0.98753 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  period   (Intercept) 0.07283 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Residual             1.03278 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of obs: 500, groups:  period, 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Fixed Effects:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           (Intercept)  as.factor(treatment)1  as.factor(treatment)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              -0.01351                0.35074                0.38215  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.03956                0.22127                0.26307  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.51399  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.24560  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>

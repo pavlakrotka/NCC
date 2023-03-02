@@ -97,63 +97,63 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>data</dt>
-<dd><p>Simulated trial data, e.g. result from the <code><a href="datasim_bin.html">datasim_bin()</a></code> or <code><a href="datasim_cont.html">datasim_cont()</a></code> function.</p></dd>
+<dd><p>Data frame with trial data, e.g. result from the <code><a href="datasim_bin.html">datasim_bin()</a></code> or <code><a href="datasim_cont.html">datasim_cont()</a></code> function.</p></dd>
 <dt>arms</dt>
-<dd><p>Vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.</p></dd>
+<dd><p>Integer vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.</p></dd>
 <dt>models</dt>
-<dd><p>Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel"). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.</p></dd>
+<dd><p>Character vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel"). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.</p></dd>
 <dt>endpoint</dt>
 <dd><p>Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.</p></dd>
 <dt>alpha</dt>
-<dd><p>Significance level (one-sided). Default=0.025.</p></dd>
+<dd><p>Double. Significance level (one-sided). Default=0.025.</p></dd>
 <dt>unit_size</dt>
-<dd><p>Number of patients per calendar time unit for frequentist models adjusting for calendar time. Default=25.</p></dd>
+<dd><p>Integer. Number of patients per calendar time unit for frequentist models adjusting for calendar time. Default=25.</p></dd>
 <dt>ncc</dt>
-<dd><p>Boolean. Whether to include NCC data into the analysis using frequentist models. Default=TRUE.</p></dd>
+<dd><p>Logical. Whether to include NCC data into the analysis using frequentist models. Default=TRUE.</p></dd>
 <dt>opt</dt>
-<dd><p>Binary. In the MAP Prior approach, if opt==1, all former periods are used as one source; if opt==2, periods get separately included into the final analysis. Default=2.</p></dd>
+<dd><p>Integer (1 or 2). In the MAP Prior approach, if opt==1, all former periods are used as one source; if opt==2, periods get separately included into the final analysis. Default=2.</p></dd>
 <dt>prior_prec_tau</dt>
-<dd><p>Dispersion parameter of the half normal prior, the prior for the between study heterogeneity in the MAP Prior approach. Default=4.</p></dd>
+<dd><p>Double. Dispersion parameter of the half normal prior, the prior for the between study heterogeneity in the MAP Prior approach. Default=4.</p></dd>
 <dt>prior_prec_eta</dt>
-<dd><p>Dispersion parameter of the normal prior, the prior for the control response (log-odds or mean) in the MAP Prior approach. Default=0.001.</p></dd>
+<dd><p>Double. Dispersion parameter of the normal prior, the prior for the control response (log-odds or mean) in the MAP Prior approach. Default=0.001.</p></dd>
 <dt>n_samples</dt>
-<dd><p>Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's in the MAP Prior approach. Default=1000.</p></dd>
+<dd><p>Integer. Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's in the MAP Prior approach. Default=1000.</p></dd>
 <dt>n_chains</dt>
-<dd><p>Number of parallel chains for the rjags model in the MAP Prior approach. Default=4.</p></dd>
+<dd><p>Integer. Number of parallel chains for the rjags model in the MAP Prior approach. Default=4.</p></dd>
 <dt>n_iter</dt>
-<dd><p>Number of iterations to monitor of the jags.model. Needed for coda.samples in the MAP Prior approach. Default=4000.</p></dd>
+<dd><p>Integer. Number of iterations to monitor of the jags.model. Needed for coda.samples in the MAP Prior approach. Default=4000.</p></dd>
 <dt>n_adapt</dt>
-<dd><p>Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model in the MAP Prior approach. Default=1000.</p></dd>
+<dd><p>Integer. Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model in the MAP Prior approach. Default=1000.</p></dd>
 <dt>robustify</dt>
-<dd><p>Boolean. Indicates whether a robust prior is to be used. If TRUE, a mixture prior is considered combining a MAP prior and a weakly non-informative component prior. Default=TRUE.</p></dd>
+<dd><p>Logical. Indicates whether a robust prior is to be used. If TRUE, a mixture prior is considered combining a MAP prior and a weakly non-informative component prior. Default=TRUE.</p></dd>
 <dt>weight</dt>
-<dd><p>Weight given to the non-informative component (0 &lt; weight &lt; 1) for the robustification of the MAP Prior according to Schmidli (2014). Default=0.1.</p></dd>
+<dd><p>Double. Weight given to the non-informative component (0 &lt; weight &lt; 1) for the robustification of the MAP Prior according to Schmidli (2014). Default=0.1.</p></dd>
 <dt>ci</dt>
-<dd><p>Boolean. Whether confidence intervals for the mixed models should be computed. Default=FALSE.</p></dd>
+<dd><p>Logical. Whether confidence intervals for the mixed models should be computed. Default=FALSE.</p></dd>
 <dt>prec_theta</dt>
-<dd><p>Precision (\(1/\sigma^2_{\theta}\)) of the prior regarding the treatment effect \(\theta\). I.e. \(\theta \sim N(0, \sigma^2_{\theta})\) . Default=0.001.</p></dd>
+<dd><p>Double. Precision (\(1/\sigma^2_{\theta}\)) of the prior regarding the treatment effect \(\theta\). I.e. \(\theta \sim N(0, \sigma^2_{\theta})\) . Default=0.001.</p></dd>
 <dt>prec_eta</dt>
-<dd><p>Precision (\(1/\sigma^2_{\eta_0}\)) of the prior regarding the control response \(\eta_0\). I.e. \(\eta_0 \sim N(0, \sigma^2_{\eta_0})\). Default=0.001.</p></dd>
+<dd><p>Double. Precision (\(1/\sigma^2_{\eta_0}\)) of the prior regarding the control response \(\eta_0\). I.e. \(\eta_0 \sim N(0, \sigma^2_{\eta_0})\). Default=0.001.</p></dd>
 <dt>tau_a</dt>
-<dd><p>Parameter \(a\) of the Gamma distribution for the precision parameter \(\tau\) in the model for the time trend in the Time Machine approach. I.e., \(\tau \sim Gamma(a,b)\). Default=0.1.</p></dd>
+<dd><p>Double. Parameter \(a\) of the Gamma distribution for the precision parameter \(\tau\) in the model for the time trend in the Time Machine approach. I.e., \(\tau \sim Gamma(a,b)\). Default=0.1.</p></dd>
 <dt>tau_b</dt>
-<dd><p>Parameter \(b\) of the Gamma distribution for the precision parameter \(\tau\) in the model for the time trend in the Time Machine approach. I.e., \(\tau \sim Gamma(a,b)\). Default=0.01.</p></dd>
+<dd><p>Double. Parameter \(b\) of the Gamma distribution for the precision parameter \(\tau\) in the model for the time trend in the Time Machine approach. I.e., \(\tau \sim Gamma(a,b)\). Default=0.01.</p></dd>
 <dt>prec_a</dt>
-<dd><p>Parameter \(a\) of the Gamma distribution regarding the precision of the responses for continuous endpoints in the Time Machine approach. I.e., \(\sigma \sim Gamma(a,b)\). Default=0.001.</p></dd>
+<dd><p>Double. Parameter \(a\) of the Gamma distribution regarding the precision of the responses for continuous endpoints in the Time Machine approach. I.e., \(\sigma \sim Gamma(a,b)\). Default=0.001.</p></dd>
 <dt>prec_b</dt>
-<dd><p>Parameter \(b\) of the Gamma distribution regarding the precision of the responses for continuous endpoints in the Time Machine approach. I.e., \(\sigma \sim Gamma(a,b)\). Default=0.001.</p></dd>
+<dd><p>Double. Parameter \(b\) of the Gamma distribution regarding the precision of the responses for continuous endpoints in the Time Machine approach. I.e., \(\sigma \sim Gamma(a,b)\). Default=0.001.</p></dd>
 <dt>bucket_size</dt>
-<dd><p>Number of patients per time bucket in the Time Machine approach. Default=25.</p></dd>
+<dd><p>Integer. Number of patients per time bucket in the Time Machine approach. Default=25.</p></dd>
 <dt>smoothing_basis</dt>
 <dd><p>String indicating the (penalized) smoothing basis to use in the GAM models. Default="tp".</p></dd>
 <dt>basis_dim</dt>
-<dd><p>The dimension of the basis used to represent the smooth term in the GAM models. The default depends on the number of variables that the smooth is a function of. Default=-1.</p></dd>
+<dd><p>Integer. The dimension of the basis used to represent the smooth term in the GAM models. The default depends on the number of variables that the smooth is a function of. Default=-1.</p></dd>
 <dt>gam_method</dt>
-<dd><p>The smoothing parameter estimation method for the GAM models. Default="GCV.Cp".</p></dd>
+<dd><p>String indicating the smoothing parameter estimation method for the GAM models. Default="GCV.Cp".</p></dd>
 <dt>bs_degree</dt>
-<dd><p>Degree of the polynomial splines. Default=3.</p></dd>
+<dd><p>Integer. Degree of the polynomial splines. Default=3.</p></dd>
 <dt>poly_degree</dt>
-<dd><p>Degree of the discontinuous piecewise polynomials. Default=3.</p></dd>
+<dd><p>Integer. Degree of the discontinuous piecewise polynomials. Default=3.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -175,37 +175,37 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_fixmodel_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2109789</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3068811</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_poolmodel_2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_poolmodel_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3335403</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.363668</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_sepmodel_2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_sepmodel_2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.06371581</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.363668</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_fixmodel_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_fixmodel_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5168713</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.066509</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_poolmodel_3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_poolmodel_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8669706</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.133344</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0_sepmodel_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect_sepmodel_3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4068029</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.105324</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 <span class="r-in"></span>

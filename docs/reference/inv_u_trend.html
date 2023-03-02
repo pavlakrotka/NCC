@@ -61,7 +61,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">inv_u_trend</span><span class="op">(</span><span class="va">j</span>, <span class="va">lambda</span>, <span class="va">N_peak</span>, <span class="va">sample_size</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">inv_u_trend</span><span class="op">(</span><span class="va">j</span>, <span class="va">lambda</span>, <span class="va">N_peak</span>, <span class="va">n_total</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -72,7 +72,7 @@
 <dd><p>Strength of time trend.</p></dd>
 <dt>N_peak</dt>
 <dd><p>Point at which the time trend switches direction in terms of overall sample size.</p></dd>
-<dt>sample_size</dt>
+<dt>n_total</dt>
 <dd><p>Total sample size in the trial.</p></dd>
 </dl></div>
     <div class="section level2">
@@ -81,7 +81,8 @@
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The time trend is generated according to the function \(f(j) = \lambda \cdot \frac{j-1}{N-1} (I(j \leq N_p) - I(j &gt; N_p))\).</p>
+    <p>The time trend is generated according to the function \(f(j) = \lambda \cdot \frac{j-1}{N-1} (I(j \leq N_p) - I(j &gt; N_p))\),
+where \(N\) is the total sample size (parameter <code>n_total</code>) and \(N_p\) (parameter <code>N_peak</code>) indicates the point at which the trend switches direction.</p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>

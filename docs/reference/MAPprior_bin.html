@@ -82,51 +82,65 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>data</dt>
-<dd><p>Trial data, e.g. result from the <code><a href="datasim_bin.html">datasim_bin()</a></code> function. Must contain columns named 'treatment', 'response' and 'period'.</p></dd>
+<dd><p>Data frame with trial data, e.g. result from the <code><a href="datasim_bin.html">datasim_bin()</a></code> function. Must contain columns named 'treatment', 'response' and 'period'.</p></dd>
 <dt>arm</dt>
-<dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
+<dd><p>Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
 <dt>alpha</dt>
-<dd><p>Significance level (one-sided). Default=0.025</p></dd>
+<dd><p>Double. Decision boundary (one-sided). Default=0.025</p></dd>
 <dt>opt</dt>
-<dd><p>Binary. If opt==1, all former periods are used as one source; if opt==2, periods get separately included into the final analysis. Default=2.</p></dd>
+<dd><p>Integer (1 or 2). If opt==1, all former periods are used as one source; if opt==2, periods get separately included into the final analysis. Default=2.</p></dd>
 <dt>prior_prec_tau</dt>
-<dd><p>Dispersion parameter of the half normal prior, the prior for the between study heterogeneity. Default=4.</p></dd>
+<dd><p>Double. Precision parameter (\(1/\sigma^2_{\tau}\)) of the half normal hyperprior, the prior for the between study heterogeneity. Default=4.</p></dd>
 <dt>prior_prec_eta</dt>
-<dd><p>Dispersion parameter of the normal prior, the prior for the control log-odds. Default=0.001.</p></dd>
+<dd><p>Double. Precision parameter (\(1/\sigma^2_{\eta}\)) of the normal hyperprior, the prior for the hyperparameter mean of the control log-odds. Default=0.001.</p></dd>
 <dt>n_samples</dt>
-<dd><p>Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's. Default=1000.</p></dd>
+<dd><p>Integer. Number of how many random samples will get drawn for the calculation of the posterior mean, the p-value and the CI's. Default=1000.</p></dd>
 <dt>n_chains</dt>
-<dd><p>Number of parallel chains for the rjags model. Default=4.</p></dd>
+<dd><p>Integer. Number of parallel chains for the rjags model. Default=4.</p></dd>
 <dt>n_iter</dt>
-<dd><p>Number of iterations to monitor of the jags.model. Needed for coda.samples. Default=4000.</p></dd>
+<dd><p>Integer. Number of iterations to monitor of the jags.model. Needed for coda.samples. Default=4000.</p></dd>
 <dt>n_adapt</dt>
-<dd><p>Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model. Default=1000.</p></dd>
+<dd><p>Integer. Number of iterations for adaptation, an initial sampling phase during which the samplers adapt their behavior to maximize their efficiency. Needed for jags.model. Default=1000.</p></dd>
 <dt>robustify</dt>
-<dd><p>Boolean. Indicates whether a robust prior is to be used. If TRUE, a mixture prior is considered combining a MAP prior and a weakly non-informative component prior. Default=TRUE.</p></dd>
+<dd><p>Logical. Indicates whether a robust prior is to be used. If TRUE, a mixture prior is considered combining a MAP prior and a weakly non-informative component prior. Default=TRUE.</p></dd>
 <dt>weight</dt>
-<dd><p>Weight given to the non-informative component (0 &lt; weight &lt; 1) for the robustification of the MAP prior according to Schmidli (2014). Default=0.1.</p></dd>
+<dd><p>Double. Weight given to the non-informative component (0 &lt; weight &lt; 1) for the robustification of the MAP prior according to Schmidli (2014). Default=0.1.</p></dd>
 <dt>check</dt>
-<dd><p>Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.</p></dd>
+<dd><p>Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.</p></dd>
 <dt>...</dt>
-<dd><p>Further arguments for simulation function.</p></dd>
+<dd><p>Further arguments passed by wrapper functions when running simulations.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>List containing the following elements regarding the results of comparing <code>arm</code> to control:</p><ul><li><p><code>p-val</code> - p-value (one-sided) obtained by drawing <code>n_samples</code> random samples from each posterior distribution</p></li>
-<li><p><code>treat_effect</code> - estimated treatment effect in terms of the log-odds ratio obtained by drawing <code>n_samples</code> random samples from each posterior distribution</p></li>
-<li><p><code>lower_ci</code> - lower limit of the (1-2*<code>alpha</code>)*100% confidence interval obtained by drawing <code>n_samples</code> random samples from each posterior distribution</p></li>
-<li><p><code>upper_ci</code> - upper limit of the (1-2*<code>alpha</code>)*100% confidence interval obtained by drawing <code>n_samples</code> random samples from each posterior distribution</p></li>
+    <p>List containing the following elements regarding the results of comparing <code>arm</code> to control:</p><ul><li><p><code>p-val</code> - posterior probability that the log-odds ratio is less than zero</p></li>
+<li><p><code>treat_effect</code> - posterior mean of log-odds ratio</p></li>
+<li><p><code>lower_ci</code> - lower limit of the (1-2*<code>alpha</code>)*100% credible interval for log-odds ratio</p></li>
+<li><p><code>upper_ci</code> - upper limit of the (1-2*<code>alpha</code>)*100% credible interval for log-odds ratio</p></li>
 <li><p><code>reject_h0</code> - indicator of whether the null hypothesis was rejected or not (<code>p_val</code> &lt; <code>alpha</code>)</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>In this function, the argument <code>alpha</code> corresponds to \(1-\gamma\), where \(\gamma\) is the decision boundary. Specifically, the posterior probability of the difference distribution under the null hypothesis is such that:
+    <p>The MAP approach derives the prior distribution for the control response in the concurrent periods by combining the control information from the non-concurrent periods with a non-informative prior.</p>
+<p>The model for the binary response \(y_{js}\) for the control patient \(j\) in the non-concurrent period \(s\) is defined as follows:</p>
+<p>$$g(E(y_{js})) = \eta_s$$</p>
+<p>where \(g(\cdot)\) denotes the logit link function and \(\eta_s\) represents the control log odds in the non-concurrent period \(s\).</p>
+<p>The log odds for the non-concurrent controls in period \(s\) are assumed to have a normal prior distribution with mean \(\mu_{\eta}\) and variance \(\tau^2\):</p>
+<p>$$\eta_s \sim \mathcal{N}(\mu_{\eta}, \tau^2)$$</p>
+<p>For the hyperparameters \(\mu_{\eta}\) and \(\tau\), normal and half-normal hyperprior distributions are assumed, with mean 0 and variances \(\sigma^2_{\eta}\) and \(\sigma^2_{\tau}\), respectively:</p>
+<p>$$\mu_{\eta} \sim \mathcal{N}(0, \sigma^2_{\eta})$$</p>
+<p>$$\tau \sim HalfNormal(0, \sigma^2_{\tau})$$</p>
+<p>The MAP prior distribution \(p_{MAP}(\eta_{CC})\) for the control response in the concurrent periods is then obtained as the posterior distribution of the parameters \(\eta_s\) from the above specified model.</p>
+<p>If <code>robustify=TRUE</code>, the MAP prior is robustified by adding a weakly-informative mixture component \(p_{\mathrm{non-inf}}\), leading to a robustified MAP prior distribution:</p>
+<p>$$p_{rMAP}(\eta_{CC}) = (1-w) \cdot p_{MAP}(\eta_{CC}) + w \cdot p_{\mathrm{non-inf}}(\eta_{CC})$$</p>
+<p>where \(w\) (parameter <code>weight</code>) may be interpreted as the degree of skepticism towards borrowing strength.</p>
+<p>In this function, the argument <code>alpha</code> corresponds to \(1-\gamma\), where \(\gamma\) is the decision boundary. Specifically, the posterior probability of the difference distribution under the null hypothesis is such that:
 \(P(p_{treatment}-p_{control}&gt;0) \ge 1-\)<code>alpha</code>.
 In case of a non-informative prior this coincides with the frequentist type I error.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Robust meta-analytic-predictive priors in clinical trials with historical control information. Schmidli, H., et al. Biometrics 70.4 (2014): 1023-1032.</p>
+<p>Applying Meta-Analytic-Predictive Priors with the R Bayesian Evidence Synthesis Tools. Weber, S., et al. Journal of Statistical Software 100.19 (2021): 1548-7660.</p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -142,19 +156,19 @@ In case of a non-informative prior this coincides with the frequentist type I er
 <span class="r-in"><span class="fu">MAPprior_bin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using default mean for robust component of 1/2.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.016</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.464</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8378846</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.03073641</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1002606</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.600294</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.594107</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6893924</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 <span class="r-in"></span>

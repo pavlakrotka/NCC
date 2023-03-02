@@ -80,29 +80,29 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>data</dt>
-<dd><p>Trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function. Must contain columns named 'treatment', 'response' and 'period'.</p></dd>
+<dd><p>Data frame with trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function. Must contain columns named 'treatment', 'response' and 'period'.</p></dd>
 <dt>arm</dt>
-<dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
+<dd><p>Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
 <dt>alpha</dt>
-<dd><p>Significance level (one-sided). Default=0.025.</p></dd>
+<dd><p>Double. Decision boundary (one-sided). Default=0.025.</p></dd>
 <dt>prec_theta</dt>
-<dd><p>Precision (\(1/\sigma^2_{\theta}\)) of the prior regarding the treatment effect \(\theta\). I.e. \(\theta \sim N(0, \sigma^2_{\theta})\). Default=0.001.</p></dd>
+<dd><p>Double. Precision (\(1/\sigma^2_{\theta}\)) of the prior regarding the treatment effect \(\theta\). I.e. \(\theta \sim N(0, \sigma^2_{\theta})\). Default=0.001.</p></dd>
 <dt>prec_eta</dt>
-<dd><p>Precision (\(1/\sigma^2_{\eta_0}\)) of the prior regarding the control mean \(\eta_0\). I.e. \(\eta_0 \sim N(0, \sigma^2_{\eta_0})\). Default=0.001.</p></dd>
+<dd><p>Double. Precision (\(1/\sigma^2_{\eta_0}\)) of the prior regarding the control mean \(\eta_0\). I.e. \(\eta_0 \sim N(0, \sigma^2_{\eta_0})\). Default=0.001.</p></dd>
 <dt>tau_a</dt>
-<dd><p>Parameter \(a_{\tau}\) of the Gamma distribution for the precision parameter \(\tau\) in the model for the time trend. I.e., \(\tau \sim Gamma(a_{\tau},b_{\tau})\). Default=0.1.</p></dd>
+<dd><p>Double. Parameter \(a_{\tau}\) of the Gamma distribution for the precision parameter \(\tau\) in the model for the time trend. I.e., \(\tau \sim Gamma(a_{\tau},b_{\tau})\). Default=0.1.</p></dd>
 <dt>tau_b</dt>
-<dd><p>Parameter \(b_{\tau}\) of the Gamma distribution for the precision parameter \(\tau\) in the model for the time trend. I.e., \(\tau \sim Gamma(a_{\tau},b_{\tau})\). Default=0.01.</p></dd>
+<dd><p>Double. Parameter \(b_{\tau}\) of the Gamma distribution for the precision parameter \(\tau\) in the model for the time trend. I.e., \(\tau \sim Gamma(a_{\tau},b_{\tau})\). Default=0.01.</p></dd>
 <dt>prec_a</dt>
-<dd><p>Parameter \(a_{\sigma^2}\) of the Gamma distribution regarding the precision of the responses. I.e., \(1/\sigma^2 \sim Gamma(a_{\sigma^2},b_{\sigma^2})\). Default=0.001.</p></dd>
+<dd><p>Double. Parameter \(a_{\sigma^2}\) of the Gamma distribution regarding the precision of the responses. I.e., \(1/\sigma^2 \sim Gamma(a_{\sigma^2},b_{\sigma^2})\). Default=0.001.</p></dd>
 <dt>prec_b</dt>
-<dd><p>Parameter \(b_{\sigma^2}\) of the Gamma distribution regarding the precision of the responses. I.e., \(1/\sigma^2 \sim Gamma(a_{\sigma^2},b_{\sigma^2})\). Default=0.001.</p></dd>
+<dd><p>Double. Parameter \(b_{\sigma^2}\) of the Gamma distribution regarding the precision of the responses. I.e., \(1/\sigma^2 \sim Gamma(a_{\sigma^2},b_{\sigma^2})\). Default=0.001.</p></dd>
 <dt>bucket_size</dt>
-<dd><p>Number of patients per time bucket. Default=25.</p></dd>
+<dd><p>Integer. Number of patients per time bucket. Default=25.</p></dd>
 <dt>check</dt>
-<dd><p>Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.</p></dd>
+<dd><p>Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.</p></dd>
 <dt>...</dt>
-<dd><p>Further arguments for simulation function.</p></dd>
+<dd><p>Further arguments passed by wrapper functions when running simulations.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -146,19 +146,19 @@ $$\alpha_c \sim \mathcal{N}(2 \alpha_{c-1} - \alpha_{c-2}, 1/\tau), 3 \le c \le 
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">timemachine_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1361417</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.001433333</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1461423</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3992868</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.1134328</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1336266</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4074435</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6643182</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 <span class="r-in"></span>

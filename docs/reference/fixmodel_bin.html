@@ -67,17 +67,17 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>data</dt>
-<dd><p>Trial data, e.g. result from the <code><a href="datasim_bin.html">datasim_bin()</a></code> function. Must contain columns named 'treatment', 'response' and 'period'.</p></dd>
+<dd><p>Data frame with trial data, e.g. result from the <code><a href="datasim_bin.html">datasim_bin()</a></code> function. Must contain columns named 'treatment', 'response' and 'period'.</p></dd>
 <dt>arm</dt>
-<dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
+<dd><p>Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
 <dt>alpha</dt>
-<dd><p>Significance level (one-sided). Default=0.025.</p></dd>
+<dd><p>Double. Significance level (one-sided). Default=0.025.</p></dd>
 <dt>ncc</dt>
-<dd><p>Boolean. Whether to include NCC data into the analysis. Default=TRUE.</p></dd>
+<dd><p>Logical. Indicates whether to include non-concurrent data into the analysis. Default=TRUE.</p></dd>
 <dt>check</dt>
-<dd><p>Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.</p></dd>
+<dd><p>Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.</p></dd>
 <dt>...</dt>
-<dd><p>Further arguments for simulation function.</p></dd>
+<dd><p>Further arguments passed by wrapper functions when running simulations.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -89,8 +89,19 @@
 <li><p><code>model</code> - fitted model</p></li>
 </ul></div>
     <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>The model-based analysis adjusts for the time effect by including the factor period (defined as a time interval bounded by any treatment arm entering or leaving the platform). The time is then modelled as a step-function with jumps at the beginning of each period.
+Denoting by \(y_j\) the response probability for patient \(j\), by \(k_j\) the arm patient \(j\) was allocated to, and by \(M\) the treatment arm under evaluation, the regression model is given by:</p>
+<p>$$g(E(y_j)) = \eta_0  + \sum_{k \in \mathcal{K}_M} \theta_k \cdot I(k_j=k) + \sum_{s=2}^{S_M} \tau_s \cdot I(t_j \in T_{S_s})$$</p>
+<p>where \(g(\cdot)\) denotes the logit link function and \(\eta_0\) is the log odds in the control arm in the first period;
+\(\theta_k\) represents the log odds ratio of treatment \(k\) and control for \(k\in\mathcal{K}_M\), where \(\mathcal{K}_M\) is the set of treatments
+that were active in the trial during periods prior or up to the time when the investigated treatment arm left the trial;
+\(\tau_s\) indicates the stepwise period effect in terms of the log odds ratio between periods 1 and \(s\) (\(s = 2, \ldots, S_M\)), where \(S_M\) denotes the period, in which the investigated treatment arm left the trial.</p>
+<p>If the data consists of only one period (e.g. in case of a multi-arm trial), the period in not used as covariate.</p>
+    </div>
+    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>On model-based time trend adjustments in platform trials with non-concurrent controls. Roig, M.B., Krotka, et al. BMC Medical Research Methodology 22.1 (2022): 1-16.</p>
+    <p>On model-based time trend adjustments in platform trials with non-concurrent controls. Bofill Roig, M., Krotka, P., et al. BMC Medical Research Methodology 22.1 (2022): 1-16.</p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -105,16 +116,16 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">fixmodel_bin</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1363732</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6803686</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4170587</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.161268</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.3189408</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.8370267</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.18144</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5176566</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
@@ -126,15 +137,15 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           (Intercept)  as.factor(treatment)1  as.factor(treatment)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               1.01501                0.54253                1.35790  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                1.9858                -0.3223                 0.1584  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3     as.factor(period)2     as.factor(period)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.41706               -0.08133               -0.03682  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               -0.1613                -0.4019                -0.4170  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    as.factor(period)4  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.99102  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               -0.5783  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Degrees of Freedom: 499 Total (i.e. Null);  493 Residual</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Null Deviance:	    465.3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 445.3 	AIC: 459.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual Deviance: 461.9 	AIC: 475.9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>

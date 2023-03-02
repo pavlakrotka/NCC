@@ -64,11 +64,11 @@ List containing the following elements regarding the results of comparing \code{
 This function performs analysis of binary data using the Meta-Analytic-Predictive (MAP) Prior approach. The method borrows data from non-concurrent controls to obtain the prior distribution for the control response in the concurrent periods.
 }
 \details{
-The MAP approach derives the prior distribution for the control response in the concurrent periods based on the control information from the non-concurrent periods.
+The MAP approach derives the prior distribution for the control response in the concurrent periods by combining the control information from the non-concurrent periods with a non-informative prior.
 
 The model for the binary response \eqn{y_{js}} for the control patient \eqn{j} in the non-concurrent period \eqn{s} is defined as follows:
 
-\deqn{g(E((y_{js})) = \eta_s}
+\deqn{g(E(y_{js})) = \eta_s}
 
 where \eqn{g(\cdot)} denotes the logit link function and \eqn{\eta_s} represents the control log odds in the non-concurrent period \eqn{s}.
 
@@ -105,6 +105,8 @@ MAPprior_bin(data = trial_data, arm = 3)
 }
 \references{
 Robust meta-analytic-predictive priors in clinical trials with historical control information. Schmidli, H., et al. Biometrics 70.4 (2014): 1023-1032.
+
+Applying Meta-Analytic-Predictive Priors with the R Bayesian Evidence Synthesis Tools. Weber, S., et al. Journal of Statistical Software 100.19 (2021): 1548-7660.
 }
 \author{
 Katharina Hees

@@ -76,21 +76,21 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>data</dt>
-<dd><p>Trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function. Must contain columns named 'treatment' and 'response'.</p></dd>
+<dd><p>Data frame with trial data, e.g. result from the <code><a href="datasim_cont.html">datasim_cont()</a></code> function. Must contain columns named 'treatment' and 'response'.</p></dd>
 <dt>arm</dt>
-<dd><p>Indicator of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
+<dd><p>Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.</p></dd>
 <dt>alpha</dt>
-<dd><p>Significance level (one-sided). Default=0.025.</p></dd>
+<dd><p>Double. Significance level (one-sided). Default=0.025.</p></dd>
 <dt>ci</dt>
-<dd><p>Boolean. Whether confidence intervals should be computed. Default=FALSE.</p></dd>
+<dd><p>Logical. Indicates whether confidence intervals should be computed. Default=FALSE.</p></dd>
 <dt>unit_size</dt>
-<dd><p>Number of patients per calendar time unit. Default=25.</p></dd>
+<dd><p>Integer. Number of patients per calendar time unit. Default=25.</p></dd>
 <dt>ncc</dt>
-<dd><p>Boolean. Whether to include NCC data into the analysis. Default=TRUE.</p></dd>
+<dd><p>Logical. Indicates whether to include non-concurrent data into the analysis. Default=TRUE.</p></dd>
 <dt>check</dt>
-<dd><p>Boolean. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.</p></dd>
+<dd><p>Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.</p></dd>
 <dt>...</dt>
-<dd><p>Further arguments for simulation function.</p></dd>
+<dd><p>Further arguments passed by wrapper functions when running simulations.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -114,16 +114,16 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">mixmodel_AR1_cal_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.06856752</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6453498</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1805866</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.05044469</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.05758612</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.3295945</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.41877</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.233298</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
@@ -136,24 +136,24 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> family: gaussian( link = identity ) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ------------ Fixed effects (beta) ------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       Estimate Cond. SE t-value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)            0.09249  0.07039   1.314</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)1  0.18875  0.12132   1.556</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)2  0.30160  0.12138   2.485</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3  0.18059  0.12128   1.489</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)            0.14532   0.1637  0.8876</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)1  0.42720   0.1352  3.1599</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)2  0.32154   0.1311  2.4525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3 -0.05044   0.1352 -0.3730</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  --------------- Random effects ---------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Family: gaussian( link = identity ) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    --- Correlation parameters:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1.ARphi </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.7428687 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1.ARphi </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.8829479 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            --- Variance parameters ('lambda'):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lambda = var(u) for u ~ Gaussian; </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    cal_time  :  0.009208  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    cal_time  :  0.04517  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # of obs: 500; # of groups: cal_time, 20 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  -------------- Residual variance  ------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> phi estimate was 0.974457 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> phi estimate was 1.05428 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ------------- Likelihood values  -------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         logLik</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> p_v(h) (marginal L): -704.8208</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> p_v(h) (marginal L): -726.9291</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>

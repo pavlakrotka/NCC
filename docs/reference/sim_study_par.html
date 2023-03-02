@@ -74,17 +74,17 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>nsim</dt>
-<dd><p>Number of replications. Must be larger than 1.</p></dd>
+<dd><p>Integer. Number of replications. Must be larger than 1.</p></dd>
 <dt>scenarios</dt>
 <dd><p>Data frame containing all parameters for scenarios that should be simulated.</p></dd>
 <dt>arms</dt>
-<dd><p>Vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.</p></dd>
+<dd><p>Integer vector with treatment arms to perform inference on. These arms are compared to the control group. Default - all arms except the first one.</p></dd>
 <dt>models</dt>
-<dd><p>Vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel"). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.</p></dd>
+<dd><p>Character vector with models that should be used for the analysis. Default=c("fixmodel", "sepmodel", "poolmodel"). Available models for continuous endpoints are: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'splines', 'splines_cal', 'timemachine'. Available models for binary endpoints are: 'fixmodel', 'fixmodel_cal', 'MAPprior', 'poolmodel', 'sepmodel', 'sepmodel_adj', 'timemachine'.</p></dd>
 <dt>endpoint</dt>
 <dd><p>Endpoint indicator. "cont" for continuous endpoints, "bin" for binary endpoints.</p></dd>
 <dt>perc_cores</dt>
-<dd><p>What percentage of available cores should be used for the simulations. Default=0.9.</p></dd>
+<dd><p>Double. What percentage of available cores should be used for the simulations. Default=0.9.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -98,6 +98,7 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
+<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
 <span class="r-in"><span class="co"># Create data frame with all parameters:</span></span>
 <span class="r-in"><span class="va">sim_scenarios</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>num_arms <span class="op">=</span> <span class="fl">4</span>,</span>
 <span class="r-in">n_arm <span class="op">=</span> <span class="fl">250</span>,</span>
@@ -122,8 +123,9 @@
 <span class="r-in">ncc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Run simulation study:</span></span>
-<span class="r-in"><span class="co"># sim_results &lt;- sim_study_par(nsim = 100, scenarios = sim_scenarios, arms = c(3, 4),</span></span>
-<span class="r-in"><span class="co"># models = c("fixmodel", "sepmodel", "poolmodel"), endpoint = "cont")</span></span>
+<span class="r-in"><span class="va">sim_results</span> <span class="op">&lt;-</span> <span class="fu">sim_study_par</span><span class="op">(</span>nsim <span class="op">=</span> <span class="fl">100</span>, scenarios <span class="op">=</span> <span class="va">sim_scenarios</span>, arms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>, </span>
+<span class="r-in">models <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fixmodel"</span>, <span class="st">"sepmodel"</span>, <span class="st">"poolmodel"</span><span class="op">)</span>, endpoint <span class="op">=</span> <span class="st">"cont"</span><span class="op">)</span></span>
+<span class="r-in"><span class="op">}</span></span>
 <span class="r-in"></span>
 <span class="r-in"></span>
 </code></pre></div>
