@@ -12,7 +12,7 @@ treatment arms compared to a shared control. We assume that treatment
 arms enter the platform trial sequentially. In particular, we consider a
 trial starting with at least one initial treatment arm, where a new arm
 is added after every
-![d=(d_1,...,d_K)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;d%3D%28d_1%2C...%2Cd_K%29 "d=(d_1,...,d_K)")
+![\\mathbf{d}=(d_1,...,d_K)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bd%7D%3D%28d_1%2C...%2Cd_K%29 "\mathbf{d}=(d_1,...,d_K)")
 patients have been recruited to the trial (with
 ![d_1=0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;d_1%3D0 "d_1=0")).
 
@@ -23,7 +23,7 @@ which a treatment arm either enters or leaves the platform.
 
 The below figure illustrates the considered trial design.
 
-<img src="./man/figures/trial_general_3.PNG" width="70%" style="display: block; margin: auto;" />
+<img src="./man/figures/trial_general_1.PNG" width="70%" style="display: block; margin: auto;" />
 
 ## Functions
 
@@ -148,17 +148,22 @@ description and examples can be found at the package website:
 
 ## References
 
-\[1\] Bofill Roig, M., Krotka, P., et al. [*“On model-based time trend
+\[1\] Krotka, P., Hees, K., et al. [*“NCC: An R-package for analysis and
+simulation of platform trials with non-concurrent
+controls.”*](https://arxiv.org/abs/2302.12634) arXiv preprint (2023):
+arXiv:2302.12634
+
+\[2\] Bofill Roig, M., Krotka, P., et al. [*“On model-based time trend
 adjustments in platform trials with non-concurrent
 controls.”*](https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-022-01683-w)
 BMC medical research methodology 22.1 (2022): 1-16.
 
-\[2\] Lee, K. M., and Wason, J. [*“Including non-concurrent control
+\[3\] Lee, K. M., and Wason, J. [*“Including non-concurrent control
 patients in the analysis of platform trials: is it worth
 it?.”*](https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-020-01043-6)
 BMC medical research methodology 20.1 (2020): 1-12.
 
-\[3\] Saville, B. R., Berry, D. A., et al. [*“The Bayesian Time Machine:
+\[4\] Saville, B. R., Berry, D. A., et al. [*“The Bayesian Time Machine:
 Accounting for Temporal Drift in Multi-arm Platform
 Trials.”*](https://journals.sagepub.com/doi/full/10.1177/17407745221112013)
 Clinical Trials 19.5 (2022): 490-501

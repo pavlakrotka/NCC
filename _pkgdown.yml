@@ -33,3 +33,8 @@ navbar:
       icon: fab fa-github fa-lg
       href: https://github.com/pavlakrotka/NCC
 
+home:
+  links:
+  - text: Read the NCC package paper
+    href: https://arxiv.org/abs/2302.12634
+

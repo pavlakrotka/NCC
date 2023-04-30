@@ -50,3 +50,4 @@ Suggests:
     rmarkdown,
     knitr
 VignetteBuilder: knitr
+BugReports: https://github.com/pavlakrotka/NCC/issues

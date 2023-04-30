@@ -19,14 +19,14 @@ opts_chunk$set(echo = TRUE,
 
 ## Design overview
 
-We consider a platform trial evaluating the efficacy of $K$ treatment arms compared to a shared control. We assume that treatment arms enter the platform trial sequentially. In particular, we consider a trial starting with at least one initial treatment arm, where a new arm is added after every $d=(d_1,...,d_K)$ patients have been recruited to the trial (with $d_1=0$).
+We consider a platform trial evaluating the efficacy of $K$ treatment arms compared to a shared control. We assume that treatment arms enter the platform trial sequentially. In particular, we consider a trial starting with at least one initial treatment arm, where a new arm is added after every $\mathbf{d}=(d_1,...,d_K)$ patients have been recruited to the trial (with $d_1=0$).
 
 We divide the duration of the trial into $S$ periods, where the periods are the time intervals bounded by times at which a treatment arm either enters or leaves the platform.
 
 The below figure illustrates the considered trial design.
 
 ```{r, echo=FALSE}
-include_graphics("./man/figures/trial_general_3.PNG")
+include_graphics("./man/figures/trial_general_1.PNG")
 ```
 
 ## Functions
@@ -131,11 +131,13 @@ Documentation of all functions as well as vignettes with further description and
 
 ## References
 
-[1] Bofill Roig, M., Krotka, P., et al. [*“On model-based time trend adjustments in platform trials with non-concurrent controls.”*](https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-022-01683-w) BMC medical research methodology 22.1 (2022): 1-16.
+[1] Krotka, P., Hees, K., et al. [*“NCC: An R-package for analysis and simulation of platform trials with non-concurrent controls.”*](https://arxiv.org/abs/2302.12634) arXiv preprint (2023): arXiv:2302.12634
 
-[2] Lee, K. M., and Wason, J. [*“Including non-concurrent control patients in the analysis of platform trials: is it worth it?.”*](https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-020-01043-6) BMC medical research methodology 20.1 (2020): 1-12.
+[2] Bofill Roig, M., Krotka, P., et al. [*“On model-based time trend adjustments in platform trials with non-concurrent controls.”*](https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-022-01683-w) BMC medical research methodology 22.1 (2022): 1-16.
 
-[3] Saville, B. R., Berry, D. A., et al. [*“The Bayesian Time Machine: Accounting for Temporal Drift in Multi-arm Platform Trials.”*](https://journals.sagepub.com/doi/full/10.1177/17407745221112013) Clinical Trials 19.5 (2022): 490-501
+[3] Lee, K. M., and Wason, J. [*“Including non-concurrent control patients in the analysis of platform trials: is it worth it?.”*](https://bmcmedresmethodol.biomedcentral.com/articles/10.1186/s12874-020-01043-6) BMC medical research methodology 20.1 (2020): 1-12.
+
+[4] Saville, B. R., Berry, D. A., et al. [*“The Bayesian Time Machine: Accounting for Temporal Drift in Multi-arm Platform Trials.”*](https://journals.sagepub.com/doi/full/10.1177/17407745221112013) Clinical Trials 19.5 (2022): 490-501
 
 ------------------------------------------------------------------------
 
