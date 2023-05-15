@@ -134,11 +134,7 @@ functionality.
 
 Please note that prior to installing the `NCC` package, the
 [JAGS](https://mcmc-jags.sourceforge.io/) library needs to be installed
-on your computer, since the Bayesian analysis methods are performed
-using the [rjags R-package](https://cran.r-project.org/package=rjags)
-and therefore require the installation of the JAGS library. You can
-download the latest version of JAGS from
-[here](https://sourceforge.net/projects/mcmc-jags/files/).
+on your computer.
 
 To install the stable version of the `NCC` package from
 [CRAN](https://cran.r-project.org/package=NCC), please run the following
@@ -149,12 +145,15 @@ install.packages("NCC")
 ```
 
 To install the latest development version of the `NCC` package from
-Github, please run the following code:
+GitHub, please run the following code:
 
 ``` r
 # install.packages("devtools") 
 devtools::install_github("pavlakrotka/NCC", build_vignettes = TRUE)
 ```
+
+For further details regarding the package installation, see
+<https://pavlakrotka.github.io/NCC/installation/installation.html>.
 
 ## Documentation
 

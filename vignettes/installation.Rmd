@@ -1,0 +1,38 @@
+---
+title: "How to install the NCC package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{How to install the NCC package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(echo = TRUE,
+               message = FALSE,
+               error = FALSE,
+               warning = FALSE,
+               comment = "",
+               fig.align = "center",
+               out.width = "70%")
+```
+
+
+Prior to installing the `NCC` package, the [JAGS](https://mcmc-jags.sourceforge.io/) library needs to be installed on your computer, since the Bayesian analysis methods are performed using the [rjags R-package](https://cran.r-project.org/package=rjags) and therefore require the installation of the JAGS library. You can download the latest version of JAGS from [here](https://sourceforge.net/projects/mcmc-jags/files/).
+
+To install the stable version of the `NCC` package from [CRAN](https://cran.r-project.org/package=NCC), please run the following code:
+
+```{r, message=FALSE, warning=FALSE, results=FALSE, eval=FALSE}
+install.packages("NCC")
+```
+
+To install the latest development version of the `NCC` package from GitHub, please run the following code:
+
+```{r, message=FALSE, warning=FALSE, results=FALSE, eval=FALSE}
+# install.packages("devtools") 
+devtools::install_github("pavlakrotka/NCC", build_vignettes = TRUE)
+```
+
+
+
