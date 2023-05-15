@@ -133,7 +133,7 @@ To install the latest development version of the `NCC` package from GitHub, plea
 devtools::install_github("pavlakrotka/NCC", build_vignettes = TRUE)
 ```
 
-For further details regarding the package installation, see <https://pavlakrotka.github.io/NCC/installation/installation.html>.
+For further details regarding the package installation, see <https://pavlakrotka.github.io/NCC/articles/installation.html>.
 
 ## Documentation
 

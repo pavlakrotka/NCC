@@ -117,19 +117,19 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">mixmodel_AR1_cal_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2911437</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4.42074e-06</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.07227805</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5517104</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.186158</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3104451</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3304008</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7929685</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> formula: response ~ as.factor(treatment) + AR1(1 | cal_time)</span>
@@ -139,24 +139,24 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> family: gaussian( link = identity ) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ------------ Fixed effects (beta) ------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       Estimate Cond. SE t-value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)            0.09176  0.07712  1.1898</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)1  0.04851  0.13124  0.3696</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)2  0.23412  0.13126  1.7836</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3  0.07228  0.13132  0.5504</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)            -0.0142  0.07093 -0.2002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)1   0.4769  0.12286  3.8813</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)2   0.4187  0.12286  3.4079</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3   0.5517  0.12286  4.4907</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  --------------- Random effects ---------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Family: gaussian( link = identity ) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    --- Correlation parameters:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    1.ARphi </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -0.6092132 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1.ARphi </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -0.999999 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            --- Variance parameters ('lambda'):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> lambda = var(u) for u ~ Gaussian; </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    cal_time  :  0.02267  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    cal_time  :  0.005623  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # of obs: 500; # of groups: cal_time, 20 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  -------------- Residual variance  ------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> phi estimate was 1.12526 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> phi estimate was 1.00621 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ------------- Likelihood values  -------------</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         logLik</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> p_v(h) (marginal L): -742.5663</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> p_v(h) (marginal L): -711.6829</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>

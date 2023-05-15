@@ -153,7 +153,7 @@ devtools::install_github("pavlakrotka/NCC", build_vignettes = TRUE)
 ```
 
 For further details regarding the package installation, see
-<https://pavlakrotka.github.io/NCC/installation/installation.html>.
+<https://pavlakrotka.github.io/NCC/articles/installation.html>.
 
 ## Documentation
 

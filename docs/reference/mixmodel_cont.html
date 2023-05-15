@@ -114,37 +114,47 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">mixmodel_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span>, ci <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing profile confidence intervals ...</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Last two rows have identical or NA .zeta values: using minstep</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Last two rows have identical or NA .zeta values: using minstep</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>non-monotonic profile for .sig01</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>bad spline fit for .sig01: falling back to linear interpolation</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>collapsing to unique 'x' values</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Computing profile confidence intervals ...</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Last two rows have identical or NA .zeta values: using minstep</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Last two rows have identical or NA .zeta values: using minstep</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>non-monotonic profile for .sig01</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>bad spline fit for .sig01: falling back to linear interpolation</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>collapsing to unique 'x' values</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.066301</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.005818503</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1811644</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3084466</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.059785</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.09069785</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4065412</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5546031</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Linear mixed model fit by REML ['lmerModLmerTest']</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Formula: response ~ as.factor(treatment) + (1 | period)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Data: data_new</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> REML criterion at convergence: 1389.263</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> REML criterion at convergence: 1394.696</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Random effects:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Groups   Name        Std.Dev.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  period   (Intercept) 0.04625 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Residual             0.96236 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  period   (Intercept) 0.04446 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Residual             0.96770 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of obs: 500, groups:  period, 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Fixed Effects:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           (Intercept)  as.factor(treatment)1  as.factor(treatment)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.11876                0.01941                0.15454  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.07192                0.30244                0.31650  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.18116  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.30845  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
 </code></pre></div>
