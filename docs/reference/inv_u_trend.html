@@ -84,8 +84,10 @@
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The time trend is generated according to the function \(f(j) = \lambda \cdot \frac{j-1}{N-1} (I(j \leq N_p) - I(j &gt; N_p))\),
-where \(N\) is the total sample size (parameter <code>n_total</code>) and \(N_p\) (parameter <code>N_peak</code>) indicates the point at which the trend switches direction.</p>
+    <p>The time trend is generated according to the function</p>
+<p>$$f(j) = \lambda \cdot \frac{j-1}{N-1} \hspace{0.2cm} \mathrm{for} \hspace{0.2cm} j \leq N_p$$
+$$f(j) = -\lambda \cdot \frac{j-N_p}{N-1} + \lambda \cdot \frac{N_p-1}{N-1} \hspace{0.2cm} \mathrm{for} \hspace{0.2cm} j &gt; N_p$$</p>
+<p>where \(N\) is the total sample size (parameter <code>n_total</code>) and \(N_p\) (parameter <code>N_peak</code>) indicates the point at which the trend switches direction.</p>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>

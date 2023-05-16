@@ -22,7 +22,11 @@ Time trend for time points j.
 This function generates a time trend for given time points in the trial according to an inverted-u function.
 }
 \details{
-The time trend is generated according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1} (I(j \leq N_p) - I(j > N_p))},
+The time trend is generated according to the function
+
+\deqn{f(j) = \lambda \cdot \frac{j-1}{N-1} \hspace{0.2cm} \mathrm{for} \hspace{0.2cm} j \leq N_p}
+\deqn{f(j) = -\lambda \cdot \frac{j-N_p}{N-1} + \lambda \cdot \frac{N_p-1}{N-1} \hspace{0.2cm} \mathrm{for} \hspace{0.2cm} j > N_p}
+
 where \eqn{N} is the total sample size (parameter \code{n_total}) and \eqn{N_p} (parameter \code{N_peak}) indicates the point at which the trend switches direction.
 }
 \author{

@@ -19,13 +19,23 @@ opts_chunk$set(echo = TRUE,
 ```
 
 
+Below we describe how to install the `NCC` package in two simple steps.
+
+## 1) Installing JAGS
+
 Prior to installing the `NCC` package, the [JAGS](https://mcmc-jags.sourceforge.io/) library needs to be installed on your computer, since the Bayesian analysis methods are performed using the [rjags R-package](https://cran.r-project.org/package=rjags) and therefore require the installation of the JAGS library. You can download the latest version of JAGS from [here](https://sourceforge.net/projects/mcmc-jags/files/).
+
+## 2) Installing the `NCC` package
+
+### 2a) from CRAN
 
 To install the stable version of the `NCC` package from [CRAN](https://cran.r-project.org/package=NCC), please run the following code:
 
 ```{r, message=FALSE, warning=FALSE, results=FALSE, eval=FALSE}
 install.packages("NCC")
 ```
+
+### 2b) from GitHub
 
 To install the latest development version of the `NCC` package from GitHub, please run the following code:
 

@@ -334,18 +334,32 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
+<p>Below we describe how to install the <code>NCC</code> package in two
+simple steps.</p>
+<div id="installing-jags" class="section level2">
+<h2>1) Installing JAGS</h2>
 <p>Prior to installing the <code>NCC</code> package, the <a href="https://mcmc-jags.sourceforge.io/">JAGS</a> library needs to be
 installed on your computer, since the Bayesian analysis methods are
 performed using the <a href="https://cran.r-project.org/package=rjags">rjags R-package</a> and
 therefore require the installation of the JAGS library. You can download
 the latest version of JAGS from <a href="https://sourceforge.net/projects/mcmc-jags/files/">here</a>.</p>
+</div>
+<div id="installing-the-ncc-package" class="section level2">
+<h2>2) Installing the <code>NCC</code> package</h2>
+<div id="a-from-cran" class="section level3">
+<h3>2a) from CRAN</h3>
 <p>To install the stable version of the <code>NCC</code> package from <a href="https://cran.r-project.org/package=NCC">CRAN</a>, please run the
 following code:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;NCC&quot;</span>)</span></code></pre></div>
+</div>
+<div id="b-from-github" class="section level3">
+<h3>2b) from GitHub</h3>
 <p>To install the latest development version of the <code>NCC</code>
 package from GitHub, please run the following code:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;) </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;pavlakrotka/NCC&quot;</span>, <span class="at">build_vignettes =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+</div>
 
 
 

@@ -125,19 +125,19 @@ that were active in the trial during calendar time units prior or up to the time
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">fixmodel_cal_cont</span><span class="op">(</span>data <span class="op">=</span> <span class="va">trial_data</span>, arm <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $p_val</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.006665554</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2155492</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $treat_effect</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.340682</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1116688</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $lower_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.07119598</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.1667937</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $upper_ci</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6101681</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3901313</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $reject_h0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -147,21 +147,21 @@ that were active in the trial during calendar time units prior or up to the time
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           (Intercept)  as.factor(treatment)1  as.factor(treatment)2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              -0.52681                0.40089                0.29522  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              -0.03703                0.30113                0.35106  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(treatment)3   as.factor(cal_time)2   as.factor(cal_time)3  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.34068                0.56252                0.34460  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.11167               -0.18460                0.25599  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  as.factor(cal_time)4   as.factor(cal_time)5   as.factor(cal_time)6  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.02589                0.38906                0.77609  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              -0.11381               -0.19925                0.09684  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  as.factor(cal_time)7   as.factor(cal_time)8   as.factor(cal_time)9  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.71844                1.04822                0.23658  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              -0.11747               -0.12922                0.19478  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(cal_time)10  as.factor(cal_time)11  as.factor(cal_time)12  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.48382                0.58720                0.42845  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              -0.15545                0.17133                0.31357  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(cal_time)13  as.factor(cal_time)14  as.factor(cal_time)15  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.85409                0.94828                0.58791  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.53562               -0.09462                0.24445  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(cal_time)16  as.factor(cal_time)17  as.factor(cal_time)18  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.73277                0.48855                0.33053  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.13648               -0.30113                0.16879  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> as.factor(cal_time)19  as.factor(cal_time)20  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               0.59745                0.78162  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               0.10318                0.21860  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"></span>
