@@ -8,10 +8,14 @@
 #' @param n_total Total sample size in the trial.
 #'
 #' @export
-#' 
-#' @details The time trend is generated according to the function \eqn{f(j) = \lambda \cdot \frac{j-1}{N-1} (I(j \leq N_p) - I(j > N_p))}, 
+#'
+#' @details The time trend is generated according to the function
+#'
+#' \deqn{f(j) = \lambda \cdot \frac{j-1}{N-1} \hspace{0.2cm} \mathrm{for} \hspace{0.2cm} j \leq N_p}
+#' \deqn{f(j) = -\lambda \cdot \frac{j-N_p}{N-1} + \lambda \cdot \frac{N_p-1}{N-1} \hspace{0.2cm} \mathrm{for} \hspace{0.2cm} j > N_p}
+#'
 #' where \eqn{N} is the total sample size (parameter `n_total`) and \eqn{N_p} (parameter `N_peak`) indicates the point at which the trend switches direction.
-#' 
+#'
 #' @return Time trend for time points j.
 #' @author Marta Bofill Roig, Pavla Krotka
 
