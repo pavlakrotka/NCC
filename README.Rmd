@@ -4,6 +4,13 @@ output: github_document
 
 # NCC: Simulation and analysis of platform trials with non-concurrent controls <img src="man/figures/NCC_hexsticker.png" align="right" height="200" />
 
+
+[![](https://cranlogs.r-pkg.org/badges/grand-total/NCC)](https://cran.rstudio.com/web/packages/NCC/index.html)
+[![](https://cranlogs.r-pkg.org/badges/NCC)](https://cran.rstudio.com/web/packages/NCC/index.html)
+[![](https://img.shields.io/cran/v/NCC)](https://cran.rstudio.com/web/packages/NCC/index.html)
+[![](https://badges.cranchecks.info/flavor/windows/NCC.svg)](https://cran.rstudio.com/web/checks/check_results_NCC.html)
+[![](https://img.shields.io/cran/l/NCC)](https://opensource.org/license/mit/)
+
 ```{r setup, include=FALSE}
 library(knitr)
 opts_chunk$set(echo = TRUE,

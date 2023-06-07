@@ -1,25 +1,27 @@
 
 # NCC: Simulation and analysis of platform trials with non-concurrent controls <img src="man/figures/NCC_hexsticker.png" align="right" height="200" />
 
+[![](https://cranlogs.r-pkg.org/badges/grand-total/NCC)](https://cran.rstudio.com/web/packages/NCC/index.html)
+[![](https://cranlogs.r-pkg.org/badges/NCC)](https://cran.rstudio.com/web/packages/NCC/index.html)
+[![](https://img.shields.io/cran/v/NCC)](https://cran.rstudio.com/web/packages/NCC/index.html)
+[![](https://badges.cranchecks.info/flavor/windows/NCC.svg)](https://cran.rstudio.com/web/checks/check_results_NCC.html)
+[![](https://img.shields.io/cran/l/NCC)](https://opensource.org/license/mit/)
+
 `NCC` package allows users to simulate platform trials and to compare
 arms using non-concurrent control data.
 
 ## Design overview
 
-We consider a platform trial evaluating the efficacy of
-![K](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;K "K")
-treatment arms compared to a shared control. We assume that treatment
-arms enter the platform trial sequentially. In particular, we consider a
-trial starting with at least one initial treatment arm, where a new arm
-is added after every
-![\\mathbf{d}=(d_1,...,d_K)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbf%7Bd%7D%3D%28d_1%2C...%2Cd_K%29 "\mathbf{d}=(d_1,...,d_K)")
-patients have been recruited to the trial (with
-![d_1=0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;d_1%3D0 "d_1=0")).
+We consider a platform trial evaluating the efficacy of $K$ treatment
+arms compared to a shared control. We assume that treatment arms enter
+the platform trial sequentially. In particular, we consider a trial
+starting with at least one initial treatment arm, where a new arm is
+added after every $\mathbf{d}=(d_1,...,d_K)$ patients have been
+recruited to the trial (with $d_1=0$).
 
-We divide the duration of the trial into
-![S](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;S "S")
-periods, where the periods are the time intervals bounded by times at
-which a treatment arm either enters or leaves the platform.
+We divide the duration of the trial into $S$ periods, where the periods
+are the time intervals bounded by times at which a treatment arm either
+enters or leaves the platform.
 
 The below figure illustrates the considered trial design.
 
@@ -33,20 +35,20 @@ This package contains the following functions:
 
 #### Main functions for data generation
 
--   `datasim_bin()` simulates data with binary outcomes
--   `datasim_cont()` simulates data with continuous outcomes
+- `datasim_bin()` simulates data with binary outcomes
+- `datasim_cont()` simulates data with continuous outcomes
 
 #### Auxiliary functions for data generation
 
--   `get_ss_matrix()` computes sample sizes per arm and period
--   `linear_trend()` is the linear time trend function, used to generate
-    the trend for each patient
--   `sw_trend()` is the step-wise time trend function, used generate the
-    trend for each patient
--   `inv_u_trend()` is the inverted-u time trend function, used generate
-    the trend for each patient
--   `seasonal_trend()` is the seasonal time trend function, used
-    generate the trend for each patient
+- `get_ss_matrix()` computes sample sizes per arm and period
+- `linear_trend()` is the linear time trend function, used to generate
+  the trend for each patient
+- `sw_trend()` is the step-wise time trend function, used generate the
+  trend for each patient
+- `inv_u_trend()` is the inverted-u time trend function, used generate
+  the trend for each patient
+- `seasonal_trend()` is the seasonal time trend function, used generate
+  the trend for each patient
 
 ### Data analysis
 
@@ -54,71 +56,66 @@ This package contains the following functions:
 
 ##### Frequentist approaches
 
--   `fixmodel_bin()` performs analysis using a regression model
-    adjusting for periods
--   `fixmodel_cal_bin()` performs analysis using a regression model
-    adjusting for calendar time
--   `poolmodel_bin()` performs pooled analysis
--   `sepmodel_bin()` performs separate analysis
--   `sepmodel_adj_bin()` performs separate analysis adjusting for
-    periods
+- `fixmodel_bin()` performs analysis using a regression model adjusting
+  for periods
+- `fixmodel_cal_bin()` performs analysis using a regression model
+  adjusting for calendar time
+- `poolmodel_bin()` performs pooled analysis
+- `sepmodel_bin()` performs separate analysis
+- `sepmodel_adj_bin()` performs separate analysis adjusting for periods
 
 ##### Bayesian approaches
 
--   `MAPprior_bin()` performs analysis using the MAP prior approach
--   `timemachine_bin()` performs analysis using the Time Machine
-    approach
+- `MAPprior_bin()` performs analysis using the MAP prior approach
+- `timemachine_bin()` performs analysis using the Time Machine approach
 
 #### Treatment-control comparisons for continuous endpoints
 
 ##### Frequentist approaches
 
--   `fixmodel_cont()` performs analysis using a regression model
-    adjusting for periods
--   `fixmodel_cal_cont()` performs analysis using a regression model
-    adjusting for calendar time
--   `gam_cont()` performs analysis using generalized additive model
--   `mixmodel_cont()` performs analysis using a mixed model adjusting
-    for periods as a random factor
--   `mixmodel_cal_cont()` performs analysis using a mixed model
-    adjusting for calendar time as a random factor
--   `mixmodel_AR1_cont()` performs analysis using a mixed model
-    adjusting for periods as a random factor with AR1 correlation
-    structure
--   `mixmodel_AR1_cal_cont()` performs analysis using a mixed model
-    adjusting for calendar time as a random factor with AR1 correlation
-    structure
--   `piecewise_cont()` performs analysis using discontinuous piecewise
-    polynomials per period
--   `piecewise_cal_cont()` performs analysis using discontinuous
-    piecewise polynomials per calendar time
--   `poolmodel_cont()` performs pooled analysis
--   `sepmodel_cont()` performs separate analysis
--   `sepmodel_adj_cont()` performs separate analysis adjusting for
-    periods
--   `splines_cont()` performs analysis using regression splines with
-    knots placed according to periods
--   `splines_cal_cont()` performs analysis using regression splines with
-    knots placed according to calendar times
+- `fixmodel_cont()` performs analysis using a regression model adjusting
+  for periods
+- `fixmodel_cal_cont()` performs analysis using a regression model
+  adjusting for calendar time
+- `gam_cont()` performs analysis using generalized additive model
+- `mixmodel_cont()` performs analysis using a mixed model adjusting for
+  periods as a random factor
+- `mixmodel_cal_cont()` performs analysis using a mixed model adjusting
+  for calendar time as a random factor
+- `mixmodel_AR1_cont()` performs analysis using a mixed model adjusting
+  for periods as a random factor with AR1 correlation structure
+- `mixmodel_AR1_cal_cont()` performs analysis using a mixed model
+  adjusting for calendar time as a random factor with AR1 correlation
+  structure
+- `piecewise_cont()` performs analysis using discontinuous piecewise
+  polynomials per period
+- `piecewise_cal_cont()` performs analysis using discontinuous piecewise
+  polynomials per calendar time
+- `poolmodel_cont()` performs pooled analysis
+- `sepmodel_cont()` performs separate analysis
+- `sepmodel_adj_cont()` performs separate analysis adjusting for periods
+- `splines_cont()` performs analysis using regression splines with knots
+  placed according to periods
+- `splines_cal_cont()` performs analysis using regression splines with
+  knots placed according to calendar times
 
 ##### Bayesian approaches
 
--   `MAPprior_cont()` performs analysis using the MAP prior approach
--   `timemachine_cont()` performs analysis using the Time Machine
-    approach
+- `MAPprior_cont()` performs analysis using the MAP prior approach
+- `timemachine_cont()` performs analysis using the Time Machine approach
 
 ### Running simulations
 
--   `all_models()` is an auxiliary wrapper function to analyze given
-    dataset (treatment-control comparisons) with multiple models
--   `sim_study()` is a wrapper function to run a simulation study
-    (treatment-control comparisons) for desired scenarios
--   `sim_study_par()` is a wrapper function to run a simulation study
-    (treatment-control comparisons) for desired scenarios in parallel
+- `all_models()` is an auxiliary wrapper function to analyze given
+  dataset (treatment-control comparisons) with multiple models
+- `sim_study()` is a wrapper function to run a simulation study
+  (treatment-control comparisons) for desired scenarios
+- `sim_study_par()` is a wrapper function to run a simulation study
+  (treatment-control comparisons) for desired scenarios in parallel
 
 ### Visualization
 
--   `plot_trial()` visualizes the progress of a simulated trial
+- `plot_trial()` visualizes the progress of a simulated trial
 
 For a more detailed description of the functions, see the vignettes in
 the R-package website (<https://pavlakrotka.github.io/NCC/>).
