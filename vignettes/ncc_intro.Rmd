@@ -17,7 +17,7 @@ opts_chunk$set(echo = FALSE,
                fig.align = "center",
                out.width = "100%")
 
-library(magick)
+# library(magick)
 ```
 
 
@@ -31,12 +31,14 @@ For treatments that enter the trial later, the control group is divided into con
 
 
 ```{r}
-CC <- image_read("../man/figures/trial_scheme_CC.png")
-NCC <- image_read("../man/figures/trial_scheme_NCC.png")
-img <- c(CC, NCC)
-
-image_animate(image_scale(img), delay = 150)
+# CC <- image_read("../man/figures/trial_scheme_CC.png")
+# NCC <- image_read("../man/figures/trial_scheme_NCC.png")
+# img <- c(CC, NCC)
+# 
+# image_animate(image_scale(img), delay = 150) # GIF saved through R Viewer
 ```
+
+<img src="../man/figures/NCC_intro_gif.gif"/>
 
 
 While using NCC data can offer several benefits, such as reduced sample size and increased statistical power, it may also introduce bias in effect estimators if time trends are present in the trial.
