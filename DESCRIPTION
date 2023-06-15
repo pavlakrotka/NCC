@@ -42,8 +42,7 @@ Imports:
   iterators,
   spaMM,
   mgcv,
-  splines,
-  magick
+  splines
 SystemRequirements: JAGS 4.x.y
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
