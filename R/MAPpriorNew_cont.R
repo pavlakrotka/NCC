@@ -159,7 +159,7 @@ MAPpriorNew_cont <- function(data,
 
 
   ## get concurrent and non-concurrent controls of treatment = arm
-  cc <- data[data$treatment == 0 & (data$period > treatment_start_period[arm + 1] - 1) & (data$period < treatment_end_period[arm + 1] + 1), ]
+  cc <- data[data$treatment == 0 & (data$period >= treatment_start_period[arm + 1]) & (data$period <= treatment_end_period[arm + 1]), ]
   ncc <- data[data$treatment == 0 & data$period < treatment_start_period[arm + 1], ]
 
   ## get patients treated with treatment=arm
@@ -168,29 +168,31 @@ MAPpriorNew_cont <- function(data,
   if(dim(ncc)[1] !=0){ # in case there are NCC data available
 
     if(opt==1){
-      ncc$period <- 0
+      ncc_data <- data.frame(period=c(0), n=c(0), y=c(0), y.se=c(0))
+      y_p <- mean(ncc$response)
+      n_p <- length(ncc$response)
+      y_pse <- sd(ncc$response)/sqrt(n_p)
+      ncc_data[1,] <- c(1,n_p,y_p,y_pse)
     }
 
-    # summary per period
-    ncc_data <- data.frame(period=c(0), n=c(0), y=c(0), y.se=c(0))
-    for(i in 1: treatment_start_period[arm + 1]-1){
-      ncc_period <- ncc[ncc$period==i,]
-      y_p <- mean(ncc_period$response)
-      n_p <- length(ncc_period$response)
-      y_pse <- sd(ncc_period$response)/sqrt(n_p)
-      ncc_data[i,] <- c(i,n_p,y_p,y_pse)
+    if(opt==2){
+      # summary per period
+      ncc_data <- data.frame(period=c(0), n=c(0), y=c(0), y.se=c(0))
+      for(i in 1: treatment_start_period[arm + 1]-1){
+        ncc_period <- ncc[ncc$period==i,]
+        y_p <- mean(ncc_period$response)
+        n_p <- length(ncc_period$response)
+        y_pse <- sd(ncc_period$response)/sqrt(n_p)
+        ncc_data[i,] <- c(i,n_p,y_p,y_pse)
+      }
     }
-
-    # N_std = length(unique(ncc$period)),
-    # y = sapply(unique(ncc$period), function(x) mean(ncc[ncc$period == x, ]$response)),
-    # se = sapply(unique(ncc$period), function(x) sd(ncc[ncc$period == x, ]$response)/sqrt(length(ncc[ncc$period == x, ]$response)))
 
     # prior
     map_mcmc <- gMAP(cbind(y, y.se) ~ 1 | period,
                      weights=n, data=ncc_data,
                      family=gaussian,
-                     beta.prior=cbind(0, prior_prec_eta), #prior_prec_eta
-                     tau.dist="HalfNormal", tau.prior=cbind(0, prior_prec_tau)) #prior_prec_tau
+                     beta.prior=cbind(0, sqrt(1/prior_prec_eta)), #prior_prec_eta
+                     tau.dist="HalfNormal", tau.prior=cbind(0, sqrt(1/prior_prec_tau))) #prior_prec_tau
 
 
     prior_control <- automixfit(map_mcmc)
