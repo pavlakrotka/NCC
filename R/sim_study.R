@@ -65,11 +65,11 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
     stop("Endpoint indicator (`endpoint`) must be one of the following strings: 'cont', 'bin'!")
   }
 
-  if(endpoint=="cont" & sum(models %in% c("fixmodel", "fixmodel_cal", "gam", "MAPprior",
+  if(endpoint=="cont" & sum(models %in% c("fixmodel", "fixmodel_cal", "gam", "MAPprior", "MAPpriorNew",
                                           "mixmodel", "mixmodel_cal", "mixmodel_AR1", "mixmodel_AR1_cal",
                                           "piecewise", "piecewise_cal", "poolmodel", "sepmodel", "sepmodel_adj",
                                           "splines", "splines_cal", "timemachine")==FALSE)>0){
-    stop("For continuous endpoints, only the following models are implemented: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior',
+    stop("For continuous endpoints, only the following models are implemented: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'MAPpriorNew',
                                           'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal',
                                           'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj',
                                           'splines', 'splines_cal', 'timemachine'.
