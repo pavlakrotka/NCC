@@ -100,5 +100,5 @@ Robust meta-analytic-predictive priors in clinical trials with historical contro
 Applying Meta-Analytic-Predictive Priors with the R Bayesian Evidence Synthesis Tools. Weber, S., et al. Journal of Statistical Software 100.19 (2021): 1548-7660.
 }
 \author{
-Katharina Hees
+Marta Bofill Roig, Katharina Hees
 }

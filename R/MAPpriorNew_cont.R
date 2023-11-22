@@ -79,7 +79,7 @@
 #' - `upper_ci` - upper limit of the (1-2*`alpha`)*100% credible interval for difference in means
 #' - `reject_h0` - indicator of whether the null hypothesis was rejected or not (`p_val` < `alpha`)
 #'
-#' @author Katharina Hees
+#' @author Marta Bofill Roig, Katharina Hees
 #'
 #' @references
 #'
@@ -145,22 +145,36 @@ MAPpriorNew_cont <- function(data,
   tab_count <- table(data$treatment, data$period)
 
   ## count number of groups and number of periods
-  number_of_groups <- dim(table(data$treatment, data$period))[1] # number of groups incl control
-  number_of_periods <- dim(table(data$treatment, data$period))[2] #total number of periods
+  number_of_groups <- dim(tab_count)[1] # number of groups incl control
+  number_of_periods <- dim(tab_count)[2] #total number of periods
 
   ## get start and end period of each treatment
   treatment_start_period <- numeric(number_of_groups)
   treatment_end_period <- numeric(number_of_groups)
 
   for (i in 1:number_of_groups){
-    treatment_start_period[i] <- min(which(table(data$treatment, data$period)[i,] > 0))
-    treatment_end_period[i] <- max(which(table(data$treatment, data$period)[i,] > 0))
+    treatment_start_period[i] <- min(which(tab_count[i,] > 0))
+    treatment_end_period[i] <- max(which(tab_count[i,] > 0))
   }
 
 
   ## get concurrent and non-concurrent controls of treatment = arm
   cc <- data[data$treatment == 0 & (data$period >= treatment_start_period[arm + 1]) & (data$period <= treatment_end_period[arm + 1]), ]
   ncc <- data[data$treatment == 0 & data$period < treatment_start_period[arm + 1], ]
+
+  ## ncc sample sizes per period
+  # tab_ncc_ss <- table(ncc$period)
+  #
+  # while (any(tab_ncc_ss<=10)) { # if less than 10 patients per period -> pool with next period
+  #   if(min(which(tab_ncc_ss<=10))!=dim(tab_ncc_ss)){
+  #     ncc[ncc$period==min(which(tab_ncc_ss<=10))+1,]$period <- min(which(tab_ncc_ss<=10))
+  #     ncc[ncc$period>min(which(tab_ncc_ss<=10))+1,]$period <- ncc[ncc$period>min(which(tab_ncc_ss<=10)),]$period-1
+  #   } else {
+  #     ncc[ncc$period==min(which(tab_ncc_ss<=10)),]$period <- max(which(tab_ncc_ss>10))
+  #   }
+  #   tab_ncc_ss <- table(ncc$period)
+  # }
+
 
   ## get patients treated with treatment=arm
   t_treatment <- data[data$treatment == arm,]
@@ -188,6 +202,7 @@ MAPpriorNew_cont <- function(data,
     }
 
     # prior
+    options(RBesT.MC.control=list(adapt_delta=0.999))
     map_mcmc <- gMAP(cbind(y, y.se) ~ 1 | period,
                      weights=n, data=ncc_data,
                      family=gaussian,
