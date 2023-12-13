@@ -6,6 +6,8 @@
 #' @param lambda Strength of time trend.
 #' @param N_peak Point at which the time trend switches direction in terms of overall sample size.
 #' @param n_total Total sample size in the trial.
+#' @param trend_mean Integer. In case of random time trends, the strength of the time trend will be generated from N(`trend_mean`, `trend_var`).
+#' @param trend_var Integer. In case of random time trends, the strength of the time trend will be generated from N(`trend_mean`, `trend_var`).
 #'
 #' @export
 #'
@@ -19,4 +21,9 @@
 #' @return Time trend for time points j.
 #' @author Marta Bofill Roig, Pavla Krotka
 
-inv_u_trend <- function(j, lambda, N_peak, n_total){ifelse(j<=N_peak, lambda*(j-1)/(n_total-1), (-lambda*(j-N_peak)/(n_total-1))+(lambda*(N_peak-1)/(n_total-1)))}
+inv_u_trend <- function(j, lambda, N_peak, n_total, trend_mean, trend_var){
+  if (lambda=="random") {
+    lambda <- rnorm(1, mean = trend_mean, sd = sqrt(trend_var))
+  }
+  ifelse(j<=N_peak, as.numeric(lambda)*(j-1)/(n_total-1), (-as.numeric(lambda)*(j-N_peak)/(n_total-1))+(as.numeric(lambda)*(N_peak-1)/(n_total-1)))
+}

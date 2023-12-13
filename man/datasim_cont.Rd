@@ -16,6 +16,8 @@ datasim_cont(
   trend,
   N_peak,
   n_wave,
+  trend_mean = 0,
+  trend_var = 0.5,
   full = FALSE,
   check = TRUE
 )
@@ -33,7 +35,7 @@ datasim_cont(
 
 \item{theta}{Double vector with treatment effects in terms of difference of means for each experimental treatment arm compared to control. The elements of the vector (treatment effects) are ordered by the entry time of the experimental treatment arms (e.g., the first entry in the vector corresponds to the treatment effect of the first experimental treatment arm). The vector length equals \code{num_arms}.}
 
-\item{lambda}{Double vector with strength of time trend in each arm ordered by the entry time of the arms (e.g., the first entry in the vector corresponds to the time trend in the control arm, second entry to the time trend in the first experimental treatment arm). The vector length equals \code{num_arms}+1, as time trend in the control is also allowed.}
+\item{lambda}{Vector containing numerical entries or the string "random", indicating the strength of the time trend in each arm ordered by the entry time of the arms (e.g., the first entry in the vector corresponds to the time trend in the control arm, second entry to the time trend in the first experimental treatment arm). The vector length equals \code{num_arms}+1, as time trend in the control is also allowed. In case of random time trend, its strenght is generated from a normal distribution.}
 
 \item{sigma}{Double. Standard deviation of the responses.}
 
@@ -42,6 +44,10 @@ datasim_cont(
 \item{N_peak}{Integer. Timepoint at which the inverted-u time trend switches direction in terms of overall sample size (i.e. after how many recruited participants the trend direction switches).}
 
 \item{n_wave}{Integer. Number of cycles (waves) should the seasonal trend have.}
+
+\item{trend_mean}{Integer. In case of random time trends, the strength of the time trend will be generated from N(\code{trend_mean}, \code{trend_var}). Default: N(0, 0.5).}
+
+\item{trend_var}{Integer. In case of random time trends, the strength of the time trend will be generated from N(\code{trend_mean}, \code{trend_var}). Default: N(0, 0.5).}
 
 \item{full}{Logical. Indicates whether the output should be in form of a data frame with variables needed for the analysis only (FALSE) or in form of a list containing more information (TRUE). Default=FALSE.}
 

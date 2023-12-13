@@ -4,7 +4,7 @@
 \alias{inv_u_trend}
 \title{Generation of an inverted-u trend}
 \usage{
-inv_u_trend(j, lambda, N_peak, n_total)
+inv_u_trend(j, lambda, N_peak, n_total, trend_mean, trend_var)
 }
 \arguments{
 \item{j}{Time points for which the trend should be generated.}
@@ -14,6 +14,10 @@ inv_u_trend(j, lambda, N_peak, n_total)
 \item{N_peak}{Point at which the time trend switches direction in terms of overall sample size.}
 
 \item{n_total}{Total sample size in the trial.}
+
+\item{trend_mean}{Integer. In case of random time trends, the strength of the time trend will be generated from N(\code{trend_mean}, \code{trend_var}).}
+
+\item{trend_var}{Integer. In case of random time trends, the strength of the time trend will be generated from N(\code{trend_mean}, \code{trend_var}).}
 }
 \value{
 Time trend for time points j.

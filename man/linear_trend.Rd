@@ -4,7 +4,7 @@
 \alias{linear_trend}
 \title{Generation of a linear trend that starts in a given period}
 \usage{
-linear_trend(j, lambda, sample_size)
+linear_trend(j, lambda, sample_size, trend_mean, trend_var)
 }
 \arguments{
 \item{j}{Time points for which the trend should be generated.}
@@ -12,6 +12,10 @@ linear_trend(j, lambda, sample_size)
 \item{lambda}{Strength of time trend.}
 
 \item{sample_size}{Vector of dimension 2, indicating sample size in the trial period until the time trend starts and the remaining sample size.}
+
+\item{trend_mean}{Integer. In case of random time trends, the strength of the time trend will be generated from N(\code{trend_mean}, \code{trend_var}).}
+
+\item{trend_var}{Integer. In case of random time trends, the strength of the time trend will be generated from N(\code{trend_mean}, \code{trend_var}).}
 }
 \value{
 Time trend for time points j.

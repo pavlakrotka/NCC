@@ -101,6 +101,14 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
     scenarios$period_blocks <- 2
   }
 
+  if(("trend_mean" %in% colnames(scenarios))==FALSE){
+    scenarios$trend_mean <- 0
+  }
+
+  if(("trend_var" %in% colnames(scenarios))==FALSE){
+    scenarios$trend_var <- 0.5
+  }
+
   if(endpoint=="cont" & ("mu0" %in% colnames(scenarios))==FALSE){
     scenarios$mu0 <- 0
   }
@@ -319,6 +327,8 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                                         trend = scenarios$trend[i],
                                         N_peak = scenarios$N_peak[i],
                                         n_wave = scenarios$n_wave[i],
+                                        trend_mean = scenarios$trend_mean[i],
+                                        trend_var = scenarios$trend_var[i],
                                         full = TRUE,
                                         check = FALSE)$time_dep_effect
 
@@ -336,6 +346,8 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                                                      trend = scenarios$trend[i],
                                                      N_peak = scenarios$N_peak[i],
                                                      n_wave = scenarios$n_wave[i],
+                                                     trend_mean = scenarios$trend_mean[i],
+                                                     trend_var = scenarios$trend_var[i],
                                                      full = FALSE,
                                                      check = FALSE),
                                  arms = arms,

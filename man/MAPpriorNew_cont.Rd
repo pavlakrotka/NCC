@@ -87,10 +87,12 @@ In case of a non-informative prior this coincides with the frequentist type I er
 }
 \examples{
 
+\donttest{
 trial_data <- datasim_cont(num_arms = 3, n_arm = 100, d = c(0, 100, 250),
 theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "stepwise")
 
 MAPpriorNew_cont(data = trial_data, arm = 3)
+}
 
 
 }

@@ -89,6 +89,14 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
     scenarios$period_blocks <- 2
   }
 
+  if(("trend_mean" %in% colnames(scenarios))==FALSE){
+    scenarios$trend_mean <- 0
+  }
+
+  if(("trend_var" %in% colnames(scenarios))==FALSE){
+    scenarios$trend_var <- 0.5
+  }
+
   if(endpoint=="cont" & ("mu0" %in% colnames(scenarios))==FALSE){
     scenarios$mu0 <- 0
   }
@@ -302,6 +310,8 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
                                                      trend = scenarios$trend[i],
                                                      N_peak = scenarios$N_peak[i],
                                                      n_wave = scenarios$n_wave[i],
+                                                     trend_mean = scenarios$trend_mean[i],
+                                                     trend_var = scenarios$trend_var[i],
                                                      full = FALSE,
                                                      check = FALSE),
                                  arms = arms,
@@ -410,6 +420,8 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
                                                     trend = scenarios$trend[i],
                                                     N_peak = scenarios$N_peak[i],
                                                     n_wave = scenarios$n_wave[i],
+                                                    trend_mean = scenarios$trend_mean[i],
+                                                    trend_var = scenarios$trend_var[i],
                                                     full = FALSE,
                                                     check = FALSE),
                                  arms = arms,

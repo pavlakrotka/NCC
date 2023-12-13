@@ -4,7 +4,7 @@
 \alias{seasonal_trend}
 \title{Generation of a seasonal trend}
 \usage{
-seasonal_trend(j, lambda, n_wave, n_total)
+seasonal_trend(j, lambda, n_wave, n_total, trend_mean, trend_var)
 }
 \arguments{
 \item{j}{Time points for which the trend should be generated.}
@@ -14,6 +14,10 @@ seasonal_trend(j, lambda, n_wave, n_total)
 \item{n_wave}{How many cycles (waves) should the time trend have (\eqn{\psi}).}
 
 \item{n_total}{Total sample size in the trial.}
+
+\item{trend_mean}{Integer. In case of random time trends, the strength of the time trend will be generated from N(\code{trend_mean}, \code{trend_var}).}
+
+\item{trend_var}{Integer. In case of random time trends, the strength of the time trend will be generated from N(\code{trend_mean}, \code{trend_var}).}
 }
 \value{
 Time trend for time points j.

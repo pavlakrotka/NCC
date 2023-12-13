@@ -6,6 +6,8 @@
 #' @param lambda Strength of time trend.
 #' @param n_wave How many cycles (waves) should the time trend have (\eqn{\psi}).
 #' @param n_total Total sample size in the trial.
+#' @param trend_mean Integer. In case of random time trends, the strength of the time trend will be generated from N(`trend_mean`, `trend_var`).
+#' @param trend_var Integer. In case of random time trends, the strength of the time trend will be generated from N(`trend_mean`, `trend_var`).
 #'
 #' @export
 #'
@@ -14,4 +16,9 @@
 #' @return Time trend for time points j.
 #' @author Marta Bofill Roig, Pavla Krotka
 
-seasonal_trend <- function(j, lambda, n_wave, n_total){lambda*sin(n_wave*(2*pi)*(j-1)/(n_total-1))}
+seasonal_trend <- function(j, lambda, n_wave, n_total, trend_mean, trend_var){
+  if (lambda=="random") {
+    lambda <- rnorm(1, mean = trend_mean, sd = sqrt(trend_var))
+  }
+  as.numeric(lambda)*sin(n_wave*(2*pi)*(j-1)/(n_total-1))
+}

@@ -65,10 +65,12 @@
 #'
 #' @examples
 #'
+#' \donttest{
 #' trial_data <- datasim_cont(num_arms = 3, n_arm = 100, d = c(0, 100, 250),
 #' theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "stepwise")
 #'
 #' MAPpriorNew_cont(data = trial_data, arm = 3)
+#' }
 #'
 #'
 #' @return List containing the following elements regarding the results of comparing `arm` to control:
@@ -215,7 +217,7 @@ MAPpriorNew_cont <- function(data,
     # consider mean of the map
     # summary(map_mcmc)[3]
     if (robustify==TRUE) {
-      prior_control <- robustify(prior_control, weight=weight, mean=0)
+      prior_control <- suppressMessages(robustify(prior_control, weight=weight, mean=0)) # suppressMessages() to not report the default prior scale
     }
   } else {
 

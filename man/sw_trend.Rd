@@ -4,12 +4,16 @@
 \alias{sw_trend}
 \title{Generation of stepwise trend with equal jumps between periods}
 \usage{
-sw_trend(cj, lambda)
+sw_trend(cj, lambda, trend_mean, trend_var)
 }
 \arguments{
 \item{cj}{Period indicator.}
 
 \item{lambda}{Strength of time trend.}
+
+\item{trend_mean}{Integer. In case of random time trends, the strength of the time trend will be generated from N(\code{trend_mean}, \code{trend_var}).}
+
+\item{trend_var}{Integer. In case of random time trends, the strength of the time trend will be generated from N(\code{trend_mean}, \code{trend_var}).}
 }
 \value{
 Time trend in period \eqn{c_j}.

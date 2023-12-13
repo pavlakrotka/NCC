@@ -8,10 +8,12 @@
 #' @param period_blocks Integer. Number to define the size of the blocks for the block randomization. The block size in each period equals `period_blocks`times the number of active arms in the period (see Details). Default=2.
 #' @param p0 Double. Response probability in the control arm.
 #' @param OR Double vector with treatment effects in terms of odds ratios for each experimental treatment arm compared to control. The elements of the vector (odds ratios) are ordered by the entry time of the experimental treatment arms (e.g., the first entry in the vector corresponds to the odds ratio of the first experimental treatment arm). The vector length equals `num_arms`.
-#' @param lambda Double vector with strength of time trend in each arm ordered by the entry time of the arms (e.g., the first entry in the vector corresponds to the time trend in the control arm, second entry to the time trend in the first experimental treatment arm). The vector length equals `num_arms`+1, as time trend in the control is also allowed.
+#' @param lambda Vector containing numerical entries or the string "random", indicating the strength of the time trend in each arm ordered by the entry time of the arms (e.g., the first entry in the vector corresponds to the time trend in the control arm, second entry to the time trend in the first experimental treatment arm). The vector length equals `num_arms`+1, as time trend in the control is also allowed. In case of random time trend, its strenght is generated from a normal distribution.
 #' @param trend String indicating the time trend pattern ("linear", "linear_2, "stepwise", "stepwise_2", "inv_u" or "seasonal"). See Details for more information.
 #' @param N_peak Integer. Timepoint at which the inverted-u time trend switches direction in terms of overall sample size (i.e. after how many recruited participants the trend direction switches).
 #' @param n_wave Integer. Number of cycles (waves) should the seasonal trend have.
+#' @param trend_mean Integer. In case of random time trends, the strength of the time trend will be generated from N(`trend_mean`, `trend_var`). Default: N(0, 0.5).
+#' @param trend_var Integer. In case of random time trends, the strength of the time trend will be generated from N(`trend_mean`, `trend_var`). Default: N(0, 0.5).
 #' @param full Logical. Indicates whether the output should be in form of a data frame with variables needed for the analysis only (FALSE) or in form of a list containing more information (TRUE). Default=FALSE.
 #' @param check Logical. Indicates whether the input parameters should be checked by the function. Default=TRUE, unless the function is called by a simulation function, where the default is FALSE.
 #'
@@ -84,7 +86,7 @@
 #'
 #' @author Pavla Krotka, Marta Bofill Roig
 
-datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, trend, N_peak, n_wave, full=FALSE, check=TRUE){
+datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, trend, N_peak, n_wave, trend_mean=0, trend_var=0.5, full=FALSE, check=TRUE){
 
   if (check) {
     if(!is.numeric(num_arms) | length(num_arms)!=1){
@@ -112,8 +114,8 @@ datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, tre
            (i.e., the first entry in the vector corresponds to the odds ratio of the first experimental treatment arm etc.)!")
     }
 
-    if (!is.numeric(lambda) | length(lambda)!=(num_arms+1)) {
-      stop("Vector with strength of time trend in each arm (`lambda`) must be a numeric vector of length `num_arms`+1 and must be ordered by the entry time of the arms
+    if ((sum(!is.numeric(lambda) | lambda!="random")!=length(lambda)) | length(lambda)!=(num_arms+1)) {
+      stop("The entries in the vector with the strength of the time trend in each arm (`lambda`) must be numeric or the string 'random', the length of the vector must be `num_arms`+1 and it must be ordered by the entry time of the arms
            (i.e., the first entry in the vector corresponds to the time trend in the control arm, second entry to the time trend in the first treatment arm etc.)!")
     }
 
@@ -130,6 +132,18 @@ datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, tre
     if(trend=="seasonal"){
       if(!is.numeric(n_wave) | length(n_wave)!=1){
         stop("Number of cycles in the seasonal trend (`n_wave`) must be one number!")
+      }
+    }
+
+    if("random" %in% lambda){
+      if(!is.numeric(trend_mean) | length(trend_mean)!=1){
+        stop("The mean of the random time trend (`trend_mean`) must be one number!")
+      }
+    }
+
+    if("random" %in% lambda){
+      if(!is.numeric(trend_var) | length(trend_var)!=1){
+        stop("The variance of the random time trend (`trend_var`) must be one number!")
       }
     }
 
@@ -199,11 +213,15 @@ datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, tre
     for (i in 0:num_arms) {
       assign(paste0("ind_trend", i), linear_trend(j=eval(sym(paste0("j", i))),
                                                   lambda = lambda[i+1],
-                                                  sample_size = c(0, n_total)))
+                                                  sample_size = c(0, n_total),
+                                                  trend_mean = trend_mean,
+                                                  trend_var = trend_var))
 
       assign(paste0("all_trend", i), linear_trend(j=j,
                                                   lambda = lambda[i+1],
-                                                  sample_size = c(0, n_total)))
+                                                  sample_size = c(0, n_total),
+                                                  trend_mean = trend_mean,
+                                                  trend_var = trend_var))
     }
   }
 
@@ -211,31 +229,43 @@ datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, tre
     for (i in 0:num_arms) {
       assign(paste0("ind_trend", i), linear_trend(j=eval(sym(paste0("j", i))),
                                                   lambda = lambda[i+1],
-                                                  sample_size = c(N_period[1], sum(N_period[-1]))))
+                                                  sample_size = c(N_period[1], sum(N_period[-1])),
+                                                  trend_mean = trend_mean,
+                                                  trend_var = trend_var))
 
       assign(paste0("all_trend", i), linear_trend(j=j,
                                                   lambda = lambda[i+1],
-                                                  sample_size = c(N_period[1], sum(N_period[-1]))))
+                                                  sample_size = c(N_period[1], sum(N_period[-1])),
+                                                  trend_mean = trend_mean,
+                                                  trend_var = trend_var))
     }
   }
 
   if(trend=="stepwise"){
     for (i in 0:num_arms) {
       assign(paste0("ind_trend", i), sw_trend(cj=cj[eval(sym(paste0("j", i)))],
-                                              lambda = lambda[i+1]))
+                                              lambda = lambda[i+1],
+                                              trend_mean = trend_mean,
+                                              trend_var = trend_var))
 
       assign(paste0("all_trend", i), sw_trend(cj=cj,
-                                              lambda = lambda[i+1]))
+                                              lambda = lambda[i+1],
+                                              trend_mean = trend_mean,
+                                              trend_var = trend_var))
     }
   }
 
   if(trend=="stepwise_2"){
     for (i in 0:num_arms) {
       assign(paste0("ind_trend", i), sw_trend(cj=cj_added[eval(sym(paste0("j", i)))],
-                                              lambda = lambda[i+1]))
+                                              lambda = lambda[i+1],
+                                              trend_mean = trend_mean,
+                                              trend_var = trend_var))
 
       assign(paste0("all_trend", i), sw_trend(cj=cj_added,
-                                              lambda = lambda[i+1]))
+                                              lambda = lambda[i+1],
+                                              trend_mean = trend_mean,
+                                              trend_var = trend_var))
     }
   }
 
@@ -245,12 +275,16 @@ datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, tre
       assign(paste0("ind_trend", i), inv_u_trend(j=eval(sym(paste0("j", i))),
                                                  N_peak = N_peak,
                                                  lambda = lambda[i+1],
-                                                 n_total = n_total))
+                                                 n_total = n_total,
+                                                 trend_mean = trend_mean,
+                                                 trend_var = trend_var))
 
       assign(paste0("all_trend", i), inv_u_trend(j=j,
                                                  N_peak = N_peak,
                                                  lambda = lambda[i+1],
-                                                 n_total = n_total))
+                                                 n_total = n_total,
+                                                 trend_mean = trend_mean,
+                                                 trend_var = trend_var))
     }
   }
 
@@ -260,12 +294,16 @@ datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, tre
       assign(paste0("ind_trend", i), seasonal_trend(j=eval(sym(paste0("j", i))),
                                                     lambda = lambda[i+1],
                                                     n_wave = n_wave,
-                                                    n_total = n_total))
+                                                    n_total = n_total,
+                                                    trend_mean = trend_mean,
+                                                    trend_var = trend_var))
 
       assign(paste0("all_trend", i), seasonal_trend(j=j,
                                                     lambda = lambda[i+1],
                                                     n_wave = n_wave,
-                                                    n_total = n_total))
+                                                    n_total = n_total,
+                                                    trend_mean = trend_mean,
+                                                    trend_var = trend_var))
     }
   }
 
@@ -327,7 +365,7 @@ datasim_bin <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, lambda, tre
                        p = p)
 
     for (i in 0:(num_arms)) {
-      Data[ ,paste0("lambda", i)] <- lambda[i+1]
+      Data[ ,paste0("lambda", i)] <- ifelse(lambda[i+1]=="random", lambda[i+1], as.numeric(lambda[i+1]))
     }
 
     return(list(Data = Data,
