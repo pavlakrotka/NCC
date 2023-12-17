@@ -314,7 +314,7 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
       }
 
       lambda_i <- lambda_i[, order(as.numeric(gsub("lambda","", colnames(lambda_i))))] # Sort to correct order
-      lambda_i <- as.numeric(lambda_i)[1:(scenarios[i,]$num_arms+1)]
+      lambda_i <- as.character(lambda_i)[1:(scenarios[i,]$num_arms+1)]
 
       time_dep_effect_i <- datasim_cont(n_arm = scenarios$n_arm[i],
                                         num_arms = scenarios$num_arms[i],
@@ -452,7 +452,7 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
       }
 
       lambda_i <- lambda_i[, order(as.numeric(gsub("lambda","", colnames(lambda_i))))] # Sort to correct order
-      lambda_i <- as.numeric(lambda_i)[1:(scenarios[i,]$num_arms+1)]
+      lambda_i <- as.character(lambda_i)[1:(scenarios[i,]$num_arms+1)]
 
       time_dep_effect_i <- datasim_bin(n_arm = scenarios$n_arm[i],
                                        num_arms = scenarios$num_arms[i],
