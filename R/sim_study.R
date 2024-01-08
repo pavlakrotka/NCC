@@ -66,11 +66,11 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
   }
 
   if(endpoint=="cont" & sum(models %in% c("fixmodel", "fixmodel_cal", "gam", "MAPprior", "MAPpriorNew",
-                                          "mixmodel", "mixmodel_cal", "mixmodel_AR1", "mixmodel_AR1_cal",
+                                          "mixmodel", "mixmodel_cal", "mixmodel_AR1", "mixmodel_AR1_cal", "mixmodel_int", "mixmodel_int_cal",
                                           "piecewise", "piecewise_cal", "poolmodel", "sepmodel", "sepmodel_adj",
                                           "splines", "splines_cal", "timemachine")==FALSE)>0){
     stop("For continuous endpoints, only the following models are implemented: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'MAPpriorNew',
-                                          'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal',
+                                          'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'mixmodel_int', 'mixmodel_int_cal',
                                           'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj',
                                           'splines', 'splines_cal', 'timemachine'.
          The argument `models` must contain only these strings!")
@@ -105,15 +105,15 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
     scenarios$alpha <- 0.025
   }
 
-  if((("fixmodel" %in% models) | ("fixmodel_cal" %in% models) | ("mixmodel" %in% models) | ("mixmodel_cal" %in% models) | ("mixmodel_AR1" %in% models) | ("mixmodel_AR1_cal" %in% models) | ("piecewise" %in% models) | ("piecewise_cal" %in% models) | ("splines" %in% models) | ("splines_cal" %in% models)) & ("ncc" %in% colnames(scenarios))==FALSE){
+  if((("fixmodel" %in% models) | ("fixmodel_cal" %in% models) | ("mixmodel" %in% models) | ("mixmodel_cal" %in% models) | ("mixmodel_AR1" %in% models) | ("mixmodel_AR1_cal" %in% models) | ("mixmodel_int" %in% models) | ("mixmodel_int_cal" %in% models) | ("piecewise" %in% models) | ("piecewise_cal" %in% models) | ("splines" %in% models) | ("splines_cal" %in% models)) & ("ncc" %in% colnames(scenarios))==FALSE){
     scenarios$ncc <- TRUE
   }
 
-  if((("fixmodel_cal" %in% models) | ("mixmodel_cal" %in% models) | ("mixmodel_AR1_cal" %in% models) | ("piecewise_cal" %in% models) | ("splines_cal" %in% models)) & ("unit_size" %in% colnames(scenarios))==FALSE){
+  if((("fixmodel_cal" %in% models) | ("mixmodel_cal" %in% models) | ("mixmodel_AR1_cal" %in% models) | ("mixmodel_int_cal" %in% models) | ("piecewise_cal" %in% models) | ("splines_cal" %in% models)) & ("unit_size" %in% colnames(scenarios))==FALSE){
     scenarios$unit_size <- 25
   }
 
-  if((("mixmodel" %in% models) | ("mixmodel_cal" %in% models) | ("mixmodel_AR1" %in% models) | ("mixmodel_AR1_cal" %in% models) | ("gam" %in% models)) & ("ci" %in% colnames(scenarios))==FALSE){
+  if((("mixmodel" %in% models) | ("mixmodel_cal" %in% models) | ("mixmodel_AR1" %in% models) | ("mixmodel_AR1_cal" %in% models) | ("mixmodel_int" %in% models) | ("mixmodel_int_cal" %in% models) | ("gam" %in% models)) & ("ci" %in% colnames(scenarios))==FALSE){
     scenarios$ci <- FALSE
   }
 
