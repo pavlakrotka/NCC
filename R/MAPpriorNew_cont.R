@@ -205,11 +205,19 @@ MAPpriorNew_cont <- function(data,
 
     # prior
     options(RBesT.MC.control=list(adapt_delta=0.999))
-    map_mcmc <- gMAP(cbind(y, y.se) ~ 1 | period,
-                     weights=n, data=ncc_data,
-                     family=gaussian,
-                     beta.prior=cbind(0, sqrt(1/prior_prec_eta)), #prior_prec_eta
-                     tau.dist="HalfNormal", tau.prior=cbind(0, sqrt(1/prior_prec_tau))) #prior_prec_tau
+    if (check==TRUE) {
+      map_mcmc <- gMAP(cbind(y, y.se) ~ 1 | period,
+                       weights=n, data=ncc_data,
+                       family=gaussian,
+                       beta.prior=cbind(0, sqrt(1/prior_prec_eta)),
+                       tau.dist="HalfNormal", tau.prior=cbind(0, sqrt(1/prior_prec_tau)))
+    } else {
+      map_mcmc <- suppressWarnings(suppressMessages(gMAP(cbind(y, y.se) ~ 1 | period,
+                                                         weights=n, data=ncc_data,
+                                                         family=gaussian,
+                                                         beta.prior=cbind(0, sqrt(1/prior_prec_eta)),
+                                                         tau.dist="HalfNormal", tau.prior=cbind(0, sqrt(1/prior_prec_tau)))))
+    }
 
 
     prior_control <- automixfit(map_mcmc)
