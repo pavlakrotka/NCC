@@ -68,6 +68,8 @@ mixmodel_int_cont <- function(data, arm, alpha=0.025, ci=FALSE, ncc=TRUE, check=
     data_new <- data[data$period %in% c(min_period:max_period),]
   }
 
+  data_new$treatment_aux <- ifelse(data_new$treatment==arm, 0, data_new$treatment) # create an auxiliary treatment variable for the interaction
+
   # fit linear mixed model
   if(length(unique(data_new$period))==1){ # if only one period in the data, don't use period as covariate
     mod <- lm(response ~ as.factor(treatment), data_new)
@@ -77,7 +79,7 @@ mixmodel_int_cont <- function(data, arm, alpha=0.025, ci=FALSE, ncc=TRUE, check=
     p_val <- pt(coef(res)[paste0("as.factor(treatment)", arm), "t value"], mod$df, lower.tail = FALSE)
 
   } else {
-    mod <- lmer(response ~ as.factor(treatment) + as.factor(period) + (1 | treatment:period), data_new) # using lmerTest
+    mod <- lmer(response ~ as.factor(treatment) + as.factor(period) + (1 | treatment_aux:period), data_new) # using lmerTest
     res <- summary(mod)
 
     # one-sided p-value

@@ -48,10 +48,12 @@ This function performs linear mixed model regression taking into account all tri
 }
 \examples{
 
+\donttest{
 trial_data <- datasim_cont(num_arms = 3, n_arm = 100, d = c(0, 100, 250),
 theta = rep(0.25, 3), lambda = rep(0.15, 4), sigma = 1, trend = "linear")
 
 mixmodel_int_cal_cont(data = trial_data, arm = 3, ci = TRUE)
+}
 
 }
 \author{

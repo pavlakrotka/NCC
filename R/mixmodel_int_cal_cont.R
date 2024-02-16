@@ -77,6 +77,8 @@ mixmodel_int_cal_cont <- function(data, arm, alpha=0.025, ci=FALSE, unit_size=25
     data_new <- data[data$cal_time %in% c(min_unit:max_unit),]
   }
 
+  data_new$treatment_aux <- ifelse(data_new$treatment==arm, 0, data_new$treatment) # create an auxiliary treatment variable for the interaction
+
   # fit linear mixed model
   if(length(unique(data_new$cal_time))==1){ # if only one calendar time unit in the data, don't use unit as covariate
     mod <- lm(response ~ as.factor(treatment), data_new)
@@ -86,7 +88,7 @@ mixmodel_int_cal_cont <- function(data, arm, alpha=0.025, ci=FALSE, unit_size=25
     p_val <- pt(coef(res)[paste0("as.factor(treatment)", arm), "t value"], mod$df, lower.tail = FALSE)
 
   } else {
-    mod <- lmer(response ~ as.factor(treatment) + as.factor(cal_time) + (1 | treatment:cal_time), data_new) # using lmerTest
+    mod <- lmer(response ~ as.factor(treatment) + as.factor(cal_time) + (1 | treatment_aux:cal_time), data_new) # using lmerTest
     res <- summary(mod)
 
     # one-sided p-value
@@ -112,3 +114,4 @@ mixmodel_int_cal_cont <- function(data, arm, alpha=0.025, ci=FALSE, unit_size=25
               reject_h0 = reject_h0,
               model = mod))
 }
+
