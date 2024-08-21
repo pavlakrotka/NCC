@@ -67,13 +67,22 @@ piecewise_cal_cont <- function(data, arm, alpha=0.025, unit_size=25, ncc=TRUE, p
 
   data$cal_time <- rep(c(1:ceiling((nrow(data)/unit_size))), each=unit_size)[1:nrow(data)]
 
-  min_unit <- min(data[data$treatment==arm,]$cal_time)
-  max_unit <- max(data[data$treatment==arm,]$cal_time)
+  # min_unit <- min(data[data$treatment==arm,]$cal_time)
+  # max_unit <- max(data[data$treatment==arm,]$cal_time)
+
+  min_id <- min(which(data$treatment==arm))
+  max_id <- max(which(data$treatment==arm))
+
+  # if (ncc) {
+  #   data_new <- data[data$cal_time %in% c(1:max_unit),]
+  # } else {
+  #   data_new <- data[data$cal_time %in% c(min_unit:max_unit),]
+  # }
 
   if (ncc) {
-    data_new <- data[data$cal_time %in% c(1:max_unit),]
+    data_new <- data[1:max_id,]
   } else {
-    data_new <- data[data$cal_time %in% c(min_unit:max_unit),]
+    data_new <- data[min_id:max_id,]
   }
 
   # fit linear model
