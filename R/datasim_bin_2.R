@@ -1,4 +1,4 @@
-#' Simulate binary data from a platform trial with a shared control arm and a given number of experimental treatment arms entering at given time points
+#' Simulate binary data from a platform trial with a shared control arm and a given number of experimental treatment arms entering at given time points using a user-specified sample size matrix
 #'
 #' @description This function simulates data from a platform trial with a given number of experimental treatment arms entering at given time points and a shared control arm. The primary endpoint is a binary endpoint. The user specifies the timing of adding arms in terms of patients recruited to the trial so far and the sample size per experimental treatment arm.
 #'
@@ -57,7 +57,7 @@
 #' Trials with no time trend can be simulated too, by setting all elements of the vector `lambda` to zero and choosing an arbitrary pattern.
 #'
 #' @examples
-#' ss_matrix <- matrix(c(125, 125, 125, 125, NA, 250), nrow = 3, byrow = T)
+#' ss_matrix <- matrix(c(125, 125, 125, 125, NA, 250), nrow = 3, byrow = TRUE)
 #' head(datasim_bin_2(SS_matrix = ss_matrix,
 #' p0 = 0.7, OR = rep(1.8, 2), lambda = rep(0.15, 3), trend="stepwise_2"))
 #'
