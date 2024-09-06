@@ -31,7 +31,7 @@ List containing the following elements regarding the results of comparing \code{
 }
 }
 \description{
-This function performs linear regression taking into account all trial data until the arm under study leaves the trial and adjusting for time a continuous covariate
+This function performs linear regression taking into account all trial data until the arm under study leaves the trial and adjusting for time as a continuous covariate
 }
 \examples{
 

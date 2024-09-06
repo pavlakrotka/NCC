@@ -74,7 +74,7 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
     stop("Endpoint indicator (`endpoint`) must be one of the following strings: 'cont', 'bin'!")
   }
 
-  if(endpoint=="cont" & sum(models %in% c("fixmodel", "fixmodel_cal", "gam", "MAPprior", "MAPpriorNew",
+  if(endpoint=="cont" & sum(models %in% c("fixmodel", "fixmodel_cal", "fixmodel_lin", "gam", "MAPprior", "MAPpriorNew",
                                           "mixmodel", "mixmodel_cal", "mixmodel_AR1", "mixmodel_AR1_cal", "mixmodel_int", "mixmodel_int_cal",
                                           "piecewise", "piecewise_cal", "poolmodel", "sepmodel", "sepmodel_adj",
                                           "splines", "splines_cal", "timemachine")==FALSE)>0){
