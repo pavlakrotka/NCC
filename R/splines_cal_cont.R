@@ -86,12 +86,16 @@ splines_cal_cont <- function(data, arm, alpha=0.025, unit_size=25, ncc=TRUE, bs_
     data_new <- data[min_id:max_id,]
   }
 
-  bs_knots <- seq(unit_size, (nrow(data_new)-unit_size), by = unit_size) # get knots based on length of cal. time unit
-
   # fit linear model
   if(length(unique(data_new$cal_time))==1){ # if only one calendar time unit in the data, don't use any knots, just ordinary polynomial regression
     mod <- lm(response ~ as.factor(treatment) + bs(j, degree = bs_degree), data_new)
   } else {
+    
+    if ((nrow(data_new)-unit_size)<=unit_size) {
+      bs_knots <- unit_size
+    } else {
+    bs_knots <- seq(unit_size, (nrow(data_new)-unit_size), by = unit_size) # get knots based on length of cal. time unit
+    }
 
     mod <- lm(response ~ as.factor(treatment) + bs(j, knots = bs_knots, degree = bs_degree), data_new)
   }
@@ -114,3 +118,4 @@ splines_cal_cont <- function(data, arm, alpha=0.025, unit_size=25, ncc=TRUE, bs_
               knots = bs_knots,
               model = mod))
 }
+
