@@ -88,6 +88,7 @@ splines_cal_cont <- function(data, arm, alpha=0.025, unit_size=25, ncc=TRUE, bs_
 
   # fit linear model
   if(length(unique(data_new$cal_time))==1){ # if only one calendar time unit in the data, don't use any knots, just ordinary polynomial regression
+    bs_knots <- NA
     mod <- lm(response ~ as.factor(treatment) + bs(j, degree = bs_degree), data_new)
   } else {
     
