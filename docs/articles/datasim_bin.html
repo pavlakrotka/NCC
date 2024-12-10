@@ -5,71 +5,52 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="NCC">
 <title>How to simulate binary data • NCC</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="How to simulate binary data">
-<meta property="og:description" content="NCC">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="How to simulate binary data">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">NCC</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/ncc_intro.html">NCC Introduction
-</a>
-    <a class="dropdown-item" href="../articles/datasim_bin.html">How to simulate binary data
-</a>
-    <a class="dropdown-item" href="../articles/datasim_cont.html">How to simulate continuous data
-</a>
-    <a class="dropdown-item" href="../articles/how_to_run_sim_study.html">How to run a simulation study
-</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/ncc_intro.html">NCC Introduction
+    </a></li>
+    <li><a class="dropdown-item" href="../articles/datasim_bin.html">How to simulate binary data
+    </a></li>
+    <li><a class="dropdown-item" href="../articles/datasim_cont.html">How to simulate continuous data
+    </a></li>
+    <li><a class="dropdown-item" href="../articles/how_to_run_sim_study.html">How to run a simulation study
+    </a></li>
+  </ul>
 </li>
-<li class="nav-item">
-  <a class="nav-link" href="../articles/installation.html">Installation</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../articles/installation.html">Installation</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/pavlakrotka/NCC">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/pavlakrotka/NCC"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
@@ -78,7 +59,8 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>How to simulate binary data</h1>
+
+      <h1>How to simulate binary data</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/pavlakrotka/NCC/blob/HEAD/vignettes/datasim_bin.Rmd" class="external-link"><code>vignettes/datasim_bin.Rmd</code></a></small>
@@ -122,7 +104,7 @@ specified as input argument (<code>period_blocks</code>, default=2)</li>
 </tr>
 <tr>
 <td>
-<span class="math inline">\(N\)</span>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
 </td>
 <td>
 n_total
@@ -130,7 +112,7 @@ n_total
 </tr>
 <tr>
 <td>
-<span class="math inline">\(K\)</span>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math>
 </td>
 <td>
 num_arms
@@ -138,7 +120,7 @@ num_arms
 </tr>
 <tr>
 <td>
-<span class="math inline">\(d\)</span>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>
 </td>
 <td>
 d
@@ -146,7 +128,7 @@ d
 </tr>
 <tr>
 <td>
-<span class="math inline">\(n\)</span>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
 </td>
 <td>
 n_arm
@@ -154,7 +136,7 @@ n_arm
 </tr>
 <tr>
 <td>
-<span class="math inline">\(\eta_0\)</span>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>η</mi><mn>0</mn></msub><annotation encoding="application/x-tex">\eta_0</annotation></semantics></math>
 </td>
 <td>
 p0
@@ -162,7 +144,7 @@ p0
 </tr>
 <tr>
 <td>
-<span class="math inline">\(\lambda\)</span>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>
 </td>
 <td>
 lambda
@@ -170,7 +152,7 @@ lambda
 </tr>
 <tr>
 <td>
-<span class="math inline">\(N_p\)</span>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>N</mi><mi>p</mi></msub><annotation encoding="application/x-tex">N_p</annotation></semantics></math>
 </td>
 <td>
 N_peak
@@ -199,7 +181,8 @@ number of patients recruited to the trial so far (of length
 <li>
 <code>period_blocks</code> - number to multiply the number of active
 arms with in order to get the block size per period (block size =
-<code>period_blocks</code> <span class="math inline">\(\cdot\)</span>
+<code>period_blocks</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⋅</mo><annotation encoding="application/x-tex">\cdot</annotation></semantics></math>
 #active arms)</li>
 <li>
 <code>p0</code> - response in the control arm</li>
@@ -241,12 +224,12 @@ lambdas and underlying responses) and all input parameters.</p>
 <span>                 p0 <span class="op">=</span> <span class="fl">0.7</span>, OR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1.8</span>, <span class="fl">3</span><span class="op">)</span>, </span>
 <span>                 lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, trend<span class="op">=</span><span class="st">"stepwise"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>  j response treatment period
-1 1        1         1      1
-2 2        1         1      1
-3 3        1         0      1
-4 4        1         0      1
-5 5        0         1      1
-6 6        0         0      1</code></pre>
+1 1        0         0      1
+2 2        1         0      1
+3 3        1         1      1
+4 4        1         1      1
+5 5        1         0      1
+6 6        0         1      1</code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Full dataset</span></span>
 <span></span>
@@ -254,36 +237,34 @@ lambdas and underlying responses) and all input parameters.</p>
 <span>                 p0 <span class="op">=</span> <span class="fl">0.7</span>, OR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1.8</span>, <span class="fl">3</span><span class="op">)</span>, </span>
 <span>                 lambda <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.15</span>, <span class="fl">4</span><span class="op">)</span>, trend<span class="op">=</span><span class="st">"stepwise"</span>, full <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">$</span><span class="va">Data</span><span class="op">)</span></span></code></pre></div>
 <pre><code>  j response treatment period         p lambda0 lambda1 lambda2 lambda3
-1 1        0         1      1 0.8076923    0.15    0.15    0.15    0.15
+1 1        1         1      1 0.8076923    0.15    0.15    0.15    0.15
 2 2        1         0      1 0.7000000    0.15    0.15    0.15    0.15
-3 3        0         0      1 0.7000000    0.15    0.15    0.15    0.15
-4 4        1         1      1 0.8076923    0.15    0.15    0.15    0.15
-5 5        1         0      1 0.7000000    0.15    0.15    0.15    0.15
-6 6        1         1      1 0.8076923    0.15    0.15    0.15    0.15</code></pre>
+3 3        1         1      1 0.8076923    0.15    0.15    0.15    0.15
+4 4        1         0      1 0.7000000    0.15    0.15    0.15    0.15
+5 5        1         1      1 0.8076923    0.15    0.15    0.15    0.15
+6 6        1         0      1 0.7000000    0.15    0.15    0.15    0.15</code></pre>
 </div>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by Pavla Krotka, Marta Bofill Roig, Katharina Hees, Peter Jacko, Dominic Magirr.</p>
+  <p>Developed by Pavla Krotka, Marta Bofill Roig, Katharina Hees, Peter Jacko, Dominic Magirr.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>

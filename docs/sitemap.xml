@@ -1,162 +1,62 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/articles/datasim_bin.html</loc>
-  </url>
-  <url>
-    <loc>/articles/datasim_cont.html</loc>
-  </url>
-  <url>
-    <loc>/articles/get_ss_matrix.html</loc>
-  </url>
-  <url>
-    <loc>/articles/how_to_run_sim_study.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/installation.html</loc>
-  </url>
-  <url>
-    <loc>/articles/ncc_intro.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/reference/all_models.html</loc>
-  </url>
-  <url>
-    <loc>/reference/datasim_bin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/datasim_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fixmodel_bin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fixmodel_cal_bin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fixmodel_cal_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fixmodel_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gam_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_alloc_matrix.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_ss_matrix.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/inv_u_trend.html</loc>
-  </url>
-  <url>
-    <loc>/reference/linear_trend.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MAPprior_bin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MAPprior_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mixmodel_AR1_cal_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mixmodel_AR1_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mixmodel_cal_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mixmodel_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/piecewise_cal_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/piecewise_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_trial.html</loc>
-  </url>
-  <url>
-    <loc>/reference/poolmodel_bin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/poolmodel_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/seasonal_trend.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sepmodel_adj_bin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sepmodel_adj_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sepmodel_bin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sepmodel_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sim_study.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sim_study_par.html</loc>
-  </url>
-  <url>
-    <loc>/reference/splines_cal_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/splines_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sw_trend.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sw_trend2.html</loc>
-  </url>
-  <url>
-    <loc>/reference/timemachine_bin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/timemachine_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/TT_all_models.html</loc>
-  </url>
-  <url>
-    <loc>/reference/TT_fixmodel_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/TT_indirect_cont.html</loc>
-  </url>
-  <url>
-    <loc>/reference/TT_sim_study.html</loc>
-  </url>
-  <url>
-    <loc>/reference/TT_sim_study_par.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/articles/datasim_bin.html</loc></url>
+<url><loc>/articles/datasim_cont.html</loc></url>
+<url><loc>/articles/get_ss_matrix.html</loc></url>
+<url><loc>/articles/how_to_run_sim_study.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/installation.html</loc></url>
+<url><loc>/articles/ncc_intro.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/MAPprior_bin.html</loc></url>
+<url><loc>/reference/MAPprior_cont.html</loc></url>
+<url><loc>/reference/TT_all_models.html</loc></url>
+<url><loc>/reference/TT_fixmodel_cont.html</loc></url>
+<url><loc>/reference/TT_indirect_cont.html</loc></url>
+<url><loc>/reference/TT_sim_study.html</loc></url>
+<url><loc>/reference/TT_sim_study_par.html</loc></url>
+<url><loc>/reference/all_models.html</loc></url>
+<url><loc>/reference/datasim_bin.html</loc></url>
+<url><loc>/reference/datasim_cont.html</loc></url>
+<url><loc>/reference/fixmodel_bin.html</loc></url>
+<url><loc>/reference/fixmodel_cal_bin.html</loc></url>
+<url><loc>/reference/fixmodel_cal_cont.html</loc></url>
+<url><loc>/reference/fixmodel_cont.html</loc></url>
+<url><loc>/reference/gam_cont.html</loc></url>
+<url><loc>/reference/get_alloc_matrix.html</loc></url>
+<url><loc>/reference/get_ss_matrix.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/inv_u_trend.html</loc></url>
+<url><loc>/reference/linear_trend.html</loc></url>
+<url><loc>/reference/mixmodel_AR1_cal_cont.html</loc></url>
+<url><loc>/reference/mixmodel_AR1_cont.html</loc></url>
+<url><loc>/reference/mixmodel_cal_cont.html</loc></url>
+<url><loc>/reference/mixmodel_cont.html</loc></url>
+<url><loc>/reference/piecewise_cal_cont.html</loc></url>
+<url><loc>/reference/piecewise_cont.html</loc></url>
+<url><loc>/reference/plot_trial.html</loc></url>
+<url><loc>/reference/poolmodel_bin.html</loc></url>
+<url><loc>/reference/poolmodel_cont.html</loc></url>
+<url><loc>/reference/seasonal_trend.html</loc></url>
+<url><loc>/reference/sepmodel_adj_bin.html</loc></url>
+<url><loc>/reference/sepmodel_adj_cont.html</loc></url>
+<url><loc>/reference/sepmodel_bin.html</loc></url>
+<url><loc>/reference/sepmodel_cont.html</loc></url>
+<url><loc>/reference/sim_study.html</loc></url>
+<url><loc>/reference/sim_study_par.html</loc></url>
+<url><loc>/reference/splines_cal_cont.html</loc></url>
+<url><loc>/reference/splines_cont.html</loc></url>
+<url><loc>/reference/sw_trend.html</loc></url>
+<url><loc>/reference/sw_trend2.html</loc></url>
+<url><loc>/reference/timemachine_bin.html</loc></url>
+<url><loc>/reference/timemachine_cont.html</loc></url>
+<url><loc>/reference/MAPpriorNew_cont.html</loc></url>
+<url><loc>/reference/mixmodel_int_cal_cont.html</loc></url>
+<url><loc>/reference/mixmodel_int_cont.html</loc></url>
+<url><loc>/reference/datasim_bin_2.html</loc></url>
+<url><loc>/reference/fixmodel_lin_cont.html</loc></url>
+<url><loc>/reference/powerprior_cont.html</loc></url>
 </urlset>
+
