@@ -103,6 +103,7 @@ This package contains the following functions:
 
 - `MAPprior_cont()` performs analysis using the MAP prior approach
 - `timemachine_cont()` performs analysis using the Time Machine approach
+- `powerprior_cont()` performs analysis using the power prior approach
 
 ### Running simulations
 
@@ -162,8 +163,7 @@ description and examples can be found at the package website:
 
 \[1\] Krotka, P., Hees, K., et al. [*“NCC: An R-package for analysis and
 simulation of platform trials with non-concurrent
-controls.”*](https://arxiv.org/abs/2302.12634) arXiv preprint (2023):
-arXiv:2302.12634
+controls.”*](https://www.sciencedirect.com/science/article/pii/S2352711023001334) SoftwareX 23 (2023): 101437.
 
 \[2\] Bofill Roig, M., Krotka, P., et al. [*“On model-based time trend
 adjustments in platform trials with non-concurrent

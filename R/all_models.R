@@ -53,7 +53,7 @@
 all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel"), endpoint, alpha = 0.025,
                        unit_size = 250,
                        ncc = TRUE,
-                       opt = 2, prior_prec_tau = 4, prior_prec_eta = 0.001, n_samples = 1000, n_chains = 4, n_iter = 4000, n_adapt = 1000, robustify = TRUE, weight = 0.1,
+                       opt = 2, prior_prec_tau = 4, prior_prec_eta = 0.001, n_samples = 1000, n_chains = 4, n_iter = 4000, n_adapt = 1000, robustify = TRUE, weight = 0.1, a_0 = 0.9,
                        ci = FALSE,
                        prec_theta = 0.001, prec_eta = 0.001, tau_a = 0.1, tau_b = 0.01, prec_a = 0.001, prec_b = 0.001, bucket_size = 25,
                        smoothing_basis = "tp", basis_dim = -1, gam_method = "GCV.Cp",
@@ -94,6 +94,7 @@ all_models <- function(data, arms, models = c("fixmodel", "sepmodel", "poolmodel
                                                                   gam_method = gam_method,
                                                                   bs_degree = bs_degree,
                                                                   poly_degree = poly_degree,
+                                                                  a_0 = a_0,
                                                                   check = FALSE))[c("reject_h0", "treat_effect")], error = function(cnd) list(reject_h0 = NA, treat_effect = NA))
 
       names(res_i_j) <- c(paste0("reject_h0_", j, "_", i), paste0("treat_effect_", j, "_", i))

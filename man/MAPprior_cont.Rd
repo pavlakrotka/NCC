@@ -22,7 +22,7 @@ MAPprior_cont(
 )
 }
 \arguments{
-\item{data}{Data frame with trial data, e.g. result from the \code{datasim_bin()} function. Must contain columns named 'treatment', 'response' and 'period'.}
+\item{data}{Data frame with trial data, e.g. result from the \code{datasim_cont()} function. Must contain columns named 'treatment', 'response' and 'period'.}
 
 \item{arm}{Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.}
 

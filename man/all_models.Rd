@@ -21,6 +21,7 @@ all_models(
   n_adapt = 1000,
   robustify = TRUE,
   weight = 0.1,
+  a_0 = 0.9,
   ci = FALSE,
   prec_theta = 0.001,
   prec_eta = 0.001,

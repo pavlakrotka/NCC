@@ -7,14 +7,14 @@ Author: Pavla Krotka [aut, cre] (<https://orcid.org/0000-0001-5727-4270>),
   Peter Jacko [aut], 
   Dominic Magirr [aut], 
   Martin Posch [ctb] (<https://orcid.org/0000-0001-8499-8573>)
-Maintainer: Pavla Krotka <pavla.krotka@meduniwien.ac.at>
+Maintainer: Pavla Krotka <pavla.krotka@upc.edu>
 Authors@R: 
 	c(person(given = "Pavla",
            family = "Krotka",
            role = c("aut", "cre"),
-           email = "pavla.krotka@meduniwien.ac.at",
+           email = "pavla.krotka@upc.edu",
            comment = c(ORCID = "0000-0001-5727-4270")),
-	person("Marta", "Bofill Roig", email = "marta.bofillroig@meduniwien.ac.at", role = c("aut", "ths"), comment = c(ORCID = "0000-0002-4400-7541")),
+	person("Marta", "Bofill Roig", email = "marta.bofill.roig@upc.edu", role = c("aut", "ths"), comment = c(ORCID = "0000-0002-4400-7541")),
 	person("Katharina", "Hees", email = "Katharina.Hees@pei.de", role = c("aut")),
 	person("Peter", "Jacko", email = "peter@berryconsultants.net", role = c("aut")),
 	person("Dominic", "Magirr", email = "dominic.magirr@novartis.com", role = c("aut")),
@@ -42,7 +42,8 @@ Imports:
   iterators,
   spaMM,
   mgcv,
-  splines
+  splines,
+  BayesPPD
 SystemRequirements: JAGS 4.x.y
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2

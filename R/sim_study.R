@@ -68,11 +68,11 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
   if(endpoint=="cont" & sum(models %in% c("fixmodel", "fixmodel_cal", "fixmodel_lin", "gam", "MAPprior", "MAPpriorNew",
                                           "mixmodel", "mixmodel_cal", "mixmodel_AR1", "mixmodel_AR1_cal", "mixmodel_int", "mixmodel_int_cal",
                                           "piecewise", "piecewise_cal", "poolmodel", "sepmodel", "sepmodel_adj",
-                                          "splines", "splines_cal", "timemachine")==FALSE)>0){
+                                          "splines", "splines_cal", "timemachine", "powerprior")==FALSE)>0){
     stop("For continuous endpoints, only the following models are implemented: 'fixmodel', 'fixmodel_cal', 'gam', 'MAPprior', 'MAPpriorNew',
                                           'mixmodel', 'mixmodel_cal', 'mixmodel_AR1', 'mixmodel_AR1_cal', 'mixmodel_int', 'mixmodel_int_cal',
                                           'piecewise', 'piecewise_cal', 'poolmodel', 'sepmodel', 'sepmodel_adj',
-                                          'splines', 'splines_cal', 'timemachine'.
+                                          'splines', 'splines_cal', 'timemachine', 'powerprior'.
          The argument `models` must contain only these strings!")
   }
 
@@ -172,7 +172,15 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
   if(("MAPprior" %in% models) & ("weight" %in% colnames(scenarios))==FALSE){
     scenarios$weight <- 0.1
   }
-
+  
+  if(("powerprior" %in% models) & ("opt" %in% colnames(scenarios))==FALSE){
+    scenarios$opt <- 2
+  }
+  
+  if(("powerprior" %in% models) & ("a_0" %in% colnames(scenarios))==FALSE){
+    scenarios$a_0 <- 0.9
+  }
+  
   if(("timemachine" %in% models) & ("prec_theta" %in% colnames(scenarios))==FALSE){
     scenarios$prec_theta <- 0.001
   }
@@ -341,7 +349,8 @@ sim_study <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmodel", 
                                  basis_dim = scenarios$basis_dim[i],
                                  gam_method = scenarios$gam_method[i],
                                  bs_degree = scenarios$bs_degree[i],
-                                 poly_degree = scenarios$poly_degree[i]))
+                                 poly_degree = scenarios$poly_degree[i],
+                                 a_0 = scenarios$a_0[i]))
 
       result_i <- cbind(scenarios[i,],
                         study_arm = rep(arms, each = num_models),

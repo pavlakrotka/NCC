@@ -2,7 +2,7 @@
 #'
 #' @description This function performs analysis of continuous data using the Meta-Analytic-Predictive (MAP) Prior approach. The method borrows data from non-concurrent controls to obtain the prior distribution for the control response in the concurrent periods.
 #'
-#' @param data Data frame with trial data, e.g. result from the `datasim_bin()` function. Must contain columns named 'treatment', 'response' and 'period'.
+#' @param data Data frame with trial data, e.g. result from the `datasim_cont()` function. Must contain columns named 'treatment', 'response' and 'period'.
 #' @param arm Integer. Index of the treatment arm under study to perform inference on (vector of length 1). This arm is compared to the control group.
 #' @param alpha Double. Decision boundary (one-sided). Default=0.025
 #' @param opt Integer (1 or 2). If opt==1, all former periods are used as one source; if opt==2, periods get separately included into the final analysis. Default=2.
