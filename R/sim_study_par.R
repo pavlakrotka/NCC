@@ -233,8 +233,8 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
     stop("The `scenarios` data frame must include the parameters 'num_arms', 'n_arm', 'd', 'p0', 'OR', 'lambda' and 'trend' in separate columns!")
   }
 
-  if(sum(scenarios$trend %in% c("linear", "linear_2", "stepwise", "stepwise_2", "inv_u", "seasonal")==FALSE)>0){
-    stop("Values allowed for the time trend pattern (column 'trend') are: 'linear', 'linear_2', 'stepwise', 'stepwise_2', 'inv_u', 'seasonal'!")
+  if(sum(scenarios$trend %in% c("linear", "linear_2", "stepwise", "stepwise_2", "inv_u", "seasonal", "stepwise_2jp")==FALSE)>0){
+    stop("Values allowed for the time trend pattern (column 'trend') are: 'linear', 'linear_2', 'stepwise', 'stepwise_2', 'stepwise_2jp', 'inv_u', 'seasonal'!")
   }
 
   if(("inv_u" %in% scenarios$trend) & ("N_peak" %in% colnames(scenarios))==FALSE){
