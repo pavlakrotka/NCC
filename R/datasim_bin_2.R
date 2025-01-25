@@ -124,8 +124,8 @@ datasim_bin_2 <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, SS_matrix
            (i.e., the first entry in the vector corresponds to the time trend in the control arm, second entry to the time trend in the first treatment arm etc.)!")
     }
     
-    if((trend %in% c("linear", "linear_2", "stepwise", "stepwise_2", "inv_u", "seasonal")==FALSE) | length(trend)!=1){
-      stop("Time trend pattern (`trend`) must be one of the following strings: 'linear', 'linear_2', 'stepwise', 'stepwise_2', 'inv_u', 'seasonal'!")
+    if((trend %in% c("linear", "linear_2", "stepwise", "stepwise_2", "inv_u", "seasonal", "stepwise_2jp")==FALSE) | length(trend)!=1){
+      stop("Time trend pattern (`trend`) must be one of the following strings: 'linear', 'linear_2', 'stepwise', 'stepwise_2', 'stepwise_2jp', 'inv_u', 'seasonal'!")
     }
     
     if(trend=="inv_u"){
