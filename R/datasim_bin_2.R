@@ -200,6 +200,7 @@ datasim_bin_2 <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, SS_matrix
   }
   
   cj <- rep(1:num_periods, N_period) # period indicator
+  cj2 <- rep(1:(num_periods*2), rep(N_period / 2, each = 2) ) # period indicator
   
   if(num_periods>1){
     arm_added <- 1
@@ -263,6 +264,21 @@ datasim_bin_2 <- function(num_arms, n_arm, d, period_blocks=2, p0, OR, SS_matrix
                                               trend_var = trend_var))
       
       assign(paste0("all_trend", i), sw_trend(cj=cj,
+                                              lambda = lambda[i+1],
+                                              trend_mean = trend_mean,
+                                              trend_var = trend_var))
+    }
+  }
+  
+  # Two jumps: within and in between periods
+  if(trend=="stepwise_2jp"){
+    for (i in 0:num_arms) {
+      assign(paste0("ind_trend", i), sw_trend(cj=cj2[eval(sym(paste0("j", i)))],
+                                              lambda = lambda[i+1],
+                                              trend_mean = trend_mean,
+                                              trend_var = trend_var))
+      
+      assign(paste0("all_trend", i), sw_trend(cj=cj2,
                                               lambda = lambda[i+1],
                                               trend_mean = trend_mean,
                                               trend_var = trend_var))
