@@ -35,8 +35,6 @@ Imports:
   rjags,
   ggplot2,
   lmerTest,
-  parallel,
-  doParallel,
   parallelly,
   foreach,
   iterators,
@@ -44,7 +42,6 @@ Imports:
   mgcv,
   splines,
   BayesPPD,
-  doRNG,
   doFuture,
   future
 SystemRequirements: JAGS 4.x.y

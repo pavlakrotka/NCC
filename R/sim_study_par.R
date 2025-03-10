@@ -11,13 +11,8 @@
 #' @param verbose Logical. Indicates whether to print a message (system time and number of finished scenarios) after simulating each scenario in order to track the progress of the simulations. Default=TRUE.
 #'
 #' @importFrom parallelly availableCores
-#' @importFrom parallel makeCluster
-#' @importFrom parallel stopCluster
-#' @importFrom doParallel registerDoParallel
 #' @importFrom foreach foreach
-#' @importFrom foreach %dopar%
 #' @importFrom iterators icount
-#' @importFrom doRNG %dorng%
 #' @importFrom doFuture %dofuture%
 #' @importFrom future plan
 #'
@@ -272,15 +267,9 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
   }
 
 
-  # cores <- availableCores()
-  # n_cores <- ifelse(floor(unname(cores)*perc_cores)<=1, 1, floor(unname(cores)*perc_cores)) # always use at least one core
-  # cl <- makeCluster(n_cores)
-  # registerDoParallel(cl)
   
   cores <- availableCores()
   n_cores <- ifelse(floor(unname(cores)*perc_cores)<=1, 1, floor(unname(cores)*perc_cores)) # always use at least one core
-  #registerDoFuture()
-  #cl <- makeCluster(n_cores)
   plan(strategy = "cluster", workers = n_cores)
 
 
@@ -418,7 +407,6 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
 
     }
 
-    #stopCluster(cl)
     plan(strategy = "sequential")
     gc()
 
@@ -551,7 +539,6 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
 
     }
 
-    #stopCluster(cl)
     plan(strategy = "sequential")
     gc()
 
