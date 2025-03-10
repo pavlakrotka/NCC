@@ -17,6 +17,7 @@
 #' @importFrom foreach foreach
 #' @importFrom foreach %dopar%
 #' @importFrom iterators icount
+#' @importFrom doRNG %dorng%
 #'
 #' @export
 #'
@@ -341,7 +342,7 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                                         check = FALSE)$time_dep_effect
 
       db <- foreach(icount(nsim), .combine = cbind,
-                    .packages = c("NCC")) %dopar% {
+                    .packages = c("NCC")) %dorng% {
 
                       all_models(data = datasim_cont(n_arm = scenarios$n_arm[i],
                                                      num_arms = scenarios$num_arms[i],
@@ -477,7 +478,7 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                                        check = FALSE)$time_dep_effect
 
       db <- foreach(icount(nsim), .combine = cbind,
-                    .packages = c("NCC")) %dopar% {
+                    .packages = c("NCC")) %dorng% {
 
                       all_models(data = datasim_bin(n_arm = scenarios$n_arm[i],
                                                     num_arms = scenarios$num_arms[i],

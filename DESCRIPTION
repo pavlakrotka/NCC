@@ -43,7 +43,8 @@ Imports:
   spaMM,
   mgcv,
   splines,
-  BayesPPD
+  BayesPPD,
+  doRNG
 SystemRequirements: JAGS 4.x.y
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
