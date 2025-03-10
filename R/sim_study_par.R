@@ -18,6 +18,8 @@
 #' @importFrom foreach %dopar%
 #' @importFrom iterators icount
 #' @importFrom doRNG %dorng%
+#' @importFrom doFuture %dofuture%
+#' @importFrom future plan
 #'
 #' @export
 #'
@@ -270,10 +272,16 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
   }
 
 
+  # cores <- availableCores()
+  # n_cores <- ifelse(floor(unname(cores)*perc_cores)<=1, 1, floor(unname(cores)*perc_cores)) # always use at least one core
+  # cl <- makeCluster(n_cores)
+  # registerDoParallel(cl)
+  
   cores <- availableCores()
   n_cores <- ifelse(floor(unname(cores)*perc_cores)<=1, 1, floor(unname(cores)*perc_cores)) # always use at least one core
-  cl <- makeCluster(n_cores)
-  registerDoParallel(cl)
+  #registerDoFuture()
+  #cl <- makeCluster(n_cores)
+  plan(strategy = "cluster", workers = n_cores)
 
 
   models <- sort(models)
@@ -341,8 +349,7 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                                         full = TRUE,
                                         check = FALSE)$time_dep_effect
 
-      db <- foreach(icount(nsim), .combine = cbind,
-                    .packages = c("NCC")) %dorng% {
+      db <- foreach(icount(nsim), .combine = cbind, .options.future = list(seed = TRUE)) %dofuture% {
 
                       all_models(data = datasim_cont(n_arm = scenarios$n_arm[i],
                                                      num_arms = scenarios$num_arms[i],
@@ -411,7 +418,8 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
 
     }
 
-    stopCluster(cl)
+    #stopCluster(cl)
+    plan(strategy = "sequential")
     gc()
 
   }
@@ -477,8 +485,7 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
                                        full = TRUE,
                                        check = FALSE)$time_dep_effect
 
-      db <- foreach(icount(nsim), .combine = cbind,
-                    .packages = c("NCC")) %dorng% {
+      db <- foreach(icount(nsim), .combine = cbind, .options.future = list(seed = TRUE)) %dofuture% {
 
                       all_models(data = datasim_bin(n_arm = scenarios$n_arm[i],
                                                     num_arms = scenarios$num_arms[i],
@@ -544,7 +551,8 @@ sim_study_par <- function(nsim, scenarios, arms, models = c("fixmodel", "sepmode
 
     }
 
-    stopCluster(cl)
+    #stopCluster(cl)
+    plan(strategy = "sequential")
     gc()
 
   }

@@ -44,7 +44,9 @@ Imports:
   mgcv,
   splines,
   BayesPPD,
-  doRNG
+  doRNG,
+  doFuture,
+  future
 SystemRequirements: JAGS 4.x.y
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
